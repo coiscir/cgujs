@@ -9,7 +9,7 @@ PWD = Dir.pwd
 
 ROOT  = File.expand_path(File.dirname(__FILE__))
 C_BLD = File.join(ROOT, 'build');
-C_DST = File.join(ROOT, 'dist');
+C_DST = File.join(ROOT, 'lib');
 C_SRC = File.join(ROOT, 'src');
 
 # source file list
