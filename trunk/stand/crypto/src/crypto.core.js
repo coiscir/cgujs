@@ -3,8 +3,8 @@
 **/
 var Crypto = new (function () {
   this.Version = '1.0.0';
-  this.Release = '2008-08-04';
-  this.Serials = [1.0, 8.0804];
+  this.Release = '2008-08-05';
+  this.Serials = [1.0, 8.0805];
   /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Release serial (index-1) is: 'YYyy-MM-DD' => 'yy.MMDD'
    *
@@ -88,21 +88,14 @@ var Crypto = new (function () {
     };
   };
   
-  this.algos = function (options) {
-    options = (function (o) { return {
-      hmac : (Crypto.Type.limit(o.hmac, 'boolean') || false),
-      attr : (Crypto.Type.limit(o.attr, 'boolean') || false)
-    };})(options || {});
+  this.algos = function (hmac) {
+    hmac = Crypto.Type.limit(hmac, 'boolean') || false;
     
     var list = [];
     for (var call in Algos)
       if (Algos.propertyIsEnumerable(call))
-        if (!options.hmac || Algos[call].block > 0)
+        if (!hmac || Algos[call].block > 0)
           list.push(Crypto.Type.clone(call));
-    if (options.attr)
-      for (var j in list)
-        if (list.propertyIsEnumerable(j))
-          list[j] += (Algos[list[j]].block > 0 ? '{hmac}' : '{}');
     return list;
   };
   
