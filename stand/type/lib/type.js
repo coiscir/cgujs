@@ -10,8 +10,8 @@
 
 var Type = new (function () {
   this.Version = '1.0.0';
-  this.Release = '2008-08-04';
-  this.Serials = [1.0, 8.0804];
+  this.Release = '2008-08-05';
+  this.Serials = [1.0, 8.0805];
 
   var UND = 'undefined', NUL = 'null',
       ARR = 'array',     BLN = 'boolean',

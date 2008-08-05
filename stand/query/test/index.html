@@ -9,8 +9,8 @@
 document.write('<pre style="font-size:11px;">');
 
 document.writeln('================================================================================');
-document.writeln('~~~~~~~~~~~~~~~~~~~~~~~ ECMAScript Data-Type Distinction ~~~~~~~~~~~~~~~~~~~~~~~');
-document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ CGU Stand-Alone Type ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ HTTP QueryString ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~ CGU Stand-Alone Query ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
 document.writeln('================================================================================');
 document.writeln('');
 
@@ -18,10 +18,17 @@ document.writeln('Version : ', Query.Version);
 document.writeln('Release : ', Query.Release);
 document.writeln('Serials : ', Query.Serials.join(', '));
 document.writeln('');
+document.writeln('');
+document.writeln('CGU-Stand Type');
+document.writeln('--------------');
+document.writeln('Version : ', Query.Type.Version);
+document.writeln('Release : ', Query.Type.Release);
+document.writeln('Serials : ', Query.Type.Serials.join(', '));
+document.writeln('');
 
 document.writeln('');
 document.writeln('--------------------------------------------------------------------------------');
-document.writeln('===================================================================== HTTP Query');
+document.writeln('=========================================================================== Read');
 document.writeln('--------------------------------------------------------------------------------');
 document.writeln('');
 

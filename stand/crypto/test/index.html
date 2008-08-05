@@ -58,10 +58,8 @@ document.writeln('==============================================================
 document.writeln('--------------------------------------------------------------------------------');
 document.writeln('');
 
-document.writeln('algos()             : ', Crypto.algos().join(', '));
-document.writeln('algos({hmac: true}) : ', Crypto.algos({hmac : true}).join(', '));
-document.writeln('');
-document.writeln('algos({attr: true}) : ', Crypto.algos({attr : true}).join('\n                    : '));
+document.writeln('algos()     : ', Crypto.algos().join(', '));
+document.writeln('algos(true) : ', Crypto.algos(true).join(', '), '  // hmac-only');
 document.writeln('');
 
 document.writeln('');
@@ -74,11 +72,12 @@ document.writeln(' // search can limit results to HMAC algorithms');
 document.writeln(' // to show this, a dummy algo was added: srch');
 document.writeln('');
 Crypto.register({call:'srch',algo:function(){return '0123456789'}});
-document.writeln('algos()              : ', Crypto.algos().join(', '));
-document.writeln('algos({hmac: true})  : ', Crypto.algos({hmac : true}).join(', '));
+document.writeln('algos()      : ', Crypto.algos().join(', '));
+document.writeln('algos(true)  : ', Crypto.algos(true).join(', '));
 document.writeln('');
-document.writeln('search("md2") : ', Crypto.search('md2'));
-document.writeln('search("md5") : ', Crypto.search('md5'));
+document.writeln('search("md2")        : ', Crypto.search('md2'));
+document.writeln('search("md5")        : ', Crypto.search('md5'));
+document.writeln('search("md5", true)  : ', Crypto.search('md5', true));
 document.writeln('');
 document.writeln('search("srch")       : ', Crypto.search('srch'));
 document.writeln('search("srch", true) : ', Crypto.search('srch', true));
