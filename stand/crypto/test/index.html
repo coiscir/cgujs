@@ -4,7 +4,7 @@
 </head>
 <body>
 
-<script src="../dist/crypto.js"></script>
+<script src="../lib/crypto.js"></script>
 <script type="text/javascript">
 var fillArray = function (size, elem) {
   var arr = [];
@@ -30,7 +30,7 @@ String.prototype.trim = function () {
 };
 </script>
 <script type="text/javascript">
-if (!!(window.Crypto.Sequence && window.Crypto.Type)) {
+if (!!(window.Crypto && window.Crypto.Sequence && window.Crypto.Type)) {
 
 document.write('<pre style="font-size:11px;">');
 

@@ -20,20 +20,20 @@ $SRC = eval(File.open(File.join(C_BLD, 'src.rb'), 'r').readlines.to_s)
 $DST = eval(File.open(File.join(C_BLD, 'dst.rb'), 'r').readlines.to_s)
 
 
-task :default => [:clean, :dist]
+task :default => [:clean, :lib]
 
 
 ################################################################################
 # Build
 ##
 
-desc "Deletes distribution files"
+desc "Deletes library files"
 task :clean do
   print "\n== Clean ==\n"
   $DST.each do |dst|
     if File.exist? File.join(C_DST, dst[1])
       File.delete File.join(C_DST, dst[1])
-      print File.join(C_DST, dst[1]) + "\n"
+      print " " + File.join(C_DST, dst[1]) + "\n"
     end
   end
 end
@@ -43,8 +43,8 @@ end
 # Build
 ##
 
-desc "Builds the distribution"
-task :dist do
+desc "Builds library files"
+task :lib do
   print "\n== Build ==\n"
   Dir.chdir(ROOT) do
     $DST.each do |dst|
@@ -63,11 +63,13 @@ task :dist do
             else
               dist << src[4].strip
             end
-            dist << "\n"
+            if not (src == $SRC.last)
+              dist << "\n"
+            end
           end
         end
       end
-      print File.join(C_DST, dst[1]) + "\n"
+      print " " + File.join(C_DST, dst[1]) + "\n"
     end
   end
   Dir.chdir(PWD)
