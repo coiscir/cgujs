@@ -11,3 +11,28 @@
  * SHA (c) 2006 The Internet Society                                  [RFC 4634]
  * RMD (c) 1996 Hans Dobbertin, Antoon Bosselaers, and Bart Preneel
 **/
+
+var Crypto = new (function () {
+  this.Version = '1.0.0';
+  this.Release = '2008-08-05';
+  this.Serials = [1.0, 8.0805];
+
+<%= include 'crypto.core.js', 'crypto.seq.js' %>
+
+
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  CGU-Stand :: Cookie :: Algorithms
+**/
+<%= jsmin 'hash.md4.js', 'hash.md5.js' %>
+
+<%= jsmin 'hash.sha1.js', 'hash.sha224.js', 'hash.sha256.js' %>
+
+<%= jsmin 'hash.ripemd128.js', 'hash.ripemd160.js' %>
+
+
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  CGU-Stand :: Cookie :: Externals
+**/
+<%= jsmin 'ext.type.js' %>
+
+})();
