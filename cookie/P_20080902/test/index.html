@@ -1,0 +1,70 @@
+<html>
+<head>
+  <title>Cookie - Test Cases</title>
+</head>
+<body>
+
+<script src="../lib/cookie.js"></script>
+<script type="text/javascript">
+String.prototype.trim=function(){return String(this).replace(/^\s+|\s+$/g, '');};
+</script>
+<script type="text/javascript">
+document.write('<pre style="font-size:11px;">');
+
+document.writeln('================================================================================');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ HTTP Cookies ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~ CGU Stand-Alone Cookie ~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('================================================================================');
+document.writeln('');
+
+document.writeln('Version : ', Cookie.Version);
+document.writeln('Release : ', Cookie.Release);
+document.writeln('Serials : ', Cookie.Serials.join(', '));
+document.writeln('');
+document.writeln('');
+document.writeln('CGU-Stand Type');
+document.writeln('--------------');
+document.writeln('Version : ', Cookie.Type.Version);
+document.writeln('Release : ', Cookie.Type.Release);
+document.writeln('Serials : ', Cookie.Type.Serials.join(', '));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('============================================================ READ, WRITE, EXPIRE');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('write("TZ", ...)  /* session */  //=> ', Cookie.write('TZ', ((new Date()).getTimezoneOffset() * 60)));
+document.writeln('write("foo", ...) /* 2 days */   //=> ', Cookie.write('foo', 'bar', {duration : 2}));
+document.writeln('write("+-?", ...) /* 2 days */   //=> ', Cookie.write('+-?', 'demo', {duration : 2}));
+document.writeln('write(" ", "space")              //=> ', Cookie.write(' ', 'space'));
+document.writeln('write("", "")                    //=> ', Cookie.write('', ''));
+document.writeln('');
+document.writeln('document.cookie  //=> ', document.cookie, ' (', document.cookie.trim().split(/;\s?/).length, ')');
+document.writeln('');
+document.writeln('read("TZ")   //=> ', Cookie.read('TZ'));
+document.writeln('read("foo")  //=> ', Cookie.read('foo'));
+document.writeln('read("+-?")  //=> ', Cookie.read('+-?'));
+document.writeln('read(" ")    //=> ', Cookie.read(' '));
+document.writeln('read("")     //=> ', Cookie.read(''));
+document.writeln('');
+document.writeln('expire("TZ")   //=> ', Cookie.expire('TZ'));
+document.writeln('expire("foo")  //=> ', Cookie.expire('foo'));
+document.writeln('expire("+-?")  //=> ', Cookie.expire('+-?'));
+document.writeln('expire(" ")    //=> ', Cookie.expire(' '));
+document.writeln('expire("")     //=> ', Cookie.expire(''));
+document.writeln('');
+document.writeln('document.cookie  //=> ', document.cookie, ' (', document.cookie.trim().split(/;\s?/).length, ')');
+document.writeln('');
+document.writeln('read("TZ")   //=> ', Cookie.read('TZ'));
+document.writeln('read("foo")  //=> ', Cookie.read('foo'));
+document.writeln('read("+-?")  //=> ', Cookie.read('+-?'));
+document.writeln('read(" ")    //=> ', Cookie.read(' '));
+document.writeln('read("")     //=> ', Cookie.read(''));
+
+document.write('</pre>');
+</script>
+
+</body>
+</html>
