@@ -1,0 +1,76 @@
+require 'rake'
+
+
+################################################################################
+# Prepare
+##
+
+PWD = Dir.pwd
+
+ROOT  = File.expand_path(File.dirname(__FILE__))
+C_BLD = File.join(ROOT, 'build');
+C_DST = File.join(ROOT, 'lib');
+C_SRC = File.join(ROOT, 'src');
+
+# source file list
+$SRC = eval(File.open(File.join(C_BLD, 'src.rb'), 'r').readlines.to_s)
+#require "build/src.rb"
+
+# distro file list
+$DST = eval(File.open(File.join(C_BLD, 'dst.rb'), 'r').readlines.to_s)
+
+
+task :default => [:clean, :lib]
+
+
+################################################################################
+# Build
+##
+
+desc "Deletes library files"
+task :clean do
+  print "\n== Clean ==\n"
+  $DST.each do |dst|
+    if File.exist? File.join(C_DST, dst[1])
+      File.delete File.join(C_DST, dst[1])
+      print " " + File.join(C_DST, dst[1]) + "\n"
+    end
+  end
+end
+
+
+################################################################################
+# Build
+##
+
+desc "Builds library files"
+task :lib do
+  print "\n== Build ==\n"
+  Dir.chdir(ROOT) do
+    $DST.each do |dst|
+      File.open(File.join(C_DST, dst[1]), 'w+') do |dist|
+        $SRC.each do |src|
+          if (dst[0] & src[1]) > 0
+            if src[0] > 0
+              if (dst[0] & src[2]) > 0
+                dist << (`ruby build/jsmin.rb < src/#{src[4]}`).strip
+              else
+                dist << File.open(File.join(C_SRC, src[4]), 'r').readlines.to_s.strip
+              end
+              if (dst[0] & src[3]) > 0
+                dist << "\n"
+              end
+            else
+              dist << src[4].strip
+            end
+            if not (src == $SRC.last)
+              dist << "\n"
+            end
+          end
+        end
+      end
+      print " " + File.join(C_DST, dst[1]) + "\n"
+    end
+  end
+  Dir.chdir(PWD)
+end
