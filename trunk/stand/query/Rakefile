@@ -46,19 +46,17 @@ end
 task :default => [:clean, :build]
 
 task :clean do
-  print "\n== Clean ==\n"
   if File.exist? FINAL
     File.delete FINAL
-    print " " + FINAL + "\n"
+    print " - " + FINAL + "\n"
   end
 end
 
 task :build do
-  print "\n== Build ==\n"
   Dir.chdir(SRC) do
     File.open(FINAL, 'w+') do |lib|
       lib << Build::Reader.new(START)
-      print " " + FINAL + "\n"
+      print " + " + FINAL + "\n"
     end
   end
 end

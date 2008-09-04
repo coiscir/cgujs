@@ -1,0 +1,26 @@
+require 'rake'
+
+ROOT = File.expand_path(File.dirname(__FILE__))
+DIRS = ['cookie', 'crypto', 'query', 'type']
+
+class Builder
+  def initialize(command)
+    DIRS.each do |dir|
+      Dir.chdir(File.join(ROOT, dir)) do
+        print (`#{command}`).split($/).drop(1).join($/) + "\n"
+      end
+    end
+  end
+end
+
+task :default do
+  Builder.new('rake')
+end
+
+task :clean do
+  Builder.new('rake clean')
+end
+
+task :build do
+  Builder.new('rake build')
+end
