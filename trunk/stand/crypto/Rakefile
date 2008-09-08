@@ -12,8 +12,14 @@ START = 'anchor.js'
 FINAL = File.join(LIB, "#{File.split(ROOT)[1]}.js")
 
 ################################################################################
-# Module
+# Tools
 ####
+class Time
+  def serial
+    strftime("%Y").to_f - 2000 + strftime("0.%m%d").to_f
+  end
+end
+
 module Build
   module Utilities
     def jsmin(*filenames)

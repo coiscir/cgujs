@@ -9,9 +9,8 @@
 **/
 
 var Cookie = new (function () {
-  this.Version = '1.0.0';
-  this.Release = '2008-09-03';
-  this.Serials = [1.0, 8.0903];
+  this.Release = <%= Time.now.utc.strftime("'%Y-%m-%d'") %>;
+  this.Version = <%= Time.now.utc.serial %>;
   
 <%= include 'core.js' %>
 

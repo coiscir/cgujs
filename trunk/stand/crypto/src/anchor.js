@@ -13,9 +13,8 @@
 **/
 
 var Crypto = new (function () {
-  this.Version = '1.0.0';
-  this.Release = '2008-08-05';
-  this.Serials = [1.0, 8.0805];
+  this.Release = <%= Time.now.utc.strftime("'%Y-%m-%d'") %>;
+  this.Version = <%= Time.now.utc.serial %>;
 
 <%= include 'crypto.core.js', 'crypto.seq.js' %>
 
