@@ -9,7 +9,6 @@
 **/
 
 var Type = new (function () {
-  this.Release = <%= Time.now.utc.strftime("'%Y-%m-%d'") %>;
   this.Version = <%= Time.now.utc.serial %>;
   
 <%= include 'types.js', 'utils.js', 'lists.js' %>

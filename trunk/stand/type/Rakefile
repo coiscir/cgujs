@@ -44,6 +44,18 @@ module Build
       @template.result(binding).gsub(/[ \t]+$/m, '').strip
     end
   end
+  
+  class Anchor
+    include Utilities
+    
+    def initialize(filename)
+      @read = include(filename)
+    end
+    
+    def to_s
+      @read + "\n"
+    end
+  end
 end
 
 ################################################################################
@@ -61,7 +73,7 @@ end
 task :build do
   Dir.chdir(SRC) do
     File.open(FINAL, 'w+') do |lib|
-      lib << Build::Reader.new(START)
+      lib << Build::Anchor.new(START)
       print " + " + FINAL + "\n"
     end
   end

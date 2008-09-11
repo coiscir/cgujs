@@ -13,7 +13,6 @@
 **/
 
 var Crypto = new (function () {
-  this.Release = <%= Time.now.utc.strftime("'%Y-%m-%d'") %>;
   this.Version = <%= Time.now.utc.serial %>;
 
 <%= include 'crypto.core.js', 'crypto.seq.js' %>

@@ -1,26 +1,26 @@
 require 'rake'
 
 ROOT = File.expand_path(File.dirname(__FILE__))
-DIRS = ['cookie', 'crypto', 'query', 'type']
+EXTS = ['type']
+DIRS = ['cookie', 'crypto', 'query']
 
-class Builder
-  def initialize(command)
+task :default do
+  EXTS.each do |ext|
+    Dir.chdir(File.join(ROOT, ext)) do
+      print (`rake`).split($/).drop(1).join($/) + "\n"
+    end
     DIRS.each do |dir|
-      Dir.chdir(File.join(ROOT, dir)) do
-        print (`#{command}`).split($/).drop(1).join($/) + "\n"
+      $ext = File.expand_path(File.join(ROOT, dir, 'src', "ext.#{ext}.js"))
+      $lib = File.expand_path(File.join(ROOT, ext, 'lib', "#{ext}.js"))
+      File.open($ext, 'w+') do |dist|
+        dist << IO.read($lib)
+        print " > " + $ext + "\n"
       end
     end
   end
-end
-
-task :default do
-  Builder.new('rake')
-end
-
-task :clean do
-  Builder.new('rake clean')
-end
-
-task :build do
-  Builder.new('rake build')
+  DIRS.each do |dir|
+    Dir.chdir(File.join(ROOT, dir)) do
+      print (`rake`).split($/).drop(1).join($/) + "\n"
+    end
+  end
 end
