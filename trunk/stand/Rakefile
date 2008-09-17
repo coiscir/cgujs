@@ -7,20 +7,22 @@ DIRS = ['cookie', 'crypto', 'query']
 task :default do
   EXTS.each do |ext|
     Dir.chdir(File.join(ROOT, ext)) do
-      print (`rake`).split($/).drop(1).join($/) + "\n"
+      print((`rake`).split($/).drop(1).join($/) + "\n")
     end
     DIRS.each do |dir|
       $ext = File.expand_path(File.join(ROOT, dir, 'src', "ext.#{ext}.js"))
       $lib = File.expand_path(File.join(ROOT, ext, 'lib', "#{ext}.js"))
-      File.open($ext, 'w+') do |dist|
-        dist << IO.read($lib)
-        print " > " + $ext + "\n"
+      if File.exists? $lib
+        File.open($ext, 'w+') do |dist|
+          dist << IO.read($lib)
+          print " > " + $ext + "\n"
+        end
       end
     end
   end
   DIRS.each do |dir|
     Dir.chdir(File.join(ROOT, dir)) do
-      print (`rake`).split($/).drop(1).join($/) + "\n"
+      print((`rake`).split($/).drop(1).join($/) + "\n")
     end
   end
 end
