@@ -4,77 +4,33 @@ require 'erb'
 ################################################################################
 # Prepare
 ####
-ROOT = File.expand_path(File.dirname(__FILE__))
-LIB  = File.join(ROOT, 'lib')
-SRC  = File.join(ROOT, 'src')
+CRYPTO_ROOT = File.expand_path(File.dirname(__FILE__))
+CRYPTO_LIB  = File.join(CRYPTO_ROOT, 'lib')
+CRYPTO_SRC  = File.join(CRYPTO_ROOT, 'src')
 
-START = 'anchor.js'
-FINAL = File.join(LIB, "#{File.split(ROOT)[1]}.js")
+CRYPTO_START = 'anchor.js'
+CRYPTO_FINAL = File.join(CRYPTO_LIB, "#{File.split(CRYPTO_ROOT)[1]}.js")
 
-################################################################################
-# Tools
-####
-class Time
-  def serial
-    strftime("%Y").to_f - 2000 + strftime("0.%m%d").to_f
-  end
-end
-
-module Build
-  module Utilities
-    def jsmin(*filenames)
-      filenames.map {|filename| File.expand_path(filename)}
-      filenames.map {|filename| (`ruby #{File.join(ROOT, 'jsmin.rb')} < #{filename}`).strip}.join("\n")
-    end
-    
-    def include(*filenames)
-      filenames.map {|filename| Reader.new(filename).to_s.strip}.join("\n\n")
-    end
-  end
-  
-  class Reader
-    include Utilities
-    
-    def initialize(filename)
-      @filename = File.expand_path(filename)
-      @template = ERB.new(IO.read(@filename), nil, '%')
-    end
-    
-    def to_s
-      @template.result(binding).gsub(/[ \t]+$/m, '').strip
-    end
-  end
-  
-  class Anchor
-    include Utilities
-    
-    def initialize(filename)
-      @read = include(filename)
-    end
-    
-    def to_s
-      @read + "\n"
-    end
-  end
-end
+require File.join(CRYPTO_ROOT, 'builder')
 
 ################################################################################
 # Tasks
 ####
 task :default => [:clean, :build]
+task :build => :crypto # for external prerequisite definitions
 
 task :clean do
-  if File.exist? FINAL
-    File.delete FINAL
-    print " - " + FINAL + "\n"
+  if File.exist? CRYPTO_FINAL
+    File.delete CRYPTO_FINAL
+    print " - " + CRYPTO_FINAL + "\n"
   end
 end
 
-task :build do
-  Dir.chdir(SRC) do
-    File.open(FINAL, 'w+') do |lib|
-      lib << Build::Anchor.new(START)
-      print " + " + FINAL + "\n"
+task :crypto do
+  Dir.chdir(CRYPTO_SRC) do
+    File.open(CRYPTO_FINAL, 'w+') do |lib|
+      lib << Builder::Anchor.new(CRYPTO_START)
+      print " + " + CRYPTO_FINAL + "\n"
     end
   end
 end
