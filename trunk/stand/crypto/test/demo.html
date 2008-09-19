@@ -57,7 +57,7 @@ window.onload = function () {
   wkey = document.getElementById('wkey');
   hmac = document.getElementById('hmac');
   
-  ready = !!(hash && algo && code && text && wkey && hmac);
+  ready = !!(window.Crypto && window.Crypto.Version && hash && algo && code && text && wkey && hmac);
   if (!ready) alert('Error loading form!');
   else algo.focus();
   
