@@ -1,6 +1,3 @@
-require 'rake'
-require 'erb'
-
 ################################################################################
 # Prepare
 ####
@@ -11,26 +8,23 @@ TYPE_SRC  = File.join(TYPE_ROOT, 'src')
 TYPE_START = 'anchor.js'
 TYPE_FINAL = File.join(TYPE_LIB, "#{File.split(TYPE_ROOT)[1]}.js")
 
-require File.join(TYPE_ROOT, 'builder')
-
 ################################################################################
 # Tasks
 ####
-task :default => [:clean, :build]
-task :build => :type # for external prerequisite definitions
+task :default do; print "  type" + $/; end
+task :build => :type
+task :clean => :clean_type
 
-task :clean do
-  if File.exist? TYPE_FINAL
-    File.delete TYPE_FINAL
-    print " - " + TYPE_FINAL + "\n"
+task :clean_type do
+  if Builder.clear(TYPE_FINAL)
+    print " -  " + outPath(TYPE_FINAL) + $/
   end
 end
 
+desc "Build Type library script"
+task :type => [:clean_type]
 task :type do
-  Dir.chdir(TYPE_SRC) do
-    File.open(TYPE_FINAL, 'w+') do |lib|
-      lib << Builder::Anchor.new(TYPE_START)
-      print " + " + TYPE_FINAL + "\n"
-    end
+  if Builder.start(TYPE_SRC, TYPE_START, TYPE_FINAL)
+    print " +  " + outPath(TYPE_FINAL) + $/
   end
 end
