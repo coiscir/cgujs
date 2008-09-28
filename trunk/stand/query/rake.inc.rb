@@ -5,10 +5,13 @@ QUERY_ROOT = File.expand_path(File.dirname(__FILE__))
 QUERY_LIB  = File.join(QUERY_ROOT, 'lib')
 QUERY_SRC  = File.join(QUERY_ROOT, 'src')
 
-QUERY_START = 'anchor.js'
-QUERY_FINAL = File.join(QUERY_LIB, "#{File.split(QUERY_ROOT)[1]}.js")
+QUERY_START = File.join(QUERY_SRC, 'anchor.js')
+QUERY_FINAL = File.join(QUERY_LIB, 'query.js')
 
-QUERY_EXT_TYPE = File.join(QUERY_SRC, 'ext.type.js')
+Builder.define('query', QUERY_START)
+QUERY_INCS = {
+  'type' => File.join(QUERY_SRC, "inc.type.js")
+}
 
 ################################################################################
 # Tasks
@@ -18,21 +21,17 @@ task :build => :query
 task :clean => :clean_query
 
 task :clean_query do
-  if Builder.clear(QUERY_FINAL)
-    print " -  " + outPath(QUERY_FINAL) + $/
-  end
-  if Builder.clear(QUERY_EXT_TYPE)
-    print " -  " + outPath(QUERY_EXT_TYPE) + $/
+  Builder.clear(QUERY_FINAL, true)
+  QUERY_INCS.each_pair do |inc, loc|
+    Builder.clear(loc, true)
   end
 end
 
 desc "Build Query library script"
 task :query => [:clean_query]
 task :query do
-  if Builder.start(TYPE_SRC, TYPE_START, QUERY_EXT_TYPE)
-    print " >  " + outPath(QUERY_EXT_TYPE) + $/
+  QUERY_INCS.each_pair do |inc, loc|
+    Builder.build(inc, loc, true)
   end
-  if Builder.start(QUERY_SRC, QUERY_START, QUERY_FINAL)
-    print " +  " + outPath(QUERY_FINAL) + $/
-  end
+  Builder.build('query', QUERY_FINAL, true)
 end

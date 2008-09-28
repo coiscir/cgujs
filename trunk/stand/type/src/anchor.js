@@ -9,7 +9,7 @@
 **/
 
 var Type = new (function () {
-  this.Version = <%= Time.now.utc.serial %>;
+  this.Version = <%= TIME.serial %>;
   
 <%= include 'types.js', 'utils.js', 'lists.js' %>
 

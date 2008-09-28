@@ -5,8 +5,11 @@ TYPE_ROOT = File.expand_path(File.dirname(__FILE__))
 TYPE_LIB  = File.join(TYPE_ROOT, 'lib')
 TYPE_SRC  = File.join(TYPE_ROOT, 'src')
 
-TYPE_START = 'anchor.js'
-TYPE_FINAL = File.join(TYPE_LIB, "#{File.split(TYPE_ROOT)[1]}.js")
+TYPE_START = File.join(TYPE_SRC, 'anchor.js')
+TYPE_FINAL = File.join(TYPE_LIB, 'type.js')
+
+Builder.define('type', TYPE_START)
+TYPE_INCS = {}
 
 ################################################################################
 # Tasks
@@ -16,15 +19,17 @@ task :build => :type
 task :clean => :clean_type
 
 task :clean_type do
-  if Builder.clear(TYPE_FINAL)
-    print " -  " + outPath(TYPE_FINAL) + $/
+  Builder.clear(TYPE_FINAL, true)
+  TYPE_INCS.each_pair do |inc, loc|
+    Builder.clear(loc, true)
   end
 end
 
 desc "Build Type library script"
 task :type => [:clean_type]
 task :type do
-  if Builder.start(TYPE_SRC, TYPE_START, TYPE_FINAL)
-    print " +  " + outPath(TYPE_FINAL) + $/
+  TYPE_INCS.each_pair do |ext, loc|
+    Builder.build(ext, loc, true)
   end
+  Builder.build('type', TYPE_FINAL, true)
 end

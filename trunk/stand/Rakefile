@@ -3,28 +3,16 @@
 ####
 ROOT = File.expand_path(File.dirname(__FILE__))
 DIRS = ['type', 'cookie', 'crypto', 'query']
+TIME = Time.now.utc
 
 require 'rake'
 require 'erb'
 require File.join(ROOT, 'builder')
 
-DIRS.sort.each do |dir|
-  require File.join(ROOT, dir, 'rake.inc')
-end
-
 ################################################################################
-# Tools
+# Setup
 ####
-def outPath(file)
-  file.sub(/#{Regexp.quote(ROOT)}\/([^\/]+)\/(?:[^\/]*\/)*([^\/]+)$/, '\1: \2')
-end
-
-################################################################################
-# Tasks
-####
-task :default => :help
-
-task :help do
+task :default do
   print [
     "Global tasks:",
     "  build",
@@ -33,6 +21,14 @@ task :help do
     "Script tasks:"
   ].join($/) + $/
 end
+
+DIRS.sort.each do |dir|
+  require File.join(ROOT, dir, 'rake.inc')
+end
+
+################################################################################
+# Tasks
+####
 
 desc "Build all library scripts"
 task :build

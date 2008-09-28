@@ -1,3 +1,8 @@
+def outPath(file)
+  root = File.expand_path(File.dirname(__FILE__))
+  file.sub(/#{Regexp.quote(root)}\/([^\/]+)\/(?:[^\/]*\/)*?(?:([^\/]+)\/)?([^\/]+)$/, '\1:\2 \3')
+end
+
 class Time
   def serial
     strftime("%Y").to_f - 2000 + strftime("0.%m%d").to_f
@@ -7,7 +12,7 @@ end
 module Builder
   ROOT = File.expand_path(File.dirname(__FILE__))
   JSMIN = File.join(ROOT, 'jsmin.rb')
-  EXTS = {}
+  INCS = {}
   
   module Utilities
     def jsmin(*filenames)
@@ -34,16 +39,33 @@ module Builder
     end
   end
   
-  def Builder.clear(remove)
-    File.delete(remove) if File.exists?(remove)
+  def Builder.define(name, anchor)
+    if (INCS[name].nil?)
+      INCS[name] = anchor
+      return true
+    else
+      return false
+    end
   end
   
-  def Builder.start(srcdir, anchor, create)
-    Dir.chdir(srcdir) do
-      File.open(create, 'w+') do |output|
-        output << Builder::Reader.new(anchor, true)
+  def Builder.clear(remove, display)
+    e = File.exists?(remove)
+    File.delete(remove) if e
+    print(" -  " + outPath(remove) + $/) if (display && e && !File.exists?(remove))
+  end
+  
+  def Builder.build(name, create, display)
+    e = File.exists?(create)
+    if (INCS[name].nil?)
+      return nil
+    else
+      inc = File.split(INCS[name])
+      Dir.chdir(inc[0]) do
+        File.open(create, 'w+') do |output|
+          output << Builder::Reader.new(inc[1], true)
+        end
       end
     end
-    File.exists?(create)
+    print(" +  " + outPath(create) + $/) if (display && !e && File.exists?(create))
   end
 end

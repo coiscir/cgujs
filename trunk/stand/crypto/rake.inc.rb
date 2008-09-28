@@ -5,10 +5,13 @@ CRYPTO_ROOT = File.expand_path(File.dirname(__FILE__))
 CRYPTO_LIB  = File.join(CRYPTO_ROOT, 'lib')
 CRYPTO_SRC  = File.join(CRYPTO_ROOT, 'src')
 
-CRYPTO_START = 'anchor.js'
-CRYPTO_FINAL = File.join(CRYPTO_LIB, "#{File.split(CRYPTO_ROOT)[1]}.js")
+CRYPTO_START = File.join(CRYPTO_SRC, 'anchor.js')
+CRYPTO_FINAL = File.join(CRYPTO_LIB, 'crypto.js')
 
-CRYPTO_EXT_TYPE = File.join(CRYPTO_SRC, 'ext.type.js')
+Builder.define('crypto', CRYPTO_START)
+CRYPTO_INCS = {
+  'type' => File.join(CRYPTO_SRC, "inc.type.js")
+}
 
 ################################################################################
 # Tasks
@@ -18,21 +21,17 @@ task :build => :crypto
 task :clean => :clean_crypto
 
 task :clean_crypto do
-  if Builder.clear(CRYPTO_FINAL)
-    print " -  " + outPath(CRYPTO_FINAL) + $/
-  end
-  if Builder.clear(CRYPTO_EXT_TYPE)
-    print " -  " + outPath(CRYPTO_EXT_TYPE) + $/
+  Builder.clear(CRYPTO_FINAL, true)
+  CRYPTO_INCS.each_pair do |inc, loc|
+    Builder.clear(loc, true)
   end
 end
 
 desc "Build Crypto library script"
 task :crypto => [:clean_crypto]
 task :crypto do
-  if Builder.start(TYPE_SRC, TYPE_START, CRYPTO_EXT_TYPE)
-    print " >  " + outPath(CRYPTO_EXT_TYPE) + $/
+  CRYPTO_INCS.each_pair do |inc, loc|
+    Builder.build(inc, loc, true)
   end
-  if Builder.start(CRYPTO_SRC, CRYPTO_START, CRYPTO_FINAL)
-    print " +  " + outPath(CRYPTO_FINAL) + $/
-  end
+  Builder.build('crypto', CRYPTO_FINAL, true)
 end

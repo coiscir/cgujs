@@ -8,7 +8,7 @@
       case 'number'    : return NUM;  // literal
       case 'string'    : return STR;  // literal
       case 'function'  :
-        if (obj.constructor === RegExp)  return RGX;  // FF
+        if (obj.constructor === RegExp)  return RGX;  // FF2
         return FNC;
       case 'object'    :
         if (obj === null) return NUL;
@@ -16,7 +16,7 @@
         if (obj.constructor === Boolean) return BLN;  // new operator
         if (obj.constructor === Date)    return DTE;
         if (obj.constructor === Number)  return NUM;  // new operator
-        if (obj.constructor === RegExp)  return RGX;  // IE
+        if (obj.constructor === RegExp)  return RGX;
         if (obj.constructor === String)  return STR;  // new operator
         return OBJ;
       default : return UNK;

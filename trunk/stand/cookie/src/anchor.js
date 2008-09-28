@@ -9,14 +9,14 @@
 **/
 
 var Cookie = new (function () {
-  this.Version = <%= Time.now.utc.serial %>;
+  this.Version = <%= TIME.serial %>;
   
 <%= include 'core.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Cookie :: Externals
+ *  CGU-Stand :: Cookie :: Includes
 **/
-<%= jsmin 'ext.type.js' %>
+<%= jsmin 'inc.type.js' %>
 
 })();

@@ -9,14 +9,14 @@
 **/
 
 var Query = new (function () {
-  this.Version = <%= Time.now.utc.serial %>;
+  this.Version = <%= TIME.serial %>;
   
 <%= include 'core.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Query :: Externals
+ *  CGU-Stand :: Query :: Includes
 **/
-<%= jsmin 'ext.type.js' %>
+<%= jsmin 'inc.type.js' %>
 
 })();

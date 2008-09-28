@@ -13,7 +13,7 @@
 **/
 
 var Crypto = new (function () {
-  this.Version = <%= Time.now.utc.serial %>;
+  this.Version = <%= TIME.serial %>;
 
 <%= include 'crypto.core.js', 'crypto.seq.js' %>
 
@@ -29,8 +29,8 @@ var Crypto = new (function () {
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Cookie :: Externals
+ *  CGU-Stand :: Cookie :: Includes
 **/
-<%= jsmin 'ext.type.js' %>
+<%= jsmin 'inc.type.js' %>
 
 })();
