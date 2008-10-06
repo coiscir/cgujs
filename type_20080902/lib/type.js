@@ -80,3 +80,4 @@ var Type = new (function () {
     return this.isof.apply(this, args) ? this.clone(args[0]) : undefined;
   };
 })();
+
