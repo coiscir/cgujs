@@ -11,3 +11,4 @@
   this.types = function () {
     return this.clone([UND, NUL, ARR, BLN, DTE, FNC, NUM, OBJ, RGX, STR, UNK]);
   };
+

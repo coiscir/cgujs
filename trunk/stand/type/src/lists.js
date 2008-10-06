@@ -19,3 +19,4 @@
       args[argi] = arguments[argi];
     return this.isof.apply(this, args) ? this.clone(args[0]) : undefined;
   };
+

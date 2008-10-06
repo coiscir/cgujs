@@ -165,3 +165,4 @@
       return encode(HASH);
     }
   };
+

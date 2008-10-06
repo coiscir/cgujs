@@ -146,3 +146,4 @@
       return encode(HASH);
     }
   };
+

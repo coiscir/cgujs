@@ -34,3 +34,4 @@ var Crypto = new (function () {
 <%= jsmin 'inc.type.js' %>
 
 })();
+

@@ -129,3 +129,4 @@ Crypto.register({
     return encode(HASH.slice(0, 7));
   }
 });
+

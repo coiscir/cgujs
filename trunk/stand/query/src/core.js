@@ -11,3 +11,4 @@
           matches.push(decodeURIComponent(queries[i].split('=')[1] || ''));
     return Type.clone(matches);
   };
+

@@ -237,3 +237,4 @@
       return encode(HASH);
     }
   };
+

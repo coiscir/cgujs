@@ -14,3 +14,4 @@ var Type = new (function () {
 <%= include 'types.js', 'utils.js', 'lists.js' %>
 
 })();
+
