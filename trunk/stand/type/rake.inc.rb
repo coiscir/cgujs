@@ -15,8 +15,9 @@ TYPE_INCS = {}
 # Tasks
 ####
 task :default do; print "  type" + $/; end
-task :build => :type
-task :clean => :clean_type
+task :build  => :type
+task :clean  => :clean_type
+task :status => :status_type
 
 task :clean_type do
   Builder.clear(TYPE_FINAL, true)
@@ -33,3 +34,11 @@ task :type do
   end
   Builder.build('type', TYPE_FINAL, true)
 end
+
+task :status_type do
+  TYPE_INCS.each_pair do |inc, loc|
+    Builder.check(loc)
+  end
+  Builder.check(TYPE_FINAL)
+end
+

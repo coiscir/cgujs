@@ -17,8 +17,9 @@ COOKIE_INCS = {
 # Tasks
 ####
 task :default do; print "  cookie" + $/; end
-task :build => :cookie
-task :clean => :clean_cookie
+task :build  => :cookie
+task :clean  => :clean_cookie
+task :status => :status_cookie
 
 task :clean_cookie do
   Builder.clear(COOKIE_FINAL, true)
@@ -35,3 +36,11 @@ task :cookie do
   end
   Builder.build('cookie', COOKIE_FINAL, true)
 end
+
+task :status_cookie do
+  COOKIE_INCS.each_pair do |inc, loc|
+    Builder.check(loc)
+  end
+  Builder.check(COOKIE_FINAL)
+end
+

@@ -17,6 +17,7 @@ task :default do
     "Global tasks:",
     "  build",
     "  clean",
+    "  status (st)",
     "",
     "Script tasks:"
   ].join($/) + $/
@@ -35,3 +36,7 @@ task :build
 
 desc "Delete all library scripts"
 task :clean
+
+desc "Check build status of library scrips"
+task :status
+task :st => :status

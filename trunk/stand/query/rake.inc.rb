@@ -17,8 +17,9 @@ QUERY_INCS = {
 # Tasks
 ####
 task :default do; print "  query" + $/; end
-task :build => :query
-task :clean => :clean_query
+task :build  => :query
+task :clean  => :clean_query
+task :status => :status_query
 
 task :clean_query do
   Builder.clear(QUERY_FINAL, true)
@@ -35,3 +36,11 @@ task :query do
   end
   Builder.build('query', QUERY_FINAL, true)
 end
+
+task :status_query do
+  QUERY_INCS.each_pair do |inc, loc|
+    Builder.check(loc)
+  end
+  Builder.check(QUERY_FINAL)
+end
+

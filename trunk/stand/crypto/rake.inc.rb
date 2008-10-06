@@ -17,8 +17,9 @@ CRYPTO_INCS = {
 # Tasks
 ####
 task :default do; print "  crypto" + $/; end
-task :build => :crypto
-task :clean => :clean_crypto
+task :build  => :crypto
+task :clean  => :clean_crypto
+task :status => :status_crypto
 
 task :clean_crypto do
   Builder.clear(CRYPTO_FINAL, true)
@@ -35,3 +36,11 @@ task :crypto do
   end
   Builder.build('crypto', CRYPTO_FINAL, true)
 end
+
+task :status_crypto do
+  CRYPTO_INCS.each_pair do |inc, loc|
+    Builder.check(loc)
+  end
+  Builder.check(CRYPTO_FINAL)
+end
+

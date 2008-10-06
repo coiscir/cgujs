@@ -68,4 +68,9 @@ module Builder
     end
     print(" +  " + outPath(create) + $/) if (display && !e && File.exists?(create))
   end
+
+  def Builder.check(name)
+    print ' ' + (File.exists?(name) ? '+' : '-') + '  ' + outPath(name) + $/
+  end
 end
+
