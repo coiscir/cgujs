@@ -1,11 +1,8 @@
 def outPath(file)
   root = File.expand_path(File.dirname(__FILE__))
-  file.sub(/#{Regexp.quote(root)}\/([^\/]+)\/(?:[^\/]*\/)*?(?:([^\/]+)\/)?([^\/]+)$/, '\1:\2 \3')
-end
-
-class Time
-  def serial
-    strftime("%Y").to_f - 2000 + strftime("0.%m%d").to_f
+  keys = { 'src' => '++', 'lib' => '=>'}
+  file.sub(/#{Regexp.quote(root)}\/([^\/]+)\/(?:[^\/]*\/)*?(?:([^\/]+)\/)?([^\/]+)$/) do
+    [$1.ljust(LONGDIR), keys[$2], $3].join(' ')
   end
 end
 
@@ -15,6 +12,12 @@ module Builder
   INCS = {}
   
   module Utilities
+    def serial(t, noday)
+      s = noday === true ? "0.%m" : "0.%m%d";
+      f = noday === true ? "%.2f" : "%.4f";
+      sprintf(f, (t.strftime("%Y").to_f - 2000 + t.strftime(s).to_f))
+    end
+    
     def jsmin(*filenames)
       filenames.map {|name| File.expand_path(name)}
       filenames.map {|name| (`ruby #{JSMIN} < #{name}`).strip}.join("\n")
@@ -51,7 +54,7 @@ module Builder
   def Builder.clear(remove, display)
     e = File.exists?(remove)
     File.delete(remove) if e
-    print(" -  " + outPath(remove) + $/) if (display && e && !File.exists?(remove))
+    Builder.check(remove) if (display && e && !File.exists?(remove))
   end
   
   def Builder.build(name, create, display)
@@ -66,7 +69,7 @@ module Builder
         end
       end
     end
-    print(" +  " + outPath(create) + $/) if (display && !e && File.exists?(create))
+    Builder.check(create) if (display && !e && File.exists?(create))
   end
 
   def Builder.check(name)

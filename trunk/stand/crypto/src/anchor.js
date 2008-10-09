@@ -13,7 +13,7 @@
 **/
 
 var Crypto = new (function () {
-  this.Version = <%= TIME.serial %>;
+  this.Version = <%= serial(TIME, false) %>;
 
 <%= include 'crypto.core.js', 'crypto.seq.js' %>
 

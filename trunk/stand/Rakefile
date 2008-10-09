@@ -5,6 +5,8 @@ ROOT = File.expand_path(File.dirname(__FILE__))
 DIRS = ['type', 'cookie', 'crypto', 'query']
 TIME = Time.now.utc
 
+LONGDIR = DIRS.max_by {|x| x.length}.length
+
 require 'rake'
 require 'erb'
 require File.join(ROOT, 'builder')
@@ -15,8 +17,8 @@ require File.join(ROOT, 'builder')
 task :default do
   print [
     "Global tasks:",
-    "  build",
-    "  clean",
+    "  build (all)",
+    "  clean (rm)",
     "  status (st)",
     "",
     "Script tasks:"
@@ -33,11 +35,12 @@ end
 
 desc "Build all library scripts"
 task :build
+task :all => :build
 
 desc "Delete all library scripts"
 task :clean
+task :rm => :clean
 
 desc "Check build status of library scrips"
 task :status
 task :st => :status
-
