@@ -7,6 +7,8 @@ ROOT = File.expand_path(File.dirname(__FILE__))
 DIRS = ['type', 'cookie', 'crypto', 'query']
 TIME = Time.now.utc
 
+NODAY = false
+
 LONGDIR = DIRS.max {|x,y| x.length <=> y.length}.length
 
 require 'rake'

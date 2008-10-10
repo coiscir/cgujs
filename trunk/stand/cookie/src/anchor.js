@@ -9,7 +9,7 @@
 **/
 
 var Cookie = new (function () {
-  this.Version = <%= serial(TIME, false) %>;
+  this.Version = <%= serial(TIME) %>;
   
 <%= include 'core.js' %>
 

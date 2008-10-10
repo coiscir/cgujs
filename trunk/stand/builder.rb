@@ -12,9 +12,9 @@ module Builder
   INCS = {}
   
   module Utilities
-    def serial(t, noday)
-      s = noday === true ? "0.%m" : "0.%m%d";
-      f = noday === true ? "%.2f" : "%.4f";
+    def serial(t)
+      s = NODAY === true ? "0.%m" : "0.%m%d";
+      f = NODAY === true ? "%.2f" : "%.4f";
       sprintf(f, (t.strftime("%Y").to_f - 2000 + t.strftime(s).to_f))
     end
     
