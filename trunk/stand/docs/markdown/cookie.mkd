@@ -81,6 +81,12 @@ Read, Write, and Delete (Expire) HTTP Cookies
 > > > `Cookie.expire('foo', 'bar', {duration: -1});  // same as Cookie.expire`  
 > > > `Cookie.expire('foo', 'bar', {path: '/'});`  
 > > > `Cookie.expire('foo', 'bar', {path: '/', secure: true});`  
-> > > `Cookie.expire('foo', 'bar', {domain: 'myhost', path: '/'});`  
+> > > `Cookie.expire('foo', 'bar', {domain: 'myhost', path: '/'});` 
+
+----
+
+### Tests ###
+
+ * [Test Cases](../test/cookie.html) 
 
 ----

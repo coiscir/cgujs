@@ -164,3 +164,10 @@ Cryptographic Hash and HMAC Alorithms
 > > > `Crypto.search('ripemd160');  //=> true`  
 
 ----
+
+### Tests ###
+
+ * [Live Demo](../test/crypto.demo.html)
+ * [Test Cases](../test/crypto.html)
+
+----

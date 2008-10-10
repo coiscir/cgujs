@@ -12,7 +12,7 @@ CGU is a utilities collection for the Javascript language.
 
 > CGU is release under the MIT License.
 
-### Download and Bug Tracking ####
+### Download and Bug Tracking ###
 
 > [Google Code Project](http://code.google.com/p/cgujs/)
 

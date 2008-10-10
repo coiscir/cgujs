@@ -102,3 +102,9 @@ Enhanced Data-Type Distinction
 > > **Syntax**: `Type.types()`  
 
 ----
+
+### Tests ###
+
+ * [Test Cases](../test/type.html)
+
+----

@@ -35,3 +35,9 @@ Read HTTP GET Variables
 > > > `Query.read('xyz');  //=> ['1', '2']`  
 
 ----
+
+### Tests ###
+
+ * [Test Cases](../test/query.html)
+
+----
