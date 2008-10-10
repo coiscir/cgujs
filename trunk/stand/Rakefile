@@ -1,50 +1,169 @@
 require 'rake'
+require 'erb'
 
 ################################################################################
 # Prepare
 ####
 ROOT = File.expand_path(File.dirname(__FILE__))
-DIRS = ['type', 'cookie', 'crypto', 'query']
-TIME = Time.now.utc
+LIBS = File.join(ROOT, 'lib')
+SRCS = File.join(ROOT, 'src')
 
-NODAY = false
+INCS = {
+  'type'   => [],
+  'crypto' => ['type'],
+  'cookie' => ['type'],
+  'query'  => ['type']
+};
+DIRS = INCS.keys.sort
 
-LONGDIR = DIRS.max {|x,y| x.length <=> y.length}.length
+################################################################################
+# Tools
+####
+module Builder
+  module Utilities
+    JSMIN = File.join(ROOT, 'jsmin.rb')
+    TIME = Time.now.utc
+    NODAY = false
+    
+    def serial
+      s = NODAY === true ? "0.%m" : "0.%m%d";
+      f = NODAY === true ? "%.2f" : "%.4f";
+      sprintf(f, (TIME.strftime("%Y").to_f - 2000 + TIME.strftime(s).to_f))
+    end
+    
+    def jsmin(*filenames)
+      filenames.map {|name| File.expand_path(name)}
+      filenames.map {|name| (`ruby #{JSMIN} < #{name}`).strip}.join("\n")
+    end
+    
+    def include(*filenames)
+      filenames.map {|name| Reader.new(name, nil).to_s.strip}.join("\n\n")
+    end
+  end
+  
+  class Reader
+    include Utilities
+    
+    def initialize(filename, anchor)
+      @filename = File.expand_path(filename)
+      @template = ERB.new(IO.read(@filename), nil, '%')
+      @anchor = anchor === true ? true : false
+    end
+    
+    def to_s
+      @template.result(binding).gsub(/[ \t]+$/m, '').strip + (@anchor ? $/ : '')
+    end
+  end
+end
 
-require 'rake'
-require 'erb'
-require File.join(ROOT, 'builder')
+module Sources
+  DEFL = 'cgus'
+  LDIR = [].concat(DIRS).concat([DEFL]).max{|x,y| x.length <=> y.length}.length
+  PCKG = {}
+  
+  def Sources.define(name, anchor)
+    if (PCKG[name].nil?)
+      PCKG[name] = anchor
+      return true
+    end
+  end
+  
+  def Sources.format(file)
+    keys = { 'src' => '++', 'lib' => '=>'}
+    file.sub(/#{Regexp.quote(ROOT)}\/([^\/]+)\/(?:([^\/]+)\/)?([^\/]+)/) do
+      [($2 || DEFL).ljust(LDIR), keys[$1], $3].join(' ')
+    end
+  end
+  
+  def Sources.check(file)
+    print ' ' + (File.exists?(file) ? '+' : '-')
+    print '  ' + Sources.format(file) + $/
+  end
+  
+  def Sources.clear(name, inc)
+    return nil if (PCKG[name].nil?)
+    return nil if (!inc.nil? && PCKG[inc].nil?)
+    remove = inc.nil? ?
+      File.join(LIBS, "#{name}.js") :
+      File.join(File.split(PCKG[inc])[0], "inc.#{name}.js")
+    Sources.check(remove) if (File.exists?(remove) && File.delete(remove) > 0)
+  end
+  
+  def Sources.build(name, inc)
+    return nil if (PCKG[name].nil?)
+    return nil if (!inc.nil? && PCKG[inc].nil?)
+    pckg = File.split(PCKG[name])
+    create = inc.nil? ?
+      File.join(LIBS, "#{name}.js") :
+      File.join(File.split(PCKG[inc])[0], "inc.#{name}.js")
+    Dir.chdir(pckg[0]) do
+      File.open(create, 'w+') do |out|
+        out << Builder::Reader.new(pckg[1], true)
+      end
+    end
+    Sources.check(create) if (File.exists?(create))
+  end
+end
 
 ################################################################################
 # Setup
 ####
-task :default do
-  print [
-    "Global tasks:",
-    "  build (all)",
-    "  clean (rm)",
-    "  status (st)",
-    "",
-    "Script tasks:"
-  ].join($/) + $/
-end
-
-DIRS.sort.each do |dir|
-  require File.join(ROOT, dir, 'rake.inc')
+DIRS.each do |dir|
+  Sources.define(dir, File.join(SRCS, dir, 'anchor.js'))
 end
 
 ################################################################################
 # Tasks
 ####
+task :default do
+  print [
+    "Tasks:",
+    "  build (all)",
+    "  clean (rm)",
+    "  status (st)"
+  ].join($/) + $/
+end
+
+task :all => :build
+task :rm  => :clean
+task :st  => :status
 
 desc "Build all library scripts"
-task :build
-task :all => :build
+task :build => :clean do
+  print $/
+  INCS.keys.sort.each do |util|
+    INCS[util].sort.each do |inc|
+      Sources.build(inc, util)
+    end
+  end
+  INCS.keys.sort.each do |util|
+    Sources.build(util, nil)
+  end
+end
 
 desc "Delete all library scripts"
-task :clean
-task :rm => :clean
+task :clean do
+  print $/
+  INCS.keys.sort.each do |util|
+    Sources.clear(util, nil)
+  end
+  INCS.keys.sort.each do |util|
+    INCS[util].sort.each do |inc|
+      Sources.clear(inc, util)
+    end
+  end
+end
+task :clear => :clean
 
 desc "Check build status of library scrips"
-task :status
-task :st => :status
+task :status do
+  print $/
+  INCS.keys.sort.each do |util|
+    INCS[util].sort.each do |inc|
+      Sources.check(File.join(SRCS, util, "inc.#{inc}.js"))
+    end
+  end
+  INCS.keys.sort.each do |util|
+    Sources.check(File.join(LIBS, "#{util}.js"))
+  end
+end

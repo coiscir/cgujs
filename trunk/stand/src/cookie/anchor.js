@@ -3,19 +3,19 @@
  *  (c) 2008 Jonathan Lonowski
  *  
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Query
- *    Read HTTP GET Variables
+ *  CGU-Stand :: Cookie
+ *    Read, Write, and Delete (Expire) Cookies
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
-var Query = new (function () {
-  this.Version = <%= serial(TIME) %>;
+var Cookie = new (function () {
+  this.Version = <%= serial %>;
   
 <%= include 'core.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Query :: Includes
+ *  CGU-Stand :: Cookie :: Includes
 **/
 <%= jsmin 'inc.type.js' %>
 
