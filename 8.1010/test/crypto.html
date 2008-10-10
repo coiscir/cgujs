@@ -1,0 +1,369 @@
+<html>
+<head>
+  <title>Crypto - Test Cases</title>
+</head>
+<body>
+
+<script src="../lib/crypto.js"></script>
+<script type="text/javascript">
+var fillArray = function (size, elem) {
+  var arr = [];
+  size = typeof size === 'number' ? size : 0;
+  elem = typeof elem === 'undefined' ? null : elem;
+  while (arr.length < size) arr.push(elem);
+  return arr;
+}
+
+var padString = function (str, len, chr) {
+  str = String(str); len = Number(len);
+  while (str.length < len) str += (chr || '\xa0');
+  return str;
+};
+var padNumber = function (num, len, chr) {
+  num = String(num); len = Number(len);
+  while (num.length < len) num = (chr || '\xa0') + num;
+  return num;
+};
+
+String.prototype.trim = function () {
+  return this.replace(/^\s+|\s+$/g, '');
+};
+</script>
+<script type="text/javascript">
+if (!!(window.Crypto)) {
+
+document.write('<pre style="font-size:11px;">');
+
+document.writeln('================================================================================');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Cryptography ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~ CGU Stand-Alone Crypto ~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('================================================================================');
+document.writeln('');
+
+document.writeln('Version : ', Crypto.Version);
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('========================================================================== ALGOS');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('algos()     : ', Crypto.algos().join(', '));
+document.writeln('algos(true) : ', Crypto.algos(true).join(', '), '  // hmac-only');
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('========================================================================= SEARCH');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln(' // search can limit results to HMAC algorithms');
+document.writeln(' // to show this, a dummy algo was added: srch');
+document.writeln('');
+document.writeln('search("md2")        : ', Crypto.search('md2'));
+document.writeln('search("md5")        : ', Crypto.search('md5'));
+document.writeln('search("md5", true)  : ', Crypto.search('md5', true));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('====================================================================== METHODIZE');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln("Crypto.methodize('md5')        //=> ", Crypto.methodize('md5'));
+document.writeln("Crypto.methodize('md5')        //=> ", Crypto.methodize('md5'));
+document.writeln('');
+document.writeln("'abc'.md5().hex()              //=> ", 'abc'.md5().hex());
+document.writeln("'abc'.md5({key: 'abc'}).hex()  //=> ", 'abc'.md5({key : 'abc'}).hex());
+document.writeln('');
+String.prototype.md5 = undefined;
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('=========================================================================== HASH');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Fail Cases');
+document.writeln('----------');
+document.writeln('hash("")      //=> ', Crypto.hash('').hex(),     '  // Both CALL and DATA must be specified.');
+document.writeln('hash("", "")  //=> ', Crypto.hash('', '').hex(), '  // And CALL cannot be empty.');
+document.writeln('hash("sha1")  //=> ', Crypto.hash('sha1').hex());
+document.writeln('');
+
+document.writeln('<a href="http://tools.ietf.org/html/rfc1320" target="_blank">RFC 1320</a>: ' +
+  'The MD4 Message-Digest Algorithm');
+document.writeln('------------------------------------------');
+document.writeln('31d6cfe0d16ae931b73c59d7e0c089c0', ' // ("md4", "")');
+document.writeln(Crypto.hash('md4', '').hex());
+document.writeln('a448017aaf21d8525fc10ae87aa6729d', ' // ("md4", "abc")');
+document.writeln(Crypto.hash('md4', 'abc').hex());
+document.writeln('d79e1c308aa5bbcdeea8ed63df412da9', ' // ("md4", "abcdefghijklmnopqrstuvwxyz")');
+document.writeln(Crypto.hash('md4', 'abcdefghijklmnopqrstuvwxyz').hex());
+document.writeln('d9130a8164549fe818874806e1c7014b', ' // ("md4", "message digest")');
+document.writeln(Crypto.hash('md4', 'message digest').hex());
+document.writeln('');
+
+document.writeln('<a href="http://tools.ietf.org/html/rfc1321" target="_blank">RFC 1321</a>: ' +
+  'The MD5 Message-Digest Algorithm');
+document.writeln('------------------------------------------');
+document.writeln('d41d8cd98f00b204e9800998ecf8427e', ' // ("md5", "")');
+document.writeln(Crypto.hash('md5', '').hex());
+document.writeln('900150983cd24fb0d6963f7d28e17f72', ' // ("md5", "abc")');
+document.writeln(Crypto.hash('md5', 'abc').hex());
+document.writeln('c3fcd3d76192e4007dfb496cca67e13b', ' // ("md5", "abcdefghijklmnopqrstuvwxyz")');
+document.writeln(Crypto.hash('md5', 'abcdefghijklmnopqrstuvwxyz').hex());
+document.writeln('f96b697d7cb7938d525a2f31aaf161d0', ' // ("md5", "message digest")');
+document.writeln(Crypto.hash('md5', 'message digest').hex());
+document.writeln('');
+
+document.writeln('<a href="http://tools.ietf.org/html/rfc4634" target="_blank">RFC 4634</a>: ' +
+  'US Secure Hash Algorithms (SHA and HMAC-SHA)');
+document.writeln('------------------------------------------------------');
+document.writeln('A9993E364706816ABA3E25717850C26C9CD0D89D', ' // Test #1 ("sha1", "abc")');
+document.writeln(Crypto.hash('sha1', 'abc').base16());
+document.writeln('84983E441C3BD26EBAAE4AA1F95129E5E54670F1', ' // Test #2 ("sha1", "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq")');
+document.writeln(Crypto.hash('sha1', 'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq').base16());
+document.writeln('DEA356A2CDDD90C7A7ECEDC5EBB563934F460452', ' // Test #4 ("sha1", (20 * "01234567012345670123456701234567"))');
+document.writeln(Crypto.hash('sha1', fillArray(20, '01234567012345670123456701234567').join('')).base16());
+
+document.writeln('23097D223405D8228642A477BDA255B32AADBCE4BDA0B3F7E36C9DA7', ' // Test #1 ("sha224", "abc")');
+document.writeln(Crypto.hash('sha224', 'abc').base16());
+document.writeln('75388B16512776CC5DBA5DA1FD890150B0C6455CB4F58B1952522525', ' // Test #2 ("sha224", "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq")');
+document.writeln(Crypto.hash('sha224', 'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq').base16());
+document.writeln('567F69F168CD7844E65259CE658FE7AADFA25216E68ECA0EB7AB8262', ' // Test #4 ("sha224", (20 * "01234567012345670123456701234567"))');
+document.writeln(Crypto.hash('sha224', fillArray(20, '01234567012345670123456701234567').join('')).base16());
+
+document.writeln('BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD', ' // Test #1 ("sha256", "abc")');
+document.writeln(Crypto.hash('sha256', 'abc').base16());
+document.writeln('248D6A61D20638B8E5C026930C3E6039A33CE45964FF2167F6ECEDD419DB06C1', ' // Test #2 ("sha256", "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq")');
+document.writeln(Crypto.hash('sha256', 'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq').base16());
+document.writeln('594847328451BDFA85056225462CC1D867D877FB388DF0CE35F25AB5562BFBB5', ' // Test #4 ("sha256", (20 * "01234567012345670123456701234567"))');
+document.writeln(Crypto.hash('sha256', fillArray(20, '01234567012345670123456701234567').join('')).base16());
+document.writeln('');
+
+document.writeln('<a href="http://homes.esat.kuleuven.be/~bosselae/ripemd160.html" target="_blank">' +
+  'The hash function RIPEMD-160' + '</a>' + ' (and RIPEMD-128)');
+document.writeln('---------------------------------------------');
+document.writeln('cdf26213a150dc3ecb610f18f6b38b46', ' // ("ripemd128", "")');
+document.writeln(Crypto.hash('ripemd128', '').hex());
+document.writeln('c14a12199c66e4ba84636b0f69144c77', ' // ("ripemd128", "abc")');
+document.writeln(Crypto.hash('ripemd128', 'abc').hex());
+document.writeln('a1aa0689d0fafa2ddc22e88b49133a06', ' // ("ripemd128", "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq")');
+document.writeln(Crypto.hash('ripemd128', 'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq').hex());
+document.writeln('3f45ef194732c2dbb2c4a2c769795fa3', ' // ("ripemd128", (8 * "1234567890"))');
+document.writeln(Crypto.hash('ripemd128', fillArray(8, '1234567890').join('')).hex());
+
+document.writeln('9c1185a5c5e9fc54612808977ee8f548b2258d31', ' // ("ripemd160", "")');
+document.writeln(Crypto.hash('ripemd160', '').hex());
+document.writeln('8eb208f7e05d987a9b044a8e98c6b087f15a0bfc', ' // ("ripemd160", "abc")');
+document.writeln(Crypto.hash('ripemd160', 'abc').hex());
+document.writeln('12a053384a9c0c88e405a06c27dcf49ada62eb2b', ' // ("ripemd160", "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq")');
+document.writeln(Crypto.hash('ripemd160', 'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq').hex());
+document.writeln('9b752e45573d4b39f4dbd3323cab82bf63326bfb', ' // ("ripemd160", (8 * "1234567890"))');
+document.writeln(Crypto.hash('ripemd160', fillArray(8, '1234567890').join('')).hex());
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('=========================================================================== HMAC');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+var rfc2202 = [
+  'Hi There',
+  fillArray(50, '\xdd').join(''),
+  'Test Using Larger Than Block-Size Key - Hash Key First',
+  'Test Using Larger Than Block-Size Key and Larger Than One Block-Size Data'
+];
+rfc2202.md5 = [
+  fillArray(16, '\x0b').join(''),
+  fillArray(16, '\xaa').join(''),
+  fillArray(80, '\xaa').join(''),
+  fillArray(80, '\xaa').join('')
+];
+rfc2202.sha1 = [
+  rfc2202.md5[0].concat('\x0b\x0b\x0b\x0b'),
+  rfc2202.md5[1].concat('\xaa\xaa\xaa\xaa'),
+  rfc2202.md5[2].concat(''),
+  rfc2202.md5[3].concat('')
+];
+document.writeln('<a href="http://tools.ietf.org/html/rfc2202" target="_blank">RFC 2202</a>: ' +
+  'Test Cases for HMAC-MD5 and HMAC-SHA-1');
+document.writeln('------------------------------------------------');
+document.writeln('9294727a3638bb1c13f48ef8158bfc9d',         '  // HMAC-MD5 Test Case 1');
+document.writeln(Crypto.hash('md5',  rfc2202[0], {key: rfc2202.md5[0]}).hex());
+document.writeln('56be34521d144c88dbb8c733f0e8b3f6',         '  // HMAC-MD5 Test Case 3');
+document.writeln(Crypto.hash('md5',  rfc2202[1], {key: rfc2202.md5[1]}).hex());
+document.writeln('6b1ab7fe4bd7bf8f0b62e6ce61b9d0cd',         '  // HMAC-MD5 Test Case 6');
+document.writeln(Crypto.hash('md5',  rfc2202[2], {key: rfc2202.md5[2]}).hex());
+document.writeln('6f630fad67cda0ee1fb1f562db3aa53e',         '  // HMAC-MD5 Test Case 7');
+document.writeln(Crypto.hash('md5',  rfc2202[3], {key: rfc2202.md5[3]}).hex());
+document.writeln('b617318655057264e28bc0b6fb378c8ef146be00', '  // HMAC-SHA-1 Test Case 1');
+document.writeln(Crypto.hash('sha1', rfc2202[0], {key: rfc2202.sha1[0]}).hex());
+document.writeln('125d7342b9ac11cd91a39af48aa17b4f63f175d3', '  // HMAC-SHA-1 Test Case 3');
+document.writeln(Crypto.hash('sha1', rfc2202[1], {key: rfc2202.sha1[1]}).hex());
+document.writeln('aa4ae5e15272d00e95705637ce8a3b55ed402112', '  // HMAC-SHA-1 Test Case 6');
+document.writeln(Crypto.hash('sha1', rfc2202[2], {key: rfc2202.sha1[2]}).hex());
+document.writeln('e8e99d0f45237d786d6bbaa7965c7808bbff1a91', '  // HMAC-SHA-1 Test Case 7');
+document.writeln(Crypto.hash('sha1', rfc2202[3], {key: rfc2202.sha1[3]}).hex());
+document.writeln('');
+
+var rfc4231 = [
+  {
+    data: 'Hi There',
+    key:  fillArray(20, '\x0b').join('')
+  }, {
+    data: fillArray(50, '\xdd').join(''),
+    key:  fillArray(20, '\xaa').join('')
+  }, {
+    data: 'Test Using Larger Than Block-Size Key - Hash Key First',
+    key:  fillArray(131, '\xaa').join('')
+  }, {
+    data: 'This is a test using a larger than block-size key and a larger than block-size data. ' +
+      'The key needs to be hashed before being used by the HMAC algorithm.',
+    key:  fillArray(131, '\xaa').join('')
+  }
+];
+document.writeln('<a href="http://tools.ietf.org/html/rfc4231" target="_blank">RFC 4231</a>: ' +
+  'Identifiers and Test Vectors for HMAC-SHA-224, HMAC-SHA-256, HMAC-SHA-384, and HMAC-SHA-512');
+document.writeln('-----------------------------------------------------------------------------------------------------');
+document.writeln('896fb1128abbdf196832107cd49df33f47b4b1169912ba4f53684b22', '  // HMAC-SHA-224 Test Case 1');
+document.writeln(Crypto.hash('sha224',  rfc4231[0].data, {key: rfc4231[0].key}).hex());
+document.writeln('7fb3cb3588c6c1f6ffa9694d7d6ad2649365b0c1f65d69d1ec8333ea', '  // HMAC-SHA-224 Test Case 3');
+document.writeln(Crypto.hash('sha224',  rfc4231[1].data, {key: rfc4231[1].key}).hex());
+document.writeln('95e9a0db962095adaebe9b2d6f0dbce2d499f112f2d2b7273fa6870e', '  // HMAC-SHA-224 Test Case 6');
+document.writeln(Crypto.hash('sha224',  rfc4231[2].data, {key: rfc4231[2].key}).hex());
+document.writeln('3a854166ac5d9f023f54d517d0b39dbd946770db9c2b95c9f6f565d1', '  // HMAC-SHA-224 Test Case 7');
+document.writeln(Crypto.hash('sha224',  rfc4231[3].data, {key: rfc4231[3].key}).hex());
+document.writeln('b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7', '  // HMAC-SHA-256 Test Case 1');
+document.writeln(Crypto.hash('sha256',  rfc4231[0].data, {key: rfc4231[0].key}).hex());
+document.writeln('773ea91e36800e46854db8ebd09181a72959098b3ef8c122d9635514ced565fe', '  // HMAC-SHA-256 Test Case 3');
+document.writeln(Crypto.hash('sha256',  rfc4231[1].data, {key: rfc4231[1].key}).hex());
+document.writeln('60e431591ee0b67f0d8a26aacbf5b77f8e0bc6213728c5140546040f0ee37f54', '  // HMAC-SHA-256 Test Case 6');
+document.writeln(Crypto.hash('sha256',  rfc4231[2].data, {key: rfc4231[2].key}).hex());
+document.writeln('9b09ffa71b942fcb27635fbcd5b0e944bfdc63644f0713938a7f51535c3a35e2', '  // HMAC-SHA-256 Test Case 7');
+document.writeln(Crypto.hash('sha256',  rfc4231[3].data, {key: rfc4231[3].key}).hex());
+document.writeln('');
+
+var RMDKey = [
+  '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff',
+  '\x01\x23\x45\x67\x89\xab\xcd\xef\xfe\xdc\xba\x98\x76\x54\x32\x10',
+  '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x01\x23\x45\x67',
+  '\x01\x23\x45\x67\x89\xab\xcd\xef\xfe\xdc\xba\x98\x76\x54\x32\x10\x00\x11\x22\x33'
+];
+document.writeln('<a href="http://homes.esat.kuleuven.be/~bosselae/ripemd160.html" target="_blank">' +
+  'The hash function RIPEMD-160' + '</a>' + ' (and RIPEMD-128)');
+document.writeln('---------------------------------------------');
+document.writeln(' // key(0) := (hex) 00112233445566778899aabbccddeeff');
+document.writeln(' // key(1) := (hex) 0123456789abcdeffedcba9876543210');
+document.writeln(' // key(2) := (hex) 00112233445566778899aabbccddeeff01234567');
+document.writeln(' // key(3) := (hex) 0123456789abcdeffedcba987654321000112233');
+document.writeln('');
+document.writeln('ad9db2c1e22af9ab5ca9dbe5a86f67dc  // RIPEMD-128 w/ key(0) of ""');
+document.writeln(Crypto.hash('ripemd128', '', {key: RMDKey[0]}).hex());
+document.writeln('ee880b735ce3126065de1699cc136199  // RIPEMD-128 w/ key(0) of "abcdefghijklmnopqrstuvwxyz"');
+document.writeln(Crypto.hash('ripemd128', 'abcdefghijklmnopqrstuvwxyz', {key: RMDKey[0]}).hex());
+document.writeln('794daf2e3bdeea2538638a5ced154434  // RIPEMD-128 w/ key(0) of "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"');
+document.writeln(Crypto.hash('ripemd128', 'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq', {key: RMDKey[0]}).hex());
+document.writeln('8931eeee56a6b257fd1ab5418183d826  // RIPEMD-128 w/ key(1) of ""');
+document.writeln(Crypto.hash('ripemd128', '', {key: RMDKey[1]}).hex());
+document.writeln('b1b5dc0fcb7258758855dd1840fcdce4  // RIPEMD-128 w/ key(1) of "abcdefghijklmnopqrstuvwxyz"');
+document.writeln(Crypto.hash('ripemd128', 'abcdefghijklmnopqrstuvwxyz', {key: RMDKey[1]}).hex());
+document.writeln('670d0f7a697b18f1a8ab7d2a2a00dbc1  // RIPEMD-128 w/ key(1) of "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"');
+document.writeln(Crypto.hash('ripemd128', 'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq', {key: RMDKey[1]}).hex());
+
+document.writeln('cf387677bfda8483e63b57e06c3b5ecd8b7fc055  // RIPEMD-160 w/ key(2) of ""');
+document.writeln(Crypto.hash('ripemd160', '', {key: RMDKey[2]}).hex());
+document.writeln('843d1c4eb880ac8ac0c9c95696507957d0155ddb  // RIPEMD-160 w/ key(2) of "abcdefghijklmnopqrstuvwxyz"');
+document.writeln(Crypto.hash('ripemd160', 'abcdefghijklmnopqrstuvwxyz', {key: RMDKey[2]}).hex());
+document.writeln('60f5ef198a2dd5745545c1f0c47aa3fb5776f881  // RIPEMD-160 w/ key(2) of "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"');
+document.writeln(Crypto.hash('ripemd160', 'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq', {key: RMDKey[2]}).hex());
+document.writeln('fe69a66c7423eea9c8fa2eff8d9dafb4f17a62f5  // RIPEMD-160 w/ key(3) of ""');
+document.writeln(Crypto.hash('ripemd160', '', {key: RMDKey[3]}).hex());
+document.writeln('07e942aa4e3cd7c04dedc1d46e2e8cc4c741b3d9  // RIPEMD-160 w/ key(3) of "abcdefghijklmnopqrstuvwxyz"');
+document.writeln(Crypto.hash('ripemd160', 'abcdefghijklmnopqrstuvwxyz', {key: RMDKey[3]}).hex());
+document.writeln('b6582318ddcfb67a53a67d676b8ad869aded629a  // RIPEMD-160 w/ key(3) of "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"');
+document.writeln(Crypto.hash('ripemd160', 'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq', {key: RMDKey[3]}).hex());
+document.writeln('');
+
+/*
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('======================================================================= Sequence');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Ouptut Types');
+document.writeln('---------------------');
+document.writeln('Raw Data (ASCII Array)');
+document.writeln('  (sha1, "").raw()         //=> [' + Crypto.hash('sha1', '').raw().join(', ') + ']');
+document.writeln('');
+document.writeln('String');
+document.writeln('  (sha1, "").str()         //=> ' + Crypto.hash('sha1', '').str().replace(/[\s]/, ' '));
+document.writeln('');
+document.writeln('Hex / Base-16');
+document.writeln('  (sha1, "").hex()         //=> ' + Crypto.hash('sha1', '').hex());
+document.writeln('  (sha1, "").base16()      //=> ' + Crypto.hash('sha1', '').base16());
+document.writeln('');
+document.writeln('Base-32');
+document.writeln('  (sha1, "").base32()      //=> ' + Crypto.hash('sha1', '').base32() + '  // "A..Z2..7"');
+document.writeln('  (sha1, "").base32hex()   //=> ' + Crypto.hash('sha1', '').base32hex() + '  // "0..9a..v"');
+document.writeln('  (sha1, "").base32(true)  //=> ' + Crypto.hash('sha1', '').base32(true));
+document.writeln('');
+document.writeln('Base-64');
+document.writeln('  (sha1, "").base64()      //=> ' + Crypto.hash('sha1', '').base64() + '  // uses "+" &amp; "/"');
+document.writeln('  (sha1, "").base64url()   //=> ' + Crypto.hash('sha1', '').base64url() + '  // uses "-" &amp; "_"');
+document.writeln('  (sha1, "").base64(true)  //=> ' + Crypto.hash('sha1', '').base64(true));
+document.writeln('');
+document.writeln('');
+
+document.writeln('Base-32 Test Cases');
+document.writeln('------------------');
+document.writeln('Reg');
+document.writeln('    ""                 <=> "', Crypto.Sequence('').base32(), '"');
+document.writeln('    "MY======"         <=> "', Crypto.Sequence('f').base32(), '"');
+document.writeln('    "MZXQ===="         <=> "', Crypto.Sequence('fo').base32(), '"');
+document.writeln('    "MZXW6==="         <=> "', Crypto.Sequence('foo').base32(), '"');
+document.writeln('    "MZXW6YQ="         <=> "', Crypto.Sequence('foob').base32(), '"');
+document.writeln('    "MZXW6YTB"         <=> "', Crypto.Sequence('fooba').base32(), '"');
+document.writeln('    "MZXW6YTBOI======" <=> "', Crypto.Sequence('foobar').base32(), '"');
+document.writeln('');
+document.writeln('Hex');
+document.writeln('    ""                 <=> "'.toLowerCase(), Crypto.Sequence('').base32(true), '"');
+document.writeln('    "CO======"         <=> "'.toLowerCase(), Crypto.Sequence('f').base32(true), '"');
+document.writeln('    "CPNG===="         <=> "'.toLowerCase(), Crypto.Sequence('fo').base32(true), '"');
+document.writeln('    "CPNMU==="         <=> "'.toLowerCase(), Crypto.Sequence('foo').base32(true), '"');
+document.writeln('    "CPNMUOG="         <=> "'.toLowerCase(), Crypto.Sequence('foob').base32(true), '"');
+document.writeln('    "CPNMUOJ1"         <=> "'.toLowerCase(), Crypto.Sequence('fooba').base32(true), '"');
+document.writeln('    "CPNMUOJ1E8======" <=> "'.toLowerCase(), Crypto.Sequence('foobar').base32(true), '"');
+document.writeln('');
+
+document.writeln('Base-64 Test Cases');
+document.writeln('------------------');
+document.writeln('""         <=> "', Crypto.Sequence('').base64(), '"');
+document.writeln('"Zg=="     <=> "', Crypto.Sequence('f').base64(), '"');
+document.writeln('"Zm8="     <=> "', Crypto.Sequence('fo').base64(), '"');
+document.writeln('"Zm9v"     <=> "', Crypto.Sequence('foo').base64(), '"');
+document.writeln('"Zm9vYg==" <=> "', Crypto.Sequence('foob').base64(), '"');
+document.writeln('"Zm9vYmE=" <=> "', Crypto.Sequence('fooba').base64(), '"');
+document.writeln('"Zm9vYmFy" <=> "', Crypto.Sequence('foobar').base64(), '"');
+document.writeln('');
+document.writeln('');
+*/
+
+document.write('</pre>');
+
+} else {
+
+document.writeln("Crypto doesn't exist. Build with Ruby/Rake.");
+
+}
+</script>
+
+</body>
+</html>
+

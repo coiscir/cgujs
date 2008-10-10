@@ -1,0 +1,233 @@
+<hr />
+
+<h1>Crypto</h1>
+
+<p>Cryptographic Hash and HMAC Alorithms</p>
+
+<hr />
+
+<h3>Algorithms</h3>
+
+<ul>
+<li><code>MD4</code></li>
+<li><code>MD5</code></li>
+<li><code>SHA-1</code></li>
+<li><code>SHA-224</code></li>
+<li><code>SHA-256</code></li>
+<li><code>RIPEMD-128</code></li>
+<li><code>RIPEMD-160</code></li>
+</ul>
+
+<hr />
+
+<h3>Sequence Objects</h3>
+
+<blockquote>
+  <p>Sequence is an private class definition that enables various output formats for a hash.</p>
+  
+  <h4>Methods</h4>
+  
+  <blockquote>
+    <p><strong><em>base16</em></strong> / <strong><em>hex</em></strong> <code>&lt;String&gt;</code>  </p>
+    
+    <blockquote>
+      <p>Get the hash in base-16 (hexadecimal).  </p>
+      
+      <p><code>{0..9 a..f}: hex</code> <br />
+      <code>{0..9 A..F}: base16</code>  </p>
+    </blockquote>
+    
+    <p><strong><em>base32</em></strong> / <strong><em>base32hex</em></strong> <code>&lt;String&gt;</code>  </p>
+    
+    <blockquote>
+      <p>Get the hash in base-32.  </p>
+      
+      <p><code>{A..Z 2..7}: base32</code> <br />
+      <code>{0..9 a..v}: base32hex</code>  </p>
+    </blockquote>
+    
+    <p><strong><em>base64</em></strong> / <strong><em>base64url</em></strong> <code>&lt;String&gt;</code>  </p>
+    
+    <blockquote>
+      <p>Get the hash in base-64.  </p>
+      
+      <p><code>{A..Z a..z 0..9 + /}: base64</code> <br />
+      <code>{A..Z a..z 0..9 - _}: base64url</code>  </p>
+    </blockquote>
+    
+    <p><strong><em>raw</em></strong> <code>=&gt; &lt;Array&gt;</code>  </p>
+    
+    <blockquote>
+      <p>Get the hash in a byte (0-255) array of the hash value.  </p>
+    </blockquote>
+    
+    <p><strong><em>str</em></strong> <code>&lt;String&gt;</code>  </p>
+    
+    <blockquote>
+      <p>Get the hash in a String of 8-bit characters.  </p>
+    </blockquote>
+    
+    <p><strong><em>valid</em></strong> <code>&lt;Boolean&gt;</code>  </p>
+    
+    <blockquote>
+      <p>Verifies the Sequence was created properly.  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4>Overridden Methods</h4>
+  
+  <blockquote>
+    <p><strong><em>valueOf</em></strong>: <em>Same as <strong>raw</strong></em>  </p>
+    
+    <p><strong><em>toString</em></strong>: <em>Same as <strong>hex</strong></em>  </p>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Properties</h3>
+
+<blockquote>
+  <h4><code>Version</code></h4>
+  
+  <blockquote>
+    <p>A floating-point version number.  </p>
+    
+    <p>Based on the date built: <code>Y.MMDD</code> <br />
+    Where <code>Y</code> is the number of years since 2000.</p>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Methods</h3>
+
+<blockquote>
+  <h4><code>algos</code></h4>
+  
+  <blockquote>
+    <p>Get a list of all available algorithm calls.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Array&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Crypto.algos(hmac)</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>hmac</em></strong> <code>&lt;Boolean&gt;</code>: Limit the list to only algorithms with HMAC support. (In the current release, this should have no affect.)  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Crypto.algos();  //=&gt; ['md4', 'md5', ...]</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>hash</code></h4>
+  
+  <blockquote>
+    <p>Generate a hash from given input.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;&lt;Sequence&gt;&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Crypto.hash(call, data [, options])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>call</em></strong> <code>&lt;String&gt;</code>: The algorithm name to use.  </p>
+      
+      <p><strong><em>data</em></strong> <code>&lt;String&gt;</code>: The data being hashed.  </p>
+      
+      <p><strong><em>options</em></strong> <code>&lt;Object&gt;</code>: (Optional)  </p>
+      
+      <blockquote>
+        <p><strong><em>key</em></strong> <code>&lt;String&gt;</code>: HMAC key. Leave this unset to hash without HMAC.  </p>
+        
+        <p><strong><em>unicode</em></strong> <code>&lt;Boolean&gt;</code>: Split all <code>data</code> characters from 16-bit to 2 8-bit.  </p>
+      </blockquote>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Crypto.hash('md5', 'foo');</code> <br />
+      <code>Crypto.hash('sha256', 'foo');</code> <br />
+      <code>Crypto.hash('sha224', 'foo', {unicode: true}); //=&gt; data becomes '\x00f\x00o\x00o'</code> <br />
+      <code>Crypto.hash('sha1', 'foo', {key: 'bar'}); //=&gt; encrypts with HMAC key 'bar'</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>methodize</code></h4>
+  
+  <blockquote>
+    <p>Add a String Prototype method for a specific algorithm.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Crypto.methodize(call)</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>call</em></strong> <code>&lt;String&gt;</code>: The algorithm name to search for.  </p>
+    </blockquote>
+    
+    <p><strong>Method</strong></p>
+    
+    <blockquote>
+      <p><strong>Return</strong>: <code>&lt;Object&gt;</code>  </p>
+      
+      <p><strong>Syntax</strong>: <code>String::CALL([options])</code></p>
+      
+      <blockquote>
+        <p><strong><em>options</em></strong> <code>&lt;Object&gt;</code>: (Optional)  </p>
+        
+        <blockquote>
+          <p><em>Same values as for Crypto.hash.</em>  </p>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Crypto.methodize('md5'); //=&gt; true</code> <br />
+      <code>'Lorem ipsum ...'.md5(); //=&gt; &lt;&lt;Sequence&gt;&gt;</code> <br />
+      <code>Crypto.methodize('sha224'); //=&gt; true</code> <br />
+      <code>'Lorem ipsum ...'.sha224(); //=&gt; &lt;&lt;Sequence&gt;&gt;</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>search</code></h4>
+  
+  <blockquote>
+    <p>Get a list of all available algorithm calls.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Array&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Crypto.search(call, hmac)</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>call</em></strong> <code>&lt;String&gt;</code>: The algorithm name to search for.  </p>
+      
+      <p><strong><em>hmac</em></strong> <code>&lt;Boolean&gt;</code>: Limit the search to only algorithms with HMAC support. (In the current release, this should have no affect.)  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Crypto.search('md2');  //=&gt; false</code> <br />
+      <code>Crypto.search('md5');  //=&gt; true</code> <br />
+      <code>Crypto.search('sha512');  //=&gt; false</code> <br />
+      <code>Crypto.search('ripemd160');  //=&gt; true</code>  </p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Tests</h3>
+
+<ul>
+<li><a href="../test/crypto.demo.html">Live Demo</a></li>
+<li><a href="../test/crypto.html">Test Cases</a></li>
+</ul>
+
+<hr />

@@ -1,0 +1,76 @@
+<html>
+<head>
+  <title>Crypto - Demo</title>
+</head>
+<body>
+
+  <div><b><u>Result</u></b></div>
+  <div><input id="hash" type="text" style="width: 600px;"></div>
+
+  <div>&nbsp;</div>
+  
+  <div><b><u>Algo</u></b></div>
+  <div>
+    <select id="algo" onkeyup="calculate();" onchange="calculate()">
+      <option value="md4">MD4</option>
+      <option value="md5" selected>MD5</option>
+      <option value="sha1">SHA-1</option>
+      <option value="sha224">SHA-224</option>
+      <option value="sha256">SHA-256</option>
+      <option value="ripemd128">RIPEMD-128</option>
+      <option value="ripemd160">RIPEMD-160</option>
+    </select>
+  </div>
+  
+  <div><b><u>Encoding</u></b></div>
+  <div>
+    <select id="code" onkeyup="calculate();" onchange="calculate()">
+      <option value="hex">Hex</option>
+      <option value="base16">Base-16</option>
+      <option value="base32">Base-32</option>
+      <option value="base32hex">Base-32 Hex</option>
+      <option value="base64">Base-64</option>
+      <option value="base64url">Base-64 URL</option>
+    </select>
+  </div>
+
+  <div>&nbsp;</div>
+
+  <div><b><u>Input</u></b></div>
+  <div><textarea id="text" style="width: 600px; height: 150px;" onkeyup="calculate();" onchange="calculate()"></textarea>
+
+  <div>&nbsp;</div>
+  
+  <div><b><u>HMAC Key</u></b></div>
+  <div><input id="wkey" type="checkbox" onchange="calculate()"><span>Use?</span></div>
+  <div><textarea id="hmac" style="width: 600px; height: 150px;" onkeyup="calculate();" onchange="calculate()"></textarea>
+
+<script src="../lib/crypto.js"></script>
+<script type="text/javascript">
+var hash, calc, algo, code, text, wkey, hmac, ready = false;
+
+window.onload = function () {
+  hash = document.getElementById('hash');
+  algo = document.getElementById('algo');
+  code = document.getElementById('code');
+  text = document.getElementById('text');
+  wkey = document.getElementById('wkey');
+  hmac = document.getElementById('hmac');
+  
+  ready = !!(window.Crypto && window.Crypto.Version && hash && algo && code && text && wkey && hmac);
+  if (!ready) alert('Error loading form!');
+  else algo.focus();
+  
+  calculate();
+};
+
+var calculate = function () {
+  if (!ready) return false;
+  var opts = wkey.checked ? {key: hmac.value} : {};
+  hash.value = Crypto.hash(algo.value, text.value, opts)[code.value]();
+};
+</script>
+
+</body>
+</html>
+

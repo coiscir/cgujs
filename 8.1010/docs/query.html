@@ -1,0 +1,57 @@
+<hr />
+
+<h1>Query</h1>
+
+<p>Read HTTP GET Variables</p>
+
+<hr />
+
+<h3>Properties</h3>
+
+<blockquote>
+  <h4><code>Version</code></h4>
+  
+  <blockquote>
+    <p>A floating-point version number.  </p>
+    
+    <p>Based on the date built: <code>Y.MMDD</code> <br />
+    Where <code>Y</code> is the number of years since 2000.</p>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Methods</h3>
+
+<blockquote>
+  <h4><code>read</code></h4>
+  
+  <blockquote>
+    <p>Get all values for a specified name (key).  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Array&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Query.read(key)</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>key</em></strong> <code>&lt;Mixed&gt;</code>: Name of the query-string variable. Any non-String keys will first be casted to String.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>: (<em>Scenario</em>: <code>'?foo=bar&amp;xyz=1&amp;xyz=2'</code>)  </p>
+    
+    <blockquote>
+      <p><code>Query.read('foo');  //=&gt; ['bar']</code> <br />
+      <code>Query.read('xyz');  //=&gt; ['1', '2']</code>  </p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Tests</h3>
+
+<ul>
+<li><a href="../test/query.html">Test Cases</a></li>
+</ul>
+
+<hr />
