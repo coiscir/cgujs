@@ -1,0 +1,122 @@
+<hr />
+
+<h1>Cookie</h1>
+
+<p>Read, Write, and Delete (Expire) HTTP Cookies</p>
+
+<hr />
+
+<h3>Properties</h3>
+
+<blockquote>
+  <h4><code>Version</code></h4>
+  
+  <blockquote>
+    <p>A floating-point version number.  </p>
+    
+    <p>Based on the date built: <code>Y.MMDD</code> <br />
+    Where <code>Y</code> is the number of years since 2000.</p>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Methods</h3>
+
+<blockquote>
+  <h4><code>expire</code></h4>
+  
+  <blockquote>
+    <p>Delete a cookie by forcing it to expire.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Cookie.expire(key [, options])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>key</em></strong> <code>&lt;Mixed&gt;</code>: Name of the cookie. Any non-String keys will first be casted to String.  </p>
+      
+      <p><strong><em>options</em></strong> <code>&lt;Object&gt;</code>: (Optional)  </p>
+      
+      <blockquote>
+        <p><em>Same values as for Cookie.write, excluding duration.</em>  </p>
+      </blockquote>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Cookie.expire('foo');</code> <br />
+      <code>Cookie.expire('foo', {path: '/'});</code> <br />
+      <code>Cookie.expire('foo', {path: '/', secure: true});</code> <br />
+      <code>Cookie.expire('foo', {domain: 'myhost', path: '/'});</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>read</code></h4>
+  
+  <blockquote>
+    <p>Get the value of a cookie.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Cookie.read(key)</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>key</em></strong> <code>&lt;Mixed&gt;</code>: Name of the cookie. Any non-String keys will first be casted to String.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Cookie.read('foo');</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>write</code></h4>
+  
+  <blockquote>
+    <p>Create a cookie.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Cookie.write(key, value [, options])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>key</em></strong> <code>&lt;Mixed&gt;</code>: Name of the cookie. Any non-String keys will first be casted to String.  </p>
+      
+      <p><strong><em>options</em></strong> <code>&lt;Object&gt;</code>: (Optional)  </p>
+      
+      <blockquote>
+        <p><strong><em>domain</em></strong> <code>&lt;String&gt;</code>: The domain or host name associated with the cookie.  </p>
+        
+        <p><strong><em>duration</em></strong> <code>&lt;Number&gt;</code>: Time, in days, that the cookie should live. Leave this unset to create a session cookie.  </p>
+        
+        <p><strong><em>path</em></strong> <code>&lt;String&gt;</code>: The path associated with the cookie.  </p>
+        
+        <p><strong><em>secure</em></strong> <code>&lt;Boolean&gt;</code>: Use a secure cookie.  </p>
+      </blockquote>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Cookie.expire('foo', 'bar');</code> <br />
+      <code>Cookie.expire('foo', 'bar', {duration: 2});</code> <br />
+      <code>Cookie.expire('foo', 'bar', {duration: -1});  // same as Cookie.expire</code> <br />
+      <code>Cookie.expire('foo', 'bar', {path: '/'});</code> <br />
+      <code>Cookie.expire('foo', 'bar', {path: '/', secure: true});</code> <br />
+      <code>Cookie.expire('foo', 'bar', {domain: 'myhost', path: '/'});</code> </p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Tests</h3>
+
+<ul>
+<li><a href="../test/cookie.html">Test Cases</a> </li>
+</ul>
+
+<hr />

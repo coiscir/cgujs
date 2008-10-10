@@ -1,0 +1,43 @@
+----
+
+# Query #
+
+Read HTTP GET Variables
+
+----
+
+### Properties ###
+
+> #### `Version` ####
+>  
+> > A floating-point version number.  
+> >  
+> > Based on the date built: `Y.MMDD`  
+> > Where `Y` is the number of years since 2000.
+
+----
+
+### Methods ###
+
+> #### `read` ####
+>  
+> > Get all values for a specified name (key).  
+> >  
+> > **Return**: `<Array>`  
+> >   
+> > **Syntax**: `Query.read(key)`  
+> >   
+> > > **_key_** `<Mixed>`: Name of the query-string variable. Any non-String keys will first be casted to String.  
+> >  
+> > **Examples**: (_Scenario_: `'?foo=bar&xyz=1&xyz=2'`)  
+> >  
+> > > `Query.read('foo');  //=> ['bar']`  
+> > > `Query.read('xyz');  //=> ['1', '2']`  
+
+----
+
+### Tests ###
+
+ * [Test Cases](../test/query.html)
+
+----
