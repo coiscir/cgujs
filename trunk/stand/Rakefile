@@ -1,3 +1,5 @@
+require 'rake'
+
 ################################################################################
 # Prepare
 ####
@@ -5,7 +7,7 @@ ROOT = File.expand_path(File.dirname(__FILE__))
 DIRS = ['type', 'cookie', 'crypto', 'query']
 TIME = Time.now.utc
 
-LONGDIR = DIRS.max_by {|x| x.length}.length
+LONGDIR = DIRS.max {|x,y| x.length <=> y.length}.length
 
 require 'rake'
 require 'erb'
