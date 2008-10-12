@@ -2,7 +2,13 @@
 
 # Cookie #
 
-Read, Write, and Delete (Expire) HTTP Cookies
+> Read, Write, and Delete (Expire) HTTP Cookies  
+
+----
+
+### Tests ###
+
+> [Test Cases](../test/cookie.html)  
 
 ----
 
@@ -10,10 +16,8 @@ Read, Write, and Delete (Expire) HTTP Cookies
 
 > #### `Version` ####
 >  
-> > A floating-point version number.  
-> >  
-> > Based on the date built: `Y.MMDD`  
-> > Where `Y` is the number of years since 2000.
+> > Formatting is based on the date built: `Y.MMDD`  
+> > Where `Y` is the number of years since 2000.  
 
 ----
 
@@ -31,7 +35,7 @@ Read, Write, and Delete (Expire) HTTP Cookies
 > > >  
 > > > **_options_** `<Object>`: (Optional)  
 > > >  
-> > > > _Same values as for Cookie.write, excluding duration._  
+> > > > _Same as for Cookie.write, excluding duration._  
 > >  
 > > **Examples**:  
 > >  
@@ -41,7 +45,7 @@ Read, Write, and Delete (Expire) HTTP Cookies
 > > > `Cookie.expire('foo', {domain: 'myhost', path: '/'});`  
 
 > #### `read` ####
-> 
+>  
 > > Get the value of a cookie.  
 > >  
 > > **Return**: `<String>`  
@@ -55,7 +59,7 @@ Read, Write, and Delete (Expire) HTTP Cookies
 > > > `Cookie.read('foo');`  
 
 > #### `write` ####
-> 
+>  
 > > Create a cookie.  
 > >  
 > > **Return**: `<Boolean>`  
@@ -81,12 +85,6 @@ Read, Write, and Delete (Expire) HTTP Cookies
 > > > `Cookie.expire('foo', 'bar', {duration: -1});  // same as Cookie.expire`  
 > > > `Cookie.expire('foo', 'bar', {path: '/'});`  
 > > > `Cookie.expire('foo', 'bar', {path: '/', secure: true});`  
-> > > `Cookie.expire('foo', 'bar', {domain: 'myhost', path: '/'});` 
-
-----
-
-### Tests ###
-
- * [Test Cases](../test/cookie.html) 
+> > > `Cookie.expire('foo', 'bar', {domain: 'myhost', path: '/'});`  
 
 ----

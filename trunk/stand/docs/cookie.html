@@ -2,7 +2,17 @@
 
 <h1>Cookie</h1>
 
-<p>Read, Write, and Delete (Expire) HTTP Cookies</p>
+<blockquote>
+  <p>Read, Write, and Delete (Expire) HTTP Cookies  </p>
+</blockquote>
+
+<hr />
+
+<h3>Tests</h3>
+
+<blockquote>
+  <p><a href="../test/cookie.html">Test Cases</a>  </p>
+</blockquote>
 
 <hr />
 
@@ -12,10 +22,8 @@
   <h4><code>Version</code></h4>
   
   <blockquote>
-    <p>A floating-point version number.  </p>
-    
-    <p>Based on the date built: <code>Y.MMDD</code> <br />
-    Where <code>Y</code> is the number of years since 2000.</p>
+    <p>Formatting is based on the date built: <code>Y.MMDD</code> <br />
+    Where <code>Y</code> is the number of years since 2000.  </p>
   </blockquote>
 </blockquote>
 
@@ -39,7 +47,7 @@
       <p><strong><em>options</em></strong> <code>&lt;Object&gt;</code>: (Optional)  </p>
       
       <blockquote>
-        <p><em>Same values as for Cookie.write, excluding duration.</em>  </p>
+        <p><em>Same as for Cookie.write, excluding duration.</em>  </p>
       </blockquote>
     </blockquote>
     
@@ -106,17 +114,9 @@
       <code>Cookie.expire('foo', 'bar', {duration: -1});  // same as Cookie.expire</code> <br />
       <code>Cookie.expire('foo', 'bar', {path: '/'});</code> <br />
       <code>Cookie.expire('foo', 'bar', {path: '/', secure: true});</code> <br />
-      <code>Cookie.expire('foo', 'bar', {domain: 'myhost', path: '/'});</code> </p>
+      <code>Cookie.expire('foo', 'bar', {domain: 'myhost', path: '/'});</code>  </p>
     </blockquote>
   </blockquote>
 </blockquote>
-
-<hr />
-
-<h3>Tests</h3>
-
-<ul>
-<li><a href="../test/cookie.html">Test Cases</a> </li>
-</ul>
 
 <hr />

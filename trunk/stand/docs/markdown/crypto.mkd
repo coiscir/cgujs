@@ -6,6 +6,13 @@ Cryptographic Hash and HMAC Alorithms
 
 ----
 
+### Tests ###
+
+> [Live Demo](../test/crypto.demo.html)  
+> [Test Cases](../test/crypto.html)  
+
+----
+
 ### Algorithms ###
 
  * `MD4`
@@ -20,7 +27,7 @@ Cryptographic Hash and HMAC Alorithms
 
 ### Sequence Objects ###
 
-> Sequence is an private class definition that enables various output formats for a hash.
+> Sequence is an private class definition that enables various output formats for a hash.  
 
 > #### Methods ####
 > >  
@@ -45,7 +52,7 @@ Cryptographic Hash and HMAC Alorithms
 > > > `{A..Z a..z 0..9 + /}: base64`  
 > > > `{A..Z a..z 0..9 - _}: base64url`  
 > >  
-> > **_raw_** `=> <Array>`  
+> > **_raw_** `<Array>`  
 > >  
 > > > Get the hash in a byte (0-255) array of the hash value.  
 > >  
@@ -54,11 +61,11 @@ Cryptographic Hash and HMAC Alorithms
 > > > Get the hash in a String of 8-bit characters.  
 > >  
 > > **_valid_** `<Boolean>`  
-> >
+> >  
 > > > Verifies the Sequence was created properly.  
 
 > #### Overridden Methods ####
->
+>  
 > > **_valueOf_**: _Same as **raw**_  
 >  
 > > **_toString_**: _Same as **hex**_  
@@ -69,10 +76,8 @@ Cryptographic Hash and HMAC Alorithms
 
 > #### `Version` ####
 >  
-> > A floating-point version number.  
-> >  
-> > Based on the date built: `Y.MMDD`  
-> > Where `Y` is the number of years since 2000.
+> > Formatting is based on the date built: `Y.MMDD`  
+> > Where `Y` is the number of years since 2000.  
 
 ----
 
@@ -83,9 +88,9 @@ Cryptographic Hash and HMAC Alorithms
 > > Get a list of all available algorithm calls.  
 > >  
 > > **Return**: `<Array>`  
-> >   
+> >  
 > > **Syntax**: `Crypto.algos(hmac)`  
-> >   
+> >  
 > > > **_hmac_** `<Boolean>`: Limit the list to only algorithms with HMAC support. (In the current release, this should have no affect.)  
 > >  
 > > **Examples**:  
@@ -97,9 +102,9 @@ Cryptographic Hash and HMAC Alorithms
 > > Generate a hash from given input.  
 > >  
 > > **Return**: `<<Sequence>>`  
-> >   
+> >  
 > > **Syntax**: `Crypto.hash(call, data [, options])`  
-> >   
+> >  
 > > > **_call_** `<String>`: The algorithm name to use.  
 > > >  
 > > > **_data_** `<String>`: The data being hashed.  
@@ -122,16 +127,16 @@ Cryptographic Hash and HMAC Alorithms
 > > Add a String Prototype method for a specific algorithm.  
 > >  
 > > **Return**: `<Boolean>`  
-> >   
+> >  
 > > **Syntax**: `Crypto.methodize(call)`  
-> >   
+> >  
 > > > **_call_** `<String>`: The algorithm name to search for.  
 > >  
-> > **Method**
+> > **Method**  
 > >  
 > > > **Return**: `<Object>`  
 > > >  
-> > > **Syntax**: `String::CALL([options])`
+> > > **Syntax**: `String::CALL([options])`  
 > > >  
 > > > > **_options_** `<Object>`: (Optional)  
 > > > >  
@@ -148,10 +153,10 @@ Cryptographic Hash and HMAC Alorithms
 >  
 > > Get a list of all available algorithm calls.  
 > >  
-> > **Return**: `<Array>`  
-> >   
+> > **Return**: `<Boolean>`  
+> >  
 > > **Syntax**: `Crypto.search(call, hmac)`  
-> >   
+> >  
 > > > **_call_** `<String>`: The algorithm name to search for.  
 > > >  
 > > > **_hmac_** `<Boolean>`: Limit the search to only algorithms with HMAC support. (In the current release, this should have no affect.)  
@@ -162,12 +167,5 @@ Cryptographic Hash and HMAC Alorithms
 > > > `Crypto.search('md5');  //=> true`  
 > > > `Crypto.search('sha512');  //=> false`  
 > > > `Crypto.search('ripemd160');  //=> true`  
-
-----
-
-### Tests ###
-
- * [Live Demo](../test/crypto.demo.html)
- * [Test Cases](../test/crypto.html)
 
 ----

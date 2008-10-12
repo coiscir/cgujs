@@ -17,27 +17,41 @@ INCS = {
 DIRS = INCS.keys.sort
 
 ################################################################################
+# Versioning
+####
+PREC = nil # default = 2
+TIME = Time.now.utc
+VERS = File.join(ROOT, 'VERSION')
+$ver = nil
+
+def setserial(vers)
+  $ver = vers
+end
+
+def serial
+  if ($ver.nil?)
+    p = (PREC.is_a?(Numeric) && PREC > 0) ? PREC : 2
+    f = "%.#{p*2}f"
+    s = "0.%m#{'%d'if(p>1)}#{'%H'if(p>2)}#{'%M'if(p>3)}#{'%S'if(p>4)}"
+    setserial(sprintf(f, (TIME.strftime("%Y").to_f - 2000 + TIME.strftime(s).to_f)))
+  end
+  $ver
+end
+
+################################################################################
 # Tools
 ####
 module Builder
   module Utilities
     JSMIN = File.join(ROOT, 'jsmin.rb')
-    TIME = Time.now.utc
-    NODAY = false
-    
-    def serial
-      s = NODAY === true ? "0.%m" : "0.%m%d";
-      f = NODAY === true ? "%.2f" : "%.4f";
-      sprintf(f, (TIME.strftime("%Y").to_f - 2000 + TIME.strftime(s).to_f))
-    end
     
     def jsmin(*filenames)
       filenames.map {|name| File.expand_path(name)}
-      filenames.map {|name| (`ruby #{JSMIN} < #{name}`).strip}.join("\n")
+      filenames.map {|name| (`ruby #{JSMIN} < #{name}`).strip}.join($/)
     end
     
     def include(*filenames)
-      filenames.map {|name| Reader.new(name, nil).to_s.strip}.join("\n\n")
+      filenames.map {|name| Reader.new(name, nil).to_s.strip}.join($/+$/)
     end
   end
   
@@ -52,18 +66,6 @@ module Builder
     
     def to_s
       @template.result(binding).gsub(/[ \t]+$/m, '').strip + (@anchor ? $/ : '')
-    end
-  end
-  
-  class Parser
-    include Utilities
-    
-    def initialize(source)
-      @template = ERB.new(source, nil, '%')
-    end
-    
-    def to_s
-      @template.result(binding).gsub(/[ \t]+$/m, '')
     end
   end
 end
@@ -132,8 +134,28 @@ task :default do
     "Tasks:",
     "  build (all)",
     "  clean (rm)",
-    "  status (st)"
+    "  status (st)",
+    "",
+    "Versioning Tasks:",
+    "  cache",
+    "  clear"
   ].join($/) + $/
+end
+
+task :clear do
+  print $/ + "== Clear" + $/
+  print " -  cache" + $/
+  File.open(VERS, 'w+') do |v|
+    v << ""
+  end
+end
+
+task :cache do
+  print $/ + "== Cache" + $/
+  print " +  cache (" + serial.to_s + ")" + $/
+  File.open(VERS, 'w+') do |v|
+    v << serial.to_s + $/
+  end
 end
 
 task :all => :build
@@ -142,7 +164,12 @@ task :st  => :status
 
 desc "Build all library scripts"
 task :build => :clean do
-  print '== Build' + $/
+  if (File.exists?(VERS))
+    vers = IO.readlines(VERS).to_s.strip
+    setserial(vers) if !(vers =~ /^[0-9]+\.(?:[0-9]{2}){1,5}$/).nil?
+  end
+  
+  print $/ + '== Build' + ' :: ' + TIME.strftime('%Y-%m-%d %I:%M:%S') + ' :: ' + serial.to_s + $/
   INCS.keys.sort.each do |util|
     INCS[util].sort.each do |inc|
       Sources.build(inc, util)
@@ -151,12 +178,12 @@ task :build => :clean do
   INCS.keys.sort.each do |util|
     Sources.build(util, nil)
   end
-  print Builder::Parser.new(':: <%= serial %>').to_s + $/
+  Rake::Task['clear'].reenable
 end
 
 desc "Delete all library scripts"
 task :clean do
-  print '== Clean' + $/
+  print $/ + '== Clean' + $/
   INCS.keys.sort.each do |util|
     Sources.clear(util, nil)
   end
@@ -166,11 +193,10 @@ task :clean do
     end
   end
 end
-task :clear => :clean
 
 desc "Check build status of library scrips"
 task :status do
-  print '== Status' + $/
+  print $/ + '== Status' + $/
   INCS.keys.sort.each do |util|
     INCS[util].sort.each do |inc|
       Sources.check(File.join(SRCS, util, "inc.#{inc}.js"))
@@ -178,5 +204,13 @@ task :status do
   end
   INCS.keys.sort.each do |util|
     Sources.check(File.join(LIBS, "#{util}.js"))
+  end
+end
+
+module Rake
+  class Task
+    def reenable
+      @already_invoked = false
+    end
   end
 end

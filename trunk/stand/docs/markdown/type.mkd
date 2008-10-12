@@ -6,14 +6,18 @@ Enhanced Data-Type Distinction
 
 ----
 
+### Tests ###
+
+> [Test Cases](../test/type.html)  
+
+----
+
 ### Properties ###
 
 > #### `Version` ####
 >  
-> > A floating-point version number.  
-> >  
-> > Based on the date built: `Y.MMDD`  
-> > Where `Y` is the number of years since 2000.
+> > Formatting is based on the date built: `Y.MMDD`  
+> > Where `Y` is the number of years since 2000.  
 
 ----
 
@@ -24,9 +28,9 @@ Enhanced Data-Type Distinction
 > > Create a new prototype copy of the object.  
 > >  
 > > **Return**: `<Mixed>`  
-> >   
+> >  
 > > **Syntax**: `Type.clone(object)`  
-> >   
+> >  
 > > > **_object_** `<Mixed>`: The object being cloned.  
 > >  
 > > **Examples**:  
@@ -40,9 +44,9 @@ Enhanced Data-Type Distinction
 > > Get the type name for an object.  
 > >  
 > > **Return**: `<String>`  
-> >   
+> >  
 > > **Syntax**: `Type.get(object)`  
-> >   
+> >  
 > > > **_object_** `<Mixed>`: The object being tested.  
 > >  
 > > **Examples**:  
@@ -56,12 +60,12 @@ Enhanced Data-Type Distinction
 > > Get the type name for an object.  
 > >  
 > > **Return**: `<Boolean>`  
-> >   
+> >  
 > > **Syntax**: `Type.isof(object, type [, type [, ..]])`  
-> >   
+> >  
 > > > **_object_** `<Mixed>`: The object being tested.  
 > > >  
-> > > **_type_** `<String>`: A type to test the object against.
+> > > **_type_** `<String>`: A type to test the object against.  
 > >  
 > > **Examples**:  
 > >  
@@ -76,12 +80,12 @@ Enhanced Data-Type Distinction
 > > Limit object's type. Short for combining `isof` and `clone`.  
 > >  
 > > **Return**: `<Mixed>`  
-> >   
+> >  
 > > **Syntax**: `Type.limit(object, type [, type [, ..]])`  
-> >   
+> >  
 > > > **_object_** `<Mixed>`: The object being tested and cloned.  
 > > >  
-> > > **_type_** `<String>`: A type to test the object against.
+> > > **_type_** `<String>`: A type to test the object against.  
 > >  
 > > **Examples**:  
 > >  
@@ -91,20 +95,14 @@ Enhanced Data-Type Distinction
 > > > `Type.limit(null, 'date', 'string');  //=> undefined `  
 > > > `Type.limit(undefined, 'undefined');  //=> undefined`  
 > >  
-> > **Warning**: limiting to undefined can get false-positives (or false-negatives).  
+> > **Warning**: limiting to undefined can get false-positives (or false-negatives), since undefined is the result for failed checks.  
 
 > #### `types` ####
 >  
 > > Get a list of all recognized types.  
 > >  
 > > **Return**: `<Array>`  
-> >   
+> >  
 > > **Syntax**: `Type.types()`  
-
-----
-
-### Tests ###
-
- * [Test Cases](../test/type.html)
 
 ----
