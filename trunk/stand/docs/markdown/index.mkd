@@ -31,7 +31,7 @@ Read HTTP GET Variables
 # Extension Utilities #
 
 ## [Crypto](crypto.html) ##
-Cryptographic Hash and HMAC Alorithms
+Cryptographic Hash and HMAC Algorithms
 
 ## [Type](type.html) ##
 Enhanced Data-Type Distinction

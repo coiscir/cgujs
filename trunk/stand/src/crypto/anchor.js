@@ -4,7 +4,7 @@
  *  
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Crypto
- *    Cryptographic Hash and HMAC Alorithms
+ *    Cryptographic Hash and HMAC Algorithms
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * MD4 (c) 1990 R. Rivest                                             [RFC 1320]
  * MD5 (c) 1992 R. Rivest                                             [RFC 1321]

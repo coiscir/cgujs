@@ -2,7 +2,7 @@
 
 # Crypto #
 
-Cryptographic Hash and HMAC Alorithms
+Cryptographic Hash and HMAC Algorithms
 
 ----
 
