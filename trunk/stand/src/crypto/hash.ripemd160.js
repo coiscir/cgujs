@@ -6,7 +6,7 @@
     block  : 64,
     method : function (options) { return Crypto.hash('ripemd160', Type.clone(this), options); },
     algo   : function (input) {
-      if (!Type.isof(input, 'string')) return;
+      if (!Type.is_a(input, 'string')) return;
       
       var HASH = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0];
       

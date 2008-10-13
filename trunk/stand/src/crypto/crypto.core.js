@@ -52,7 +52,7 @@
     
     return Sequence((function () {
       call = ready(call);
-      if (!valid(call) || !Type.isof(data, 'string')) return;
+      if (!valid(call) || !Type.is_a(data, 'string')) return;
       
       // check for call
       if (!Crypto.search(call)) return false;
@@ -71,14 +71,14 @@
       }
       
       // revise data with HMAC key
-      if (Type.isof(options.key, 'string')) {
+      if (Type.is_a(options.key, 'string')) {
         if (!Crypto.search(call, true)) return false;
         data = (function (data, key) {
           var block = Algos[call].block, klen = key.length;
           var akey, i, ipad = [], opad = [];
           
           akey = Sequence(klen > block ? Algos[call].algo(key) : key).raw();
-          for (i = 0; i < block && Type.isof(akey, 'array'); i += 1) {
+          for (i = 0; i < block && Type.is_a(akey, 'array'); i += 1) {
             ipad[i] = (akey[i] || 0x00) ^ 0x36;
             opad[i] = (akey[i] || 0x00) ^ 0x5C;
           }

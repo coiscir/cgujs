@@ -51,7 +51,7 @@
     })();
     
     this.valid = function () {
-      return Type.isof(sequence, 'array');
+      return Type.is_a(sequence, 'array');
     };
     
     this.raw = function () {
