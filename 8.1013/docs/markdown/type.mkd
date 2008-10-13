@@ -1,0 +1,139 @@
+----
+
+# Type #
+
+Enhanced Data-Type Distinction
+
+----
+
+### Tests ###
+
+> [Test Cases](../test/type.html)  
+
+----
+
+### Properties ###
+
+> #### `Version` ####
+>  
+> > Formatting is based on the date built: `Y.MMDD`  
+> > Where `Y` is the number of years since 2000.  
+
+----
+
+### Methods ###
+
+> #### `clone` ####
+>  
+> > Create a new prototype copy of the object.  
+> >  
+> > **Return**: `<Mixed>`  
+> >  
+> > **Syntax**: `Type.clone(object)`  
+> >  
+> > > **_object_** `<Mixed>`: The object being cloned.  
+> >  
+> > **Examples**:  
+> >  
+> > > `Type.clone([123]);   //=> [123]`  
+> > > `Type.clone('foo');   //=> 'foo'`  
+> > > `Type.clone(/foo/);   //=> /foo/`  
+> >  
+> > **Warning**: Cloning is based on an object's `valueOf` method. Without overriding, custom constructors will be cloned as an Object.  
+
+> #### `get` ####
+>  
+> > Get the type name for an object.  
+> >  
+> > **Return**: `<String>`  
+> >  
+> > **Syntax**: `Type.get(object)`  
+> >  
+> > > **_object_** `<Mixed>`: The object being tested.  
+> >  
+> > **Examples**:  
+> >  
+> > > `Type.get([123]);  //=> 'array'`  
+> > > `Type.get('foo');  //=> 'string'`  
+> > > `Type.get(/foo/);  //=> 'regexp'`  
+
+> #### `is_a` ####
+>  
+> > Compare an object against a **single** type or constructor.  
+> > Adds support for checking against custom constructors.  
+> >  
+> > **Return**: `<Boolean>`  
+> >  
+> > **Syntax**: `Type.is_f(object, {type|Constructor})`  
+> >  
+> > > **_object_** `<Mixed>`: The object being tested.  
+> > >  
+> > > **_type_** `<String>`: A type string to test the object against.  
+> > > **_Constructor_** `<Function>`: A constructor function to test against.  
+> >  
+> > **Examples**:  
+> >  
+> > > `Type.is_a([], Array);             //=> true`  
+> > > `Type.is_a([], "array"));          //=> true`  
+> > > `Type.is_a([], Object));           //=> true`  
+> > > `Type.is_a(new Foobar(), Foobar);  //=> true`  
+> >  
+> > **Warning**: Comparing against the `Object` constructor can result in false-positives, since everything is a variant of Object.  
+> >  
+> > **Warning**: Not all literals are associated with the expected constructor. This inconsistency is effective in most browsers.  
+
+> #### `isof` ####
+>  
+> > Compare an object against **multiple** types or constructors.  
+> >  
+> > **Return**: `<Boolean>`  
+> >  
+> > **Syntax**: `Type.isof(object, {type|Constructor} [, ..])`  
+> >  
+> > > **_object_** `<Mixed>`: The object being tested.  
+> > >  
+> > > **_type_** `<String>`: A type string to test the object against.  
+> > > **_Constructor_** `<Function>`: A constructor function to test against.  
+> >  
+> > **Examples**:  
+> >  
+> > > `Type.isof([0], Array, 'number');    //=> true`  
+> > > `Type.isof(123, 'array', Number);    //=> true`  
+> > > `Type.isof(1234, 'null', 'string');  //=> false`  
+> > > `Type.isof(null, 'date', 'string');  //=> false`  
+> > > `Type.isof(undefined, 'undefined');  //=> true`  
+
+> #### `limit` ####
+>  
+> > Limit object's type.  
+> > Short for combining `isof` and `clone`.  
+> >  
+> > **Return**: `<Mixed>`  
+> >  
+> > **Syntax**: `Type.limit(object, type [, type [, ..]])`  
+> >  
+> > > **_object_** `<Mixed>`: The object being tested and cloned.  
+> > >  
+> > > **_type_** `<String>`: A type to test the object against.  
+> >  
+> > **Examples**:  
+> >  
+> > > `Type.limit(123, 'array', 'number');  //=> 123`  
+> > > `Type.limit([0], 'array', 'number');  //=> [0]`  
+> > > `Type.limit([0,1,2], Array, String);  //=> [0,1,2]`  
+> > > `Type.limit({0 : 1}, Array, String);  //=> undefined`  
+> > > `Type.limit(1234, 'null', 'string');  //=> undefined`  
+> > > `Type.limit(null, 'date', 'string');  //=> undefined`  
+> > > `Type.limit(undefined, 'undefined');  //=> undefined`  
+> >  
+> > **Warning**: Limiting to undefined can get false-positives (or false-negatives), since undefined is the result for failed checks.  
+
+> #### `types` ####
+>  
+> > Get a list of all recognized type strings.  
+> >  
+> > **Return**: `<Array>`  
+> >  
+> > **Syntax**: `Type.types()`  
+
+----
