@@ -6,6 +6,8 @@
 
 <script src="../lib/type.js"></script>
 <script type="text/javascript">
+function Foobar() {};
+
 document.write('<pre style="font-size:11px;">');
 
 document.writeln('================================================================================');
@@ -52,6 +54,8 @@ document.writeln('Type.get(new Object())    => ', Type.get(new Object()));
 document.writeln('Type.get(new RegExp())    => ', Type.get(new RegExp()));
 document.writeln('Type.get(new String())    => ', Type.get(new String()));
 document.writeln('');
+document.writeln('Type.get(new Foobar())    => ', Type.get(new Foobar()));
+document.writeln('');
 
 document.writeln('');
 document.writeln('--------------------------------------------------------------------------------');
@@ -79,6 +83,34 @@ document.writeln('Type.clone(new Object())     => ', Type.clone(new Object()));
 document.writeln('Type.clone(new RegExp())     => ', Type.clone(new RegExp()));
 document.writeln('Type.clone(new String("a"))  => ', Type.clone(new String('a')));
 document.writeln('');
+document.writeln('Type.clone(new Foobar())     => ', Type.clone(new Foobar()));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('=========================================================================== IS-A');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Type.is_a([], Array)    => ', Type.is_a([], Array));
+document.writeln('Type.is_a([], "array")  => ', Type.is_a([], "array"));
+document.writeln('Type.is_a([], Object)   => ', Type.is_a([], Object));
+document.writeln('');
+document.writeln('');
+document.writeln(' // note: not all literals are associated with the expected constructor');
+document.writeln(' // this is a browser-based "bug" (or, inconsistency)');
+document.writeln('');
+document.writeln('Type.is_a(new String(), String)   => ', Type.is_a(new String(), String));
+document.writeln('Type.is_a("new String", String)   => ', Type.is_a("new String", String));
+document.writeln('');
+document.writeln('');
+document.writeln(' // supports non-standard constructors');
+document.writeln('function Foobar() {};');
+document.writeln('');
+document.writeln('Type.is_a(new Foobar(), Foobar)    => ', Type.is_a(new Foobar(), Foobar));
+document.writeln('Type.is_a(new Foobar(), Object)    => ', Type.is_a(new Foobar(), Object));
+document.writeln('Type.is_a(new Foobar(), "object")  => ', Type.is_a(new Foobar(), "object"));
+document.writeln('');
 
 document.writeln('');
 document.writeln('--------------------------------------------------------------------------------');
@@ -89,6 +121,12 @@ document.writeln('');
 document.writeln('Type.isof([], "array", "string")  => ', Type.isof([], "array", "string"));
 document.writeln('Type.isof({}, "array", "string")  => ', Type.isof({}, "array", "string"));
 document.writeln('Type.isof("", "array", "string")  => ', Type.isof('', "array", "string"));
+document.writeln('');
+document.writeln('Type.isof([], "array", String)  => ', Type.isof([], "array", String));
+document.writeln('Type.isof({}, Array, "string")  => ', Type.isof({}, Array, "string"));
+document.writeln('');
+document.writeln('Type.isof(new String(), Object, String)   => ', Type.isof(new String(), Object, String));
+document.writeln('Type.isof("new String", Object, String)   => ', Type.isof("new String", Object, String));
 document.writeln('');
 
 document.writeln('');
@@ -103,8 +141,14 @@ document.writeln('Type.limit([0,1], "array", "string")  => ', Type.limit([0,1], 
 document.writeln('Type.limit({0:1}, "array", "string")  => ', Type.limit({0:1}, 'array', 'string'));
 document.writeln('Type.limit("0.1", "array", "string")  => ', Type.limit('0.1', 'array', 'string'));
 document.writeln('');
+document.writeln('Type.limit([0,1], Array, String)      => ', Type.limit([0,1], Array, String));
+document.writeln('Type.limit({0:1}, Array, "string")    => ', Type.limit({0:1}, Array, "string"));
 document.writeln('');
-document.writeln(' // default return is undefined (meaning, no matches)');
+document.writeln('Type.limit(new String(), Object, String)     => ', Type.limit(new String(), Object, String));
+document.writeln('Type.limit("new String", Object, String)     => ', Type.limit("new String", Object, String));
+document.writeln('');
+document.writeln('');
+document.writeln(' // default return is undefined (or, no matches)');
 document.writeln(' // so, trying to limit with undefined can be misleading');
 document.writeln('');
 document.writeln('Type.limit()                          => ', Type.limit());

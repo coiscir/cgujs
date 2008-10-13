@@ -22,7 +22,7 @@
       default : return UNK;
     }
   };
-
+  
   this.clone = function (obj) {
     switch (this.get(obj)) {
       case NUL : return null;
@@ -37,4 +37,11 @@
       default  : return undefined
     }
   };
-
+  
+  this.is_a = function () {
+    switch (this.get(arguments[1])) {
+      case FNC : return (arguments[0] instanceof arguments[1]);
+      case STR : return this.get(arguments[0]) == arguments[1];
+      default  : return undefined;
+    };
+  };
