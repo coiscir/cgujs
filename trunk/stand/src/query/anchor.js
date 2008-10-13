@@ -20,4 +20,3 @@ var Query = new (function () {
 <%= jsmin 'inc.type.js' %>
 
 })();
-

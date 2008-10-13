@@ -20,4 +20,3 @@ var Cookie = new (function () {
 <%= jsmin 'inc.type.js' %>
 
 })();
-

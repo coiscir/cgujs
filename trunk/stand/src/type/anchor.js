@@ -4,7 +4,7 @@
  *  
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Type
- *    ECMAScript Data-Type Distinction
+ *    Enhanced Data-Type Distinction
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
@@ -14,4 +14,3 @@ var Type = new (function () {
 <%= include 'types.js', 'utils.js', 'lists.js' %>
 
 })();
-
