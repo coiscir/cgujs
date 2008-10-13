@@ -92,4 +92,3 @@
       return Algos[call].algo(data);
     })());
   };
-

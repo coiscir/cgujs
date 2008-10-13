@@ -278,4 +278,3 @@
       return encode(HASH);
     }
   };
-

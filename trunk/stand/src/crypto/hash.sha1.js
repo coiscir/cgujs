@@ -102,4 +102,3 @@
       return encode(HASH);
     }
   };
-

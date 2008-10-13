@@ -187,4 +187,3 @@
     this.valueOf  = this.raw;
     this.toString = this.hex;
   };
-

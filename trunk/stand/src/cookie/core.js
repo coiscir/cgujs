@@ -49,4 +49,3 @@
     this.write(key, '', options);
     return (this.read(key) === null);
   };
-
