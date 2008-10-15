@@ -1,0 +1,166 @@
+<html>
+<head>
+  <title>Type - Test Cases</title>
+</head>
+<body>
+
+<script src="../lib/type.js"></script>
+<script type="text/javascript">
+function Foobar() {};
+
+document.write('<pre style="font-size:11px;">');
+
+document.writeln('================================================================================');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~ Enhanced Data-Type Distinction ~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ CGU Stand-Alone Type ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('================================================================================');
+document.writeln('');
+
+document.writeln('Version : ', Type.Version);
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('========================================================================== TYPES');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln("Type.types() => ", Type.types().join('\n             => '));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('============================================================================ GET');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Type.get(undefined)       => ', Type.get(undefined));
+document.writeln('Type.get(null)            => ', Type.get(null));
+document.writeln('');
+document.writeln('Type.get([2,3])           => ', Type.get([2,3]));
+document.writeln('Type.get(true)            => ', Type.get(true));
+document.writeln('Type.get(function(){})    => ', Type.get(function(){}));
+document.writeln('Type.get(24.42)           => ', Type.get(24.42));
+document.writeln('Type.get({})              => ', Type.get({}));
+document.writeln('Type.get(/./i)            => ', Type.get(/./i));
+document.writeln('Type.get("abc")           => ', Type.get('abc'));
+document.writeln('');
+document.writeln('Type.get(new Array(2,3))  => ', Type.get(new Array(2,3)));
+document.writeln('Type.get(new Boolean())   => ', Type.get(new Boolean()));
+document.writeln('Type.get(new Date())      => ', Type.get(new Date()));
+document.writeln('Type.get(new Function())  => ', Type.get(new Function()));
+document.writeln('Type.get(new Number())    => ', Type.get(new Number()));
+document.writeln('Type.get(new Object())    => ', Type.get(new Object()));
+document.writeln('Type.get(new RegExp())    => ', Type.get(new RegExp()));
+document.writeln('Type.get(new String())    => ', Type.get(new String()));
+document.writeln('');
+document.writeln('Type.get(new Foobar())    => ', Type.get(new Foobar()));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('========================================================================== CLONE');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Type.clone(undefined)        => ', Type.clone(undefined));
+document.writeln('Type.clone(null)             => ', Type.clone(null));
+document.writeln('');
+document.writeln('Type.clone([2,3])            => ', Type.clone([2,3]));
+document.writeln('Type.clone(true)             => ', Type.clone(true));
+document.writeln('Type.clone(function(){})     => ', Type.clone(function(){}).toString().replace(/\s+/g, ' '));
+document.writeln('Type.clone(24.42)            => ', Type.clone(24.42));
+document.writeln('Type.clone({})               => ', Type.clone({}));
+document.writeln('Type.clone(/./i)             => ', Type.clone(/./i));
+document.writeln('Type.clone("abc")            => ', Type.clone('abc'));
+document.writeln('');
+document.writeln('Type.clone(new Array(2,3))   => ', Type.clone(new Array(2,3)));
+document.writeln('Type.clone(new Boolean())    => ', Type.clone(new Boolean()));
+document.writeln('Type.clone(new Date())       => ', Type.clone(new Date()));
+document.writeln('Type.clone(new Function())   => ', Type.clone(new Function()).toString().replace(/\s+/g, ' '));
+document.writeln('Type.clone(new Number())     => ', Type.clone(new Number()));
+document.writeln('Type.clone(new Object())     => ', Type.clone(new Object()));
+document.writeln('Type.clone(new RegExp())     => ', Type.clone(new RegExp()));
+document.writeln('Type.clone(new String("a"))  => ', Type.clone(new String('a')));
+document.writeln('');
+document.writeln('Type.clone(new Foobar())     => ', Type.clone(new Foobar()));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('=========================================================================== IS-A');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Type.is_a([], Array)    => ', Type.is_a([], Array));
+document.writeln('Type.is_a([], "array")  => ', Type.is_a([], "array"));
+document.writeln('Type.is_a([], Object)   => ', Type.is_a([], Object));
+document.writeln('');
+document.writeln('Type.is_a(new String(), String)   => ', Type.is_a(new String(), String));
+document.writeln('Type.is_a("new String", String)   => ', Type.is_a("new String", String));
+document.writeln('');
+document.writeln('');
+document.writeln(' // is_a allows comparison to 2 literals: null and undefined');
+document.writeln('');
+document.writeln('Type.is_a(undefined, undefined)  => ', Type.is_a(undefined, undefined));
+document.writeln('Type.is_a(null, null)            => ', Type.is_a(null, null));
+document.writeln('Type.is_a(true, true)            => ', Type.is_a(true, true));
+document.writeln('');
+document.writeln('');
+document.writeln(' // supports non-standard constructors');
+document.writeln('');
+document.writeln('Type.is_a(new Foobar(), Foobar)    => ', Type.is_a(new Foobar(), Foobar));
+document.writeln('Type.is_a(new Foobar(), Object)    => ', Type.is_a(new Foobar(), Object));
+document.writeln('Type.is_a(new Foobar(), "object")  => ', Type.is_a(new Foobar(), "object"));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('=========================================================================== ISOF');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Type.isof([], "array", "string")  => ', Type.isof([], "array", "string"));
+document.writeln('Type.isof({}, "array", "string")  => ', Type.isof({}, "array", "string"));
+document.writeln('Type.isof("", "array", "string")  => ', Type.isof('', "array", "string"));
+document.writeln('');
+document.writeln('Type.isof([], "array", String)  => ', Type.isof([], "array", String));
+document.writeln('Type.isof({}, Array, "string")  => ', Type.isof({}, Array, "string"));
+document.writeln('');
+document.writeln('Type.isof(new String(), Object, String)   => ', Type.isof(new String(), Object, String));
+document.writeln('Type.isof("new String", Object, String)   => ', Type.isof("new String", Object, String));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('========================================================================== LIMIT');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln(' // limit is a shortcut for using isof and clone');
+document.writeln('');
+document.writeln('Type.limit([0,1], "array", "string")  => ', Type.limit([0,1], 'array', 'string'));
+document.writeln('Type.limit({0:1}, "array", "string")  => ', Type.limit({0:1}, 'array', 'string'));
+document.writeln('Type.limit("0.1", "array", "string")  => ', Type.limit('0.1', 'array', 'string'));
+document.writeln('');
+document.writeln('Type.limit([0,1], Array, String)      => ', Type.limit([0,1], Array, String));
+document.writeln('Type.limit({0:1}, Array, "string")    => ', Type.limit({0:1}, Array, "string"));
+document.writeln('');
+document.writeln('Type.limit(new String(), Object, String)     => ', Type.limit(new String(), Object, String));
+document.writeln('Type.limit("new String", Object, String)     => ', Type.limit("new String", Object, String));
+document.writeln('');
+document.writeln('');
+document.writeln(' // default return is undefined (or, no matches)');
+document.writeln(' // so, trying to limit with undefined can be misleading');
+document.writeln('');
+document.writeln('Type.limit()                          => ', Type.limit());
+document.writeln('Type.limit(undefined)                 => ', Type.limit(undefined));
+document.writeln('Type.limit(undefined, "undefined")    => ', Type.limit(undefined, 'undefined'));
+document.writeln('Type.limit(null,      "object")       => ', Type.limit(null, 'object'));
+document.writeln('');
+
+document.write('</pre>');
+</script>
+
+</body>
+</html>
