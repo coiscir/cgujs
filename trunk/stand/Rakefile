@@ -207,6 +207,9 @@ task :status do
   end
 end
 
+################################################################################
+# monkey patch
+####
 module Rake
   class Task
     def reenable
