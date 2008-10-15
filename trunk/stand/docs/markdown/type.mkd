@@ -79,8 +79,6 @@ Enhanced Data-Type Distinction
 > > > `Type.is_a(new Foobar(), Foobar);  //=> true`  
 > >  
 > > **Warning**: Comparing against the `Object` constructor can result in false-positives, since everything is a variant of Object.  
-> >  
-> > **Warning**: Not all literals are associated with the expected constructor. This inconsistency is effective in most browsers.  
 
 > #### `isof` ####
 >  
