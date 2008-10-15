@@ -1,0 +1,177 @@
+<hr />
+
+<h1>Type</h1>
+
+<p>Enhanced Data-Type Distinction</p>
+
+<hr />
+
+<h3>Tests</h3>
+
+<blockquote>
+  <p><a href="../test/type.html">Test Cases</a>  </p>
+</blockquote>
+
+<hr />
+
+<h3>Properties</h3>
+
+<blockquote>
+  <h4><code>Version</code></h4>
+  
+  <blockquote>
+    <p>Formatting is based on the date built: <code>Y.MMDD</code> <br />
+    Where <code>Y</code> is the number of years since 2000.  </p>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Methods</h3>
+
+<blockquote>
+  <h4><code>clone</code></h4>
+  
+  <blockquote>
+    <p>Create a new prototype copy of the object.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Mixed&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Type.clone(object)</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>object</em></strong> <code>&lt;Mixed&gt;</code>: The object being cloned.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Type.clone([123]);   //=&gt; [123]</code> <br />
+      <code>Type.clone('foo');   //=&gt; 'foo'</code> <br />
+      <code>Type.clone(/foo/);   //=&gt; /foo/</code>  </p>
+    </blockquote>
+    
+    <p><strong>Warning</strong>: Cloning is based on an object's <code>valueOf</code> method. Without overriding, custom constructors will be cloned as an Object.  </p>
+  </blockquote>
+  
+  <h4><code>get</code></h4>
+  
+  <blockquote>
+    <p>Get the type name for an object.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Type.get(object)</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>object</em></strong> <code>&lt;Mixed&gt;</code>: The object being tested.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Type.get([123]);  //=&gt; 'array'</code> <br />
+      <code>Type.get('foo');  //=&gt; 'string'</code> <br />
+      <code>Type.get(/foo/);  //=&gt; 'regexp'</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>is_a</code></h4>
+  
+  <blockquote>
+    <p>Compare an object against a <strong>single</strong> type or constructor. <br />
+    Adds support for checking against custom constructors.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Type.is_f(object, {type|Constructor})</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>object</em></strong> <code>&lt;Mixed&gt;</code>: The object being tested.  </p>
+      
+      <p><strong><em>type</em></strong> <code>&lt;String&gt;</code>: A type string to test the object against. <br />
+      <strong><em>Constructor</em></strong> <code>&lt;Function&gt;</code>: A constructor function to test against.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Type.is_a([], Array);             //=&gt; true</code> <br />
+      <code>Type.is_a([], "array"));          //=&gt; true</code> <br />
+      <code>Type.is_a([], Object));           //=&gt; true</code> <br />
+      <code>Type.is_a(new Foobar(), Foobar);  //=&gt; true</code>  </p>
+    </blockquote>
+    
+    <p><strong>Warning</strong>: Comparing against the <code>Object</code> constructor can result in false-positives, since everything is a variant of Object.  </p>
+  </blockquote>
+  
+  <h4><code>isof</code></h4>
+  
+  <blockquote>
+    <p>Compare an object against <strong>multiple</strong> types or constructors.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Type.isof(object, {type|Constructor} [, ..])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>object</em></strong> <code>&lt;Mixed&gt;</code>: The object being tested.  </p>
+      
+      <p><strong><em>type</em></strong> <code>&lt;String&gt;</code>: A type string to test the object against. <br />
+      <strong><em>Constructor</em></strong> <code>&lt;Function&gt;</code>: A constructor function to test against.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Type.isof([0], Array, 'number');    //=&gt; true</code> <br />
+      <code>Type.isof(123, 'array', Number);    //=&gt; true</code> <br />
+      <code>Type.isof(1234, 'null', 'string');  //=&gt; false</code> <br />
+      <code>Type.isof(null, 'date', 'string');  //=&gt; false</code> <br />
+      <code>Type.isof(undefined, 'undefined');  //=&gt; true</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>limit</code></h4>
+  
+  <blockquote>
+    <p>Limit object's type. <br />
+    Short for combining <code>isof</code> and <code>clone</code>.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Mixed&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Type.limit(object, type [, type [, ..]])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>object</em></strong> <code>&lt;Mixed&gt;</code>: The object being tested and cloned.  </p>
+      
+      <p><strong><em>type</em></strong> <code>&lt;String&gt;</code>: A type to test the object against.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Type.limit(123, 'array', 'number');  //=&gt; 123</code> <br />
+      <code>Type.limit([0], 'array', 'number');  //=&gt; [0]</code> <br />
+      <code>Type.limit([0,1,2], Array, String);  //=&gt; [0,1,2]</code> <br />
+      <code>Type.limit({0 : 1}, Array, String);  //=&gt; undefined</code> <br />
+      <code>Type.limit(1234, 'null', 'string');  //=&gt; undefined</code> <br />
+      <code>Type.limit(null, 'date', 'string');  //=&gt; undefined</code> <br />
+      <code>Type.limit(undefined, 'undefined');  //=&gt; undefined</code>  </p>
+    </blockquote>
+    
+    <p><strong>Warning</strong>: Limiting to undefined can get false-positives (or false-negatives), since undefined is the result for failed checks.  </p>
+  </blockquote>
+  
+  <h4><code>types</code></h4>
+  
+  <blockquote>
+    <p>Get a list of all recognized type strings.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Array&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Type.types()</code>  </p>
+  </blockquote>
+</blockquote>
+
+<hr />
