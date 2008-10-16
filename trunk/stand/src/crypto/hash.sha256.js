@@ -6,7 +6,7 @@
     block  : 64,
     method : function (options) { return Crypto.hash('sha256', Type.clone(this), options); },
     algo   : function (input) {
-      if (!Type.is_a(input, 'string')) return;
+      if (!Type.is_a(input, String)) return;
       
       var HASH = [
         0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,

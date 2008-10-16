@@ -9,7 +9,7 @@
     if (param instanceof Sequence) param = param.raw();
     
     var sequence = (function () {
-      if (Type.isof(param, 'undefined', 'null')) return undefined;
+      if (Type.isof(param, null, undefined)) return undefined;
       
       switch (Type.get(param)) {
       case 'array':
@@ -51,7 +51,7 @@
     })();
     
     this.valid = function () {
-      return Type.is_a(sequence, 'array');
+      return Type.is_a(sequence, Array);
     };
     
     this.raw = function () {

@@ -33,7 +33,7 @@
   <h4><code>clone</code></h4>
   
   <blockquote>
-    <p>Create a new prototype copy of the object.  </p>
+    <p>Clone object's value.  </p>
     
     <p><strong>Return</strong>: <code>&lt;Mixed&gt;</code>  </p>
     
@@ -57,7 +57,7 @@
   <h4><code>get</code></h4>
   
   <blockquote>
-    <p>Get the type name for an object.  </p>
+    <p>Enhanced typeof.  </p>
     
     <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
     
@@ -79,8 +79,7 @@
   <h4><code>is_a</code></h4>
   
   <blockquote>
-    <p>Compare an object against a <strong>single</strong> type or constructor. <br />
-    Adds support for checking against custom constructors.  </p>
+    <p>Enhanced instanceof.  </p>
     
     <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
     
@@ -99,6 +98,7 @@
       <p><code>Type.is_a([], Array);             //=&gt; true</code> <br />
       <code>Type.is_a([], "array"));          //=&gt; true</code> <br />
       <code>Type.is_a([], Object));           //=&gt; true</code> <br />
+      <code>Type.is_a('', String));           //=&gt; true // primitives are promoted</code> <br />
       <code>Type.is_a(new Foobar(), Foobar);  //=&gt; true</code>  </p>
     </blockquote>
     
@@ -108,7 +108,7 @@
   <h4><code>isof</code></h4>
   
   <blockquote>
-    <p>Compare an object against <strong>multiple</strong> types or constructors.  </p>
+    <p>Multiple is_a.  </p>
     
     <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
     

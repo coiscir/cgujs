@@ -2,38 +2,30 @@
 
 # CGU: Common & General Use Javascript #
 
-CGU is a utilities collection for the Javascript language.
+> CGU is a utilities collection for the Javascript language.  
 
 ----
-
-# General Info #
 
 ### License ###
 
-> CGU is release under the MIT License.
+> CGU is release under the MIT License.  
 
 ### Download and Bug Tracking ###
 
-> [Google Code Project](http://code.google.com/p/cgujs/)
+> [Google Code](http://code.google.com/p/cgujs/)  
 
 ----
 
-# Access Utilities #
+### Access Utilities ###
 
-## [Cookie](cookie.html) ##
-Read, Write, and Delete (Expire) HTTP Cookies
+ * **[Cookie](cookie.html)** - Read, Write, and Delete (Expire) HTTP Cookies
 
-## [Query](query.html) ##
-Read HTTP GET Variables
+ * **[Query](query.html)** - Read HTTP GET Variables
 
-----
+### Extension Utilities ###
 
-# Extension Utilities #
+ * **[Crypto](crypto.html)** - Cryptographic Hash and HMAC Algorithms
 
-## [Crypto](crypto.html) ##
-Cryptographic Hash and HMAC Algorithms
-
-## [Type](type.html) ##
-Enhanced Data-Type Distinction
+ * **[Type](type.html)** - Enhanced Data-Type Distinction
 
 ----

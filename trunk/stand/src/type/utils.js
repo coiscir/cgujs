@@ -10,7 +10,7 @@
       case 'function'  :
         if (object.constructor === RegExp)  return RGX;  // FF2
         return FNC;
-      case 'object'    :
+      case 'object' :
         if (object === null) return NUL;
         if (object.constructor === Array)   return ARR;
         if (object.constructor === Boolean) return BLN;  // new operator
@@ -44,7 +44,7 @@
       case NUL : return this.get(object) === NUL;
       case STR : return this.get(object) === compare;
       case FNC :
-        switch (compare) { // force primitive comparisons
+        switch (compare) { // promote primitives
           case Boolean : return this.get(object) === BLN;
           case Number  : return this.get(object) === NUM;
           case String  : return this.get(object) === STR;

@@ -13,10 +13,10 @@
   
   this.write = function (key, value, options) {
     options = (function (o) { return {
-      path     : Type.limit(o.path,     'string')  || false,
-      domain   : Type.limit(o.domain,   'string')  || false,
-      secure   : Type.limit(o.secure,   'boolean') || false,
-      duration : Type.limit(o.duration, 'number')  || false
+      path     : Type.limit(o.path,     String)  || false,
+      domain   : Type.limit(o.domain,   String)  || false,
+      secure   : Type.limit(o.secure,   Boolean) || false,
+      duration : Type.limit(o.duration, Number)  || false
     };})(options || {});
     
     if (encodeURIComponent(key) === '') return null;
@@ -38,9 +38,9 @@
   
   this.expire = function (key, options) {
     options = (function (o) { return {
-      path     : Type.limit(o.path,   'string')  || false,
-      domain   : Type.limit(o.domain, 'string')  || false,
-      secure   : Type.limit(o.secure, 'boolean') || false,
+      path     : Type.limit(o.path,   String)  || false,
+      domain   : Type.limit(o.domain, String)  || false,
+      secure   : Type.limit(o.secure, Boolean) || false,
       duration : -1
     };})(options || {});
     

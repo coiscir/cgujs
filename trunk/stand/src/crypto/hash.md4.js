@@ -6,7 +6,7 @@
     block  : 64,
     method : function (options) { return Crypto.hash('md4', Type.clone(this), options); },
     algo   : function (input) {
-      if (!Type.is_a(input, 'string')) return;
+      if (!Type.is_a(input, String)) return;
       
       var HASH = [0x067452301, 0x0efcdab89, 0x098badcfe, 0x010325476];
       

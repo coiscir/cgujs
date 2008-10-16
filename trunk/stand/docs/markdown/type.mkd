@@ -25,7 +25,7 @@ Enhanced Data-Type Distinction
 
 > #### `clone` ####
 >  
-> > Create a new prototype copy of the object.  
+> > Clone object's value.  
 > >  
 > > **Return**: `<Mixed>`  
 > >  
@@ -43,7 +43,7 @@ Enhanced Data-Type Distinction
 
 > #### `get` ####
 >  
-> > Get the type name for an object.  
+> > Enhanced typeof.  
 > >  
 > > **Return**: `<String>`  
 > >  
@@ -59,8 +59,8 @@ Enhanced Data-Type Distinction
 
 > #### `is_a` ####
 >  
-> > Compare an object against a **single** type or constructor.  
-> > Adds support for checking against custom constructors.  
+> > Enhanced instanceof.  
+> > Promotes boolean, number, and string primitives.  
 > >  
 > > **Return**: `<Boolean>`  
 > >  
@@ -76,13 +76,16 @@ Enhanced Data-Type Distinction
 > > > `Type.is_a([], Array);             //=> true`  
 > > > `Type.is_a([], "array"));          //=> true`  
 > > > `Type.is_a([], Object));           //=> true`  
+> > > `Type.is_a('foo', String));        //=> true`  
+> > > `Type.is_a(false, Boolean));       //=> true`  
+> > > `Type.is_a(null, Object));         //=> false`  
 > > > `Type.is_a(new Foobar(), Foobar);  //=> true`  
 > >  
 > > **Warning**: Comparing against the `Object` constructor can result in false-positives, since everything is a variant of Object.  
 
 > #### `isof` ####
 >  
-> > Compare an object against **multiple** types or constructors.  
+> > Multiple is_a.  
 > >  
 > > **Return**: `<Boolean>`  
 > >  

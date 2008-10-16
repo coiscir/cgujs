@@ -8,7 +8,7 @@
   var Algos = {};
   
   this.algos = function (hmac) {
-    hmac = Type.limit(hmac, 'boolean') || false;
+    hmac = Type.limit(hmac, Boolean) || false;
     
     var list = [];
     for (var call in Algos)
@@ -19,8 +19,8 @@
   };
   
   this.search = function (call, hmac) {
-    call = Type.limit(call, 'string')  ||    '';
-    hmac = Type.limit(hmac, 'boolean') || false;
+    call = Type.limit(call, String)  ||    '';
+    hmac = Type.limit(hmac, Boolean) || false;
     
     var CALL = ready(call), a, algos = Type.clone(this.algos());
     if (!valid(CALL)) return;
@@ -31,11 +31,11 @@
   };
   
   this.methodize = function (call) {
-    call = ready(Type.limit(call, 'string') || '');
+    call = ready(Type.limit(call, String) || '');
     if (!this.search(call)) return;
     
     if (String.prototype[call] === Algos[call].method) return true;
-    if (Type.isof(String.prototype[call], 'null', 'undefined')) {
+    if (Type.isof(String.prototype[call], null, undefined)) {
       String.prototype[call] = Algos[call].method;
       return true;
     }
@@ -43,16 +43,16 @@
   };
   
   this.hash = function (call, data, options) {
-    call = Type.limit(call, 'string') || '';
-    data = Type.limit(data, 'string');
+    call = Type.limit(call, String) || '';
+    data = Type.limit(data, String);
     options = (function (o) { return {
-      unicode : (Type.limit(o.unicode, 'boolean') || false),
-      key     : (Type.limit(o.key,     'string'))
+      unicode : (Type.limit(o.unicode, Boolean) || false),
+      key     : (Type.limit(o.key,     String))
     };})(options || {});
     
     return Sequence((function () {
       call = ready(call);
-      if (!valid(call) || !Type.is_a(data, 'string')) return;
+      if (!valid(call) || !Type.is_a(data, String)) return;
       
       // check for call
       if (!Crypto.search(call)) return false;
