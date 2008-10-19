@@ -25,7 +25,7 @@
 
 > #### `expire` ####
 >  
-> > Delete a cookie by forcing it to expire.  
+> > **Description**: Delete a cookie by forcing it to expire.  
 > >  
 > > **Return**: `<Boolean>`  
 > >  
@@ -46,7 +46,7 @@
 
 > #### `read` ####
 >  
-> > Get the value of a cookie.  
+> > **Description**: Get the value of a cookie.  
 > >  
 > > **Return**: `<String>`  
 > >  
@@ -60,7 +60,7 @@
 
 > #### `write` ####
 >  
-> > Create a cookie.  
+> > **Description**: Create a cookie.  
 > >  
 > > **Return**: `<Boolean>`  
 > >  
@@ -68,7 +68,7 @@
 > >  
 > > > **_key_** `<Mixed>`: Name of the cookie. Any non-String keys will first be casted to String.  
 > > >  
-> > > **_value_** `<Mixed>`: Value of the cookie. Any non-String valus will first be casted to String.
+> > > **_value_** `<Mixed>`: Value of the cookie. Any non-String values will first be casted to String.
 > > >  
 > > > **_options_** `<Object>`: (Optional)  
 > > >  

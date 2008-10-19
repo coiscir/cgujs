@@ -33,7 +33,7 @@
   <h4><code>clone</code></h4>
   
   <blockquote>
-    <p>Clone object's value.  </p>
+    <p><strong>Description</strong>: Clone an object.  </p>
     
     <p><strong>Return</strong>: <code>&lt;Mixed&gt;</code>  </p>
     
@@ -57,7 +57,7 @@
   <h4><code>get</code></h4>
   
   <blockquote>
-    <p>Enhanced typeof.  </p>
+    <p><strong>Description</strong>: Enhanced typeof.  </p>
     
     <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
     
@@ -79,7 +79,7 @@
   <h4><code>is_a</code></h4>
   
   <blockquote>
-    <p>Enhanced instanceof.  </p>
+    <p><strong>Description</strong>: Enhanced instanceof.  </p>
     
     <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
     
@@ -88,7 +88,7 @@
     <blockquote>
       <p><strong><em>object</em></strong> <code>&lt;Mixed&gt;</code>: The object being tested.  </p>
       
-      <p><strong><em>type</em></strong> <code>&lt;String&gt;</code>: A type string to test the object against. <br />
+      <p><strong><em>type</em></strong> <code>&lt;String&gt;</code>: A type string to test against. <br />
       <strong><em>Constructor</em></strong> <code>&lt;Function&gt;</code>: A constructor function to test against.  </p>
     </blockquote>
     
@@ -98,7 +98,9 @@
       <p><code>Type.is_a([], Array);             //=&gt; true</code> <br />
       <code>Type.is_a([], "array"));          //=&gt; true</code> <br />
       <code>Type.is_a([], Object));           //=&gt; true</code> <br />
-      <code>Type.is_a('', String));           //=&gt; true // primitives are promoted</code> <br />
+      <code>Type.is_a('foo', String));        //=&gt; true</code> <br />
+      <code>Type.is_a(false, Boolean));       //=&gt; true</code> <br />
+      <code>Type.is_a(null, Object));         //=&gt; false</code> <br />
       <code>Type.is_a(new Foobar(), Foobar);  //=&gt; true</code>  </p>
     </blockquote>
     
@@ -108,17 +110,14 @@
   <h4><code>isof</code></h4>
   
   <blockquote>
-    <p>Multiple is_a.  </p>
+    <p><strong>Description</strong>: Multiple is_a.  </p>
     
     <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
     
     <p><strong>Syntax</strong>: <code>Type.isof(object, {type|Constructor} [, ..])</code>  </p>
     
     <blockquote>
-      <p><strong><em>object</em></strong> <code>&lt;Mixed&gt;</code>: The object being tested.  </p>
-      
-      <p><strong><em>type</em></strong> <code>&lt;String&gt;</code>: A type string to test the object against. <br />
-      <strong><em>Constructor</em></strong> <code>&lt;Function&gt;</code>: A constructor function to test against.  </p>
+      <p><em>Properties descriptions are the same as <code>is_a</code>.</em></p>
     </blockquote>
     
     <p><strong>Examples</strong>:  </p>
@@ -135,17 +134,18 @@
   <h4><code>limit</code></h4>
   
   <blockquote>
-    <p>Limit object's type. <br />
-    Short for combining <code>isof</code> and <code>clone</code>.  </p>
+    <p><strong>Description</strong>: Limit object's type.  </p>
+    
+    <blockquote>
+      <p>Short for combining <code>isof</code> and <code>clone</code>.  </p>
+    </blockquote>
     
     <p><strong>Return</strong>: <code>&lt;Mixed&gt;</code>  </p>
     
-    <p><strong>Syntax</strong>: <code>Type.limit(object, type [, type [, ..]])</code>  </p>
+    <p><strong>Syntax</strong>: <code>Type.limit(object, {type|Constructor} [, ..])</code>  </p>
     
     <blockquote>
-      <p><strong><em>object</em></strong> <code>&lt;Mixed&gt;</code>: The object being tested and cloned.  </p>
-      
-      <p><strong><em>type</em></strong> <code>&lt;String&gt;</code>: A type to test the object against.  </p>
+      <p><em>Properties descriptions are the same as <code>is_a</code> and <code>isof</code>.</em></p>
     </blockquote>
     
     <p><strong>Examples</strong>:  </p>
@@ -166,7 +166,7 @@
   <h4><code>types</code></h4>
   
   <blockquote>
-    <p>Get a list of all recognized type strings.  </p>
+    <p><strong>Description</strong>: Get a list of all recognized type strings.  </p>
     
     <p><strong>Return</strong>: <code>&lt;Array&gt;</code>  </p>
     

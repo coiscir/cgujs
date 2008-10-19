@@ -16,15 +16,13 @@
 
 ----
 
-### Access Utilities ###
+### Utilities ###
 
  * **[Cookie](cookie.html)** - Read, Write, and Delete (Expire) HTTP Cookies
 
- * **[Query](query.html)** - Read HTTP GET Variables
-
-### Extension Utilities ###
-
  * **[Crypto](crypto.html)** - Cryptographic Hash and HMAC Algorithms
+
+ * **[Query](query.html)** - Read HTTP GET Variables
 
  * **[Type](type.html)** - Enhanced Data-Type Distinction
 

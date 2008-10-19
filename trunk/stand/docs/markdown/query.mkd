@@ -25,7 +25,7 @@ Read HTTP GET Variables
 
 > #### `read` ####
 >  
-> > Get all values for a specified name (key).  
+> > **Description**: Get all values for a specified name (key).  
 > >  
 > > **Return**: `<Array>`  
 > >  

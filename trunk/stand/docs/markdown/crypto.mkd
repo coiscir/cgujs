@@ -27,9 +27,9 @@ Cryptographic Hash and HMAC Algorithms
 
 ### Sequence Objects ###
 
-> Sequence is an private class definition that enables various output formats for a hash.  
+> Sequences are objects that enable multiple output formats of a hash.  
 
-> #### Methods ####
+> #### Formats (methods) ####
 > >  
 > > **_base16_** / **_hex_** `<String>`  
 > >  
@@ -54,17 +54,19 @@ Cryptographic Hash and HMAC Algorithms
 > >  
 > > **_raw_** `<Array>`  
 > >  
-> > > Get the hash in a byte (0-255) array of the hash value.  
+> > > Get the hash in a byte array.  
 > >  
 > > **_str_** `<String>`  
 > >  
 > > > Get the hash in a String of 8-bit characters.  
-> >  
+
+> #### Methods ####
+>  
 > > **_valid_** `<Boolean>`  
 > >  
 > > > Verifies the Sequence was created properly.  
 
-> #### Overridden Methods ####
+> #### Overwritten Methods ####
 >  
 > > **_valueOf_**: _Same as **raw**_  
 >  
@@ -85,7 +87,7 @@ Cryptographic Hash and HMAC Algorithms
 
 > #### `algos` ####
 >  
-> > Get a list of all available algorithm calls.  
+> > **Description**: Get a list of all available algorithm calls.  
 > >  
 > > **Return**: `<Array>`  
 > >  
@@ -99,13 +101,13 @@ Cryptographic Hash and HMAC Algorithms
 
 > #### `hash` ####
 >  
-> > Generate a hash from given input.  
+> > **Description**: Generate a hash from given input.  
 > >  
 > > **Return**: `<<Sequence>>`  
 > >  
 > > **Syntax**: `Crypto.hash(call, data [, options])`  
 > >  
-> > > **_call_** `<String>`: The algorithm name to use.  
+> > > **_call_** `<String>`: Name of the algorithm to use.  
 > > >  
 > > > **_data_** `<String>`: The data being hashed.  
 > > >  
@@ -113,7 +115,7 @@ Cryptographic Hash and HMAC Algorithms
 > > >  
 > > > > **_key_** `<String>`: HMAC key. Leave this unset to hash without HMAC.  
 > > > >  
-> > > > **_unicode_** `<Boolean>`: Split all `data` characters from 16-bit to 2 8-bit.  
+> > > > **_unicode_** `<Boolean>`: Convert data from UTF-16 to UTF-8.  
 > >  
 > > **Examples**:  
 > >  
@@ -124,23 +126,23 @@ Cryptographic Hash and HMAC Algorithms
 
 > #### `methodize` ####
 >  
-> > Add a String Prototype method for a specific algorithm.  
+> > **Description**: Add a String Prototype method for a specific algorithm.  
 > >  
 > > **Return**: `<Boolean>`  
 > >  
 > > **Syntax**: `Crypto.methodize(call)`  
 > >  
-> > > **_call_** `<String>`: The algorithm name to search for.  
+> > > **_call_** `<String>`: The algorithm name to methodize.  
 > >  
 > > **Method**  
 > >  
-> > > **Return**: `<Object>`  
+> > > **Return**: `<<Sequence>>`  
 > > >  
 > > > **Syntax**: `String::CALL([options])`  
 > > >  
 > > > > **_options_** `<Object>`: (Optional)  
 > > > >  
-> > > > > _Same values as for Crypto.hash._  
+> > > > > _Same as for Crypto.hash._  
 > >  
 > > **Examples**:  
 > >  
@@ -151,11 +153,11 @@ Cryptographic Hash and HMAC Algorithms
 
 > #### `search` ####
 >  
-> > Get a list of all available algorithm calls.  
+> > **Description**: Verify an algorithm is available.  
 > >  
 > > **Return**: `<Boolean>`  
 > >  
-> > **Syntax**: `Crypto.search(call, hmac)`  
+> > **Syntax**: `Crypto.search(call [, hmac])`  
 > >  
 > > > **_call_** `<String>`: The algorithm name to search for.  
 > > >  

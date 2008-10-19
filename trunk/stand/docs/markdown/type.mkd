@@ -25,7 +25,7 @@ Enhanced Data-Type Distinction
 
 > #### `clone` ####
 >  
-> > Clone object's value.  
+> > **Description**: Clone an object.  
 > >  
 > > **Return**: `<Mixed>`  
 > >  
@@ -43,7 +43,7 @@ Enhanced Data-Type Distinction
 
 > #### `get` ####
 >  
-> > Enhanced typeof.  
+> > **Description**: Enhanced typeof.  
 > >  
 > > **Return**: `<String>`  
 > >  
@@ -59,8 +59,7 @@ Enhanced Data-Type Distinction
 
 > #### `is_a` ####
 >  
-> > Enhanced instanceof.  
-> > Promotes boolean, number, and string primitives.  
+> > **Description**: Enhanced instanceof.  
 > >  
 > > **Return**: `<Boolean>`  
 > >  
@@ -68,7 +67,7 @@ Enhanced Data-Type Distinction
 > >  
 > > > **_object_** `<Mixed>`: The object being tested.  
 > > >  
-> > > **_type_** `<String>`: A type string to test the object against.  
+> > > **_type_** `<String>`: A type string to test against.  
 > > > **_Constructor_** `<Function>`: A constructor function to test against.  
 > >  
 > > **Examples**:  
@@ -85,16 +84,13 @@ Enhanced Data-Type Distinction
 
 > #### `isof` ####
 >  
-> > Multiple is_a.  
+> > **Description**: Multiple is_a.  
 > >  
 > > **Return**: `<Boolean>`  
 > >  
 > > **Syntax**: `Type.isof(object, {type|Constructor} [, ..])`  
 > >  
-> > > **_object_** `<Mixed>`: The object being tested.  
-> > >  
-> > > **_type_** `<String>`: A type string to test the object against.  
-> > > **_Constructor_** `<Function>`: A constructor function to test against.  
+> > > _Properties descriptions are the same as `is_a`._
 > >  
 > > **Examples**:  
 > >  
@@ -106,16 +102,15 @@ Enhanced Data-Type Distinction
 
 > #### `limit` ####
 >  
-> > Limit object's type.  
-> > Short for combining `isof` and `clone`.  
+> > **Description**: Limit object's type.  
+> >  
+> > > Short for combining `isof` and `clone`.  
 > >  
 > > **Return**: `<Mixed>`  
 > >  
-> > **Syntax**: `Type.limit(object, type [, type [, ..]])`  
+> > **Syntax**: `Type.limit(object, {type|Constructor} [, ..])`  
 > >  
-> > > **_object_** `<Mixed>`: The object being tested and cloned.  
-> > >  
-> > > **_type_** `<String>`: A type to test the object against.  
+> > > _Properties descriptions are the same as `is_a` and `isof`._
 > >  
 > > **Examples**:  
 > >  
@@ -131,7 +126,7 @@ Enhanced Data-Type Distinction
 
 > #### `types` ####
 >  
-> > Get a list of all recognized type strings.  
+> > **Description**: Get a list of all recognized type strings.  
 > >  
 > > **Return**: `<Array>`  
 > >  

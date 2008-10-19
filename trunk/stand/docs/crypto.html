@@ -32,9 +32,9 @@
 <h3>Sequence Objects</h3>
 
 <blockquote>
-  <p>Sequence is an private class definition that enables various output formats for a hash.  </p>
+  <p>Sequences are objects that enable multiple output formats of a hash.  </p>
   
-  <h4>Methods</h4>
+  <h4>Formats (methods)</h4>
   
   <blockquote>
     <p><strong><em>base16</em></strong> / <strong><em>hex</em></strong> <code>&lt;String&gt;</code>  </p>
@@ -67,7 +67,7 @@
     <p><strong><em>raw</em></strong> <code>&lt;Array&gt;</code>  </p>
     
     <blockquote>
-      <p>Get the hash in a byte (0-255) array of the hash value.  </p>
+      <p>Get the hash in a byte array.  </p>
     </blockquote>
     
     <p><strong><em>str</em></strong> <code>&lt;String&gt;</code>  </p>
@@ -75,7 +75,11 @@
     <blockquote>
       <p>Get the hash in a String of 8-bit characters.  </p>
     </blockquote>
-    
+  </blockquote>
+  
+  <h4>Methods</h4>
+  
+  <blockquote>
     <p><strong><em>valid</em></strong> <code>&lt;Boolean&gt;</code>  </p>
     
     <blockquote>
@@ -83,7 +87,7 @@
     </blockquote>
   </blockquote>
   
-  <h4>Overridden Methods</h4>
+  <h4>Overwritten Methods</h4>
   
   <blockquote>
     <p><strong><em>valueOf</em></strong>: <em>Same as <strong>raw</strong></em>  </p>
@@ -113,7 +117,7 @@
   <h4><code>algos</code></h4>
   
   <blockquote>
-    <p>Get a list of all available algorithm calls.  </p>
+    <p><strong>Description</strong>: Get a list of all available algorithm calls.  </p>
     
     <p><strong>Return</strong>: <code>&lt;Array&gt;</code>  </p>
     
@@ -133,14 +137,14 @@
   <h4><code>hash</code></h4>
   
   <blockquote>
-    <p>Generate a hash from given input.  </p>
+    <p><strong>Description</strong>: Generate a hash from given input.  </p>
     
     <p><strong>Return</strong>: <code>&lt;&lt;Sequence&gt;&gt;</code>  </p>
     
     <p><strong>Syntax</strong>: <code>Crypto.hash(call, data [, options])</code>  </p>
     
     <blockquote>
-      <p><strong><em>call</em></strong> <code>&lt;String&gt;</code>: The algorithm name to use.  </p>
+      <p><strong><em>call</em></strong> <code>&lt;String&gt;</code>: Name of the algorithm to use.  </p>
       
       <p><strong><em>data</em></strong> <code>&lt;String&gt;</code>: The data being hashed.  </p>
       
@@ -149,7 +153,7 @@
       <blockquote>
         <p><strong><em>key</em></strong> <code>&lt;String&gt;</code>: HMAC key. Leave this unset to hash without HMAC.  </p>
         
-        <p><strong><em>unicode</em></strong> <code>&lt;Boolean&gt;</code>: Split all <code>data</code> characters from 16-bit to 2 8-bit.  </p>
+        <p><strong><em>unicode</em></strong> <code>&lt;Boolean&gt;</code>: Convert data from UTF-16 to UTF-8.  </p>
       </blockquote>
     </blockquote>
     
@@ -166,20 +170,20 @@
   <h4><code>methodize</code></h4>
   
   <blockquote>
-    <p>Add a String Prototype method for a specific algorithm.  </p>
+    <p><strong>Description</strong>: Add a String Prototype method for a specific algorithm.  </p>
     
     <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
     
     <p><strong>Syntax</strong>: <code>Crypto.methodize(call)</code>  </p>
     
     <blockquote>
-      <p><strong><em>call</em></strong> <code>&lt;String&gt;</code>: The algorithm name to search for.  </p>
+      <p><strong><em>call</em></strong> <code>&lt;String&gt;</code>: The algorithm name to methodize.  </p>
     </blockquote>
     
     <p><strong>Method</strong>  </p>
     
     <blockquote>
-      <p><strong>Return</strong>: <code>&lt;Object&gt;</code>  </p>
+      <p><strong>Return</strong>: <code>&lt;&lt;Sequence&gt;&gt;</code>  </p>
       
       <p><strong>Syntax</strong>: <code>String::CALL([options])</code>  </p>
       
@@ -187,7 +191,7 @@
         <p><strong><em>options</em></strong> <code>&lt;Object&gt;</code>: (Optional)  </p>
         
         <blockquote>
-          <p><em>Same values as for Crypto.hash.</em>  </p>
+          <p><em>Same as for Crypto.hash.</em>  </p>
         </blockquote>
       </blockquote>
     </blockquote>
@@ -205,11 +209,11 @@
   <h4><code>search</code></h4>
   
   <blockquote>
-    <p>Get a list of all available algorithm calls.  </p>
+    <p><strong>Description</strong>: Verify an algorithm is available.  </p>
     
     <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
     
-    <p><strong>Syntax</strong>: <code>Crypto.search(call, hmac)</code>  </p>
+    <p><strong>Syntax</strong>: <code>Crypto.search(call [, hmac])</code>  </p>
     
     <blockquote>
       <p><strong><em>call</em></strong> <code>&lt;String&gt;</code>: The algorithm name to search for.  </p>
