@@ -30,7 +30,11 @@ String.prototype.trim = function () {
 };
 </script>
 <script type="text/javascript">
-if (!!(window.Crypto)) {
+if (!(window.Crypto && window.Crypto.Version)) {
+
+document.writeln("Crypto doesn't exist. Build with Ruby/Rake.");
+
+} else {
 
 document.write('<pre style="font-size:11px;">');
 
@@ -353,10 +357,6 @@ document.writeln('');
 */
 
 document.write('</pre>');
-
-} else {
-
-document.writeln("Crypto doesn't exist. Build with Ruby/Rake.");
 
 }
 </script>

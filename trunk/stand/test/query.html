@@ -6,6 +6,12 @@
 
 <script src="../lib/query.js"></script>
 <script type="text/javascript">
+if (!(window.Query && window.Query.Version)) {
+
+document.writeln("Query doesn't exist. Build with Ruby/Rake.");
+
+} else {
+
 document.write('<pre style="font-size:11px;">');
 
 document.writeln('================================================================================');
@@ -49,6 +55,8 @@ document.writeln("true    //=> " + Query.read('true'));
 document.writeln("date    //=> " + Query.read('date'));
 
 document.write('</pre>');
+
+}
 </script>
 
 </body>

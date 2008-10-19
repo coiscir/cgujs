@@ -51,8 +51,8 @@ module Builder
     JSMIN = File.join(ROOT, 'jsmin.rb')
     
     def jsmin(*filenames)
-      filenames.map {|name| File.expand_path(name)}
-      filenames.map {|name| (`ruby #{JSMIN} < #{name}`).strip}.join($/)
+      padding = filenames.first.is_a?(Numeric) ? filenames.shift : 2
+      filenames.map {|name| (' ' * padding) + (`ruby #{JSMIN} < #{name}`).strip}.join($/)
     end
     
     def include(*filenames)

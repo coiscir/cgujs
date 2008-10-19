@@ -10,6 +10,12 @@ String.prototype.trim=function(){return String(this).replace(/^\s+|\s+$/g, '');}
 Array.prototype.filter=function(){for(var i=this.length-1;i>=0;i-=1)if(!this[i]&&this[i]!==false)this.splice(i,1);return this;};
 </script>
 <script type="text/javascript">
+if (!(window.Cookie && window.Cookie.Version)) {
+
+document.writeln("Cookie doesn't exist. Build with Ruby/Rake.");
+
+} else {
+
 document.write('<pre style="font-size:11px;">');
 
 document.writeln('================================================================================');
@@ -57,6 +63,8 @@ document.writeln('');
 document.writeln('document.cookie  //=> ', document.cookie, ' (', document.cookie.trim().split(/;\s?/).filter().length, ')');
 
 document.write('</pre>');
+
+}
 </script>
 
 </body>

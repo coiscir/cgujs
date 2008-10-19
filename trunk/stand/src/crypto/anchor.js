@@ -15,7 +15,17 @@
 var Crypto = new (function () {
   this.Version = '<%= serial %>';
 
-<%= include 'crypto.core.js', 'crypto.seq.js' %>
+<%= include 'crypto.core.js' %>
+
+<%= jsmin 'crypto.seq.js' %>
+
+
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  CGU-Stand :: Cookie :: Utils
+**/
+<%= jsmin 'crypto.utils.conv.js' %>
+
+<%= jsmin 'crypto.utils.fifo.js', 'crypto.utils.filo.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

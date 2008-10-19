@@ -10,7 +10,10 @@
       
       var HASH = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0];
       
-      var ROTL = function (x, n) { return ((x << n) | (x >>> (32 - n))); };
+      var decode = FIFO.decode;
+      var encode = FIFO.encode;
+      
+      var ROTL = CONV.ROTL;
       
       var F = function (t, b, c, d) {
         if (t < 20) return (b & c) | ((~b) & d);
@@ -23,28 +26,6 @@
         if (t < 40) return 0x6ed9eba1;
         if (t < 60) return 0x8f1bbcdc;
         if (t < 80) return 0xca62c1d6;
-      };
-      
-      var decode = function (input) {
-        var i, j, output = [];
-        for (i = 0, j = 0; j < input.length; i += 1, j = (i * 4)) {
-          output[i] = 
-            ((input[j + 0] & 0xff) << 24) |
-            ((input[j + 1] & 0xff) << 16) |
-            ((input[j + 2] & 0xff) << 8 ) |
-            ((input[j + 3] & 0xff) << 0 );
-        }
-        return output;
-      };
-      var encode = function (input) {
-        var i, output = [];
-        for (i = 0; i < input.length; i += 1) {
-          output.push((input[i] >> 24) & 0xff);
-          output.push((input[i] >> 16) & 0xff);
-          output.push((input[i] >> 8 ) & 0xff);
-          output.push((input[i] >> 0 ) & 0xff);
-        }
-        return output;
       };
       
       ////////////

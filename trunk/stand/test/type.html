@@ -6,6 +6,12 @@
 
 <script src="../lib/type.js"></script>
 <script type="text/javascript">
+if (!(window.Type && window.Type.Version)) {
+
+document.writeln("Type doesn't exist. Build with Ruby/Rake.");
+
+} else {
+
 function Foobar() {};
 
 document.write('<pre style="font-size:11px;">');
@@ -175,6 +181,8 @@ document.writeln('Type.limit(null,      "object")       => ', Type.limit(null, '
 document.writeln('');
 
 document.write('</pre>');
+
+}
 </script>
 
 </body>

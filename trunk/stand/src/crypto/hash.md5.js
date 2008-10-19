@@ -27,7 +27,10 @@
       var S43 = 15;
       var S44 = 21;
       
-      var ROTL = function (x, n) { return ((x << n) | (x >>> (32 - n))); };
+      var decode = FILO.decode;
+      var encode = FILO.encode;
+      
+      var ROTL = CONV.ROTL;
       
       var F = function (x, y, z) { return ((x & y) | ((~x) & z)); };
       var G = function (x, y, z) { return ((x & z) | (y & (~z))); };
@@ -36,27 +39,6 @@
       
       var C = function (f, a, b, c, d, x, s, ac) {
         return ROTL((a + f(b, c, d) + x + ac), s) + b;
-      };
-      
-      var decode = function (input) {
-        var i, j, output = [];
-        for (i = 0, j = 0; j < input.length; i += 1, j = (i * 4)) {
-          output[i] = ((input[j]) & 0xff) |
-            ((input[j + 1] << 8 ) & 0xff00) |
-            ((input[j + 2] << 16) & 0xff0000) |
-            ((input[j + 3] << 24) & 0xff000000);
-        }
-        return output;
-      };
-      var encode = function (input) {
-        var i, output = [];
-        for (i = 0; i < input.length; i += 1) {
-          output.push((input[i] >> 0 ) & 0xff);
-          output.push((input[i] >> 8 ) & 0xff);
-          output.push((input[i] >> 16) & 0xff);
-          output.push((input[i] >> 24) & 0xff);
-        }
-        return output;
       };
       
       ////////////

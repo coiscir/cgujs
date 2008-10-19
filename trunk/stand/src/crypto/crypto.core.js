@@ -46,8 +46,8 @@
     call = Type.limit(call, String) || '';
     data = Type.limit(data, String);
     options = (function (o) { return {
-      unicode : (Type.limit(o.unicode, Boolean) || false),
-      key     : (Type.limit(o.key,     String))
+      unicode : Type.limit(o.unicode, Boolean) || false,
+      key     : Type.limit(o.key,     String)
     };})(options || {});
     
     return Sequence((function () {
