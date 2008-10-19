@@ -68,6 +68,8 @@
 > >  
 > > > **_key_** `<Mixed>`: Name of the cookie. Any non-String keys will first be casted to String.  
 > > >  
+> > > **_value_** `<Mixed>`: Value of the cookie. Any non-String valus will first be casted to String.
+> > >  
 > > > **_options_** `<Object>`: (Optional)  
 > > >  
 > > > > **_domain_** `<String>`: The domain or host name associated with the cookie.  
