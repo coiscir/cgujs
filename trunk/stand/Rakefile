@@ -24,11 +24,6 @@ TIME = Time.now.utc
 VERS = File.join(ROOT, 'VERSION')
 $ver = nil
 
-def readcache
-  vers = IO.readlines(VERS).to_s.strip
-  return vers if !(vers =~ /^[0-9]+\.(?:[0-9]{2}){1,5}$/).nil?
-end
-
 def setserial(vers)
   $ver = vers if !vers.nil?
 end
@@ -41,6 +36,18 @@ def serial
     setserial(sprintf(f, (TIME.strftime("%Y").to_f - 2000 + TIME.strftime(s).to_f)))
   end
   $ver
+end
+
+def readcache
+  vers = IO.readlines(VERS).to_s.strip
+  return vers if !(vers =~ /^[0-9]+\.(?:[0-9]{2}){1,5}$/).nil?
+end
+
+def writecache
+  File.open(VERS, 'w+') do |v|
+    v << serial.to_s + $/
+  end
+  readcache
 end
 
 ################################################################################
@@ -157,10 +164,7 @@ end
 
 task :cache do
   print $/ + "== Cache" + $/
-  print " +  cache (" + serial.to_s + ")" + $/
-  File.open(VERS, 'w+') do |v|
-    v << serial.to_s + $/
-  end
+  print " +  cache (" + writecache.to_s + ")" + $/
 end
 
 task :all => :build
