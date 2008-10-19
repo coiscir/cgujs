@@ -2,8 +2,6 @@
 
 # CGU: Common & General Use Javascript #
 
-> CGU is a utilities collection for the Javascript language.  
-
 ----
 
 ### License ###
