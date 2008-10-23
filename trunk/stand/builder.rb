@@ -11,29 +11,20 @@ module Builder
       return if !Builder.registered?(name)
       @save_reqs = true
       @pkgs = pkgs.uniq.sort
-      start = File.split(file)
-      Dir.chdir(start[0]) do
-        @src = PKGS[name]['src'] = reader(start[1])
+      
+      if (PKGS[name]['src'].nil?)
+        start = File.split(file)
+        Dir.chdir(start[0]) do
+          @src = PKGS[name]['src'] = reader(start[1])
+        end
+      else
+        @src = PKGS[name]['src']
       end
-    end
-    
-    def reader(file)
-      parse(IO.readlines(file).to_s)
-    end
-    
-    def parse(source)
-      ERB.new(source).result(binding)
-    end
-    
-    def final
-      @save_reqs = false
-      parse(@src).gsub(/[ \t]+$/m, '')
+      self
     end
     
     def require(*pkgs)
-      if @save_reqs == true
-        return ("<%= require " + pkgs.map{|p| p.inspect}.join(', ') + " %>")
-      end
+      return ("<%= require " + pkgs.map{|p| p.inspect}.join(', ') + " %>") if @save_reqs
       
       pad = pkgs.first.is_a?(Numeric) ? pkgs.shift : 0
       step = [].concat(@pkgs).concat(pkgs).uniq.sort
@@ -60,6 +51,21 @@ module Builder
     
     def to_s
       final
+    end
+    
+    private
+    
+    def reader(file)
+      parse(IO.readlines(file).to_s)
+    end
+    
+    def parse(source)
+      ERB.new(source).result(binding)
+    end
+    
+    def final
+      @save_reqs = false
+      parse(@src).gsub(/[ \t]+$/m, '')
     end
   end
 
