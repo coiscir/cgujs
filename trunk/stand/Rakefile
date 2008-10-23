@@ -19,23 +19,28 @@ DIRS = INCS.keys.sort
 ################################################################################
 # Versioning
 ####
-PREC = nil # default = 2
 TIME = Time.now.utc
 VERS = File.join(ROOT, 'VERSION')
-$ver = nil
+PREC = ['prec1', 'prec2', 'prec3', 'prec4', 'prec5']
+$prec = nil # default = 2
+$vers = nil
+
+def setprecision(prec)
+  $prec = prec
+end
 
 def setserial(vers)
-  $ver = vers
+  $vers = vers
 end
 
 def serial
-  if ($ver.nil?)
-    p = (PREC.is_a?(Numeric) && PREC > 0) ? PREC : 2
+  if ($vers.nil?)
+    p = ($prec.is_a?(Numeric) && $prec > 0) ? $prec : 2
     f = "%.#{p*2}f"
     s = "0.%m#{'%d'if(p>1)}#{'%H'if(p>2)}#{'%M'if(p>3)}#{'%S'if(p>4)}"
     setserial(sprintf(f, (TIME.strftime("%Y").to_f - 2000 + TIME.strftime(s).to_f)))
   end
-  $ver
+  $vers
 end
 
 ################################################################################
@@ -55,10 +60,34 @@ task :default do
     "  clean (rm)",
     "  status (st)",
     "",
-    "Versioning Tasks:",
-    "  cache",
-    "  clear"
+    "Version Precision Tasks: (can only use 1)",
+    "  prec1 - Y.MM",
+    "  prec2 - Y.MMDD - default",
+    "  prec3 - Y.MMDDhh",
+    "  prec4 - Y.MMDDhhmm",
+    "  prec5 - Y.MMDDhhmmss",
   ].join($/) + $/
+end
+
+task :prec1 do
+  setprecision(1)
+  PREC.reject{|p| p=='prec1'}.each{|p| Rake::Task[p].disable}
+end
+task :prec2 do
+  setprecision(2)
+  PREC.reject{|p| p=='prec2'}.each{|p| Rake::Task[p].disable}
+end
+task :prec3 do
+  setprecision(3)
+  PREC.reject{|p| p=='prec3'}.each{|p| Rake::Task[p].disable}
+end
+task :prec4 do
+  setprecision(4)
+  PREC.reject{|p| p=='prec4'}.each{|p| Rake::Task[p].disable}
+end
+task :prec5 do
+  setprecision(5)
+  PREC.reject{|p| p=='prec5'}.each{|p| Rake::Task[p].disable}
 end
 
 task :all => :build
