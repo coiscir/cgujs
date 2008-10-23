@@ -17,30 +17,30 @@ var Crypto = new (function () {
 
 <%= include 'crypto.core.js' %>
 
-<%= jsmin 'crypto.seq.js' %>
+<%= include 2, true, 'crypto.seq.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Cookie :: Utils
 **/
-<%= jsmin 'crypto.utils.conv.js' %>
+<%= include 2, true, 'crypto.utils.conv.js' %>
 
-<%= jsmin 'crypto.utils.fifo.js', 'crypto.utils.filo.js' %>
+<%= include 2, true, 'crypto.utils.fifo.js', 'crypto.utils.filo.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Cookie :: Algorithms
 **/
-<%= jsmin 'hash.md4.js', 'hash.md5.js' %>
+<%= include 2, true, 'hash.md4.js', 'hash.md5.js' %>
 
-<%= jsmin 'hash.sha1.js', 'hash.sha224.js', 'hash.sha256.js' %>
+<%= include 2, true, 'hash.sha1.js', 'hash.sha224.js', 'hash.sha256.js' %>
 
-<%= jsmin 'hash.ripemd128.js', 'hash.ripemd160.js' %>
+<%= include 2, true, 'hash.ripemd128.js', 'hash.ripemd160.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Cookie :: Includes
 **/
-<%= jsmin 'inc.type.js' %>
+<%= require 2, 'type' %>
 
 })();

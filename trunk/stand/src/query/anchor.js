@@ -17,6 +17,6 @@ var Query = new (function () {
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Query :: Includes
 **/
-<%= jsmin 'inc.type.js' %>
+<%= require 2, 'type' %>
 
 })();

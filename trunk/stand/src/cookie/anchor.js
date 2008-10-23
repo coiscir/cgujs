@@ -17,6 +17,6 @@ var Cookie = new (function () {
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Cookie :: Includes
 **/
-<%= jsmin 'inc.type.js' %>
+<%= require 2, 'type' %>
 
 })();
