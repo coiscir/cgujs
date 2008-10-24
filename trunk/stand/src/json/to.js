@@ -1,9 +1,16 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: JSON :: TO
 **/
+  var padnum = function (length, number) {
+    number = String(number);
+    while (number.length < length) number = '0' + number;
+    return number;
+  };
+
   this.to = this.stringify = function (input, options) {
     options = (function (o) { return {
       allkey : Type.limit(o.allkey, Boolean) || false,
+      dates  : Type.limit(o.dates,  Boolean) || false,
       relax  : Type.limit(o.relax,  Boolean) || false,
       verify : Type.limit(o.verify, Boolean) || false
     };})(options || {});
@@ -29,6 +36,20 @@
       return '[' + elems.join(', ') + ']';
     };
     
+    var date = function (input) {
+      if (!options.dates) return undefined;
+      return '"' + ''.concat(
+        padnum(4, input.getUTCFullYear()), '-',
+        padnum(2, input.getUTCMonth() + 1), '-',
+        padnum(2, input.getUTCDate()), 'T',
+        padnum(2, input.getUTCHours()), ':',
+        padnum(2, input.getUTCMinutes()), ':',
+        padnum(2, input.getUTCSeconds()), '.',
+        padnum(3, input.getUTCMilliseconds()), 'Z'
+      ) + '"';
+
+    };
+    
     var string = function (input) {
       var result = '', enc;
       var specials = {
@@ -42,7 +63,7 @@
       };
       while (input.length > 0) {
         if (match = input.match(/[\x00-\x1f\\"]/)) {
-          enc = match[0].charCodeAt(0).toString(16); while (enc.length < 2) enc = '0' + enc;
+          enc = padnum(2, match[0].charCodeAt(0).toString(16));
           
           result += input.slice(0, match.index);
           result += specials[match[0]] ? specials[match[0]] : ('\\u00' + enc);
@@ -58,6 +79,7 @@
       switch (Type.get(input)) {
         case 'object'   : return object(input);
         case 'array'    : return array(input);
+        case 'date'     : return date(input);
         case 'string'   : return string(input);
         case 'number'   :
         case 'boolean'  : return input.toString();

@@ -55,6 +55,8 @@ document.writeln('to({foo : 0}, {verify: true})               //=> ', JSON.to({f
 document.writeln('to(undefined, {verify: true})               //=> ', (function(){try{ return JSON.to(undefined, {verify: true}); } catch(e){ return e.message; }})());
 document.writeln('to(undefined, {relax: true, verify: true})  //=> ', (function(){try{ return JSON.to(undefined, {relax: true, verify: true}); } catch(e){ return e.message; }})());
 document.writeln('');
+document.writeln('to(new Date(), {dates: true})  //=> ', JSON.to(new Date(), {dates: true}));
+document.writeln('');
 
 document.writeln('');
 document.writeln('--------------------------------------------------------------------------------');
@@ -89,16 +91,20 @@ document.writeln('from("a..z" * 4, {errlen:  50})  //=> ', (function(){try{ retu
 document.writeln('from("a..z" * 4, {errlen: 100})  //=> ', (function(){try{ return printType(JSON.from(longfail, {errlen: 100})); }catch(e){return e.message;}})());
 document.writeln('from("a..z" * 4, {errlen: 125})  //=> ', (function(){try{ return printType(JSON.from(longfail, {errlen: 125})); }catch(e){return e.message;}})());
 document.writeln('');
-document.writeln('from("{f: 20}", {relax: true})   //=> ', printType(JSON.from("{f: 20}", {relax: true})));
-document.writeln('from("\'quote\'", {relax: true})   //=> ', printType(JSON.from("'quote'", {relax: true})));
-document.writeln('from("0x14af9", {relax: true})   //=> ', printType(JSON.from("0x14af9", {relax: true})));
-document.writeln('from("0716253", {relax: true})   //=> ', printType(JSON.from("0716253", {relax: true})));
+document.writeln('from("{f: 20}", {relax: true})     //=> ', printType(JSON.from("{f: 20}", {relax: true})));
+document.writeln('from("\'quote\'", {relax: true})     //=> ', printType(JSON.from("'quote'", {relax: true})));
+document.writeln('from("0x14af9", {relax: true})     //=> ', printType(JSON.from("0x14af9", {relax: true})));
+document.writeln('from("0716253", {relax: true})     //=> ', printType(JSON.from("0716253", {relax: true})));
 document.writeln('from("undefined", {relax: true})   //=> ', printType(JSON.from("undefined", {relax: true})));
-document.writeln('from("{f: 20}", {relax: false})  //=> ', (function(){try{ return printType(JSON.from("{f: 20}", {relax: false})); }catch(e){return e.message;}})());
-document.writeln('from("\'quote\'", {relax: false})  //=> ', (function(){try{ return printType(JSON.from("'quote'", {relax: false})); }catch(e){return e.message;}})());
-document.writeln('from("0x14af9", {relax: false})  //=> ', (function(){try{ return printType(JSON.from("0x14af9", {relax: false})); }catch(e){return e.message;}})());
-document.writeln('from("0716253", {relax: false})  //=> ', (function(){try{ return printType(JSON.from("0716253", {relax: false})); }catch(e){return e.message;}})());
+document.writeln('from("{f: 20}", {relax: false})    //=> ', (function(){try{ return printType(JSON.from("{f: 20}", {relax: false})); }catch(e){return e.message;}})());
+document.writeln('from("\'quote\'", {relax: false})    //=> ', (function(){try{ return printType(JSON.from("'quote'", {relax: false})); }catch(e){return e.message;}})());
+document.writeln('from("0x14af9", {relax: false})    //=> ', (function(){try{ return printType(JSON.from("0x14af9", {relax: false})); }catch(e){return e.message;}})());
+document.writeln('from("0716253", {relax: false})    //=> ', (function(){try{ return printType(JSON.from("0716253", {relax: false})); }catch(e){return e.message;}})());
 document.writeln('from("undefined", {relax: false})  //=> ', (function(){try{ return printType(JSON.from("undefined", {relax: false})); }catch(e){return e.message;}})());
+document.writeln('');
+document.writeln('from("\\"2008-04-02T12:24:48Z\\"", {dates: false})      //=> ', printType(JSON.from('"2008-04-02T12:24:48Z"', {dates: false})));
+document.writeln('from("\\"2008-04-02T12:24:48Z\\"", {dates: true})       //=> ', printType(JSON.from('"2008-04-02T12:24:48Z"', {dates: true})));
+document.writeln('from("\\"2008-04-02T12:24:48.999Z\\"", {dates: true})   //=> ', printType(JSON.from('"2008-04-02T12:24:48.999Z"', {dates: true})));
 document.writeln('');
 
 document.write('</pre>');

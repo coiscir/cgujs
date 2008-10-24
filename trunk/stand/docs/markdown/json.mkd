@@ -36,7 +36,9 @@ JSON Parsing and Writing
 > > >  
 > > > **_options_** `<Object>`: (Optional)  
 > > >  
-> > > > **_errlen_** `<String>`: Length of json string to grab with exceptions (default: 20).  
+> > > > **_dates_** `<Boolean>`: Convert date strings (format: `"####-##-##T##:##:##.###Z"`).  
+> > > >  
+> > > > **_errlen_** `<Number>`: Length of json string to grab with exceptions (default: 20).  
 > > > >  
 > > > > **_relax_** `<Boolean>`: Allow parsing of more string elements.  
 > > > >  
@@ -64,7 +66,9 @@ JSON Parsing and Writing
 > > >  
 > > > **_options_** `<Object>`: (Optional)  
 > > >  
-> > > > **_allkey_** `<String>`: Don't limit object keys to enumerables (i.e. `object.propertyIsEnumerable(prop)`)  
+> > > > **_allkey_** `<Boolean>`: Don't limit object keys to enumerables (i.e. `object.propertyIsEnumerable(prop)`)  
+> > > >  
+> > > > **_dates_** `<Boolean>`: Convert dates to strings (format: `"####-##-##T##:##:##.###Z"`).  
 > > > >  
 > > > > **_relax_** `<Boolean>`: Allow parsing of more string elements.  
 > > > >  
