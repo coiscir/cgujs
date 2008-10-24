@@ -46,7 +46,7 @@ module Builder
         |f| min ? JSMin.minify(f).gsub(/\n/, '').sub(/^ /, '') : f
       }.map{
         |f| f.gsub(/^/, (' ' * pad))
-      }.join($/)
+      }.join($/+(min ? '' : $/))
     end
     
     def to_s

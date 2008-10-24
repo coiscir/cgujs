@@ -12,7 +12,8 @@ INCS = {
   'type'   => File.join(SRCS, 'type', 'anchor.js'),
   'crypto' => File.join(SRCS, 'crypto', 'anchor.js'),
   'cookie' => File.join(SRCS, 'cookie', 'anchor.js'),
-  'query'  => File.join(SRCS, 'query', 'anchor.js')
+  'query'  => File.join(SRCS, 'query', 'anchor.js'),
+  'json'   => File.join(SRCS, 'json', 'anchor.js')
 };
 DIRS = INCS.keys.sort
 
