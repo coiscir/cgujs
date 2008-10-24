@@ -1,0 +1,76 @@
+----
+
+# JSON #
+
+JSON Parsing and Writing
+
+----
+
+### Tests ###
+
+> [Test Cases](../test/json.html)  
+
+----
+
+### Properties ###
+
+> #### `Version` ####
+>  
+> > Formatting is based on the date built: `Y.MMDD`  
+> > Where `Y` is the number of years since 2000.  
+
+----
+
+### Methods ###
+
+> #### `from` | `parse` ####
+>  
+> > **Description**: Parse a JSON-formatted string.  
+> >  
+> > **Return**: `<Mixed>`  
+> >  
+> > **Syntax**: `JSON.from(json [, options])`  
+> > **Syntax**: `JSON.parse(json [, options])`  
+> >  
+> > > **_json_** `<Mixed>`: String to be parsed.  
+> > >  
+> > > **_options_** `<Object>`: (Optional)  
+> > >  
+> > > > **_errlen_** `<String>`: Length of json string to grab with exceptions (default: 20).  
+> > > >  
+> > > > **_relax_** `<Boolean>`: Allow parsing of more string elements.  
+> > > >  
+> > > > > Allow undefined keyword.  
+> > > > > Allow hexadecimal and octal numbers.  
+> > > > > Allow single-quoted strings.  
+> > > > > Allow un-quoted object keys; though limited to alpha, num, underscore and dollar.  
+> >  
+> > **Examples**:  
+> >  
+> > > `JSON.from(' "foobar" ');  //=> 'foobar'`  
+> > > `JSON.parse('[ "foo" ]');  //=> ['foo']`  
+
+> #### `to` | `stringify` ####
+>  
+> > **Description**: Get a JSON-formatted string from an object.  
+> >  
+> > **Return**: `<String>`  
+> >  
+> > **Syntax**: `JSON.to(input [, options])`  
+> >  
+> > > **_input_** `<Mixed>`: Object being converted.  
+> > >  
+> > > **_options_** `<Object>`: (Optional)  
+> > >  
+> > > > **_allkey_** `<String>`: Don't limit object keys to enumerables (i.e. `object.propertyIsEnumerable(prop)`)  
+> > > >  
+> > > > **_relax_** `<Boolean>`: Allow parsing of more string elements.  
+> > > >  
+> > > > > Allow undefined keyword.  
+> >  
+> > **Examples**:  
+> >  
+> > > `JSON.to('"foobar" ');  //=> "\"foobar\" "`  
+> > > `JSON.stringify(null);  //=> null`  
+
+----

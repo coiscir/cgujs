@@ -42,11 +42,11 @@
       while (input.length > 0) {
         if (match = input.match(/[\x00-\x1f\\"]/)) {
           enc = match[0].charCodeAt(0).toString(16); while (enc.length < 2) enc = '0' + enc;
-          rep = specials[match[0]] ? specials[match[0]] : ('\u00' + enc);
+          rep = specials[match[0]] ? specials[match[0]] : ('\\u00' + enc);
           
           result += input.slice(0, match.index);
           result += rep;
-          source  = source.clice(match.index + match[0].length);
+          input  = input.slice(match.index + match[0].length);
         } else {
           result += input; input = '';
         }
@@ -56,13 +56,14 @@
     
     var value = function (input) {
       switch (Type.get(input)) {
-        case 'object' : return object(input);
-        case 'array'  : return array(input);
-        case 'string' : return string(input);
-        case 'number' :
-        case 'boolean': return input.toString();
-        case 'null'   : return 'null';
-        default : return options.relax ? 'undefined' : undefined;
+        case 'object'   : return object(input);
+        case 'array'    : return array(input);
+        case 'string'   : return string(input);
+        case 'number'   :
+        case 'boolean'  : return input.toString();
+        case 'null'     : return 'null';
+        case 'undefined': return options.relax ? 'undefined' : undefined;
+        default : return undefined;
       }
     };
     

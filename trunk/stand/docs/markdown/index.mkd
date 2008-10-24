@@ -20,6 +20,8 @@
 
  * **[Crypto](crypto.html)** - Cryptographic Hash and HMAC Algorithms
 
+ * **[JSON](json.html)** - JSON Parsing and Writing
+
  * **[Query](query.html)** - Read HTTP GET Variables
 
  * **[Type](type.html)** - Enhanced Data-Type Distinction

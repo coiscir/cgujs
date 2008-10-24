@@ -11,7 +11,7 @@
 var JSON = new (function () {
   this.Version = '<%= serial %>';
   
-<%= include 'to.js', 'from.js' %>
+<%= include 'from.js', 'to.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
