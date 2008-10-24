@@ -43,6 +43,7 @@ JSON Parsing and Writing
 > > > > > Allow undefined keyword.  
 > > > > > Allow hexadecimal and octal numbers.  
 > > > > > Allow single-quoted strings.  
+> > > > > Allow hex encoding in strings (e.g., `"\x20"`).  
 > > > > > Allow un-quoted object keys; though limited to alpha, num, underscore and dollar.  
 > >  
 > > **Examples**:  
@@ -57,6 +58,7 @@ JSON Parsing and Writing
 > > **Return**: `<String>`  
 > >  
 > > **Syntax**: `JSON.to(input [, options])`  
+> > **Syntax**: `JSON.stringify(input [, options])`  
 > >  
 > > > **_input_** `<Mixed>`: Object being converted.  
 > > >  

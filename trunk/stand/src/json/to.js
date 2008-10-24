@@ -29,7 +29,7 @@
     };
     
     var string = function (input) {
-      var result = '', enc, rep;
+      var result = '', enc;
       var specials = {
         '"'  : '\\"',
         '\b' : '\\b',
@@ -42,10 +42,9 @@
       while (input.length > 0) {
         if (match = input.match(/[\x00-\x1f\\"]/)) {
           enc = match[0].charCodeAt(0).toString(16); while (enc.length < 2) enc = '0' + enc;
-          rep = specials[match[0]] ? specials[match[0]] : ('\\u00' + enc);
           
           result += input.slice(0, match.index);
-          result += rep;
+          result += specials[match[0]] ? specials[match[0]] : ('\\u00' + enc);
           input  = input.slice(match.index + match[0].length);
         } else {
           result += input; input = '';
