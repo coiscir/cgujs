@@ -3,8 +3,9 @@
 **/
   this.to = this.stringify = function (input, options) {
     options = (function (o) { return {
+      allkey : Type.limit(o.allkey, Boolean) || false,
       relax  : Type.limit(o.relax,  Boolean) || false,
-      allkey : Type.limit(o.allkey, Boolean) || false
+      verify : Type.limit(o.verify, Boolean) || false
     };})(options || {});
     
     var object = function (input) {
@@ -66,5 +67,7 @@
       }
     };
     
-    return value(input);
+    var result = value(input);
+    if (options.verify) this.from(result, {relax : options.relax});
+    return result;
   };

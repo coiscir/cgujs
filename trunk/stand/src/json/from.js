@@ -4,8 +4,8 @@
   this.from = this.parse = function (json, options) {
     json = Type.limit(json, String) || '';
     options = (function (o) { return {
-      relax  : Type.limit(o.relax,  Boolean) || false,
-      errlen : Type.limit(o.errlen, Number)  || 20
+      errlen : Type.limit(o.errlen, Number)  || 20,
+      relax  : Type.limit(o.relax,  Boolean) || false
     };})(options || {});
     
     options.errlen = options.errlen > 9 ? options.errlen : 20;

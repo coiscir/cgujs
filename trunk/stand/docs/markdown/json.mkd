@@ -69,6 +69,8 @@ JSON Parsing and Writing
 > > > > **_relax_** `<Boolean>`: Allow parsing of more string elements.  
 > > > >  
 > > > > > Allow undefined keyword.  
+> > > >  
+> > > > **_verify_** `<Boolean>`: Use JSON.from to verify string.  
 > >  
 > > **Examples**:  
 > >  
