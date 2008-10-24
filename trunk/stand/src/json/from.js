@@ -48,7 +48,7 @@
         [
           '(',
           (cuts + 1),
-          ', "',
+          ': "',
           json.substr(0, options.errlen),
           (json.length > options.errlen ? '...' : ''),
           '")'
@@ -148,7 +148,7 @@
     var start = function () {
       if (json.length == white().length) kill('String is empty.');
       var host = value();
-      //if (json.length > white().length) kill('Tail data found.');
+      if (json.length > white().length) kill('Tail data found.');
       return host;
     };
     
