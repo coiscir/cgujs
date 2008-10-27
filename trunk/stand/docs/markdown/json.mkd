@@ -41,7 +41,7 @@ JSON Parsing and Writing
 > > > > **_relax_** `<Boolean>`: Set all relax properties.  
 > > > > **_relax_** `<Object>`: Allow parsing of more string elements.  
 > > > >  
-> > > > > **_date_** `<Boolean>`: Parse date strings (format: `"####-##-##T##:##:##.###Z"`).  
+> > > > > **_date_** `<Boolean>`: Parse UTC date strings (format: `"####-##-##T##:##:##.###Z"`).  
 > > > > >  
 > > > > > **_keyword_** `<Boolean>`: Allow undefined keyword.  
 > > > > >  
@@ -74,7 +74,7 @@ JSON Parsing and Writing
 > > > > **_relax_** `<Boolean>`: Set all relax properties.  
 > > > > **_relax_** `<Object>`: Allow parsing of more string elements.  
 > > > >  
-> > > > > **_date_** `<Boolean>`: Parse date strings (format: `"####-##-##T##:##:##.###Z"`).  
+> > > > > **_date_** `<Boolean>`: Convert UTC dates to strings (format: `"####-##-##T##:##:##.###Z"`).  
 > > > > >  
 > > > > > **_keyword_** `<Boolean>`: Allow undefined keyword.  
 > > > >  

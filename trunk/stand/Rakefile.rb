@@ -1,5 +1,4 @@
 require 'rake'
-require 'builder'
 
 ################################################################################
 # Prepare
@@ -16,6 +15,8 @@ INCS = {
   'json'   => File.join(SRCS, 'json', 'anchor.js')
 };
 DIRS = INCS.keys.sort
+
+require File.join(ROOT, 'builder')
 
 ################################################################################
 # Versioning
