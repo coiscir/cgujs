@@ -16,7 +16,9 @@ INCS = {
 };
 DIRS = INCS.keys.sort
 
-require File.join(ROOT, 'builder')
+Dir.chdir(ROOT) do
+  require 'builder'
+end
 
 ################################################################################
 # Versioning
