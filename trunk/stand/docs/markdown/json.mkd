@@ -36,17 +36,20 @@ JSON Parsing and Writing
 > > >  
 > > > **_options_** `<Object>`: (Optional)  
 > > >  
-> > > > **_dates_** `<Boolean>`: Convert date strings (format: `"####-##-##T##:##:##.###Z"`).  
-> > > >  
 > > > > **_errlen_** `<Number>`: Length of json string to grab with exceptions (default: 20).  
 > > > >  
-> > > > **_relax_** `<Boolean>`: Allow parsing of more string elements.  
+> > > > **_relax_** `<Boolean>`: Set all relax properties.  
+> > > > **_relax_** `<Object>`: Allow parsing of more string elements.  
 > > > >  
-> > > > > Allow undefined keyword.  
-> > > > > Allow hexadecimal and octal numbers.  
-> > > > > Allow single-quoted strings.  
-> > > > > Allow hex encoding in strings (e.g., `"\x20"`).  
-> > > > > Allow un-quoted object keys; though limited to alpha, num, underscore and dollar.  
+> > > > > **_date_** `<Boolean>`: Parse date strings (format: `"####-##-##T##:##:##.###Z"`).  
+> > > > >  
+> > > > > **_keyword_** `<Boolean>`: Allow undefined keyword.  
+> > > > >  
+> > > > > **_number_** `<Boolean>`: Allow hexadecimal and octal numbers.  
+> > > > >  
+> > > > > **_objkey_** `<Boolean>`: Allow un-quoted object keys; limited to alpha, num, underscore and dollar.  
+> > > > >  
+> > > > > **_string_** `<Boolean>`: Allow single-quoted strings and hex encoding in strings (e.g., `"\x20"`).  
 > >  
 > > **Examples**:  
 > >  
@@ -68,11 +71,12 @@ JSON Parsing and Writing
 > > >  
 > > > > **_allkey_** `<Boolean>`: Don't limit object keys to enumerables (i.e. `object.propertyIsEnumerable(prop)`)  
 > > > >  
-> > > > **_dates_** `<Boolean>`: Convert dates to strings (format: `"####-##-##T##:##:##.###Z"`).  
+> > > > **_relax_** `<Boolean>`: Set all relax properties.  
+> > > > **_relax_** `<Object>`: Allow parsing of more string elements.  
 > > > >  
-> > > > **_relax_** `<Boolean>`: Allow parsing of more string elements.  
-> > > >  
-> > > > > Allow undefined keyword.  
+> > > > > **_date_** `<Boolean>`: Parse date strings (format: `"####-##-##T##:##:##.###Z"`).  
+> > > > >  
+> > > > > **_keyword_** `<Boolean>`: Allow undefined keyword.  
 > > > >  
 > > > > **_verify_** `<Boolean>`: Use JSON.from to verify string.  
 > >  

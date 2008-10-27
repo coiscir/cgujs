@@ -9,11 +9,18 @@
 
   this.to = this.stringify = function (input, options) {
     options = (function (o) { return {
-      allkey : Type.limit(o.allkey, Boolean) || false,
-      dates  : Type.limit(o.dates,  Boolean) || false,
-      relax  : Type.limit(o.relax,  Boolean) || false,
-      verify : Type.limit(o.verify, Boolean) || false
+      allkey : Type.limit(o.allkey, Boolean)         || false,
+      relax  : Type.limit(o.relax,  Boolean, Object) || false,
+      verify : Type.limit(o.verify, Boolean)         || false
     };})(options || {});
+    
+    options.relax = (function (r) {
+      var global = Type.limit(r, Boolean) || false;
+      return {
+        date    : Type.limit(r.date,    Boolean) || global,
+        keyword : Type.limit(r.keyword, Boolean) || global
+      };
+    })(options.relax || false);
     
     var object = function (input) {
       var pairs = [], k, v;
@@ -37,7 +44,7 @@
     };
     
     var date = function (input) {
-      if (!options.dates) return undefined;
+      if (!options.relax.date) return undefined;
       return '"' + ''.concat(
         padnum(4, input.getUTCFullYear()), '-',
         padnum(2, input.getUTCMonth() + 1), '-',
@@ -84,7 +91,7 @@
         case 'number'   :
         case 'boolean'  : return input.toString();
         case 'null'     : return 'null';
-        case 'undefined': return options.relax ? 'undefined' : undefined;
+        case 'undefined': return options.relax.keyword ? 'undefined' : undefined;
         default : return undefined;
       }
     };

@@ -49,13 +49,14 @@ document.writeln('to("\\x1f  \\x04")  //=> ', JSON.to("\x1f  \x04"));
 document.writeln('');
 document.writeln('to({a: 0, f: function(){}})  //=> ', JSON.to({a: 0, f: function(){}}));
 document.writeln('');
-document.writeln('to({a: new Date(), b: /pattern/, c: "string", d: 98123})  //=> ', JSON.to({a: new Date(), b: /pattern/, c: "string", d: 98123}));
+document.writeln('to({a: new Date(), b: /pattern/, c: 098123})                 //=> ', JSON.to({a: new Date(), b: /pattern/, c: 098123}));
+document.writeln('to({a: new Date(), b: /pattern/, c: 098123}, {relax: true})  //=> ', JSON.to({a: new Date(), b: /pattern/, c: 098123}, {relax: true}));
 document.writeln('');
 document.writeln('to({foo : 0}, {verify: true})               //=> ', JSON.to({foo : 0}, {verify: true}));
 document.writeln('to(undefined, {verify: true})               //=> ', (function(){try{ return JSON.to(undefined, {verify: true}); } catch(e){ return e.message; }})());
 document.writeln('to(undefined, {relax: true, verify: true})  //=> ', (function(){try{ return JSON.to(undefined, {relax: true, verify: true}); } catch(e){ return e.message; }})());
 document.writeln('');
-document.writeln('to(new Date(), {dates: true})  //=> ', JSON.to(new Date(), {dates: true}));
+document.writeln('to(new Date(), {relax: {date: true}})  //=> ', JSON.to(new Date(), {relax: {date: true}}));
 document.writeln('');
 
 document.writeln('');
@@ -102,9 +103,9 @@ document.writeln('from("0x14af9", {relax: false})    //=> ', (function(){try{ re
 document.writeln('from("0716253", {relax: false})    //=> ', (function(){try{ return printType(JSON.from("0716253", {relax: false})); }catch(e){return e.message;}})());
 document.writeln('from("undefined", {relax: false})  //=> ', (function(){try{ return printType(JSON.from("undefined", {relax: false})); }catch(e){return e.message;}})());
 document.writeln('');
-document.writeln('from("\\"2008-04-02T12:24:48Z\\"")                     //=> ', printType(JSON.from('"2008-04-02T12:24:48Z"')));
-document.writeln('from("\\"2008-04-02T12:24:48Z\\"", {dates: true})      //=> ', printType(JSON.from('"2008-04-02T12:24:48Z"', {dates: true})));
-document.writeln('from("\\"2008-04-02T12:24:48.999Z\\"", {dates: true})  //=> ', printType(JSON.from('"2008-04-02T12:24:48.999Z"', {dates: true})));
+document.writeln('from("\\"2008-04-02T12:24:48Z\\"")                             //=> ', printType(JSON.from('"2008-04-02T12:24:48Z"')));
+document.writeln('from("\\"2008-04-02T12:24:48Z\\"", {relax: {date: true}})      //=> ', printType(JSON.from('"2008-04-02T12:24:48Z"', {relax: {date: true}})));
+document.writeln('from("\\"2008-04-02T12:24:48.999Z\\"", {relax: {date: true}})  //=> ', printType(JSON.from('"2008-04-02T12:24:48.999Z"', {relax: {date: true}})));
 document.writeln('');
 
 document.write('</pre>');

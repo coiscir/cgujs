@@ -4,17 +4,27 @@
   this.from = this.parse = function (json, options) {
     json = Type.limit(json, String) || '';
     options = (function (o) { return {
-      dates  : Type.limit(o.dates,  Boolean) || false,
-      errlen : Type.limit(o.errlen, Number)  || 20,
-      relax  : Type.limit(o.relax,  Boolean) || false
+      errlen : Type.limit(o.errlen, Number)         || 20,
+      relax  : Type.limit(o.relax, Boolean, Object) || false
     };})(options || {});
     
     options.errlen = options.errlen > 9 ? options.errlen : 20;
+    options.relax  = (function (r) {
+      var global = Type.limit(r, Boolean) || false;
+      return {
+        date    : Type.limit(r.date,    Boolean) || global,
+        keyword : Type.limit(r.keyword, Boolean) || global,
+        number  : Type.limit(r.number,  Boolean) || global,
+        objkey  : Type.limit(r.objkey,  Boolean) || global,
+        string  : Type.limit(r.string,  Boolean) || global
+      };
+    })(options.relax || false);
     
     var strict = {
-      datetm : /^(")(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{3}))?Z(\1)/,
+      datetm : /^(?:!.)./,                                   /* match nothing */
       keywrd : /^null|true|false/,
-      number : /^[\-]?(0(?![x0-9])|[1-9][0-9]*)(?:\.[0-9]+)?(?:[Ee][+-]?[0-9]+)?/,
+      number : /^(-)?(0(?![x0-9])|[1-9][0-9]*)(?:\.[0-9]+)?(?:[Ee][+-]?[0-9]+)?/,
+      objkey : /^(?:!.)./,                                   /* match nothing */
       string : /^(")(\\(\1|\\|\/|b|f|n|r|t|u[0-9a-f]{4})|(?!(\\|\1)).)*(\1)/
     };
     
@@ -22,15 +32,16 @@
       datetm : /^(['"])(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d+)?)Z(\1)/,
       keywrd : /^undefined|null|true|false/,
       number : /^(0([0-7]+|x[0-9a-fA-F]+))|([+-]?(0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[Ee][+-]?[0-9]+)?)/,
+      objkey : /^[A-Za-z$_][A-Za-z0-9$_]*/,
       string : /^(['"])(\\(\1|\\|\/|b|f|n|r|t|x[0-9a-f]{1}|u[0-9a-f]{4})|(?!(\\|\1)).)*(\1)/
     };
     
     var reWhite  = /^\s+/;
-    var reObjKey = /^[A-Za-z$_][A-Za-z0-9$_]*/;
-    var reDateTm = options.relax ? relaxed.datetm : strict.datetm;
-    var reKeywd  = options.relax ? relaxed.keywrd : strict.keywrd;
-    var reNumber = options.relax ? relaxed.number : strict.number;
-    var reString = options.relax ? relaxed.string : strict.string;
+    var reObjKey = options.relax.objkey  ? relaxed.objkey : strict.objkey;
+    var reDateTm = options.relax.date    ? relaxed.datetm : strict.datetm;
+    var reKeywd  = options.relax.keyword ? relaxed.keywrd : strict.keywrd;
+    var reNumber = options.relax.number  ? relaxed.number : strict.number;
+    var reString = options.relax.string  ? relaxed.string : strict.string;
     
     var cuts = 0; // characters cut from json (i.e. position - 1)
     var cut = function (match) {
@@ -80,7 +91,6 @@
     };
     
     var date = function () {
-      if (!options.dates) return string();
       var str = cut(reDateTm);
       if (!(str.length > 0)) kill("Invalid Date.");
       var d = reDateTm.exec(str);
@@ -106,9 +116,7 @@
       
       var key = function () {
         if (reString.test(json)) return string();
-        if (options.relax) {
-          if (reObjKey.test(json)) return cut(reObjKey);
-        }
+        if (reObjKey.test(json)) return cut(reObjKey);
         kill("Invalid Object key.");
       };
       
@@ -116,7 +124,7 @@
         white();
         var k = key();
         white();
-        if (!(cut(/^\:/).length > 0)) kill("Missing Object value.");
+        if (!(cut(/^\:/).length > 0)) kill("Invalid Object. Expected ':'.");
         white();
         var v = value();
         host[k] = v;
@@ -129,8 +137,7 @@
           white();
         } while (cut(/^,/).length > 0);
       }
-      if (!(cut(/^\}/).length > 0))
-        kill("Unterminated Object.");
+      if (!(cut(/^\}/).length > 0)) kill("Unterminated Object.");
       return host;
     };
     
