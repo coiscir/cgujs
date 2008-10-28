@@ -31,10 +31,7 @@ $vers = nil
 
 def setprecision(prec)
   $prec = prec
-end
-
-def setserial(vers)
-  $vers = vers
+  PREC.each{|p| Rake::Task[p].disable}
 end
 
 def serial
@@ -42,7 +39,7 @@ def serial
     p = ($prec.is_a?(Numeric) && $prec > 0) ? $prec : 2
     f = "%.#{p*2}f"
     s = "0.%m#{'%d'if(p>1)}#{'%H'if(p>2)}#{'%M'if(p>3)}#{'%S'if(p>4)}"
-    setserial(sprintf(f, (TIME.strftime("%Y").to_f - 2000 + TIME.strftime(s).to_f)))
+    $vers = sprintf(f, (TIME.strftime("%Y").to_f - 2000 + TIME.strftime(s).to_f))
   end
   $vers
 end
@@ -75,23 +72,18 @@ end
 
 task :prec1 do
   setprecision(1)
-  PREC.reject{|p| p=='prec1'}.each{|p| Rake::Task[p].disable}
 end
 task :prec2 do
   setprecision(2)
-  PREC.reject{|p| p=='prec2'}.each{|p| Rake::Task[p].disable}
 end
 task :prec3 do
   setprecision(3)
-  PREC.reject{|p| p=='prec3'}.each{|p| Rake::Task[p].disable}
 end
 task :prec4 do
   setprecision(4)
-  PREC.reject{|p| p=='prec4'}.each{|p| Rake::Task[p].disable}
 end
 task :prec5 do
   setprecision(5)
-  PREC.reject{|p| p=='prec5'}.each{|p| Rake::Task[p].disable}
 end
 
 task :all => :build
@@ -99,7 +91,7 @@ task :rm  => :clean
 task :st  => :status
 
 desc "Build all library scripts"
-task :build do
+task :build => [:prec2] do
   print $/ + '== Build' + ' :: ' + TIME.strftime('%Y-%m-%d %I:%M:%S') + ' :: ' + serial.to_s + $/
   DIRS.each do |pkg|
     libf = File.join(LIBS, "#{pkg}.js")

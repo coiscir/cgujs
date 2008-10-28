@@ -3,8 +3,9 @@
 ### ERB Wrapper
 ################################################################################
 # Requires: jsmin (http://rubyforge.org/projects/riposte/)
-#
 #   $ gem install jsmin
+#
+# More info at http://www.crockford.com/javascript/jsmin.html
 ################################################################################
 # NOTE:
 #
@@ -34,8 +35,8 @@
 #   4. Require
 #     (As noted above) Requires are other projects needed. They are specified
 #     using the require function by passing the project name (from Register).
-#     With require functions unused, they can now be checked against all
-#     projects already required to prevent duplicates.
+#     With require functions unused when cached, they can now be checked
+#     against all projects already required to prevent duplicates.
 ################################################################################
 # Syntax
 #
@@ -60,7 +61,7 @@
 #   <%# include 'utils.js' with jsmin and 2 padding %>
 #   <%= include 2, true 'utils.js' %>
 #
-#   // Require: Bar
+#   // require: Bar
 #   <%= require 2, 'bar' %>
 #
 #   })();

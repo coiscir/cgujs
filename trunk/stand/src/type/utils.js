@@ -12,6 +12,7 @@
         return FNC;
       case 'object' :
         if (object === null) return NUL;
+        if (object instanceof Error) return ERR;
         if (object.constructor === Array)   return ARR;
         if (object.constructor === Boolean) return BLN;  // new operator
         if (object.constructor === Date)    return DTE;
@@ -28,6 +29,7 @@
       case NUL : return null;
       case ARR :
       case BLN :
+      case ERR :
       case FNC :
       case NUM :
       case OBJ :
