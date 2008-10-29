@@ -13,6 +13,6 @@
 var Type = new (function () {
   this.Version = '<%= serial %>';
   
-<%= include 'types.js', 'utils.js', 'lists.js' %>
+<%= inc 'types.js', 'utils.js', 'lists.js' %>
 
 })();

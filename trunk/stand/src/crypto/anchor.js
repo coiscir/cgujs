@@ -17,32 +17,32 @@
 var Crypto = new (function () {
   this.Version = '<%= serial %>';
 
-<%= include 'crypto.core.js' %>
+<%= inc 'crypto.core.js' %>
 
-<%= include 2, true, 'crypto.seq.js' %>
+<%= inc 2, true, 'crypto.seq.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Cookie :: Utils
 **/
-<%= include 2, true, 'crypto.utils.conv.js' %>
+<%= inc 2, true, 'crypto.utils.conv.js' %>
 
-<%= include 2, true, 'crypto.utils.fifo.js', 'crypto.utils.filo.js' %>
+<%= inc 2, true, 'crypto.utils.fifo.js', 'crypto.utils.filo.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Cookie :: Algorithms
 **/
-<%= include 2, true, 'hash.md4.js', 'hash.md5.js' %>
+<%= inc 2, true, 'hash.md4.js', 'hash.md5.js' %>
 
-<%= include 2, true, 'hash.sha1.js', 'hash.sha224.js', 'hash.sha256.js' %>
+<%= inc 2, true, 'hash.sha1.js', 'hash.sha224.js', 'hash.sha256.js' %>
 
-<%= include 2, true, 'hash.ripemd128.js', 'hash.ripemd160.js' %>
+<%= inc 2, true, 'hash.ripemd128.js', 'hash.ripemd160.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Cookie :: Includes
 **/
-<%= require 2, 'type' %>
+<%= req 2, 'type' %>
 
 })();

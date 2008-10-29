@@ -13,12 +13,12 @@
 var JSON = new (function () {
   this.Version = '<%= serial %>';
   
-<%= include 'from.js', 'to.js' %>
+<%= inc 'from.js', 'to.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Query :: Includes
 **/
-<%= require 2, 'type' %>
+<%= req 2, 'type' %>
 
 })();

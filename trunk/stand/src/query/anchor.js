@@ -13,12 +13,12 @@
 var Query = new (function () {
   this.Version = '<%= serial %>';
   
-<%= include 'core.js' %>
+<%= inc 'core.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Query :: Includes
 **/
-<%= require 2, 'type' %>
+<%= req 2, 'type' %>
 
 })();

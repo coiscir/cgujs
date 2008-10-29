@@ -13,12 +13,12 @@
 var Cookie = new (function () {
   this.Version = '<%= serial %>';
   
-<%= include 'core.js' %>
+<%= inc 'core.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Cookie :: Includes
 **/
-<%= require 2, 'type' %>
+<%= req 2, 'type' %>
 
 })();

@@ -23,19 +23,18 @@
 #     point for that project. It should specify all initial includes and
 #     requires necessary to build the final script.
 #     
-#   2. Include
+#   2. Reader/Include
 #     Includes are subsequent script files for the project. They are specified
-#     using the include function with relative paths to the anchor file.
+#     using the `inc` function with relative paths to the anchor file.
 #
 #   3. Cache
-#     Project sources are cached as one script with all Includes. But Requires
-#     are left unused. The cache is used for the project's own build as well as
-#     for any other project that requires it.
+#     Project sources are cached as one script with all Includes. Requires are
+#     only gather, not used.
 #
-#   4. Require
+#   4. Final/Require
 #     (As noted above) Requires are other projects needed. They are specified
-#     using the require function by passing the project name (from Register).
-#     With require functions unused when cached, they can now be checked
+#     using the `req` function by passing the project name (from Register).
+#     With `req` functions unused during Cache, they can now be checked
 #     against all projects already required to prevent duplicates.
 ################################################################################
 # Syntax
@@ -87,6 +86,7 @@ module Builder
     def initialize(name, file, pkgs)
       return if !Builder.registered?(name)
       @pkgs = pkgs.uniq.sort
+      @step = @pkgs.dup
       
       if (PKGS[name]['src'].nil?)
         start = File.split(file)
@@ -96,24 +96,27 @@ module Builder
       else
         @src = PKGS[name]['src']
       end
+      
       self
     end
     
-    def require(*pkgs)
-      return ("<%= require " + pkgs.map{|p| p.inspect}.join(', ') + " %>") if @save_reqs
+    def req(*pkgs)
+      if (@save_reqs)
+        @step = [].concat(@step).concat(pkgs.reject{|p| !Builder.registered?(p)}).uniq.sort
+        return "<%= req " + pkgs.map{|p| p.inspect}.join(', ') + " %>"
+      end
       
       pad = pkgs.first.is_a?(Numeric) ? pkgs.shift : 0
-      step = [].concat(@pkgs).concat(pkgs).uniq.sort
       pkgs.reject{
         |p| !Builder.registered?(p) || @pkgs.include?(p)
       }.map{
-        |p| JSMin.minify(Builder.start(p, step)).gsub(/\n/, '').sub(/^ /, '')
+        |p| JSMin.minify(Builder.start(p, @step)).gsub(/\n/, '').sub(/^ +/, '')
       }.map{
         |p| p.gsub(/^/, (' ' * pad))
       }.join($/)
     end
     
-    def include(*files)
+    def inc(*files)
       pad = files.first.is_a?(Numeric) ? files.shift : 0
       min = files.first == true ? files.shift : false
       files.map{
