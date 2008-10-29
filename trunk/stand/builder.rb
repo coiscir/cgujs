@@ -7,14 +7,6 @@
 #
 # More info at http://www.crockford.com/javascript/jsmin.html
 ################################################################################
-# NOTE:
-#
-#   General documentation for the Bulder::Reader class is not offered. It isn't
-#   intended to be used on its own.
-#
-#   The `include` and `require` methods are documented below for their use
-#   within project source files.
-################################################################################
 # Builder builds projects in 4 stages:
 #
 #   1. Register
@@ -83,13 +75,13 @@ module Builder
   PKGS = {}
   
   class Reader
-    def initialize(name, file, pkgs)
+    def initialize(name, pkgs)
       return if !Builder.registered?(name)
       @pkgs = pkgs.uniq.sort
       @step = @pkgs.dup
       
       if (PKGS[name]['src'].nil?)
-        start = File.split(file)
+        start = File.split(PKGS[name]['start'])
         Dir.chdir(start[0]) do
           @src = PKGS[name]['src'] = reader(start[1])
         end
@@ -100,6 +92,20 @@ module Builder
       self
     end
     
+    def inc(*files)
+      pad = files.first.is_a?(Numeric) ? files.shift : 0
+      min = files.first == true ? files.shift : false
+      files.reject{
+        |f| !File.file?(f)
+      }.map{
+        |f| reader(f).strip
+      }.map{
+        |f| min ? JSMin.minify(f).gsub(/\n/, '').sub(/^ /, '') : f
+      }.map{
+        |f| f.gsub(/^/, (' ' * pad))
+      }.join($/+(min ? '' : $/))
+    end
+    
     def req(*pkgs)
       if (@save_reqs)
         @step = [].concat(@step).concat(pkgs.reject{|p| !Builder.registered?(p)}).uniq.sort
@@ -107,25 +113,16 @@ module Builder
       end
       
       pad = pkgs.first.is_a?(Numeric) ? pkgs.shift : 0
+      min = pkgs.first == true ? pkgs.shift : false
       pkgs.reject{
         |p| !Builder.registered?(p) || @pkgs.include?(p)
       }.map{
-        |p| JSMin.minify(Builder.start(p, @step)).gsub(/\n/, '').sub(/^ +/, '')
+        |p| Builder.start(p, @step)
+      }.map{
+        |p| min ? JSMin.minify(p).gsub(/\n/, '').sub(/^ +/, '') : p
       }.map{
         |p| p.gsub(/^/, (' ' * pad))
       }.join($/)
-    end
-    
-    def inc(*files)
-      pad = files.first.is_a?(Numeric) ? files.shift : 0
-      min = files.first == true ? files.shift : false
-      files.map{
-        |f| reader(f).strip
-      }.map{
-        |f| min ? JSMin.minify(f).gsub(/\n/, '').sub(/^ /, '') : f
-      }.map{
-        |f| f.gsub(/^/, (' ' * pad))
-      }.join($/+(min ? '' : $/))
     end
     
     def to_s
@@ -165,7 +162,7 @@ module Builder
       return if !self.registered?(name)
       
       pkgs = [] if pkgs.nil?
-      Reader.new(name, PKGS[name]['start'], [name].concat(pkgs).uniq).to_s
+      Reader.new(name, [name].concat(pkgs).uniq).to_s
     end
   end
   

@@ -1,13 +1,29 @@
+<%= req 'HEADER' %>
+
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU: Common & General Use Javascript
- *  (c) 2008 Jonathan Lonowski
- *    http://code.google.com/p/cgujs/
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU and CGU-Stand are released under the MIT License.
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Query
  *    Read HTTP GET Variables
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *~~~ Properties
+ *
+ *  Version
+ *
+ *    Actually a misnomer, Version is the date built. Depending on the build
+ *    options used, can be between 'Y.MM' and 'Y.MMDDHHMISS'.
+ *
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *~~~ Methods
+ *
+ *
+ *  read -> Get all values for a key.
+ *
+ *    Syntax: Query.read(key)
+ *
+ *      key <String>: Name of the query-string variable.
+ *
+ *    Return: <Array>: List of values.
+ *
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
 var Query = new (function () {
@@ -19,6 +35,6 @@ var Query = new (function () {
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Query :: Includes
 **/
-<%= req 2, 'type' %>
+<%= req 2, true, 'type' %>
 
 })();

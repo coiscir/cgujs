@@ -7,6 +7,9 @@ ROOT = File.expand_path(File.dirname(__FILE__))
 LIBS = File.join(ROOT, 'lib')
 SRCS = File.join(ROOT, 'src')
 
+GLOB = {
+  'HEADER' => File.join(SRCS, 'header.js')
+}
 INCS = {
   'type'   => File.join(SRCS, 'type', 'anchor.js'),
   'crypto' => File.join(SRCS, 'crypto', 'anchor.js'),
@@ -24,7 +27,6 @@ end
 # Versioning
 ####
 TIME = Time.now.utc
-VERS = File.join(ROOT, 'VERSION')
 PREC = ['prec1', 'prec2', 'prec3', 'prec4', 'prec5']
 $prec = nil # default = 2
 $vers = nil
@@ -47,7 +49,10 @@ end
 ################################################################################
 # Setup
 ####
-INCS.each_pair do |name,anch|
+GLOB.each_pair do |name, anch|
+  Builder.register(name, anch)
+end
+INCS.each_pair do |name, anch|
   Builder.register(name, anch)
 end
 
