@@ -1,0 +1,124 @@
+<hr />
+
+<h1>Cookie</h1>
+
+<blockquote>
+  <p>Read, Write, and Delete (Expire) HTTP Cookies  </p>
+</blockquote>
+
+<hr />
+
+<h3>Tests</h3>
+
+<blockquote>
+  <p><a href="../test/cookie.html">Test Cases</a>  </p>
+</blockquote>
+
+<hr />
+
+<h3>Properties</h3>
+
+<blockquote>
+  <h4><code>Version</code></h4>
+  
+  <blockquote>
+    <p>Formatting is based on the date built: <code>Y.MMDD</code> <br />
+    Where <code>Y</code> is the number of years since 2000.  </p>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Methods</h3>
+
+<blockquote>
+  <h4><code>expire</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Delete a cookie by forcing it to expire.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Cookie.expire(key [, options])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>key</em></strong> <code>&lt;Mixed&gt;</code>: Name of the cookie. Any non-String keys will first be casted to String.  </p>
+      
+      <p><strong><em>options</em></strong> <code>&lt;Object&gt;</code>: (Optional)  </p>
+      
+      <blockquote>
+        <p><em>Same as for Cookie.write, excluding duration.</em>  </p>
+      </blockquote>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Cookie.expire('foo');</code> <br />
+      <code>Cookie.expire('foo', {path: '/'});</code> <br />
+      <code>Cookie.expire('foo', {path: '/', secure: true});</code> <br />
+      <code>Cookie.expire('foo', {domain: 'myhost', path: '/'});</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>read</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Get the value of a cookie.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Cookie.read(key)</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>key</em></strong> <code>&lt;Mixed&gt;</code>: Name of the cookie. Any non-String keys will first be casted to String.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Cookie.read('foo');</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>write</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Create a cookie.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Cookie.write(key, value [, options])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>key</em></strong> <code>&lt;Mixed&gt;</code>: Name of the cookie. Any non-String keys will first be casted to String.  </p>
+      
+      <p><strong><em>value</em></strong> <code>&lt;Mixed&gt;</code>: Value of the cookie. Any non-String values will first be casted to String.</p>
+      
+      <p><strong><em>options</em></strong> <code>&lt;Object&gt;</code>: (Optional)  </p>
+      
+      <blockquote>
+        <p><strong><em>domain</em></strong> <code>&lt;String&gt;</code>: The domain or host name associated with the cookie.  </p>
+        
+        <p><strong><em>duration</em></strong> <code>&lt;Number&gt;</code>: Time, in days, that the cookie should live. Leave this unset to create a session cookie.  </p>
+        
+        <p><strong><em>path</em></strong> <code>&lt;String&gt;</code>: The path associated with the cookie.  </p>
+        
+        <p><strong><em>secure</em></strong> <code>&lt;Boolean&gt;</code>: Use a secure cookie.  </p>
+      </blockquote>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Cookie.expire('foo', 'bar');</code> <br />
+      <code>Cookie.expire('foo', 'bar', {duration: 2});</code> <br />
+      <code>Cookie.expire('foo', 'bar', {duration: -1});  // same as Cookie.expire</code> <br />
+      <code>Cookie.expire('foo', 'bar', {path: '/'});</code> <br />
+      <code>Cookie.expire('foo', 'bar', {path: '/', secure: true});</code> <br />
+      <code>Cookie.expire('foo', 'bar', {domain: 'myhost', path: '/'});</code>  </p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<hr />
