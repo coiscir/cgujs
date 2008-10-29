@@ -5,6 +5,7 @@
 <body>
 
 <script src="../lib/cookie.js"></script>
+<script src="../lib/json.js"></script>
 <script type="text/javascript">
 String.prototype.trim=function(){return String(this).replace(/^\s+|\s+$/g, '');};
 Array.prototype.filter=function(){for(var i=this.length-1;i>=0;i-=1)if(!this[i]&&this[i]!==false)this.splice(i,1);return this;};
@@ -29,7 +30,7 @@ document.writeln('');
 
 document.writeln('');
 document.writeln('--------------------------------------------------------------------------------');
-document.writeln('============================================================ READ, WRITE, EXPIRE');
+document.writeln('================================================== READ, WRITE, EXPIRE, TOOBJECT');
 document.writeln('--------------------------------------------------------------------------------');
 document.writeln('');
 
@@ -41,7 +42,7 @@ document.writeln('write("und")         //=> ', Cookie.write('und'),  '  // uses 
 document.writeln('write()              //=> ', Cookie.write(),       '  // even for key (name)');
 document.writeln('write("", "")        //=> ', Cookie.write('', ''), '  // only invalid value is an empty string');
 document.writeln('');
-document.writeln('document.cookie  //=> ', document.cookie, ' (', document.cookie.trim().split(/;\s?/).filter().length, ')');
+document.writeln('toObject  //=> ', JSON.to(Cookie.toObject()).replace(/(^\{(?!\})|",)/g, '$1\n                 ').replace(/(\}$)/g, '\n               $1'));
 document.writeln('');
 document.writeln('read("TZ")     //=> ', Cookie.read('TZ'));
 document.writeln('read("foo")    //=> ', Cookie.read('foo'));
@@ -60,7 +61,8 @@ document.writeln('expire("und")  //=> ', Cookie.expire('und'));
 document.writeln('expire()       //=> ', Cookie.expire());
 document.writeln('expire("")     //=> ', Cookie.expire(''));
 document.writeln('');
-document.writeln('document.cookie  //=> ', document.cookie, ' (', document.cookie.trim().split(/;\s?/).filter().length, ')');
+document.writeln('toObject  //=> ', JSON.to(Cookie.toObject()).replace(/(^\{(?!\})|",)/g, '$1\n                 ').replace(/(\}$)/g, '\n               $1'));
+document.writeln('');
 
 document.write('</pre>');
 

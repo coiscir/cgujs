@@ -70,6 +70,8 @@ var Cookie = new (function () {
   
 <%= inc 'core.js' %>
 
+<%= inc 'conv.js' %>
+
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Cookie :: Includes

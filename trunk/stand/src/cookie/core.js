@@ -3,7 +3,7 @@
 **/
   this.read = function (key) {
     key = String(key);
-    var cookies = ('' + document.cookie).split(/\;\s*/), i;
+    var cookies = Type.clone(document.cookie).split(/\;\s*/), i;
     for (i = 0; i < cookies.length; i += 1)
       if (typeof cookies[i] === 'string' && cookies[i].match(/[^\=]+\=/))
         if (key === decodeURIComponent(cookies[i].split('=')[0]))

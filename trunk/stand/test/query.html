@@ -5,6 +5,7 @@
 <body>
 
 <script src="../lib/query.js"></script>
+<script src="../lib/json.js"></script>
 <script type="text/javascript">
 if (!(window.Query && window.Query.Version)) {
 
@@ -53,6 +54,16 @@ document.writeln("' '     //=> " + Query.read(' '));
 document.writeln("n/a     //=> " + Query.read('n/a'));
 document.writeln("true    //=> " + Query.read('true'));
 document.writeln("date    //=> " + Query.read('date'));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('======================================================================= toObject');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('toObject  //=> ', JSON.to(Query.toObject()).replace(/(^\{(?!\})|\],)/g, '$1\n                 ').replace(/(\}$)/g, '\n               $1'));
+document.writeln('');
 
 document.write('</pre>');
 

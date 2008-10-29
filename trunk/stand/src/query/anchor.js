@@ -22,6 +22,13 @@
  *      key <String>: Name of the query-string variable.
  *
  *    Return: <Array>: List of values.
+ *----
+ *
+ *  toObject -> Get an object representation of the query-string.
+ *
+ *    Syntax: Query.toObject()
+ *
+ *    Return: <Object>: Representation of query-string.
  *
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
@@ -30,6 +37,8 @@ var Query = new (function () {
   this.Version = '<%= serial %>';
   
 <%= inc 'core.js' %>
+
+<%= inc 'conv.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
