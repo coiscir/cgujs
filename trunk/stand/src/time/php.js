@@ -1,29 +1,15 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Time :: PHP
 **/
-  var phpRanges = function () {
-    return {
-      local : [
-        new Date(-999,  0,  1,  0,  0,  0,   0).getTime(),
-        new Date(9999, 11, 31, 23, 59, 59, 999).getTime()
-      ],
-      utc : [
-        Date.UTC(-999,  0,  1,  0,  0,  0,   0),
-        Date.UTC(9999, 11, 31, 23, 59, 59, 999)
-      ]
-    };
-  };
-  
   this.php = function (format, time) {
     format = Type.limit(format, String) || '';
     time   = new Date(Type.limit(time, Date, Number, String) || new Date());
     
-    var range = phpRanges();
     if (time != 0 && !time) return;
-    if (!between(time.getTime(), range.local[0], range.local[1])) return null;
-    
-    var day = 24 * 60 * 60 * 1000; // milliseconds in a day
-    var swb = 24 * 60 * 60 / 1000; // seconds in a swatch beat
+    if (!between(time,
+      new Date(-999,  0,  1,  0,  0,  0,   0).getTime(),
+      new Date(9999, 11, 31, 23, 59, 59, 999).getTime()
+    )) return null;
     
     // January 1st
     var firstCurr = new Date((time.getFullYear() + 0), 0, 1);
@@ -58,6 +44,62 @@
     // leap year
       base.l   = !(base.y % 4) && !!(base.y % 100) || !(base.y % 400);
     /*# end #*/
+    
+    return phpf(base, format, [firstCurr, firstNext], [monCurr, monNext]);
+  };
+  
+  this.utcphp = function (format, time) {
+    format = Type.limit(format, String) || '';
+    time   = new Date(Type.limit(time, Date, Number, String) || new Date());
+    
+    if (time != 0 && !time) return;
+    if (!between(time,
+      new Date(-999,  0,  1,  0,  0,  0,   0).getTime(),
+      new Date(9999, 11, 31, 23, 59, 59, 999).getTime()
+    )) return null;
+    
+    // January 1st
+    var firstCurr = new Date(Date.UTC((time.getUTCFullYear() + 0), 0, 1));
+    var firstNext = new Date(Date.UTC((time.getUTCFullYear() + 1), 0, 1));
+    
+    // 1st Monday
+    var dayCurr = tumble(firstCurr.getUTCDay(), 7);
+    var dayNext = tumble(firstNext.getUTCDay(), 7);
+    var monCurr = firstCurr.getTime() - (day * (dayCurr - (dayCurr >= 4 ? 7 : 0)));
+    var monNext = firstNext.getTime() - (day * (dayNext - (dayNext >= 4 ? 7 : 0)));
+    
+    var base = {}; /* c, d, h, i, l, m, n, o, s, t, u, w, y, z */
+    // day, month, year
+      base.d   = time.getUTCDate();
+      base.m   = time.getUTCMonth() + 1;
+      base.n   = time.getUTCMonth();
+      base.y   = time.getUTCFullYear();
+    // hour, minute, second
+      base.h   = time.getUTCHours();
+      base.i   = time.getUTCMinutes();
+      base.s   = time.getUTCSeconds();
+    // week
+      base.w   = time.getUTCDay();
+    // time
+      base.c   = time.getTime();
+      base.t   = ftoi(base.c / 1000);
+      base.u   = (base.c % 1000) * 1000;
+    // timezone
+      base.o   = 0;
+      base.z   = 0;
+      base.dst = false;
+    // leap year
+      base.l   = !(base.y % 4) && !!(base.y % 100) || !(base.y % 400);
+    /*# end #*/
+    
+    return phpf(base, format, [firstCurr, firstNext], [monCurr, monNext]);
+  };
+  
+  var phpf = function (base, format, firsts, mondays) {
+    var firstCurr = firsts[0];
+    var firstNext = firsts[1];
+    var monCurr = mondays[0];
+    var monNext = mondays[1];
   
     var monthc = [31, (base.l ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     var months = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -129,7 +171,7 @@
         case 'T': buffer += 'T'; break;  // unsupported
         case 'Z': buffer += base.z * 60; break;
       // full date/time
-        case 'c': buffer += ''.concat(
+        case 'c': buffer += ''.concat( /* "Y-m-d\Th:i:sP" */
                     padnum(4, base.y), '-',
                     padnum(2, base.m), '-',
                     padnum(2, base.d), 'T',
@@ -140,7 +182,7 @@
                     (padnum(2, Math.abs(ftoi(base.z / 60)))), ':',
                     (padnum(2, Math.abs(base.z % 60)))
                   ); break;
-        case 'r': buffer += ''.concat(
+        case 'r': buffer += ''.concat( /* "D, d M, Y h:i:s O" */
                     weekday[base.w].substr(0, 3), ', ',
                     padnum(2, base.d), ' ',
                     months[base.n].substr(0, 3), ', ',
@@ -156,7 +198,7 @@
         
         case '\\': i += 1;
         
-        default: buffer += format[i]; break;
+        default: buffer += (format[i] || ''); break;
       }
     }
     

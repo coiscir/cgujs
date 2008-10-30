@@ -31,19 +31,44 @@ document.writeln('');
 
 document.writeln('Character Spectrum:');
 document.writeln(''.concat(
-  '  Day      : ', Time.php('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z'        ), '\n',
-  '  Week     : ', Time.php('W'                                    ), '\n',
-  '  Month    : ', Time.php('F ~ m ~ M ~ n ~ t'                    ), '\n',
-  '  Year     : ', Time.php('L ~ o ~ Y ~ y'                        ), '\n',
+  '  Day      : ', Time.php('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        '), '\n',
+  '  Week     : ', Time.php('W                                    '), '\n',
+  '  Month    : ', Time.php('F ~ m ~ M ~ n ~ t                    '), '\n',
+  '  Year     : ', Time.php('L ~ o ~ Y ~ y                        '), '\n',
   '  Time     : ', Time.php('a ~ A ~ B ~ g ~ G ~ h ~ H ~ i ~ s ~ u'), '\n',
-  '  Timezone : ', Time.php('e ~ I ~ O ~ P ~ T ~ Z'                ), '\n',
-  '  Full     : ', Time.php('c ~ r ~ U'                            )
+  '  Timezone : ', Time.php('e ~ I ~ O ~ P ~ T ~ Z                '), '\n',
+  '  Full     : ', Time.php('c ~ r ~ U                            ')
 ));
 document.writeln('');
 document.writeln('Unsupported Characters:');
 document.writeln(''.concat(
   '  Timezone : ', Time.php('e ~ T')
 ));
+document.writeln('');
+document.writeln(Time.php("c"));
+document.writeln(Time.php("Y-m-d\Th:i:sP"));
+document.writeln(Time.php("r"));
+document.writeln(Time.php("D, d M, Y h:i:s O"));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('========================================================================= UTCPHP');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Character Spectrum:');
+document.writeln(''.concat(
+  '  Day      : ', Time.utcphp('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        '), '\n',
+  '  Week     : ', Time.utcphp('W                                    '), '\n',
+  '  Month    : ', Time.utcphp('F ~ m ~ M ~ n ~ t                    '), '\n',
+  '  Year     : ', Time.utcphp('L ~ o ~ Y ~ y                        '), '\n',
+  '  Time     : ', Time.utcphp('a ~ A ~ B ~ g ~ G ~ h ~ H ~ i ~ s ~ u'), '\n',
+  '  Timezone : ', Time.utcphp('e ~ I ~ O ~ P ~ T ~ Z                '), '\n',
+  '  Full     : ', Time.utcphp('c ~ r ~ U                            ')
+));
+document.writeln('');
+document.writeln("JSON Formatting (Y-m-d\\Th:i:s\\Z): ", Time.utcphp("Y-m-d\\Th:i:s\\Z"));
 document.writeln('');
 
 document.write('</pre>');
