@@ -12,6 +12,29 @@
  *    options used, it can be between 'Y.MM' and 'Y.MMDDHHMISS'.
  *
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *~~~ Methods
+ *
+ *
+ *  php -> PHP date() formatting for local time.
+ *
+ *    Syntax: JSON.php(format [, time])
+ *
+ *      format <String>: A string representing the date format.
+ *
+ *      time <Mixed>: A date value. <Date>, <Number>, or <String>.
+ *
+ *    Return: <String>: A formatted date string.
+ *
+ *      <undefined>: `time` created an invalid .
+ *
+ *      <null>: Out of range. Range: Jan 1, -999 (1000 B.C.) to Dec 31, 9999.
+ *----
+ *
+ *  utcphp -> PHP date() formatting for UTC time.
+ *
+ *    (Timezone is the only difference between php and utcphp.)
+ *
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
 var Time = new (function () {
