@@ -1,0 +1,55 @@
+<html>
+<head>
+  <title>Time - Test Cases</title>
+</head>
+<body>
+
+<script src="../lib/time.js"></script>
+<script type="text/javascript">
+if (!(window.Time && window.Time.Version)) {
+
+document.writeln("Time doesn't exist. Build with Ruby/Rake.");
+
+} else {
+
+document.write('<pre style="font-size:11px;">');
+
+document.writeln('================================================================================');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Time ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Date/Time Manipulation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('================================================================================');
+document.writeln('');
+
+document.writeln('Version : ', Time.Version);
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('============================================================================ PHP');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Character Spectrum:');
+document.writeln(''.concat(
+  '  Day      : ', Time.php('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z'        ), '\n',
+  '  Week     : ', Time.php('W'                                    ), '\n',
+  '  Month    : ', Time.php('F ~ m ~ M ~ n ~ t'                    ), '\n',
+  '  Year     : ', Time.php('L ~ o ~ Y ~ y'                        ), '\n',
+  '  Time     : ', Time.php('a ~ A ~ B ~ g ~ G ~ h ~ H ~ i ~ s ~ u'), '\n',
+  '  Timezone : ', Time.php('e ~ I ~ O ~ P ~ T ~ Z'                ), '\n',
+  '  Full     : ', Time.php('c ~ r ~ U'                            )
+));
+document.writeln('');
+document.writeln('Unsupported Characters:');
+document.writeln(''.concat(
+  '  Timezone : ', Time.php('e ~ T')
+));
+document.writeln('');
+
+document.write('</pre>');
+
+}
+</script>
+
+</body>
+</html>
