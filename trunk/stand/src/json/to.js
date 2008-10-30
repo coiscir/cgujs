@@ -1,12 +1,6 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: JSON :: TO
 **/
-  var padnum = function (length, number) {
-    number = String(number);
-    while (number.length < length) number = '0' + number;
-    return number;
-  };
-
   this.to = this.stringify = function (input, options) {
     options = (function (o) { return {
       allkey : Type.limit(o.allkey, Boolean)         || false,
@@ -45,16 +39,7 @@
     
     var date = function (input) {
       if (!options.relax.date) return undefined;
-      return '"' + ''.concat(
-        padnum(4, input.getUTCFullYear()), '-',
-        padnum(2, input.getUTCMonth() + 1), '-',
-        padnum(2, input.getUTCDate()), 'T',
-        padnum(2, input.getUTCHours()), ':',
-        padnum(2, input.getUTCMinutes()), ':',
-        padnum(2, input.getUTCSeconds()), '.',
-        padnum(3, input.getUTCMilliseconds()), 'Z'
-      ) + '"';
-
+      return string(Time.utcphp("Y-m-d\\Th:i:s\\Z", input));
     };
     
     var string = function (input) {

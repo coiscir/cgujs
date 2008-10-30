@@ -76,12 +76,14 @@
 var JSON = new (function () {
   this.Version = '<%= serial %>';
   
+  var padnum = function (l, n) { n=String(n); while(n.length<l) n='0'+n; return n; };
+  
 <%= inc 'from.js', 'to.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Query :: Requires
 **/
-<%= req 2, true, 'type' %>
+<%= req 2, true, 'time', 'type' %>
 
 })();
