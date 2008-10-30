@@ -24,6 +24,8 @@
 
  * **[Query](query.html)** - Read HTTP GET Variables
 
+ * **[Time](time.html)** - Date/Time Manipulation
+
  * **[Type](type.html)** - Enhanced Data-Type Distinction
 
 ----

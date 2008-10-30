@@ -1,0 +1,81 @@
+<hr />
+
+<h1>Time</h1>
+
+<p>Date/Time Manipulation</p>
+
+<hr />
+
+<h3>Tests</h3>
+
+<blockquote>
+  <p><a href="../test/time.html">Test Cases</a>  </p>
+</blockquote>
+
+<hr />
+
+<h3>Properties</h3>
+
+<blockquote>
+  <h4><code>Version</code></h4>
+  
+  <blockquote>
+    <p>Formatting is based on the date built: <code>Y.MMDD</code> <br />
+    Where <code>Y</code> is the number of years since 2000.  </p>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Methods</h3>
+
+<blockquote>
+  <h4><code>php</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: PHP date() formatting for local time.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <blockquote>
+      <p><undefined>: <code>time</code> is invalid.</p>
+      
+      <p><null>: Out of range. Range is: Jan 1, -999 (1000 B.C.) to Dec 31, 9999.</p>
+    </blockquote>
+    
+    <p><strong>Syntax</strong>: <code>Time.php(format [, time])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>format</em></strong> <code>&lt;String&gt;</code>: String to be parsed.  </p>
+      
+      <p><strong><em>time</em></strong> <code>&lt;Mixed&gt;</code>: A date value: <Date>, <Number>, or <String>. (optional)  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.php("c");</code> <br />
+      <code>Time.php("Y-m-d\Th:i:sP");</code> <br />
+      <code>Time.php("r", (new Date().getTime() - 3600 * 1000));</code> <br />
+      <code>Time.php("D, d M, Y h:i:s O", (new Date().getTime() - 3600 * 1000));</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>utcphp</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: PHP date() formatting for UTC time.  </p>
+    
+    <blockquote>
+      <p><em>Timezone is the only difference between <code>php</code> and <code>utcphp</code>.</em></p>
+    </blockquote>
+    
+    <p><strong>Examples</strong></p>
+    
+    <blockquote>
+      <p><code>Time.utcphp('"Y-m-d\Th:i:s\Z"') // JSON-formatted</code>  </p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<hr />

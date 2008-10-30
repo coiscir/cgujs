@@ -68,6 +68,11 @@ document.writeln(''.concat(
   '  Full     : ', Time.utcphp('c ~ r ~ U                            ')
 ));
 document.writeln('');
+document.writeln('Unsupported Characters:');
+document.writeln(''.concat(
+  '  Timezone : ', Time.utcphp('e ~ T')
+));
+document.writeln('');
 document.writeln("JSON Formatting (Y-m-d\\Th:i:s\\Z): ", Time.utcphp("Y-m-d\\Th:i:s\\Z"));
 document.writeln('');
 

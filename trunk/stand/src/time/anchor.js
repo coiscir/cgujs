@@ -17,7 +17,7 @@
  *
  *  php -> PHP date() formatting for local time.
  *
- *    Syntax: JSON.php(format [, time])
+ *    Syntax: Time.php(format [, time])
  *
  *      format <String>: A string representing the date format.
  *

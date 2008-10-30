@@ -1,0 +1,59 @@
+----
+
+# Time #
+
+Date/Time Manipulation
+
+----
+
+### Tests ###
+
+> [Test Cases](../test/time.html)  
+
+----
+
+### Properties ###
+
+> #### `Version` ####
+>  
+> > Formatting is based on the date built: `Y.MMDD`  
+> > Where `Y` is the number of years since 2000.  
+
+----
+
+### Methods ###
+
+> #### `php` ####
+>  
+> > **Description**: PHP date() formatting for local time.  
+> >  
+> > **Return**: `<String>`  
+> >  
+> > > <undefined>: `time` is invalid.
+> > >  
+> > > <null>: Out of range. Range is: Jan 1, -999 (1000 B.C.) to Dec 31, 9999.
+> >  
+> > **Syntax**: `Time.php(format [, time])`  
+> >  
+> > > **_format_** `<String>`: String to be parsed.  
+> > >  
+> > > **_time_** `<Mixed>`: A date value: <Date>, <Number>, or <String>. (optional)  
+> >  
+> > **Examples**:  
+> >  
+> > > `Time.php("c");`  
+> > > `Time.php("Y-m-d\\Th:i:sP");`  
+> > > `Time.php("r", (new Date().getTime() - 3600 * 1000));`  
+> > > `Time.php("D, d M, Y h:i:s O", (new Date().getTime() - 3600 * 1000));`  
+
+> #### `utcphp` ####
+>  
+> > **Description**: PHP date() formatting for UTC time.  
+> >  
+> > > _Timezone is the only difference between `php` and `utcphp`._
+> >  
+> > **Examples**
+> >  
+> > > `Time.utcphp('"Y-m-d\\Th:i:s\\Z"') // JSON-formatted`  
+
+----
