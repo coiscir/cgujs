@@ -74,7 +74,7 @@ var Cookie = new (function () {
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Cookie :: Includes
+ *  CGU-Stand :: Cookie :: Requires
 **/
 <%= req 2, true, 'type' %>
 

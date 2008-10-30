@@ -80,7 +80,7 @@ var JSON = new (function () {
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Query :: Includes
+ *  CGU-Stand :: Query :: Requires
 **/
 <%= req 2, true, 'type' %>
 

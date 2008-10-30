@@ -3,7 +3,6 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Crypto
  *    Cryptographic Hash and HMAC Algorithms
- *
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * MD4 (c) 1990 R. Rivest                                             [RFC 1320]
  * MD5 (c) 1992 R. Rivest                                             [RFC 1321]
@@ -164,7 +163,7 @@ var Crypto = new (function () {
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Cookie :: Includes
+ *  CGU-Stand :: Cookie :: Requires
 **/
 <%= req 2, true, 'type' %>
 
