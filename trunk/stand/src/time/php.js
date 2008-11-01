@@ -14,6 +14,7 @@
     var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     var ordinal = ['th', 'st', 'nd', 'rd'];
     
+    format = Type.clone(format).split('');
     var buffer = '', rfc_colon = true;
     for (var i = 0; i < format.length; i += 1) {
       rfc_colon = true;
@@ -66,7 +67,7 @@
         case 's': buffer += padnum(2, base.s); break;
         case 'u': buffer += padnum(6, base.u); break;
       // timezone
-        case 'e': buffer += 'e'; break;  // unsupported
+        case 'e': buffer += 'e'; break;  /* unsupported */
         case 'I': buffer += base.dst ? 1 : 0; break;
         case 'O': rfc_colon = false; /* break intentionally missing */
         case 'P': buffer += ''.concat(
@@ -75,10 +76,10 @@
                     (rfc_colon ? ':' : ''),
                     (padnum(2, Math.abs(base.z % 60)))
                   ); break;
-        case 'T': buffer += 'T'; break;  // unsupported
+        case 'T': buffer += 'T'; break;  /* unsupported */
         case 'Z': buffer += base.z * 60; break;
       // full date/time
-        case 'c': buffer += ''.concat( /* "Y-m-d\Th:i:sP" */
+        case 'c': buffer += ''.concat( /* "Y-m-d\TH:i:sP" */
                     padnum(4, base.y), '-',
                     padnum(2, base.m), '-',
                     padnum(2, base.d), 'T',
@@ -89,7 +90,7 @@
                     (padnum(2, Math.abs(ftoi(base.z / 60)))), ':',
                     (padnum(2, Math.abs(base.z % 60)))
                   ); break;
-        case 'r': buffer += ''.concat( /* "D, d M, Y h:i:s O" */
+        case 'r': buffer += ''.concat( /* "D, d M, Y H:i:s O" */
                     weekday[base.w].substr(0, 3), ', ',
                     padnum(2, base.d), ' ',
                     months[base.n].substr(0, 3), ', ',
@@ -115,7 +116,7 @@
 // public
   this.php = function (format, time) {
     format = Type.limit(format, String) || '';
-    time   = new Date(Type.limit(time, Date, Number, String) || new Date());
+    time   = new Date(Type.limit(time, Date, Number, String) || new Date().getTime());
     
     if (time != 0 && !time) return;
     if (!inrange(time, false)) return null;
@@ -159,7 +160,7 @@
 
   this.utcphp = function (format, time) {
     format = Type.limit(format, String) || '';
-    time   = new Date(Type.limit(time, Date, Number, String) || new Date());
+    time   = new Date(Type.limit(time, Date, Number, String) || new Date().getTime());
     
     if (time != 0 && !time) return;
     if (!inrange(time, true)) return null;
