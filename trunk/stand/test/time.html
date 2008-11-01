@@ -25,11 +25,11 @@ document.writeln('');
 
 document.writeln('');
 document.writeln('--------------------------------------------------------------------------------');
-document.writeln('============================================================================ PHP');
+document.writeln('=================================================================== PHP | UTCPHP');
 document.writeln('--------------------------------------------------------------------------------');
 document.writeln('');
 
-document.writeln('Character Spectrum:');
+document.writeln('Character Spectrum (local):');
 document.writeln(''.concat(
   '  Day      : ', Time.php('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        '), '\n',
   '  Week     : ', Time.php('W                                    '), '\n',
@@ -40,24 +40,7 @@ document.writeln(''.concat(
   '  Full     : ', Time.php('c ~ r ~ U                            ')
 ));
 document.writeln('');
-document.writeln('Unsupported Characters:');
-document.writeln(''.concat(
-  '  Timezone : ', Time.php('e ~ T')
-));
-document.writeln('');
-document.writeln(Time.php("c"));
-document.writeln(Time.php("Y-m-d\Th:i:sP"));
-document.writeln(Time.php("r"));
-document.writeln(Time.php("D, d M, Y h:i:s O"));
-document.writeln('');
-
-document.writeln('');
-document.writeln('--------------------------------------------------------------------------------');
-document.writeln('========================================================================= UTCPHP');
-document.writeln('--------------------------------------------------------------------------------');
-document.writeln('');
-
-document.writeln('Character Spectrum:');
+document.writeln('Character Spectrum (utc):');
 document.writeln(''.concat(
   '  Day      : ', Time.utcphp('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        '), '\n',
   '  Week     : ', Time.utcphp('W                                    '), '\n',
@@ -70,10 +53,15 @@ document.writeln(''.concat(
 document.writeln('');
 document.writeln('Unsupported Characters:');
 document.writeln(''.concat(
-  '  Timezone : ', Time.utcphp('e ~ T')
+  '  Timezone : ', Time.php('e ~ T')
 ));
 document.writeln('');
-document.writeln("JSON Formatting (Y-m-d\\Th:i:s\\Z): ", Time.utcphp("Y-m-d\\Th:i:s\\Z"));
+document.writeln('php("c")                  //=> ', Time.php("c"));
+document.writeln('php("Y-m-d\\TH:i:sP")      //=> ', Time.php("Y-m-d\TH:i:sP"));
+document.writeln('php("r")                  //=> ', Time.php("r"));
+document.writeln('php("D, d M, Y H:i:s O")  //=> ', Time.php("D, d M, Y H:i:s O"));
+document.writeln('');
+document.writeln("JSON Formatting (Y-m-d\\TH:i:s\\Z): ", Time.utcphp("Y-m-d\\TH:i:s\\Z"));
 document.writeln('');
 
 document.write('</pre>');

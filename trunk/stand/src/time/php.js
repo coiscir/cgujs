@@ -1,100 +1,7 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Time :: PHP
 **/
-  this.php = function (format, time) {
-    format = Type.limit(format, String) || '';
-    time   = new Date(Type.limit(time, Date, Number, String) || new Date());
-    
-    if (time != 0 && !time) return;
-    if (!between(time,
-      new Date(-999,  0,  1,  0,  0,  0,   0).getTime(),
-      new Date(9999, 11, 31, 23, 59, 59, 999).getTime()
-    )) return null;
-    
-    // January 1st
-    var firstCurr = new Date((time.getFullYear() + 0), 0, 1);
-    var firstNext = new Date((time.getFullYear() + 1), 0, 1);
-    
-    // 1st Monday
-    var dayCurr = tumble(firstCurr.getDay(), 7);
-    var dayNext = tumble(firstNext.getDay(), 7);
-    var monCurr = firstCurr.getTime() - (day * (dayCurr - (dayCurr >= 4 ? 7 : 0)));
-    var monNext = firstNext.getTime() - (day * (dayNext - (dayNext >= 4 ? 7 : 0)));
-    
-    var base = {}; /* c, d, h, i, l, m, n, o, s, t, u, w, y, z */
-    // day, month, year
-      base.d   = time.getDate();
-      base.m   = time.getMonth() + 1;
-      base.n   = time.getMonth();
-      base.y   = time.getFullYear();
-    // hour, minute, second
-      base.h   = time.getHours();
-      base.i   = time.getMinutes();
-      base.s   = time.getSeconds();
-    // week
-      base.w   = time.getDay();
-    // time
-      base.c   = time.getTime();
-      base.t   = ftoi(base.c / 1000);
-      base.u   = (base.c % 1000) * 1000;
-    // timezone
-      base.o   = time.getTimezoneOffset();
-      base.z   = -1 * base.o;
-      base.dst = base.o !== firstCurr.getTimezoneOffset();
-    // leap year
-      base.l   = !(base.y % 4) && !!(base.y % 100) || !(base.y % 400);
-    /*# end #*/
-    
-    return phpf(base, format, [firstCurr, firstNext], [monCurr, monNext]);
-  };
-  
-  this.utcphp = function (format, time) {
-    format = Type.limit(format, String) || '';
-    time   = new Date(Type.limit(time, Date, Number, String) || new Date());
-    
-    if (time != 0 && !time) return;
-    if (!between(time,
-      new Date(-999,  0,  1,  0,  0,  0,   0).getTime(),
-      new Date(9999, 11, 31, 23, 59, 59, 999).getTime()
-    )) return null;
-    
-    // January 1st
-    var firstCurr = new Date(Date.UTC((time.getUTCFullYear() + 0), 0, 1));
-    var firstNext = new Date(Date.UTC((time.getUTCFullYear() + 1), 0, 1));
-    
-    // 1st Monday
-    var dayCurr = tumble(firstCurr.getUTCDay(), 7);
-    var dayNext = tumble(firstNext.getUTCDay(), 7);
-    var monCurr = firstCurr.getTime() - (day * (dayCurr - (dayCurr >= 4 ? 7 : 0)));
-    var monNext = firstNext.getTime() - (day * (dayNext - (dayNext >= 4 ? 7 : 0)));
-    
-    var base = {}; /* c, d, h, i, l, m, n, o, s, t, u, w, y, z */
-    // day, month, year
-      base.d   = time.getUTCDate();
-      base.m   = time.getUTCMonth() + 1;
-      base.n   = time.getUTCMonth();
-      base.y   = time.getUTCFullYear();
-    // hour, minute, second
-      base.h   = time.getUTCHours();
-      base.i   = time.getUTCMinutes();
-      base.s   = time.getUTCSeconds();
-    // week
-      base.w   = time.getUTCDay();
-    // time
-      base.c   = time.getTime();
-      base.t   = ftoi(base.c / 1000);
-      base.u   = (base.c % 1000) * 1000;
-    // timezone
-      base.o   = 0;
-      base.z   = 0;
-      base.dst = false;
-    // leap year
-      base.l   = !(base.y % 4) && !!(base.y % 100) || !(base.y % 400);
-    /*# end #*/
-    
-    return phpf(base, format, [firstCurr, firstNext], [monCurr, monNext]);
-  };
-  
+// private
   var phpf = function (base, format, firsts, mondays) {
     var firstCurr = firsts[0];
     var firstNext = firsts[1];
@@ -203,4 +110,93 @@
     }
     
     return buffer;
+  };
+
+// public
+  this.php = function (format, time) {
+    format = Type.limit(format, String) || '';
+    time   = new Date(Type.limit(time, Date, Number, String) || new Date());
+    
+    if (time != 0 && !time) return;
+    if (!inrange(time, false)) return null;
+    
+    // January 1st
+    var firstCurr = new Date((time.getFullYear() + 0), 0, 1);
+    var firstNext = new Date((time.getFullYear() + 1), 0, 1);
+    
+    // 1st Monday
+    var dayCurr = tumble(firstCurr.getDay(), 7);
+    var dayNext = tumble(firstNext.getDay(), 7);
+    var monCurr = firstCurr.getTime() - (day * (dayCurr - (dayCurr >= 4 ? 7 : 0)));
+    var monNext = firstNext.getTime() - (day * (dayNext - (dayNext >= 4 ? 7 : 0)));
+    
+    var base = {}; /* c, d, h, i, l, m, n, o, s, t, u, w, y, z */
+    // day, month, year
+      base.d   = time.getDate();
+      base.m   = time.getMonth() + 1;
+      base.n   = time.getMonth();
+      base.y   = time.getFullYear();
+    // hour, minute, second
+      base.h   = time.getHours();
+      base.i   = time.getMinutes();
+      base.s   = time.getSeconds();
+    // week
+      base.w   = time.getDay();
+    // time
+      base.c   = time.getTime();
+      base.t   = ftoi(base.c / 1000);
+      base.u   = (base.c % 1000) * 1000;
+    // timezone
+      base.o   = time.getTimezoneOffset();
+      base.z   = -1 * base.o;
+      base.dst = base.o !== firstCurr.getTimezoneOffset();
+    // leap year
+      base.l   = !(base.y % 4) && !!(base.y % 100) || !(base.y % 400);
+    /*# end #*/
+    
+    return phpf(base, format, [firstCurr, firstNext], [monCurr, monNext]);
+  };
+
+  this.utcphp = function (format, time) {
+    format = Type.limit(format, String) || '';
+    time   = new Date(Type.limit(time, Date, Number, String) || new Date());
+    
+    if (time != 0 && !time) return;
+    if (!inrange(time, true)) return null;
+    
+    // January 1st
+    var firstCurr = new Date(Date.UTC((time.getUTCFullYear() + 0), 0, 1));
+    var firstNext = new Date(Date.UTC((time.getUTCFullYear() + 1), 0, 1));
+    
+    // 1st Monday
+    var dayCurr = tumble(firstCurr.getUTCDay(), 7);
+    var dayNext = tumble(firstNext.getUTCDay(), 7);
+    var monCurr = firstCurr.getTime() - (day * (dayCurr - (dayCurr >= 4 ? 7 : 0)));
+    var monNext = firstNext.getTime() - (day * (dayNext - (dayNext >= 4 ? 7 : 0)));
+    
+    var base = {}; /* c, d, h, i, l, m, n, o, s, t, u, w, y, z */
+    // day, month, year
+      base.d   = time.getUTCDate();
+      base.m   = time.getUTCMonth() + 1;
+      base.n   = time.getUTCMonth();
+      base.y   = time.getUTCFullYear();
+    // hour, minute, second
+      base.h   = time.getUTCHours();
+      base.i   = time.getUTCMinutes();
+      base.s   = time.getUTCSeconds();
+    // week
+      base.w   = time.getUTCDay();
+    // time
+      base.c   = time.getTime();
+      base.t   = ftoi(base.c / 1000);
+      base.u   = (base.c % 1000) * 1000;
+    // timezone
+      base.o   = 0;
+      base.z   = 0;
+      base.dst = false;
+    // leap year
+      base.l   = !(base.y % 4) && !!(base.y % 100) || !(base.y % 400);
+    /*# end #*/
+    
+    return phpf(base, format, [firstCurr, firstNext], [monCurr, monNext]);
   };

@@ -33,6 +33,11 @@
  *  utcphp -> PHP date() formatting for UTC time.
  *
  *    (Timezone is the only difference between php and utcphp.)
+ *----
+ *
+ *  strftime -> [work in progress]
+ *
+ *  strfutc -> [under consideration]
  *
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
@@ -40,14 +45,7 @@
 var Time = new (function () {
   this.Version = '<%= serial %>';
   
-  var between = function (x, m, n) { return m <= x && x <= n; };
-  var ftoi = function (x) { return x - (x % 1); };
-  var tumble = function (x, n) { x=ftoi(x); n=ftoi(n||0); return (x+n-1)%n; };
-  var tumblesh = function (x, n) { return tumble(x, n) + 1; };
-  var padnum = function (l, n) { n=String(n); while(n.length<l) n='0'+n; return n; };
-  
-  var day = 24 * 60 * 60 * 1000; // milliseconds in a day
-  var swb = 24 * 60 * 60 / 1000; // seconds in a swatch beat
+<%= inc 'core.js' %>
   
 <%= inc 'php.js' %>
 
