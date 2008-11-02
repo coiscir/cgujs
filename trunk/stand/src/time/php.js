@@ -90,10 +90,10 @@
                     (padnum(2, Math.abs(ftoi(base.z / 60)))), ':',
                     (padnum(2, Math.abs(base.z % 60)))
                   ); break;
-        case 'r': buffer += ''.concat( /* "D, d M, Y H:i:s O" */
+        case 'r': buffer += ''.concat( /* "D, d M Y H:i:s O" */
                     weekday[base.w].substr(0, 3), ', ',
                     padnum(2, base.d), ' ',
-                    months[base.n].substr(0, 3), ', ',
+                    months[base.n].substr(0, 3), ' ',
                     padnum(4, base.y), ' ',
                     padnum(2, base.h), ':',
                     padnum(2, base.i), ':',

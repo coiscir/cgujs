@@ -30,7 +30,37 @@
 <h3>Methods</h3>
 
 <blockquote>
-  <h4><code>php</code></h4>
+  <h4><code>abs</code> | <code>utc</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Absolute Date creation.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Number&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.abs([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])</code>  </p>
+    
+    <blockquote>
+      <p>yr = year <code>(0 - 9999)</code> <br />
+      mn = month <code>(0 - 11)</code> <br />
+      dy = day <code>(1 - 31)</code> <br />
+      hr = hour <code>(0 - 23)</code> <br />
+      mi = minute <code>(0 - 59)</code> <br />
+      sc = second <code>(0 - 59)</code> <br />
+      ms = milliseconds <code>(0 - 999)</code>  </p>
+      
+      <p>(All parameters are optional. Default is '0/0/0000 00:00:00'.)  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.abs();</code> <br />
+      <code>Time.abs(0, 0, 1, 0, 0, 0, 0);</code> <br />
+      <code>Time.abs(9999, 11, 31, 23, 59, 59, 999)</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>php</code> | <code>utcphp</code></h4>
   
   <blockquote>
     <p><strong>Description</strong>: PHP date() formatting for local time.  </p>
@@ -57,23 +87,8 @@
       <p><code>Time.php("c");</code> <br />
       <code>Time.php("Y-m-d\Th:i:sP");</code> <br />
       <code>Time.php("r", (new Date().getTime() - 3600 * 1000));</code> <br />
-      <code>Time.php("D, d M, Y h:i:s O", (new Date().getTime() - 3600 * 1000));</code>  </p>
-    </blockquote>
-  </blockquote>
-  
-  <h4><code>utcphp</code></h4>
-  
-  <blockquote>
-    <p><strong>Description</strong>: PHP date() formatting for UTC time.  </p>
-    
-    <blockquote>
-      <p><em>Timezone is the only difference between <code>php</code> and <code>utcphp</code>.</em></p>
-    </blockquote>
-    
-    <p><strong>Examples</strong></p>
-    
-    <blockquote>
-      <p><code>Time.utcphp('"Y-m-d\Th:i:s\Z"') // JSON-formatted</code>  </p>
+      <code>Time.php("D, d M, Y h:i:s O", (new Date().getTime() - 3600 * 1000));</code> <br />
+      <code>Time.utcphp('"Y-m-d\Th:i:s\Z"') // JSON-formatted</code>  </p>
     </blockquote>
   </blockquote>
 </blockquote>

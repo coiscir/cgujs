@@ -23,7 +23,31 @@ Date/Time Manipulation
 
 ### Methods ###
 
-> #### `php` ####
+> #### `abs` | `utc` ####
+>  
+> > **Description**: Absolute Date creation.  
+> >  
+> > **Return**: `<Number>`  
+> >  
+> > **Syntax**: `Time.abs([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])`  
+> >  
+> > > yr = year `(0 - 9999)`  
+> > > mn = month `(0 - 11)`  
+> > > dy = day `(1 - 31)`  
+> > > hr = hour `(0 - 23)`  
+> > > mi = minute `(0 - 59)`  
+> > > sc = second `(0 - 59)`  
+> > > ms = milliseconds `(0 - 999)`  
+> > >  
+> > > (All parameters are optional. Default is '0/0/0000 00:00:00'.)  
+> >  
+> > **Examples**:  
+> >  
+> > > `Time.abs();`  
+> > > `Time.abs(0, 0, 1, 0, 0, 0, 0);`  
+> > > `Time.abs(9999, 11, 31, 23, 59, 59, 999)`  
+
+> #### `php` | `utcphp` ####
 >  
 > > **Description**: PHP date() formatting for local time.  
 > >  
@@ -45,15 +69,6 @@ Date/Time Manipulation
 > > > `Time.php("Y-m-d\\Th:i:sP");`  
 > > > `Time.php("r", (new Date().getTime() - 3600 * 1000));`  
 > > > `Time.php("D, d M, Y h:i:s O", (new Date().getTime() - 3600 * 1000));`  
-
-> #### `utcphp` ####
->  
-> > **Description**: PHP date() formatting for UTC time.  
-> >  
-> > > _Timezone is the only difference between `php` and `utcphp`._
-> >  
-> > **Examples**
-> >  
 > > > `Time.utcphp('"Y-m-d\\Th:i:s\\Z"') // JSON-formatted`  
 
 ----

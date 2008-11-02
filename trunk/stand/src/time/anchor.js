@@ -14,6 +14,14 @@
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *~~~ Methods
  *
+ *  abs -> Absolute local Date creation.
+ *
+ *    Syntax: Time.abs([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])
+ *
+ *      (All parameters are optional. Default is '0/0/0000 00:00:00'.)
+ *
+ *    Return: <Number>: Epoch timestamp.
+ *----
  *
  *  php -> PHP date() formatting for local time.
  *
@@ -30,9 +38,14 @@
  *      <null>: Out of range. Range: Jan 1, -999 (1000 B.C.) to Dec 31, 9999.
  *----
  *
+ *  utc -> Absolute UTC Date creation.
+ *
+ *    (Timezone is the only difference from abs.)
+ *----
+ *
  *  utcphp -> PHP date() formatting for UTC time.
  *
- *    (Timezone is the only difference between php and utcphp.)
+ *    (Timezone is the only difference from php.)
  *----
  *
  *  strftime -> [work in progress]
@@ -48,6 +61,8 @@ var Time = new (function () {
 <%= inc 'core.js' %>
   
 <%= inc 'php.js' %>
+
+<%= inc 2, true, 'shared.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

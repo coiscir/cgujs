@@ -1,25 +1,34 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Time :: Core
+ *  CGU-Stand :: Time :: Shared
 **/
-  var day = 24 * 60 * 60 * 1000; // milliseconds in a day
-  var swb = 24 * 60 * 60 / 1000; // seconds in a swatch beat
+  this.abs = function (yr, mn, dy, hr, mi, sc, ms) {
+    var date = new Date(0);
+    date.setFullYear(0, 0, 1);
+    date.setHours(0, 0, 0, 0);
+    
+    if (Number(yr)) date.setFullYear(yr);
+    if (Number(mn)) date.setMonth(mn);
+    if (Number(dy)) date.setDate(dy);
+    if (Number(hr)) date.setHours(hr);
+    if (Number(mi)) date.setMinutes(mi);
+    if (Number(sc)) date.setSeconds(sc);
+    if (Number(ms)) date.setMilliseconds(ms);
+    
+    return date.getTime();
+  };
 
-  var between = function (x, m, n) { return m <= x && x <= n; };
-  var ftoi = function (x) { return x - (x % 1); };
-  var tumble = function (x, n) { x=ftoi(x); n=ftoi(n||0); return (x+n-1)%n; };
-  var tumblesh = function (x, n) { return tumble(x, n) + 1; };
-  var padnum = function (l, n) { n=String(n); while(n.length<l) n='0'+n; return n; };
-
-  var inrange = function (time, utc) {
-    if (utc) {
-      return between(time,
-        new Date(-999,  0,  1,  0,  0,  0,   0).getTime(),
-        new Date(9999, 11, 31, 23, 59, 59, 999).getTime()
-      );
-    } else {
-      return between(time,
-        new Date(-999,  0,  1,  0,  0,  0,   0).getTime(),
-        new Date(9999, 11, 31, 23, 59, 59, 999).getTime()
-      );
-    };
+  this.utc = function (yr, mn, dy, hr, mi, sc, ms) {
+    var date = new Date(0);
+    date.setUTCFullYear(0, 0, 1);
+    date.setUTCHours(0, 0, 0, 0);
+    
+    if (Number(yr)) date.setUTCFullYear(yr);
+    if (Number(mn)) date.setUTCMonth(mn);
+    if (Number(dy)) date.setUTCDate(dy);
+    if (Number(hr)) date.setUTCHours(hr);
+    if (Number(mi)) date.setUTCMinutes(mi);
+    if (Number(sc)) date.setUTCSeconds(sc);
+    if (Number(ms)) date.setUTCMilliseconds(ms);
+    
+    return date.getTime();
   };

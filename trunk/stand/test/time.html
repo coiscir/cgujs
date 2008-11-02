@@ -25,12 +25,48 @@ document.writeln('');
 
 document.writeln('');
 document.writeln('--------------------------------------------------------------------------------');
-document.writeln('=================================================================== PHP | UTCPHP');
+document.writeln('====================================================================== ABS | UTC');
 document.writeln('--------------------------------------------------------------------------------');
 document.writeln('');
 
-document.writeln('Character Spectrum (local):');
+document.writeln('Absolute Dates:');
+document.writeln('');
+document.writeln('new Date(0, 0, 1, 0, 0, 0, 0)  //=> ', Time.php('r', new Date(0, 0, 1, 0, 0, 0, 0)));
+document.writeln('Time.abs(0, 0, 1, 0, 0, 0, 0)  //=> ', Time.php('r', Time.abs(0, 0, 1, 0, 0, 0, 0)));
+document.writeln('');
+document.writeln('Date.UTC(0, 0, 1, 0, 0, 0, 0)  //=> ', Time.utcphp('r', Date.UTC(0, 0, 1, 0, 0, 0, 0)));
+document.writeln('Time.utc(0, 0, 1, 0, 0, 0, 0)  //=> ', Time.utcphp('r', Time.utc(0, 0, 1, 0, 0, 0, 0)));
+document.writeln('');
+document.writeln('// notice the lack of assumptions and auto-corrections (e.g., 0 => 1900)');
+document.writeln('');
+document.writeln('');
+document.writeln('All parameters are optional:');
+document.writeln('');
+document.writeln('Time.abs()  //=> ', Time.php('r', Time.abs()));
+document.writeln('Time.utc()  //=> ', Time.utcphp('r', Time.utc()));
+document.writeln('');
+document.writeln('Time.abs(2008, 10, 1, 16, 14)  //=> ', Time.php('r', Time.abs(2008, 10, 1, 16, 14)));
+document.writeln('Time.utc(2008, 10, 1, 16, 14)  //=> ', Time.utcphp('r', Time.utc(2008, 10, 1, 16, 14)));
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('=================================================================== PHP | PHPUTC');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Ranges:');
+document.writeln('');
+document.writeln('php("c", Time.abs(   0,  0,  1,  0,  0,  0,   0))     //=> ', Time.php("c", Time.abs(   0,  0,  1,  0,  0,  0,   0)));
+document.writeln('php("c", Time.abs(9999, 11, 31, 23, 59, 59, 999))     //=> ', Time.php("c", Time.abs(9999, 11, 31, 23, 59, 59, 999)));
+document.writeln('');
+document.writeln('utcphp("c", Time.utc(   0,  0,  1,  0,  0,  0,   0))  //=> ', Time.utcphp("c", Time.utc(   0,  0,  1,  0,  0,  0,   0)));
+document.writeln('utcphp("c", Time.utc(9999, 11, 31, 23, 59, 59, 999))  //=> ', Time.utcphp("c", Time.utc(9999, 11, 31, 23, 59, 59, 999)));
+document.writeln('');
+document.writeln('');
+document.writeln('Character Spectrum:');
+document.writeln('');
 document.writeln(''.concat(
+  'Local:', '\n',
   '  Day      : ', Time.php('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        '), '\n',
   '  Week     : ', Time.php('W                                    '), '\n',
   '  Month    : ', Time.php('F ~ m ~ M ~ n ~ t                    '), '\n',
@@ -40,8 +76,8 @@ document.writeln(''.concat(
   '  Full     : ', Time.php('c ~ r ~ U                            ')
 ));
 document.writeln('');
-document.writeln('Character Spectrum (utc):');
 document.writeln(''.concat(
+  'UTC:', '\n',
   '  Day      : ', Time.utcphp('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        '), '\n',
   '  Week     : ', Time.utcphp('W                                    '), '\n',
   '  Month    : ', Time.utcphp('F ~ m ~ M ~ n ~ t                    '), '\n',
@@ -51,15 +87,20 @@ document.writeln(''.concat(
   '  Full     : ', Time.utcphp('c ~ r ~ U                            ')
 ));
 document.writeln('');
+document.writeln('');
 document.writeln('Unsupported Characters:');
 document.writeln(''.concat(
   '  Timezone : ', Time.php('e ~ T')
 ));
 document.writeln('');
+document.writeln('');
+document.writeln('Equivalents:');
+document.writeln('');
 document.writeln('php("c")                  //=> ', Time.php("c"));
 document.writeln('php("Y-m-d\\TH:i:sP")      //=> ', Time.php("Y-m-d\TH:i:sP"));
+document.writeln('');
 document.writeln('php("r")                  //=> ', Time.php("r"));
-document.writeln('php("D, d M, Y H:i:s O")  //=> ', Time.php("D, d M, Y H:i:s O"));
+document.writeln('php("D, d M, Y H:i:s O")  //=> ', Time.php("D, d M Y H:i:s O"));
 document.writeln('');
 document.writeln("JSON Formatting (Y-m-d\\TH:i:s\\Z): ", Time.utcphp("Y-m-d\\TH:i:s\\Z"));
 document.writeln('');
