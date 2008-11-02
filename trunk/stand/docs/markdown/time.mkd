@@ -43,11 +43,11 @@ Date/Time Manipulation
 > >  
 > > **Examples**:  
 > >  
-> > > `Time.abs();`  
-> > > `Time.abs(0, 0, 1, 0, 0, 0, 0);`  
+> > > `Time.abs()`  
+> > > `Time.abs(0, 0, 1, 0, 0, 0, 0)`  
 > > > `Time.abs(9999, 11, 31, 23, 59, 59, 999)`  
 
-> #### `php` | `utcphp` ####
+> #### `phpdate` | `phputc` ####
 >  
 > > **Description**: PHP date() formatting for local time.  
 > >  
@@ -57,7 +57,7 @@ Date/Time Manipulation
 > > >  
 > > > <null>: Out of range. Range is: Jan 1, 0000 to Dec 31, 9999.  
 > >  
-> > **Syntax**: `Time.php(format [, time])`  
+> > **Syntax**: `Time.phpdate(format [, time])`  
 > >  
 > > > **_format_** `<String>`: String to be parsed.  
 > > >  
@@ -65,10 +65,10 @@ Date/Time Manipulation
 > >  
 > > **Examples**:  
 > >  
-> > > `Time.php("c");`  
-> > > `Time.php("Y-m-d\\Th:i:sP");`  
-> > > `Time.php("r", (new Date().getTime() - 3600 * 1000));`  
-> > > `Time.php("D, d M, Y h:i:s O", (new Date().getTime() - 3600 * 1000));`  
-> > > `Time.utcphp('"Y-m-d\\Th:i:s\\Z"') // JSON-formatted`  
+> > > `Time.phpdate("c")`  
+> > > `Time.phpdate("Y-m-d\\\\Th:i:sP")`  
+> > > `Time.phpdate("r")`  
+> > > `Time.phpdate("D, d M, Y h:i:s O")`  
+> > > `Time.phputc('"Y-m-d\\\\Th:i:s\\\\Z"') // JSON-formatted`  
 
 ----

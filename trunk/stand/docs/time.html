@@ -54,13 +54,13 @@
     <p><strong>Examples</strong>:  </p>
     
     <blockquote>
-      <p><code>Time.abs();</code> <br />
-      <code>Time.abs(0, 0, 1, 0, 0, 0, 0);</code> <br />
+      <p><code>Time.abs()</code> <br />
+      <code>Time.abs(0, 0, 1, 0, 0, 0, 0)</code> <br />
       <code>Time.abs(9999, 11, 31, 23, 59, 59, 999)</code>  </p>
     </blockquote>
   </blockquote>
   
-  <h4><code>php</code> | <code>utcphp</code></h4>
+  <h4><code>phpdate</code> | <code>phputc</code></h4>
   
   <blockquote>
     <p><strong>Description</strong>: PHP date() formatting for local time.  </p>
@@ -70,10 +70,10 @@
     <blockquote>
       <p><undefined>: <code>time</code> is invalid.</p>
       
-      <p><null>: Out of range. Range is: Jan 1, 0000 to Dec 31, 9999.</p>
+      <p><null>: Out of range. Range is: Jan 1, 0000 to Dec 31, 9999.  </p>
     </blockquote>
     
-    <p><strong>Syntax</strong>: <code>Time.php(format [, time])</code>  </p>
+    <p><strong>Syntax</strong>: <code>Time.phpdate(format [, time])</code>  </p>
     
     <blockquote>
       <p><strong><em>format</em></strong> <code>&lt;String&gt;</code>: String to be parsed.  </p>
@@ -84,11 +84,11 @@
     <p><strong>Examples</strong>:  </p>
     
     <blockquote>
-      <p><code>Time.php("c");</code> <br />
-      <code>Time.php("Y-m-d\Th:i:sP");</code> <br />
-      <code>Time.php("r", (new Date().getTime() - 3600 * 1000));</code> <br />
-      <code>Time.php("D, d M, Y h:i:s O", (new Date().getTime() - 3600 * 1000));</code> <br />
-      <code>Time.utcphp('"Y-m-d\Th:i:s\Z"') // JSON-formatted</code>  </p>
+      <p><code>Time.phpdate("c")</code> <br />
+      <code>Time.phpdate("Y-m-d\\Th:i:sP")</code> <br />
+      <code>Time.phpdate("r")</code> <br />
+      <code>Time.phpdate("D, d M, Y h:i:s O")</code> <br />
+      <code>Time.phputc('"Y-m-d\\Th:i:s\\Z"') // JSON-formatted</code>  </p>
     </blockquote>
   </blockquote>
 </blockquote>

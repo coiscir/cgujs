@@ -114,7 +114,7 @@
   };
 
 // public
-  this.php = function (format, time) {
+  this.phpdate = function (format, time) {
     format = Type.limit(format, String) || '';
     time   = new Date(Type.limit(time, Date, Number, String) || new Date().getTime());
     
@@ -158,7 +158,7 @@
     return phpf(base, format, [firstCurr, firstNext], [monCurr, monNext]);
   };
 
-  this.utcphp = function (format, time) {
+  this.phputc = function (format, time) {
     format = Type.limit(format, String) || '';
     time   = new Date(Type.limit(time, Date, Number, String) || new Date().getTime());
     

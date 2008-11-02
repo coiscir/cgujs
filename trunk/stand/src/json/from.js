@@ -94,7 +94,7 @@
       var str = cut(reDateTm);
       if (!(str.length > 0)) kill("Invalid Date.");
       var d = reDateTm.exec(str);
-      return new Date(Date.UTC(+d[2], +d[3] - 1, +d[4], +d[5], +d[6], +d[7], +d[8] || 0));
+      return new Date(Time.utc(+d[2], +d[3] - 1, +d[4], +d[5], +d[6], +d[7], +d[8] || 0));
     };
     
     var array = function () {

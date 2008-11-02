@@ -14,7 +14,7 @@
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *~~~ Methods
  *
- *  abs -> Absolute local Date creation.
+ *  abs | utc -> Absolute Date creation.
  *
  *    Syntax: Time.abs([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])
  *
@@ -23,9 +23,9 @@
  *    Return: <Number>: Epoch timestamp.
  *----
  *
- *  php -> PHP date() formatting for local time.
+ *  phpdate | phputc -> PHP date() formatting.
  *
- *    Syntax: Time.php(format [, time])
+ *    Syntax: Time.phpdate(format [, time])
  *
  *      format <String>: A string representing the date format.
  *
@@ -38,19 +38,9 @@
  *      <null>: Out of range. Range: Jan 1, 0000 to Dec 31, 9999.
  *----
  *
- *  utc -> Absolute UTC Date creation.
- *
- *    (Timezone is the only difference from abs.)
- *----
- *
- *  utcphp -> PHP date() formatting for UTC time.
- *
- *    (Timezone is the only difference from php.)
- *----
- *
  *  strftime -> [work in progress]
  *
- *  strfutc -> [under consideration]
+ *  strfutc -> [name under consideration]
  *
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
