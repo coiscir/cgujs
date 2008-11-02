@@ -5,6 +5,7 @@
 <body>
 
 <script src="../lib/json.js"></script>
+<script src="../lib/time.js"></script>
 <script src="../lib/type.js"></script>
 <script type="text/javascript">
 var printType = function (object) {
@@ -56,7 +57,8 @@ document.writeln('to({foo : 0}, {verify: true})               //=> ', JSON.to({f
 document.writeln('to(undefined, {verify: true})               //=> ', (function(){try{ return JSON.to(undefined, {verify: true}); } catch(e){ return e.message; }})());
 document.writeln('to(undefined, {relax: true, verify: true})  //=> ', (function(){try{ return JSON.to(undefined, {relax: true, verify: true}); } catch(e){ return e.message; }})());
 document.writeln('');
-document.writeln('to(new Date(), {relax: {date: true}})  //=> ', JSON.to(new Date(), {relax: {date: true}}));
+document.writeln('     to(new Date(), {relax: {date: true}})          //=> ', JSON.to(new Date(), {relax: {date: true}}));
+document.writeln('from(to(new Date(), {relax: true}), {relax: true})  //=> ', Time.phpdate('r u', JSON.from(JSON.to(new Date(), {relax: true}), {relax: true})));
 document.writeln('');
 
 document.writeln('');

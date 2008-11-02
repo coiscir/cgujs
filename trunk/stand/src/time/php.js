@@ -27,7 +27,7 @@
         case 'N': buffer += tumblesh(base.w, 7); break;
         case 'S': buffer += ordinal[between(base.d, 10, 19) ? 0 : (base.d % 10)] || ordinal[0]; break;
         case 'w': buffer += base.w; break;
-        case 'z': buffer += ftoi((base.c / firstCurr.getTime()) / day); break;
+        case 'z': buffer += ftoi((base.c - firstCurr.getTime()) / day); break;
       // week
         case 'W': buffer += padnum(2, (
                     ftoi((
@@ -50,7 +50,7 @@
                     )
                   )); break;
         case 'Y': buffer += padnum(4, base.y); break;
-        case 'y': buffer += padnum(4, (base.y % 100)); break;
+        case 'y': buffer += padnum(2, (base.y % 100)); break;
       // time
         case 'a': buffer += base.h < 12 ? 'am' : 'pm'; break;
         case 'A': buffer += base.h < 12 ? 'AM' : 'PM'; break;

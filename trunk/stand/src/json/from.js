@@ -29,12 +29,15 @@
     };
     
     var relaxed = {
-      datetm : /^(['"])(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d+)?)Z(\1)/,
+      datetm : /^(['"])(\d{4})-(\d{2})-(\d{2})[T\x20](\d{2}):(\d{2}):(\d{2})(?:\.(\d{3})\d*)?Z?(\1)/,
       keywrd : /^undefined|null|true|false/,
       number : /^(0([0-7]+|x[0-9a-fA-F]+))|([+-]?(0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[Ee][+-]?[0-9]+)?)/,
       objkey : /^[A-Za-z$_][A-Za-z0-9$_]*/,
       string : /^(['"])(\\(\1|\\|\/|b|f|n|r|t|x[0-9a-f]{1}|u[0-9a-f]{4})|(?!(\\|\1)).)*(\1)/
     };
+    /** Potentials
+     * regexp : /^(\/)((?:\\(?:\1|.)|(?!(?:\\|\1)).)*)(\1)([igm]*)/
+    **/
     
     var reWhite  = /^\s+/;
     var reObjKey = options.relax.objkey  ? relaxed.objkey : strict.objkey;
@@ -94,7 +97,7 @@
       var str = cut(reDateTm);
       if (!(str.length > 0)) kill("Invalid Date.");
       var d = reDateTm.exec(str);
-      return new Date(Time.utc(+d[2], +d[3] - 1, +d[4], +d[5], +d[6], +d[7], +d[8] || 0));
+      return new Date(Time.utc(+d[2], +d[3] - 1, +d[4], +d[5], +d[6], +d[7], +d[8]));
     };
     
     var array = function () {
