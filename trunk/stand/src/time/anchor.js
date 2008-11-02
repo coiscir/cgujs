@@ -35,7 +35,7 @@
  *
  *      <undefined>: `time` created an invalid .
  *
- *      <null>: Out of range. Range: Jan 1, -999 (1000 B.C.) to Dec 31, 9999.
+ *      <null>: Out of range. Range: Jan 1, 0000 to Dec 31, 9999.
  *----
  *
  *  utc -> Absolute UTC Date creation.
