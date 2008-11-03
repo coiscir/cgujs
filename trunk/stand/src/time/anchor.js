@@ -38,9 +38,19 @@
  *      <null>: Out of range. Range: Jan 1, 0000 to Dec 31, 9999.
  *----
  *
- *  strftime -> [work in progress]
+ *  strftime | strfutc -> POSIX date formatting. (Work-in-progress)
  *
- *  strfutc -> [name under consideration]
+ *    Syntax: Time.strftime(format [, time])
+ *
+ *      format <String>: A string representing the date format.
+ *
+ *      time <Mixed>: A date value. <Date>, <Number>, or <String>.
+ *
+ *    Return: <String>: A formatted date string.
+ *
+ *      <undefined>: `time` created an invalid .
+ *
+ *      <null>: Out of range. Range: Jan 1, 0000 to Dec 31, 9999.
  *
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
@@ -50,7 +60,7 @@ var Time = new (function () {
   
 <%= inc 'core.js' %>
   
-<%= inc 'php.js' %>
+<%= inc 'php.js', 'posix.js' %>
 
 <%= inc 'shared.js' %>
 

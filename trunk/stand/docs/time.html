@@ -91,6 +91,30 @@
       <code>Time.phputc('"Y-m-d\\Th:i:s\\Z"') // JSON-formatted</code>  </p>
     </blockquote>
   </blockquote>
+  
+  <h4><code>strftime</code> | <code>strfutc</code></h4>
+  
+  <blockquote>
+    <p>(<strong>Work-in-progress</strong>)  </p>
+    
+    <p><strong>Description</strong>: POSIX date formatting.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <blockquote>
+      <p><undefined>: <code>time</code> is invalid.</p>
+      
+      <p><null>: Out of range. Range is: Jan 1, 0000 to Dec 31, 9999.  </p>
+    </blockquote>
+    
+    <p><strong>Syntax</strong>: <code>Time.strftime(format [, time])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>format</em></strong> <code>&lt;String&gt;</code>: String to be parsed.  </p>
+      
+      <p><strong><em>time</em></strong> <code>&lt;Mixed&gt;</code>: A date value: <Date>, <Number>, or <String>. (optional)  </p>
+    </blockquote>
+  </blockquote>
 </blockquote>
 
 <hr />

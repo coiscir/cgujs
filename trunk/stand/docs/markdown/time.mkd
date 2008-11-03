@@ -71,4 +71,22 @@ Date/Time Manipulation
 > > > `Time.phpdate("D, d M, Y h:i:s O")`  
 > > > `Time.phputc('"Y-m-d\\\\Th:i:s\\\\Z"') // JSON-formatted`  
 
+> #### `strftime` | `strfutc` ####
+>  
+> > (**Work-in-progress**)  
+> >  
+> > **Description**: POSIX date formatting.  
+> >  
+> > **Return**: `<String>`  
+> >  
+> > > <undefined>: `time` is invalid.
+> > >  
+> > > <null>: Out of range. Range is: Jan 1, 0000 to Dec 31, 9999.  
+> >  
+> > **Syntax**: `Time.strftime(format [, time])`  
+> >  
+> > > **_format_** `<String>`: String to be parsed.  
+> > >  
+> > > **_time_** `<Mixed>`: A date value: <Date>, <Number>, or <String>. (optional)  
+
 ----
