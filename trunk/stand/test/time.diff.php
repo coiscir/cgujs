@@ -24,7 +24,7 @@ document.writeln('  Year     : ', Time.phpdate('L ~ o ~ Y ~ y                   
 document.writeln('             ', "<?=    date('L ~ o ~ Y ~ y                        ')?>");
 document.writeln('  Time     : ', Time.phpdate('a ~ A ~ B ~ g ~ G ~ h ~ H ~ i ~ s ~ u'));
 document.writeln('             ', "<?=    date('a ~ A ~ B ~ g ~ G ~ h ~ H ~ i ~ s ~ u')?>");
-document.writeln('  Timezone : ', Time.phpdate('e ~ I ~ O ~ P ~ T ~ Z                '));
+document.writeln('  Timezone : ', Time.phpdate('I ~ O ~ P ~ Z                        '));
 document.writeln('             ', "<?=    date('I ~ O ~ P ~ Z                        ')?>");
 document.writeln('  Full     : ', Time.phpdate('c ~ r ~ U                            '));
 document.writeln('             ', "<?=    date('c ~ r ~ U                            ')?>");

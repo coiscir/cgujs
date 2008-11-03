@@ -47,6 +47,7 @@ document.writeln('Time.utc()  //=> ', Time.phputc('r', Time.utc()));
 document.writeln('');
 document.writeln('Time.abs(2008, 10, 1, 16, 14)  //=> ', Time.phpdate('r', Time.abs(2008, 10, 1, 16, 14)));
 document.writeln('Time.utc(2008, 10, 1, 16, 14)  //=> ', Time.phputc('r', Time.utc(2008, 10, 1, 16, 14)));
+document.writeln('');
 
 document.writeln('');
 document.writeln('--------------------------------------------------------------------------------');
@@ -85,9 +86,7 @@ document.writeln('  Full     : ', Time.phputc('c ~ r ~ U                        
 document.writeln('');
 document.writeln('');
 document.writeln('Unsupported Characters:');
-document.writeln(''.concat(
-  '  Timezone : ', Time.phpdate('e ~ T')
-));
+document.writeln('  Timezone : ', Time.phputc('e ~ T'));
 document.writeln('');
 document.writeln('');
 document.writeln('Equivalents:');

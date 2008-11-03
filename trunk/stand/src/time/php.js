@@ -2,19 +2,11 @@
  *  CGU-Stand :: Time :: PHP
 **/
 // private
-  var phpf = function (base, format, firsts, mondays) {
-    var firstCurr = firsts[0];
-    var firstNext = firsts[1];
-    var monCurr = mondays[0];
-    var monNext = mondays[1];
-  
-    var monthc = [31, (base.l ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    var months = ['January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'];
-    var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    var ordinal = ['th', 'st', 'nd', 'rd'];
-    
+  var phpf = function (format, base) {
     format = Type.clone(format).split('');
+    
+    var monthc = [31, (base.l ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    
     var buffer = '', rfc_colon = true;
     for (var i = 0; i < format.length; i += 1) {
       rfc_colon = true;
@@ -27,26 +19,26 @@
         case 'N': buffer += tumblesh(base.w, 7); break;
         case 'S': buffer += ordinal[between(base.d, 10, 19) ? 0 : (base.d % 10)] || ordinal[0]; break;
         case 'w': buffer += base.w; break;
-        case 'z': buffer += ftoi((base.c - firstCurr.getTime()) / day); break;
+        case 'z': buffer += ftoi((base.$$ - base.jc) / day); break;
       // week
         case 'W': buffer += padnum(2, (
                     ftoi((
-                      ftoi(base.c / day) -
+                      ftoi(base.$$ / day) -
                       tumble(base.w, 7) -
-                      ftoi((base.c > monNext ? monNext : monCurr) / day)
+                      ftoi((base.$$ > base.an ? base.an : base.ac) / day)
                     ) / 7) + 1
                   )); break;
       // month
-        case 'F': buffer += months[base.n]; break;
-        case 'm': buffer += padnum(2, base.m); break;
-        case 'M': buffer += months[base.n].substr(0, 3); break;
-        case 'n': buffer += base.m; break;
-        case 't': buffer += monthc[base.n]; break;
+        case 'F': buffer += months[base.m]; break;
+        case 'm': buffer += padnum(2, base.n); break;
+        case 'M': buffer += months[base.m].substr(0, 3); break;
+        case 'n': buffer += base.n; break;
+        case 't': buffer += monthc[base.m]; break;
       // year
         case 'L': buffer += base.l ? 1 : 0; break;
         case 'o': buffer += padnum(4, (
-                    (base.c < monCurr ? (base.y - 1) :
-                      (base.c >= monNext ? (base.y + 1) : base.y)
+                    (base.$$ < base.ac ? (base.y - 1) :
+                      (base.$$ >= base.an ? (base.y + 1) : base.y)
                     )
                   )); break;
         case 'Y': buffer += padnum(4, base.y); break;
@@ -65,10 +57,10 @@
         case 'H': buffer += padnum(2, base.h); break;
         case 'i': buffer += padnum(2, base.i); break;
         case 's': buffer += padnum(2, base.s); break;
-        case 'u': buffer += padnum(6, base.u); break;
+        case 'u': buffer += padnum(6, base.$u); break;
       // timezone
-        case 'e': buffer += 'e'; break;  /* unsupported */
-        case 'I': buffer += base.dst ? 1 : 0; break;
+        case 'e': break;  /* unsupported */
+        case 'I': buffer += base.t ? 1 : 0; break;
         case 'O': rfc_colon = false; /* break intentionally missing */
         case 'P': buffer += ''.concat(
                     (base.z < 0 ? '-' : '+'),
@@ -76,7 +68,7 @@
                     (rfc_colon ? ':' : ''),
                     (padnum(2, Math.abs(base.z % 60)))
                   ); break;
-        case 'T': buffer += 'T'; break;  /* unsupported */
+        case 'T': break;  /* unsupported */
         case 'Z': buffer += base.z * 60; break;
       // full date/time
         case 'c': buffer += ''.concat( /* "Y-m-d\TH:i:sP" */
@@ -102,7 +94,7 @@
                     (padnum(2, Math.abs(ftoi(base.z / 60)))),
                     (padnum(2, Math.abs(base.z % 60)))
                   ); break;
-        case 'U': buffer += base.t; break;
+        case 'U': buffer += base.$t; break;
         
         case '\\': i += 1;
         
@@ -121,41 +113,7 @@
     if (time != 0 && !time) return;
     if (!inrange(time, false)) return null;
     
-    // January 1st
-    var firstCurr = new Date((time.getFullYear() + 0), 0, 1);
-    var firstNext = new Date((time.getFullYear() + 1), 0, 1);
-    
-    // 1st Monday
-    var dayCurr = tumble(firstCurr.getDay(), 7);
-    var dayNext = tumble(firstNext.getDay(), 7);
-    var monCurr = firstCurr.getTime() - (day * (dayCurr - (dayCurr >= 4 ? 7 : 0)));
-    var monNext = firstNext.getTime() - (day * (dayNext - (dayNext >= 4 ? 7 : 0)));
-    
-    var base = {}; /* c, d, h, i, l, m, n, o, s, t, u, w, y, z */
-    // day, month, year
-      base.d   = time.getDate();
-      base.m   = time.getMonth() + 1;
-      base.n   = time.getMonth();
-      base.y   = time.getFullYear();
-    // hour, minute, second
-      base.h   = time.getHours();
-      base.i   = time.getMinutes();
-      base.s   = time.getSeconds();
-    // week
-      base.w   = time.getDay();
-    // time
-      base.c   = time.getTime();
-      base.t   = ftoi(base.c / 1000);
-      base.u   = (base.c % 1000) * 1000;
-    // timezone
-      base.o   = time.getTimezoneOffset();
-      base.z   = -1 * base.o;
-      base.dst = base.o !== firstCurr.getTimezoneOffset();
-    // leap year
-      base.l   = !(base.y % 4) && !!(base.y % 100) || !(base.y % 400);
-    /*# end #*/
-    
-    return phpf(base, format, [firstCurr, firstNext], [monCurr, monNext]);
+    return phpf(format, setbase(time, false));
   };
 
   this.phputc = function (format, time) {
@@ -165,39 +123,5 @@
     if (time != 0 && !time) return;
     if (!inrange(time, true)) return null;
     
-    // January 1st
-    var firstCurr = new Date(Date.UTC((time.getUTCFullYear() + 0), 0, 1));
-    var firstNext = new Date(Date.UTC((time.getUTCFullYear() + 1), 0, 1));
-    
-    // 1st Monday
-    var dayCurr = tumble(firstCurr.getUTCDay(), 7);
-    var dayNext = tumble(firstNext.getUTCDay(), 7);
-    var monCurr = firstCurr.getTime() - (day * (dayCurr - (dayCurr >= 4 ? 7 : 0)));
-    var monNext = firstNext.getTime() - (day * (dayNext - (dayNext >= 4 ? 7 : 0)));
-    
-    var base = {}; /* c, d, h, i, l, m, n, o, s, t, u, w, y, z */
-    // day, month, year
-      base.d   = time.getUTCDate();
-      base.m   = time.getUTCMonth() + 1;
-      base.n   = time.getUTCMonth();
-      base.y   = time.getUTCFullYear();
-    // hour, minute, second
-      base.h   = time.getUTCHours();
-      base.i   = time.getUTCMinutes();
-      base.s   = time.getUTCSeconds();
-    // week
-      base.w   = time.getUTCDay();
-    // time
-      base.c   = time.getTime();
-      base.t   = ftoi(base.c / 1000);
-      base.u   = (base.c % 1000) * 1000;
-    // timezone
-      base.o   = 0;
-      base.z   = 0;
-      base.dst = false;
-    // leap year
-      base.l   = !(base.y % 4) && !!(base.y % 100) || !(base.y % 400);
-    /*# end #*/
-    
-    return phpf(base, format, [firstCurr, firstNext], [monCurr, monNext]);
+    return phpf(format, setbase(time, true));
   };
