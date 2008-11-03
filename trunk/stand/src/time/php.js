@@ -71,29 +71,8 @@
         case 'T': break;  /* unsupported */
         case 'Z': buffer += base.z * 60; break;
       // full date/time
-        case 'c': buffer += ''.concat( /* "Y-m-d\TH:i:sP" */
-                    padnum(4, base.y), '-',
-                    padnum(2, base.m), '-',
-                    padnum(2, base.d), 'T',
-                    padnum(2, base.h), ':',
-                    padnum(2, base.i), ':',
-                    padnum(2, base.s),
-                    (base.z < 0 ? '-' : '+'),
-                    (padnum(2, Math.abs(ftoi(base.z / 60)))), ':',
-                    (padnum(2, Math.abs(base.z % 60)))
-                  ); break;
-        case 'r': buffer += ''.concat( /* "D, d M Y H:i:s O" */
-                    weekday[base.w].substr(0, 3), ', ',
-                    padnum(2, base.d), ' ',
-                    months[base.n].substr(0, 3), ' ',
-                    padnum(4, base.y), ' ',
-                    padnum(2, base.h), ':',
-                    padnum(2, base.i), ':',
-                    padnum(2, base.s), ' ',
-                    (base.z < 0 ? '-' : '+'),
-                    (padnum(2, Math.abs(ftoi(base.z / 60)))),
-                    (padnum(2, Math.abs(base.z % 60)))
-                  ); break;
+        case 'c': buffer += phpf('Y-m-d\\TH:i:sP', base); break;
+        case 'r': buffer += phpf('D, d M Y H:i:s O', base); break;
         case 'U': buffer += base.$t; break;
         
         case '\\': i += 1;

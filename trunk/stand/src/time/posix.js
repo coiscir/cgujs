@@ -17,22 +17,10 @@
           case 'b': buffer += months[base.m].substr(0, 3); break;
           case 'B': buffer += months[base.m]; break;
           case 'c': break; /* disable ruby-1.9.0 */
-                    buffer += ''.concat(
-                      weekday[base.w].substr(0, 3), ', ',
-                      months[base.m].substr(0, 3), ' ',
-                      padspc(2, base.d), ' ',
-                      padnum(2, base.h), ':',
-                      padnum(2, base.i), ':',
-                      padnum(2, base.s), ' ',
-                      padnum(4, base.y)
-                    ); break;
+                    buffer += strf('%a %b %e %H:%M:%S %Y', base); break;
           case 'C': buffer += padnum(2, ftoi(base.y / 100)); break;
           case 'd': buffer += padnum(2, base.d); break;
-          case 'D': buffer += ''.concat(
-                      padnum(2, base.n), '/',
-                      padnum(2, base.d), '/',
-                      padnum(4, base.y)
-                    ); break;
+          case 'D': buffer += strf('%m/%d/%y', base); break;
           case 'e': buffer += padspc(2, base.d); break;
           case 'H': buffer += padnum(2, base.h); break;
           case 'I': buffer += padnum(2, tumblesh((base.h % 12), 12)); break;
@@ -47,25 +35,13 @@
           case 'p': buffer += base.h < 12 ? 'AM' : 'PM'; break;
           case 'P': break; /* disable ruby-1.9.0 */
                     buffer += base.h < 12 ? 'am' : 'pm'; break;
-          case 'r': buffer += ''.concat(
-                      padnum(2, tumblesh((base.h % 12), 12)), ':',
-                      padnum(2, base.i), ':',
-                      padnum(2, base.s), ' ',
-                      (base.h < 12 ? 'AM' : 'PM')
-                    ); break;
-          case 'R': buffer += ''.concat(
-                      padnum(2, base.h), ':',
-                      padnum(2, base.i)
-                    ); break;
+          case 'r': buffer += strf('%I:%M:%S %p', base); break;
+          case 'R': buffer += strf('%H:%M', base); break;
           case 's': break; /* disable ruby-1.9.0 */
                     buffer += padspc(2, base.s); break;
           case 'S': buffer += padnum(2, base.s); break;
           case 't': buffer += '\t'; break;
-          case 'T': buffer += ''.concat(
-                      padnum(2, base.h), ':',
-                      padnum(2, base.i), ':',
-                      padnum(2, base.s)
-                    ); break;
+          case 'T': buffer += strf('%H:%M:%S', base); break;
           case 'u': buffer += tumblesh(base.w, 7); break;
           case 'U': buffer += padnum(2, ftoi((base.$$ - base.fs) / (7 * day))); break;
           case 'V': buffer += padnum(2, (
@@ -78,17 +54,9 @@
           case 'w': buffer += base.w; break;
           case 'W': buffer += padnum(2, ftoi((base.$$ - base.fm) / (7 * day))); break;
           case 'x': break; /* disable ruby-1.9.0 */
-                    buffer += ''.concat(
-                      padnum(2, base.n), '/',
-                      padnum(2, base.d), '/',
-                      padnum(4, base.y)
-                    ); break;
+                    buffer += strf('%m/%d/%y', base); break;
           case 'X': break; /* disable ruby-1.9.0 */
-                    buffer += ''.concat(
-                      padnum(2, base.h), ':',
-                      padnum(2, base.i), ':',
-                      padnum(2, base.s)
-                    ); break;
+                    buffer += strf('%H:%M:%S', base); break;
           case 'y': buffer += padnum(2, (base.y % 100)); break;
           case 'Y': buffer += padnum(4, base.y); break;
           case 'Z': break;  /* unsupported */
