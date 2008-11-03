@@ -39,7 +39,7 @@
     
     var date = function (input) {
       if (!options.relax.date) return undefined;
-      return string(Time.phputc("Y-m-d\\TH:i:s\\.u\\Z", input));
+      return string(Time.phputc("Y-m-d\\TH:i:s.u\\Z", input));
     };
     
     var string = function (input) {

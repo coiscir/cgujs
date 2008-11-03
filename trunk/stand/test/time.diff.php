@@ -14,22 +14,20 @@ document.writeln("Time doesn't exist. Build with Ruby/Rake.");
 
 document.write('<pre style="font-size:11px;">');
 
-document.writeln(''.concat(
-  '  Day      : ', Time.phpdate('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        '), '\n',
-  '             ', "<?=    date('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        ')?>", '\n',
-  '  Week     : ', Time.phpdate('W                                    '), '\n',
-  '             ', "<?=    date('W                                    ')?>", '\n',
-  '  Month    : ', Time.phpdate('F ~ m ~ M ~ n ~ t                    '), '\n',
-  '             ', "<?=    date('F ~ m ~ M ~ n ~ t                    ')?>", '\n',
-  '  Year     : ', Time.phpdate('L ~ o ~ Y ~ y                        '), '\n',
-  '             ', "<?=    date('L ~ o ~ Y ~ y                        ')?>", '\n',
-  '  Time     : ', Time.phpdate('a ~ A ~ B ~ g ~ G ~ h ~ H ~ i ~ s ~ u'), '\n',
-  '             ', "<?=    date('a ~ A ~ B ~ g ~ G ~ h ~ H ~ i ~ s ~ u')?>", '\n',
-  '  Timezone : ', Time.phpdate('I ~ O ~ P ~ Z                        '), '\n',
-  '             ', "<?=    date('I ~ O ~ P ~ Z                        ')?>", '\n',
-  '  Full     : ', Time.phpdate('c ~ r ~ U                            '), '\n',
-  '             ', "<?=    date('c ~ r ~ U                            ')?>"
-));
+document.writeln('  Day      : ', Time.phpdate('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        '));
+document.writeln('             ', "<?=    date('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        ')?>");
+document.writeln('  Week     : ', Time.phpdate('W                                    '));
+document.writeln('             ', "<?=    date('W                                    ')?>");
+document.writeln('  Month    : ', Time.phpdate('F ~ m ~ M ~ n ~ t                    '));
+document.writeln('             ', "<?=    date('F ~ m ~ M ~ n ~ t                    ')?>");
+document.writeln('  Year     : ', Time.phpdate('L ~ o ~ Y ~ y                        '));
+document.writeln('             ', "<?=    date('L ~ o ~ Y ~ y                        ')?>");
+document.writeln('  Time     : ', Time.phpdate('a ~ A ~ B ~ g ~ G ~ h ~ H ~ i ~ s ~ u'));
+document.writeln('             ', "<?=    date('a ~ A ~ B ~ g ~ G ~ h ~ H ~ i ~ s ~ u')?>");
+document.writeln('  Timezone : ', Time.phpdate('e ~ I ~ O ~ P ~ T ~ Z                '));
+document.writeln('             ', "<?=    date('I ~ O ~ P ~ Z                        ')?>");
+document.writeln('  Full     : ', Time.phpdate('c ~ r ~ U                            '));
+document.writeln('             ', "<?=    date('c ~ r ~ U                            ')?>");
 document.writeln('');
 
 document.write('</pre>');

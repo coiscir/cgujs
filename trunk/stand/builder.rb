@@ -119,10 +119,10 @@ module Builder
       }.map{
         |p| Builder.start(p, @step)
       }.map{
-        |p| min ? JSMin.minify(p).gsub(/\n/, '').sub(/^ +/, '') : p
+        |p| (min ? JSMin.minify(p).gsub(/\n/, '') : p.strip).sub(/^ +/, '')
       }.map{
         |p| p.gsub(/^/, (' ' * pad))
-      }.join($/)
+      }.join($/+(min ? '' : $/))
     end
     
     def to_s
