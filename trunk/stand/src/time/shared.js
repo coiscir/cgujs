@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Time :: Core
+ *  CGU-Stand :: Time :: Shared
 **/
   var day = 24 * 60 * 60 * 1000; // milliseconds in a day
   var swb = 24 * 60 * 60 / 1000; // seconds in a swatch beat
