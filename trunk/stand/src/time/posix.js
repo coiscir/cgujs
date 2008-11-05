@@ -2,13 +2,23 @@
  *  CGU-Stand :: Time :: POSIX {WIP}
 **/
 // private
-  var strflocale = function (time) {
-    time = new Date(time);
-    var d = time.toLocaleDateString();
-    var t = time.toLocaleTimeString();
+  var strflocale = function (time, utc) {
+    if (utc) {
+      return {
+        c: '%a, %b %e %Y %H:%M:%S',
+        x: '%Y-%m-%d',
+        X: '%H:%M:%S'
+      };
+    } else {
+      return {
+        c: time.toLocaleString(),
+        x: time.toLocaleDateString(),
+        X: time.toLocaleTimeString()
+      }
+    }
   };
   
-  var strf = function (format, base) {
+  var strf = function (format, base, locale) {
     format = Type.clone(format).split('');
     
     var buffer = '';
@@ -19,8 +29,8 @@
           case 'A': buffer += weekday[base.w]; break;
           case 'b': buffer += months[base.m].substr(0, 3); break;
           case 'B': buffer += months[base.m]; break;
-          case 'c': break; /* disable ruby-1.9.0 equivalents */
-                    buffer += strf('%a %b %e %H:%M:%S %Y', base); break;
+          case 'c': buffer += strf(locale.c, base); break;
+                    /* buffer += strf('%a %b %e %H:%M:%S %Y', base); break; */
           case 'C': buffer += padnum(2, ftoi(base.y / 100)); break;
           case 'd': buffer += padnum(2, base.d); break;
           case 'D': buffer += strf('%m/%d/%y', base); break;
@@ -64,10 +74,10 @@
                     )); break;
           case 'w': buffer += base.w; break;
           case 'W': buffer += padnum(2, ftoi((base.$$ - base.fm) / (7 * day))); break;
-          case 'x': break; /* disable ruby-1.9 equivalents */
-                    buffer += strf('%m/%d/%y', base); break;
-          case 'X': break; /* disable ruby-1.9 equivalents */
-                    buffer += strf('%H:%M:%S', base); break;
+          case 'x': buffer += strf(locale.x, base); break;
+                    /* buffer += strf('%m/%d/%y', base); break; */
+          case 'X': buffer += strf(locale.X, base); break;
+                    /* buffer += strf('%H:%M:%S', base); break; */
           case 'y': buffer += padnum(2, (base.y % 100)); break;
           case 'Y': buffer += padnum(4, base.y); break;
           case 'z': buffer += ''.concat(
@@ -94,7 +104,7 @@
     if (time != 0 && !time) return;
     if (!inrange(time, false)) return null;
     
-    return strf(format, setbase(time, false));
+    return strf(format, setbase(time, false), strflocale(time, false));
   };
 
   this.strfutc = function (format, time) {
@@ -104,5 +114,5 @@
     if (time != 0 && !time) return;
     if (!inrange(time, true)) return null;
     
-    return strf(format, setbase(time, true));
+    return strf(format, setbase(time, true), strflocale(time, true));
   };
