@@ -138,10 +138,10 @@ Date/Time Manipulation
 > > > >  `%c` - Locale date and time. (based on Date#toLocaleString)  
 > > > >  `%C` - Century. (year / 100)  
 > > > >  `%d` - Day of the month with leading zeros.  
-> > > >  `%D` - Equivalent to "%m/%d/%y".  
+> > > >  `%D` - Equivalent to `"%m/%d/%y"`.  
 > > > >  `%e` - Day of the month with leading spaces.  
 > > > >  `%E` - [**unsupported**] POSIX locale extensions.  
-> > > >  `%F` - Equivalent to "%Y-%m-%d".  
+> > > >  `%F` - Equivalent to `"%Y-%m-%d"`.  
 > > > >  `%g` - 2-digit year containing majority of the Monday-start week.  
 > > > >  `%G` - 4-digit year containing majority of the Monday-start week.  
 > > > >  `%h` - %b  
@@ -155,15 +155,15 @@ Date/Time Manipulation
 > > > >  `%n` - newline.  
 > > > >  `%O` - [**unsupported**] POSIX locale extensions.  
 > > > >  `%p` - ante meridiem or post meridiem.  
-> > > >  `%r` - Equivalent to "%I:%M:%S %p".  
-> > > >  `%R` - Equivalent to "%H:%M".  
+> > > >  `%r` - Equivalent to `"%I:%M:%S %p"`.  
+> > > >  `%R` - Equivalent to `"%H:%M"`.  
 > > > >  `%s` - Seconds since Unix Epoch.  
 > > > >  `%S` - Seconds with leading zeros.  
 > > > >  `%t` - tab.  
-> > > >  `%T` - Equivalent to "%H:%M:%S".  
+> > > >  `%T` - Equivalent to `"%H:%M:%S"`.  
 > > > >  `%u` - Day of the week. (1 - 7 <=> Mon - Sun)  
 > > > >  `%U` - Week number of the year, Sunday-start, with leading zeros.  
-> > > >  `%v` - Equivalent to "%e-%b-%Y".  
+> > > >  `%v` - Equivalent to `"%e-%b-%Y"`.  
 > > > >  `%V` - Week number of %G year, Monday-start, with leading zeros.  
 > > > >  `%w` - Day of the week. (0 - 6 <=> Sun - Sat)  
 > > > >  `%W` - Week number of the year, Monday-start, with leading zeros.  
