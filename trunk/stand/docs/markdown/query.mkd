@@ -38,4 +38,14 @@ Read HTTP GET Variables
 > > > `Query.read('foo');  //=> ['bar']`  
 > > > `Query.read('xyz');  //=> ['1', '2']`  
 
+> #### `toObject` ####
+>  
+> > **Description**: Get an object representation of the query-string.  
+> >  
+> > **Return**: `<Object>`
+> >  
+> > > With query-string names as keys and an array of string values respectively.  
+> >  
+> > **Syntax**: `Cookie.toObject()`  
+
 ----

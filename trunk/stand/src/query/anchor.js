@@ -28,7 +28,7 @@
  *
  *    Syntax: Query.toObject()
  *
- *    Return: <Object>: Representation of query-string.
+ *    Return: <Object>: With query-string names as keys and an array of string values respectively.
  *
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/

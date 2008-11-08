@@ -58,6 +58,16 @@
 > >  
 > > > `Cookie.read('foo');`  
 
+> #### `toObject` ####
+>  
+> > **Description**: Create an object representation of cookies.  
+> >  
+> > **Return**: `<Object>`
+> >  
+> > > Cookie names are the object keys with string values respectively.  
+> >  
+> > **Syntax**: `Cookie.toObject()`  
+
 > #### `write` ####
 >  
 > > **Description**: Create a cookie.  

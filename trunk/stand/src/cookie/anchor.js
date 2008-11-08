@@ -39,6 +39,13 @@
  *      <null>: Cookie hasn't been written.
  *----
  *
+ *  toObject -> Create an object representation of cookies.
+ *
+ *    Syntax: Cookie.toObject()
+ *
+ *    Return: <Object>: With cookie names as keys and string values respectively.
+ *----
+ *
  *  write -> Create a cookie.
  *
  *    Syntax: Cookie.write(key, value [, options])
