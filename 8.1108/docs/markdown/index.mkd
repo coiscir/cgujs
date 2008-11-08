@@ -1,0 +1,35 @@
+----
+
+# CGU: Common & General Use Javascript #
+
+----
+
+### License ###
+
+> CGU is release under the MIT License.  
+
+### Download and Bug Tracking ###
+
+> [Google Code](http://code.google.com/p/cgujs/)  
+
+### Questions? ###
+
+> [CGU Discussions](http://groups.google.com/group/cgujs)  
+
+----
+
+### Utilities ###
+
+ * **[Cookie](cookie.html)** - Read, Write, and Delete (Expire) HTTP Cookies
+
+ * **[Crypto](crypto.html)** - Cryptographic Hash and HMAC Algorithms
+
+ * **[JSON](json.html)** - JSON Parsing and Writing
+
+ * **[Query](query.html)** - Read HTTP GET Variables
+
+ * **[Time](time.html)** - Date/Time Manipulation
+
+ * **[Type](type.html)** - Enhanced Data-Type Distinction
+
+----

@@ -1,0 +1,74 @@
+<html>
+<head>
+  <title>Query - Test Cases</title>
+</head>
+<body>
+
+<script src="../lib/query.js"></script>
+<script src="../lib/json.js"></script>
+<script type="text/javascript">
+if (!(window.Query && window.Query.Version)) {
+
+document.writeln("Query doesn't exist. Build with Ruby/Rake.");
+
+} else {
+
+document.write('<pre style="font-size:11px;">');
+
+document.writeln('================================================================================');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ HTTP QueryString ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~ CGU Stand-Alone Query ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('================================================================================');
+document.writeln('');
+
+document.writeln('Version : ', Query.Version);
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('=========================================================================== Read');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('  <a href="', ''.concat(
+    '?test=-1058.56e%2B2',
+    '&demo=+!%22%23%24%25%26\'()*%2B%2C-.%2F%3A%3B%3C%3D%3E%3F%40%5B%5D%5E_%60%7B%7C%7D~',
+    '&foo=b',
+    '&foo=a',
+    '&foo=r',
+    '&%20=space',
+    '&n%2Fa=',
+    '&true',
+    '&foo=\'',
+    '&foo=d',
+    '&num=-24',
+    '&date=1/1/2008'
+  ),
+  '">sample</a>');
+document.writeln('----------');
+document.writeln('');
+document.writeln("test    //=> " + Query.read('test'));
+document.writeln("demo    //=> " + Query.read('demo'));
+document.writeln("foo     //=> " + Query.read('foo'));
+document.writeln("' '     //=> " + Query.read(' '));
+document.writeln("n/a     //=> " + Query.read('n/a'));
+document.writeln("true    //=> " + Query.read('true'));
+document.writeln("date    //=> " + Query.read('date'));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('======================================================================= toObject');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('toObject  //=> ', JSON.to(Query.toObject()).replace(/(^\{(?!\})|\],)/g, '$1\n                 ').replace(/(\}$)/g, '\n               $1'));
+document.writeln('');
+
+document.write('</pre>');
+
+}
+</script>
+
+</body>
+</html>

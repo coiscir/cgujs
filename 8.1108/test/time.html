@@ -1,0 +1,210 @@
+<html>
+<head>
+  <title>Time - Test Cases</title>
+</head>
+<body>
+
+<script src="../lib/time.js"></script>
+<script type="text/javascript">
+if (!(window.Time && window.Time.Version)) {
+
+document.writeln("Time doesn't exist. Build with Ruby/Rake.");
+
+} else {
+
+document.write('<pre style="font-size:11px;">');
+
+document.writeln('================================================================================');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Time ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Date/Time Manipulation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('================================================================================');
+document.writeln('');
+
+document.writeln('Version : ', Time.Version);
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('====================================================================== ABS | UTC');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Absolute Dates:');
+document.writeln('');
+document.writeln('new Date(0, 0, 1, 0, 0, 0, 0)  //=> ', Time.phpdate('r', new Date(0, 0, 1, 0, 0, 0, 0)));
+document.writeln('Time.abs(0, 0, 1, 0, 0, 0, 0)  //=> ', Time.phpdate('r', Time.abs(0, 0, 1, 0, 0, 0, 0)));
+document.writeln('');
+document.writeln('Date.UTC(0, 0, 1, 0, 0, 0, 0)  //=> ', Time.phputc('r', Date.UTC(0, 0, 1, 0, 0, 0, 0)));
+document.writeln('Time.utc(0, 0, 1, 0, 0, 0, 0)  //=> ', Time.phputc('r', Time.utc(0, 0, 1, 0, 0, 0, 0)));
+document.writeln('');
+document.writeln('// notice the lack of assumptions and auto-corrections (e.g., 0 => 1900)');
+document.writeln('');
+document.writeln('');
+document.writeln('All parameters are optional:');
+document.writeln('');
+document.writeln('Time.abs()  //=> ', Time.phpdate('r', Time.abs()));
+document.writeln('Time.utc()  //=> ', Time.phputc('r', Time.utc()));
+document.writeln('');
+document.writeln('Time.abs(2008, 10, 1, 16, 14)  //=> ', Time.phpdate('r', Time.abs(2008, 10, 1, 16, 14)));
+document.writeln('Time.utc(2008, 10, 1, 16, 14)  //=> ', Time.phputc('r', Time.utc(2008, 10, 1, 16, 14)));
+document.writeln('');
+document.writeln('');
+document.writeln('Ranges: (both PHPDATE and STRFTIME)');
+document.writeln('');
+document.writeln('phpdate("c",   Time.abs(   0,  0,  1,  0,  0,  0,   0))  //=> ', Time.phpdate("c",   Time.abs(   0,  0,  1,  0,  0,  0,   0)));
+document.writeln('phpdate("c",   Time.abs(9999, 11, 31, 23, 59, 59, 999))  //=> ', Time.phpdate("c",   Time.abs(9999, 11, 31, 23, 59, 59, 999)));
+document.writeln('strftime("%c", Time.abs(   0,  0,  1,  0,  0,  0,   0))  //=> ', Time.strftime("%c", Time.abs(   0,  0,  1,  0,  0,  0,   0)));
+document.writeln('strftime("%c", Time.abs(9999, 11, 31, 23, 59, 59, 999))  //=> ', Time.strftime("%c", Time.abs(9999, 11, 31, 23, 59, 59, 999)));
+document.writeln('');
+document.writeln('phputc("c",   Time.utc(   0,  0,  1,  0,  0,  0,   0))   //=> ', Time.phputc("c",   Time.utc(   0,  0,  1,  0,  0,  0,   0)));
+document.writeln('phputc("c",   Time.utc(9999, 11, 31, 23, 59, 59, 999))   //=> ', Time.phputc("c",   Time.utc(9999, 11, 31, 23, 59, 59, 999)));
+document.writeln('strfutc("%c", Time.utc(   0,  0,  1,  0,  0,  0,   0))   //=> ', Time.strfutc("%c", Time.utc(   0,  0,  1,  0,  0,  0,   0)));
+document.writeln('strfutc("%c", Time.utc(9999, 11, 31, 23, 59, 59, 999))   //=> ', Time.strfutc("%c", Time.utc(9999, 11, 31, 23, 59, 59, 999)));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('=============================================================== PHPDATE | PHPUTC');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Character Spectrum:');
+document.writeln('');
+document.writeln('Local:');
+document.writeln('  Day      : ', Time.phpdate('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        '));
+document.writeln('  Week     : ', Time.phpdate('W                                    '));
+document.writeln('  Month    : ', Time.phpdate('F ~ m ~ M ~ n ~ t                    '));
+document.writeln('  Year     : ', Time.phpdate('L ~ o ~ Y ~ y                        '));
+document.writeln('  Time     : ', Time.phpdate('a ~ A ~ B ~ g ~ G ~ h ~ H ~ i ~ s ~ u'));
+document.writeln('  Timezone : ', Time.phpdate('e ~ I ~ O ~ P ~ T ~ Z                '));
+document.writeln('  Full     : ', Time.phpdate('c ~ r ~ U                            '));
+document.writeln('');
+document.writeln('UTC:');
+document.writeln('  Day      : ', Time.phputc('d ~ D ~ j ~ l ~ N ~ S ~ w ~ z        '));
+document.writeln('  Week     : ', Time.phputc('W                                    '));
+document.writeln('  Month    : ', Time.phputc('F ~ m ~ M ~ n ~ t                    '));
+document.writeln('  Year     : ', Time.phputc('L ~ o ~ Y ~ y                        '));
+document.writeln('  Time     : ', Time.phputc('a ~ A ~ B ~ g ~ G ~ h ~ H ~ i ~ s ~ u'));
+document.writeln('  Timezone : ', Time.phputc('e ~ I ~ O ~ P ~ T ~ Z                '));
+document.writeln('  Full     : ', Time.phputc('c ~ r ~ U                            '));
+document.writeln('');
+document.writeln('');
+document.writeln('Unsupported Characters:');
+document.writeln('  Timezone : ', Time.phputc('\\e ~ \\T'));
+document.writeln('');
+document.writeln('');
+document.writeln('Equivalents:');
+document.writeln('');
+document.writeln('phpdate("c")                  //=> ', Time.phpdate("c"));
+document.writeln('phpdate("Y-m-d\\TH:i:sP")      //=> ', Time.phpdate("Y-m-d\\TH:i:sP"));
+document.writeln('');
+document.writeln('phpdate("r")                  //=> ', Time.phpdate("r"));
+document.writeln('phpdate("D, d M, Y H:i:s O")  //=> ', Time.phpdate("D, d M Y H:i:s O"));
+document.writeln('');
+document.writeln("JSON Formatting (Y-m-d\\TH:i:s.u\\Z): ", Time.phputc("Y-m-d\\TH:i:s.u\\Z"));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('============================================================= STRFTIME | STRFUTC');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Completion');
+document.writeln('');
+document.writeln(Time.strftime('%%a: %a'));
+document.writeln(Time.strftime('%%A: %A'));
+document.writeln(Time.strftime('%%b: %b'));
+document.writeln(Time.strftime('%%B: %B'));
+document.writeln(Time.strftime('%%c: %c'));
+document.writeln(Time.strftime('%%C: %C'));
+document.writeln(Time.strftime('%%d: %d'));
+document.writeln(Time.strftime('%%D: %D'));
+document.writeln(Time.strftime('%%e: %e'));
+document.writeln(Time.strftime('%%E: %E'));
+document.writeln(Time.strftime('%%F: %F'));
+document.writeln(Time.strftime('%%g: %g'));
+document.writeln(Time.strftime('%%G: %G'));
+document.writeln(Time.strftime('%%h: %h'));
+document.writeln(Time.strftime('%%H: %H'));
+document.writeln(Time.strftime('%%I: %I'));
+document.writeln(Time.strftime('%%j: %j'));
+document.writeln(Time.strftime('%%k: %k'));
+document.writeln(Time.strftime('%%l: %l'));
+document.writeln(Time.strftime('%%m: %m'));
+document.writeln(Time.strftime('%%M: %M'));
+document.writeln(Time.strftime('%%n: \\n'));
+document.writeln(Time.strftime('%%O: %O'));
+document.writeln(Time.strftime('%%p: %p'));
+document.writeln(Time.strftime('%%r: %r'));
+document.writeln(Time.strftime('%%R: %R'));
+document.writeln(Time.strftime('%%s: %s'));
+document.writeln(Time.strftime('%%S: %S'));
+document.writeln(Time.strftime('%%t: \\t'));
+document.writeln(Time.strftime('%%T: %T'));
+document.writeln(Time.strftime('%%u: %u'));
+document.writeln(Time.strftime('%%U: %U'));
+document.writeln(Time.strftime('%%v: %v'));
+document.writeln(Time.strftime('%%V: %V'));
+document.writeln(Time.strftime('%%w: %w'));
+document.writeln(Time.strftime('%%W: %W'));
+document.writeln(Time.strftime('%%x: %x'));
+document.writeln(Time.strftime('%%X: %X'));
+document.writeln(Time.strftime('%%y: %y'));
+document.writeln(Time.strftime('%%Y: %Y'));
+document.writeln(Time.strftime('%%z: %z'));
+document.writeln(Time.strftime('%%Z: %Z'));
+document.writeln(Time.strftime('%%%%: %%'));
+document.writeln('');
+document.writeln(Time.strfutc('%%a: %a'));
+document.writeln(Time.strfutc('%%A: %A'));
+document.writeln(Time.strfutc('%%b: %b'));
+document.writeln(Time.strfutc('%%B: %B'));
+document.writeln(Time.strfutc('%%c: %c'));
+document.writeln(Time.strfutc('%%C: %C'));
+document.writeln(Time.strfutc('%%d: %d'));
+document.writeln(Time.strfutc('%%D: %D'));
+document.writeln(Time.strfutc('%%e: %e'));
+document.writeln(Time.strfutc('%%E: %E'));
+document.writeln(Time.strfutc('%%F: %F'));
+document.writeln(Time.strfutc('%%g: %g'));
+document.writeln(Time.strfutc('%%G: %G'));
+document.writeln(Time.strfutc('%%h: %h'));
+document.writeln(Time.strfutc('%%H: %H'));
+document.writeln(Time.strfutc('%%I: %I'));
+document.writeln(Time.strfutc('%%j: %j'));
+document.writeln(Time.strfutc('%%k: %k'));
+document.writeln(Time.strfutc('%%l: %l'));
+document.writeln(Time.strfutc('%%m: %m'));
+document.writeln(Time.strfutc('%%M: %M'));
+document.writeln(Time.strfutc('%%n: \\n'));
+document.writeln(Time.strfutc('%%O: %O'));
+document.writeln(Time.strfutc('%%p: %p'));
+document.writeln(Time.strfutc('%%r: %r'));
+document.writeln(Time.strfutc('%%R: %R'));
+document.writeln(Time.strfutc('%%s: %s'));
+document.writeln(Time.strfutc('%%S: %S'));
+document.writeln(Time.strfutc('%%t: \\t'));
+document.writeln(Time.strfutc('%%T: %T'));
+document.writeln(Time.strfutc('%%u: %u'));
+document.writeln(Time.strfutc('%%U: %U'));
+document.writeln(Time.strfutc('%%v: %v'));
+document.writeln(Time.strfutc('%%V: %V'));
+document.writeln(Time.strfutc('%%w: %w'));
+document.writeln(Time.strfutc('%%W: %W'));
+document.writeln(Time.strfutc('%%x: %x'));
+document.writeln(Time.strfutc('%%X: %X'));
+document.writeln(Time.strfutc('%%y: %y'));
+document.writeln(Time.strfutc('%%Y: %Y'));
+document.writeln(Time.strfutc('%%z: %z'));
+document.writeln(Time.strfutc('%%Z: %Z'));
+document.writeln(Time.strfutc('%%%%: %%'));
+document.writeln('');
+
+document.write('</pre>');
+
+}
+</script>
+
+</body>
+</html>
