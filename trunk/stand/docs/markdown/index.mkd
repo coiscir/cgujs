@@ -12,6 +12,10 @@
 
 > [Google Code](http://code.google.com/p/cgujs/)  
 
+### Questions? ###
+
+> [CGU Discussions](http://groups.google.com/group/cgujs)  
+
 ----
 
 ### Utilities ###
