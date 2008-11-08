@@ -40,7 +40,7 @@
         replace(/0/g, '%w').
         replace(/52/g, '%W').
         replace(/95/g, '%y');
-    }
+    };
     
     locale[false] = {
       c: conv(),
