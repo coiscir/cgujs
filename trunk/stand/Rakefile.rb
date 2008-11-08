@@ -98,7 +98,7 @@ task :st  => :status
 
 desc "Build all library scripts"
 task :build => [:prec2] do
-  print $/ + '== Build' + ' :: ' + TIME.strftime('%Y-%m-%d %I:%M:%S') + ' :: ' + serial.to_s + $/
+  print $/ + '== Build' + ' :: ' + TIME.strftime('%Y-%m-%d %H:%M:%S') + ' :: ' + serial.to_s + $/
   DIRS.each do |pkg|
     libf = File.join(LIBS, "#{pkg}.js")
     File.open(libf, "w+") do |lib|

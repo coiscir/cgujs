@@ -31,13 +31,13 @@
 ################################################################################
 # Syntax
 #
-#   include([padding,] [jsmin,] file, ..)
-#   require([padding,] project, ..)
+#   inc([padding,] [jsmin,] file, ..)
+#   req([padding,] [jsmin,] project, ..)
 #
 #   `padding` (Numeric): Precedes each included line with number of spaces.
 #   `jsmin` (true/false): Minifies the included source.
 #
-#   Note: Requires are always minified.
+#   Note: jsmin is default false for inc and true for req.
 ################################################################################
 # Example: Source (src/foo/anchor.js)
 #
@@ -113,7 +113,7 @@ module Builder
       end
       
       pad = pkgs.first.is_a?(Numeric) ? pkgs.shift : 0
-      min = pkgs.first == true ? pkgs.shift : false
+      min = pkgs.first == false ? pkgs.shift : true
       pkgs.reject{
         |p| !Builder.registered?(p) || @pkgs.include?(p)
       }.map{
