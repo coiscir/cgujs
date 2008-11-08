@@ -1,7 +1,7 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU-Stand :: Time :: Shared
 **/
-  this.abs = function (yr, mn, dy, hr, mi, sc, ms) {
+  var _abs = this.abs = function (yr, mn, dy, hr, mi, sc, ms) {
     var date = new Date(0);
     date.setFullYear(0, 0, 1);
     date.setHours(0, 0, 0, 0);
@@ -17,7 +17,7 @@
     return date.getTime();
   };
 
-  this.utc = function (yr, mn, dy, hr, mi, sc, ms) {
+  var _utc = this.utc = function (yr, mn, dy, hr, mi, sc, ms) {
     var date = new Date(0);
     date.setUTCFullYear(0, 0, 1);
     date.setUTCHours(0, 0, 0, 0);

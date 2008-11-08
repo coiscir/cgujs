@@ -2,21 +2,59 @@
  *  CGU-Stand :: Time :: POSIX {WIP}
 **/
 // private
-  var strflocale = function (time, utc) {
-    if (utc) {
-      return {
-        c: '%a, %b %e %Y %H:%M:%S',
-        x: '%Y-%m-%d',
-        X: '%H:%M:%S'
-      };
-    } else {
-      return {
-        c: time.toLocaleString(),
-        x: time.toLocaleDateString(),
-        X: time.toLocaleTimeString()
+  var locale = {};
+  
+  (function () {
+    
+    var conv = function (stage) {
+      var f;
+      switch (stage) {
+        case 'x': f = 'toLocaleDateString'; break;
+        case 'X': f = 'toLocaleTimeString'; break;
+        default : f = 'toLocaleString';     break;
       }
+      
+      var hrZr = (/09/).test(new Date(_abs(0, 0, 0, 9)).toLocaleString());
+      var dyZr = (/09/).test(new Date(_abs(0, 0, 9)).toLocaleString()); // 0 or space padding
+      
+      return new Date(_abs(2006, 11, 31, 23, 30, 59, 999))[f]().
+        replace(/\n/g, '%n').
+        replace(/\t/g, '%t').
+        replace(/2006/g, '%Y').
+        replace(/[+-]\d{2}:?\d{2}/g, '%z').
+        replace(/Sunday/ig, '%A').
+        replace(/Sun/ig, '%a').
+        replace(/December/ig, '%B').
+        replace(/Dec/ig, '%b').
+        replace(/20(?![0-9])/g, '%C').
+        replace(/31/g, (dyZr ? '%d' : '%e')).
+        replace(/23/g, (hrZr ? '%H' : '%k')).
+        replace(/11/g, (hrZr ? '%I' : '%l')).
+        replace(/(w)?365/g, 'w%j').
+        replace(/12/g, '%m').
+        replace(/30/g, '%M').
+        replace(/PM/ig, '%p').
+        replace(/820\d{4}59/g, '%s').
+        replace(/59/g, '%S').
+        replace(/7/g, '%u').
+        replace(/0/g, '%w').
+        replace(/52/g, '%W').
+        replace(/95/g, '%y');
     }
-  };
+    
+    locale[false] = {
+      c: conv(),
+      x: conv('x'),
+      X: conv('X')
+    };
+    
+    locale[true] = {
+      /*c: '%a, %b %e %Y %H:%M:%S',*/
+      c: '%a %d %b %Y %H:%M:%S %Z',
+      x: '%Y-%m-%d',
+      X: '%H:%M:%S'
+    };
+  })();
   
   var strf = function (format, base, locale) {
     format = Type.clone(format).split('');
@@ -104,7 +142,7 @@
     if (time != 0 && !time) return;
     if (!inrange(time, false)) return null;
     
-    return strf(format, setbase(time, false), strflocale(time, false));
+    return strf(format, setbase(time, false), locale[false]);
   };
 
   this.strfutc = function (format, time) {
@@ -114,5 +152,5 @@
     if (time != 0 && !time) return;
     if (!inrange(time, true)) return null;
     
-    return strf(format, setbase(time, true), strflocale(time, true));
+    return strf(format, setbase(time, true), locale[true]);
   };
