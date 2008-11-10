@@ -189,7 +189,7 @@ var Time = new (function () {
   
 <%= inc 'php.js', 'posix.js' %>
 
-<%= inc 'locale.js', 'shared.js' %>
+<%= inc 'lang.js', 'locale.js', 'shared.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
