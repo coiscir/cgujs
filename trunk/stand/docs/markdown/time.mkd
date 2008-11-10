@@ -47,6 +47,73 @@ Date/Time Manipulation
 > > > `Time.abs(0, 0, 1, 0, 0, 0, 0)`  
 > > > `Time.abs(9999, 11, 31, 23, 59, 59, 999)`  
 
+> #### `lang` ####
+>  
+> > **Description**: Get current language in-use.  
+> >  
+> > **Return**: `<String>`  
+> >  
+> > **Syntax**: `Time.lang()`  
+> >  
+> > **Examples**:  
+> >  
+> > > `Time.lang() //=> "en"`  
+
+> #### `langDetect` ####
+>  
+> > **Description**: Get user, browser, or system languagee.  
+> >  
+> > **Return**: `<String>`  
+> >  
+> > **Syntax**: `Time.langDetect()`  
+> >  
+> > **Examples**:  
+> >  
+> > > `Time.langDetect() //=> "en"`  
+
+> #### `langList` ####
+>  
+> > **Description**: List supported languages.  
+> >  
+> > **Return**: `<Array>`  
+> >  
+> > **Syntax**: `Time.langList()`  
+> >  
+> > **Examples**:  
+> >  
+> > > `Time.langList() //=> ["en", "es"]`  
+
+> #### `langReset` ####
+>  
+> > **Description**: Reset in-use language to configured default.  
+> >  
+> > **Return**: `<Boolean>`: Success.  
+> >  
+> > **Syntax**: `Time.langReset()`  
+
+> #### `langSet` ####
+>  
+> > **Description**: Set in-use language.  
+> >  
+> > **Return**: `<Boolean>`: Success.  
+> >  
+> > **Syntax**: `Time.langSet(lang)`  
+> >  
+> > > **_lang_** `<String>`: Language to use.  
+> >  
+> > **Examples**:  
+> >  
+> > > `Time.langSet("en") //=> true`  
+> > > `Time.langSet("fr") //=> false`  
+
+> #### `langSetDetect` ####
+>  
+> > **Description**: Set in-use language to detected language.  
+> >  
+> > **Return**: `<Boolean>`: Success.  
+> >  
+> > **Syntax**: `Time.langSetDetect()`  
+
 > #### `phpdate` | `phputc` ####
 >  
 > > **Description**: PHP date() formatting for local time.  

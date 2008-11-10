@@ -22,6 +22,45 @@
  *
  *    Return: <Number>: Epoch timestamp.
  *----
+ *  lang -> Get current language in-use.
+ *
+ *    Syntax: Time.lang()
+ *
+ *    Return: <String>
+ *
+ *  langDetect -> Get user, browser, or system language.
+ *
+ *    Syntax: Time.langDetect()
+ *
+ *    Return: <String>
+ *
+ *  langList -> List supported languages.
+ *
+ *    Syntax: Type.langList()
+ *
+ *    Return: <Array>
+ *
+ *  langReset -> Reset in-use language to configured default.
+ *
+ *    Syntax: Type.langReset()
+ *
+ *    Return: <Boolean>: Success.
+ *
+ *  langSet -> Set in-use language.
+ *
+ *    Syntax: Type.langSet(lang)
+ *
+ *      lang <String>: Language to use.
+ *
+ *    Return: <Boolean>: Success.
+ *
+ *  langSetDetect -> Set in-use language to detected language.
+ *
+ *    Syntax: Type.langSetDetect()
+ *
+ *    Return: <Boolean>: Success.
+ *
+ *----
  *
  *  phpdate | phputc -> PHP date() formatting.
  *

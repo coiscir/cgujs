@@ -60,6 +60,95 @@
     </blockquote>
   </blockquote>
   
+  <h4><code>lang</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Get current language in-use.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.lang()</code>  </p>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.lang() //=&gt; "en"</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>langDetect</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Get user, browser, or system languagee.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.langDetect()</code>  </p>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.langDetect() //=&gt; "en"</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>langList</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: List supported languages.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Array&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.langList()</code>  </p>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.langList() //=&gt; ["en", "es"]</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>langReset</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Reset in-use language to configured default.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>: Success.  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.langReset()</code>  </p>
+  </blockquote>
+  
+  <h4><code>langSet</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Set in-use language.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>: Success.  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.langSet(lang)</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>lang</em></strong> <code>&lt;String&gt;</code>: Language to use.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.langSet("en") //=&gt; true</code> <br />
+      <code>Time.langSet("fr") //=&gt; false</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>langSetDetect</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Set in-use language to detected language.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>: Success.  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.langSetDetect()</code>  </p>
+  </blockquote>
+  
   <h4><code>phpdate</code> | <code>phputc</code></h4>
   
   <blockquote>
