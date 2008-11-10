@@ -63,10 +63,10 @@
     for (var i = 0; i < format.length; i += 1) {
       if (format[i] == '%') {
         switch (format[(i += 1)]) {
-          case 'a': buffer += lang.week_s[base.w]; break;
-          case 'A': buffer += lang.week_f[base.w]; break;
-          case 'b': buffer += lang.month_s[base.m]; break;
-          case 'B': buffer += lang.month_f[base.m]; break;
+          case 'a': buffer += lang.week_abbr[base.w]; break;
+          case 'A': buffer += lang.week_full[base.w]; break;
+          case 'b': buffer += lang.month_abbr[base.m]; break;
+          case 'B': buffer += lang.month_full[base.m]; break;
           case 'c': buffer += strf(locale.c, base); break;
                     /* buffer += strf('%a %b %e %H:%M:%S %Y', base); break; */
           case 'C': buffer += padnum(2, ftoi(base.y / 100)); break;
@@ -92,7 +92,7 @@
           case 'n': buffer += '\n'; break;
           case 'N': buffer += padnum(3, base.$u / 1000); break;
           case 'O': break;
-          case 'p': buffer += lang.meridien[(base.h < 12 ? 0 : 1)] || ''; break;
+          case 'p': buffer += lang.meridiem[(base.h < 12 ? 0 : 1)] || ''; break;
           case 'P': break; /* disable ruby-1.9 equivalents */
                     buffer += base.h < 12 ? 'am' : 'pm'; break;
           case 'r': buffer += strf('%I:%M:%S %p', base); break;

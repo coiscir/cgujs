@@ -5,17 +5,17 @@
   var defaultLanguage = 'en';
   
   var $lang = defaultLanguage; // language used
-  var _lang = {                // language list
+  var _lang = {                // language list // a=abbreviated, f=full
     $$ : { // language non-specific
     },
     
     en : {
-      month_f  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      month_s  : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      week_f   : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      week_s   : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      meridien : ['AM', 'PM', 'am', 'pm'],
-      ordinal  : ['th', 'st', 'nd', 'rd']
+      month_abbr : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      month_full : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      week_abbr  : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      week_full  : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      meridiem   : ['AM', 'PM', 'am', 'pm'],
+      ordinal    : ['th', 'st', 'nd', 'rd']
     }
   };
   
