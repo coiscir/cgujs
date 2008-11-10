@@ -25,6 +25,26 @@ document.writeln('');
 
 document.writeln('');
 document.writeln('--------------------------------------------------------------------------------');
+document.writeln('======================================================================= LANGUAGE');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('Default Language:      ', Time.lang());
+document.writeln('Supported Languages:   ', Time.langList());
+document.writeln('');
+document.writeln('Set Language to de:    ', Time.langSet('de'));
+document.writeln('Set Language to en:    ', Time.langSet('en'));
+document.writeln('Set Language to es:    ', Time.langSet('es'));
+document.writeln('Set Language to fr:    ', Time.langSet('fr'));
+document.writeln('');
+document.writeln('Detected Language:     ', Time.langDetect());
+document.writeln('Set Detected Language: ', Time.langSetDetect());
+document.writeln('');
+document.writeln('Reset Language:        ', Time.langReset());
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
 document.writeln('====================================================================== ABS | UTC');
 document.writeln('--------------------------------------------------------------------------------');
 document.writeln('');

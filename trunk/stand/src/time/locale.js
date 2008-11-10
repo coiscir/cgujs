@@ -20,15 +20,40 @@
   };
   
 // public
-  this.setLanguage = function (lang) {
+  this.lang = function () {
+    return Type.clone($lang) || '';
+  };
+  
+  this.langList = function () {
+    var langs = [];
+    for (var l in _lang)
+      if (_lang.propertyIsEnumerable(l))
+        if ((/[a-z]{2}/).test(l))
+          langs.push(l);
+    return langs.sort();
+  };
+  
+  this.langSet = function (lang) {
     if (!_lang[lang]) return false;
     if (!(/[a-z]{2}/).test(lang)) return false;
     $lang = lang;
     return true;
   };
   
-  this.detectLanguage = function () {
-    return this.setLanguage((navigator.language || navigator.userLanguage || navigator.browserLanguage || navigator.systemLanguage).substr(0, 2));
+  this.langReset = function () {
+    return this.langSet(defaultLanguage);
+  };
+  
+  this.langDetect = function () {
+    return (
+      navigator.language ||
+      navigator.userLanguage || navigator.browserLanguage || navigator.systemLanguage ||
+      document.getElementById('html')[0].lang
+    ).substr(0, 2);
+  };
+  
+  this.langSetDetect = function () {
+    return this.langSet(this.langDetect());
   };
 
 
@@ -68,8 +93,6 @@
    *    %yyyy = 4-digit year
    *    %yyy  = ISO-8601 year
    *    %yy   = 2-digit year
-   *    %ZZ   = Full Timezone name
-   *    %Z    = Abbreviated Timezone name
    *    %zz   = Timezone offset, as '+HH:MM'
    *    %z    = Timezone offset, as '+HHMM'
    *
@@ -78,6 +101,8 @@
    *
    *    %ZZZZ = Zoneinfo name
    *    %ZZZ  = Military timezone
+   *    %ZZ   = Full Timezone name
+   *    %Z    = Abbreviated Timezone name
   **/
 
   var _locale = {
@@ -120,9 +145,10 @@
     var conv = function (stage) {
       var f;
       switch (stage) {
-        case 'x': f = 'toLocaleDateString'; break;
-        case 'X': f = 'toLocaleTimeString'; break;
-        default : f = 'toLocaleString';     break;
+        case 'c' : f = 'toLocaleString';     break;
+        case 'x' : f = 'toLocaleDateString'; break;
+        case 'X' : f = 'toLocaleTimeString'; break;
+        default  : f = 'toString';           break;
       }
       
       // 0 or space padding
@@ -135,37 +161,47 @@
       return new Date(_abs(2000, 11, 31, 23, 30, 59, 999))[f]().
       // character replacements
         replace(/%/g, '%%').
-      // distinct combinations
+      // grouping replacements
         replace(/2000-12-31/g, '%yyyy-%mm-%dd').
         replace(/2000-W52-0/gi, '%yyy-W%WWW-%w').
-      // distinct replacements
         replace(/[+-]\d{2}:(00|15|30|45)/g, '%zz').
         replace(/[+-]\d{2}(00|15|30|45)/g, '%z').
-        replace(/2000/g, '%yyyy').
-        replace(/00/g, '%yy').
-        replace(/20/g, '%C').
-        replace(/53/g, '%WW').
-        replace(/52/g, '%W').
-        replace(re_week_f, '%wwww').
-        replace(re_week_s, '%www').
-        replace(/820\d{4}59/g, '%SSSS').
-        replace(/999\d*/g, '%SSS').
-        replace(/59/g, (scZr ? '%SS' : '%S')).
-        replace(re_meridien, '%p').
-        replace(re_month_f, '%mmmm').
+      // word replacements
         replace(re_month_s, '%mmm').
-        replace(/12/g, (mnZr ? '%mm' : '%m')).
-        replace(/30/g, (miZr ? '%MM' : '%M')).
-        replace(/23/g, (hrZr ? '%HHHH' : '%HHH')).
-        replace(/11/g, (hrZr ? '%HH' : '%H')).
-        replace(/31/g, (dyZr ? '%dd' : '%d')).
-      // mixable replacements
+        replace(re_month_f, '%mmmm').
+        replace(re_week_s, '%www').
+        replace(re_week_f, '%wwww').
         replace(re_ordinal, '%o').
-        replace(/7/g, '%u').
-        replace(/0/g, '%w');
+        replace(re_meridien, '%p').
+      // numeric replacements
+        replace(/820\d{4}59/g, '%SSSS').
+        replace(/\d+/g, function ($1) {
+          switch ($1) {
+            case '20'   : return '%C';
+            case '31'   : return dyZr ? '%dd' : '%d';
+            case '11'   : return hrZr ? '%HH' : '%H';
+            case '23'   : return hrZr ? '%HHHH' : '%HHH';
+            case '12'   : return mnZr ? '%mm' : '%m';
+            case '30'   : return miZr ? '%MM' : '%M';
+            case '59'   : return scZr ? '%SS' : '%S';
+            case '999'  : return '%SSS';
+            case '0'    : return '%w';
+            case '7'    : return '%ww';
+            case '52'   : return '%W';
+            case '53'   : return '%WW';
+            case '00'   : return '%yy';
+            case '2000' : return '%yyyy';
+            default : $1;
+          }
+        });
     };
     
-    _locale.local.c = conv();
-    _locale.local.x = conv('x');
-    _locale.local.X = conv('X');
+    _locale.local.c = conv('c') || '';
+    _locale.local.x = conv('x') || '';
+    _locale.local.X = conv('X') || '';
+    
+    // for testing timezone encoding
+    //_locale.local.$ = conv() || '';
   })();
+  
+  //document.writeln('<pre>', _locale.local.$, '</pre>');

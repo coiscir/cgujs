@@ -4,8 +4,9 @@
 // private
   var strflocale = function (utc) {
     var swap = function (c) {
-      return (_locale[utc ? 'utc' : 'local'][c] || '').replace(/%(C|d|H|M|m|o|p|S|W|w|y|Z|z)\1*/g, function ($1) {
+      return (_locale[utc ? 'utc' : 'local'][c] || '').replace(/%%|%([A-Za-z])\1*/g, function ($1) {
         switch ($1) {
+          case '%%'    : return '%%';
           case '%C'    : return '%C';
           case '%d'    : return '%e';
           case '%dd'   : return '%d';
@@ -41,6 +42,7 @@
           case '%ZZZZ' : return '%Z';
           case '%z'    : return '%z';
           case '%zz'   : return '%z';
+          default : return '';
         }
       });
     };
