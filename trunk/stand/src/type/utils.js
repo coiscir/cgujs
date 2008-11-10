@@ -25,17 +25,23 @@
   };
   
   this.clone = function (object) {
+    var $object = function (object) {
+      var obj = {};
+      for (var prop in object) obj[prop] = object[prop];
+      return obj;
+    };
+    
     switch (this.get(object)) {
       case NUL : return null;
-      case ARR :
-      case BLN :
-      case ERR :
-      case FNC :
-      case NUM :
-      case OBJ :
-      case RGX :
-      case STR : return object.valueOf();
+      case ARR : return [].concat(object.valueOf());
+      case BLN : return !!object.valueOf();
       case DTE : return new Date(object.valueOf());
+      case ERR :
+      case FNC : return object.valueOf();
+      case NUM : return 0 + object.valueOf();
+      case OBJ : return $object(object.valueOf());
+      case RGX : return new RegExp(object.valueOf());
+      case STR : return '' + object.valueOf();
       default  : return undefined
     }
   };
