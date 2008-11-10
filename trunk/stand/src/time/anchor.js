@@ -149,6 +149,7 @@
  *        %m - Numeric month with leading zeros.
  *        %M - Minutes with leading spaces.
  *        %n - newline.
+ *        %N - Milliseconds with leading zeros.
  *        %O - [unsupported] POSIX locale extensions.
  *        %p - ante meridiem or post meridiem.
  *        %r - Equivalent to "%I:%M:%S %p".
