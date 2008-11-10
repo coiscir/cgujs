@@ -150,7 +150,7 @@ var Time = new (function () {
   
 <%= inc 'php.js', 'posix.js' %>
 
-<%= inc 'shared.js' %>
+<%= inc 'locale.js', 'shared.js' %>
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

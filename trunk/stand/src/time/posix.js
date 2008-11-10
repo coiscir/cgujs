@@ -2,71 +2,69 @@
  *  CGU-Stand :: Time :: POSIX {WIP}
 **/
 // private
-  var locale = {};
-  
-  (function () {
-    
-    var conv = function (stage) {
-      var f;
-      switch (stage) {
-        case 'x': f = 'toLocaleDateString'; break;
-        case 'X': f = 'toLocaleTimeString'; break;
-        default : f = 'toLocaleString';     break;
-      }
-      
-      var hrZr = (/09/).test(new Date(_abs(0, 0, 0, 9)).toLocaleString());
-      var dyZr = (/09/).test(new Date(_abs(0, 0, 9)).toLocaleString()); // 0 or space padding
-      
-      return new Date(_abs(2006, 11, 31, 23, 30, 59, 999))[f]().
-        replace(/\n/g, '%n').
-        replace(/\t/g, '%t').
-        replace(/2006/g, '%Y').
-        replace(/[+-]\d{2}:?\d{2}/g, '%z').
-        replace(/Sunday/ig, '%A').
-        replace(/Sun/ig, '%a').
-        replace(/December/ig, '%B').
-        replace(/Dec/ig, '%b').
-        replace(/20(?![0-9])/g, '%C').
-        replace(/31/g, (dyZr ? '%d' : '%e')).
-        replace(/23/g, (hrZr ? '%H' : '%k')).
-        replace(/11/g, (hrZr ? '%I' : '%l')).
-        replace(/(w)?365/g, 'w%j').
-        replace(/12/g, '%m').
-        replace(/30/g, '%M').
-        replace(/PM/ig, '%p').
-        replace(/820\d{4}59/g, '%s').
-        replace(/59/g, '%S').
-        replace(/7/g, '%u').
-        replace(/0/g, '%w').
-        replace(/52/g, '%W').
-        replace(/95/g, '%y');
+  var strflocale = function (utc) {
+    var swap = function (c) {
+      return (_locale[utc ? 'utc' : 'local'][c] || '').replace(/%(C|d|H|M|m|o|p|S|W|w|y|Z|z)\1*/g, function ($1) {
+        switch ($1) {
+          case '%C'    : return '%C';
+          case '%d'    : return '%e';
+          case '%dd'   : return '%d';
+          case '%H'    : return '%l';
+          case '%HH'   : return '%I';
+          case '%HHH'  : return '%k';
+          case '%HHHH' : return '%H';
+          case '%M'    : return '%M';
+          case '%MM'   : return '%M';
+          case '%m'    : return '%m';
+          case '%mm'   : return '%m';
+          case '%mmm'  : return '%b';
+          case '%mmmm' : return '%B';
+          case '%o'    : return '';
+          case '%p'    : return '%p';
+          case '%S'    : return '%S';
+          case '%SS'   : return '%S';
+          case '%SSS'  : return '';
+          case '%SSSS' : return '%s';
+          case '%W'    : return '%W';
+          case '%WW'   : return '%U';
+          case '%WWW'  : return '%V';
+          case '%w'    : return '%w';
+          case '%ww'   : return '%u';
+          case '%www'  : return '%a';
+          case '%wwww' : return '%A';
+          case '%yy'   : return '%y';
+          case '%yyy'  : return '%G';
+          case '%yyyy' : return '%Y';
+          case '%Z'    : return '%Z';
+          case '%ZZ'   : return '%Z';
+          case '%ZZZ'  : return '%Z';
+          case '%ZZZZ' : return '%Z';
+          case '%z'    : return '%z';
+          case '%zz'   : return '%z';
+        }
+      });
     };
     
-    locale[false] = {
-      c: conv(),
-      x: conv('x'),
-      X: conv('X')
+    return {
+      c : swap('c'),
+      x : swap('x'),
+      X : swap('X')
     };
-    
-    locale[true] = {
-      /*c: '%a, %b %e %Y %H:%M:%S',*/
-      c: '%a %d %b %Y %H:%M:%S %Z',
-      x: '%Y-%m-%d',
-      X: '%H:%M:%S'
-    };
-  })();
+  };
   
   var strf = function (format, base, locale) {
     format = Type.clone(format).split('');
+    
+    var lang = _lang[$lang] || _lang[defaultLanguage];
     
     var buffer = '';
     for (var i = 0; i < format.length; i += 1) {
       if (format[i] == '%') {
         switch (format[(i += 1)]) {
-          case 'a': buffer += weekday[base.w].substr(0, 3); break;
-          case 'A': buffer += weekday[base.w]; break;
-          case 'b': buffer += months[base.m].substr(0, 3); break;
-          case 'B': buffer += months[base.m]; break;
+          case 'a': buffer += lang.week_s[base.w]; break;
+          case 'A': buffer += lang.week_f[base.w]; break;
+          case 'b': buffer += lang.month_s[base.m]; break;
+          case 'B': buffer += lang.month_f[base.m]; break;
           case 'c': buffer += strf(locale.c, base); break;
                     /* buffer += strf('%a %b %e %H:%M:%S %Y', base); break; */
           case 'C': buffer += padnum(2, ftoi(base.y / 100)); break;
@@ -91,7 +89,7 @@
           case 'M': buffer += padnum(2, base.i); break;
           case 'n': buffer += '\n'; break;
           case 'O': break;
-          case 'p': buffer += base.h < 12 ? 'AM' : 'PM'; break;
+          case 'p': buffer += lang.meridien[(base.h < 12 ? 0 : 1)] || ''; break;
           case 'P': break; /* disable ruby-1.9 equivalents */
                     buffer += base.h < 12 ? 'am' : 'pm'; break;
           case 'r': buffer += strf('%I:%M:%S %p', base); break;
@@ -142,7 +140,7 @@
     if (time != 0 && !time) return;
     if (!inrange(time, false)) return null;
     
-    return strf(format, setbase(time, false), locale[false]);
+    return strf(format, setbase(time, false), strflocale(false));
   };
 
   this.strfutc = function (format, time) {
@@ -152,5 +150,5 @@
     if (time != 0 && !time) return;
     if (!inrange(time, true)) return null;
     
-    return strf(format, setbase(time, true), locale[true]);
+    return strf(format, setbase(time, true), strflocale(true));
   };

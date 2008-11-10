@@ -4,11 +4,6 @@
   var day = 24 * 60 * 60 * 1000; // milliseconds in a day
   var swb = 24 * 60 * 60 / 1000; // seconds in a swatch beat
   
-  var months = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'];
-  var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  var ordinal = ['th', 'st', 'nd', 'rd'];
-
   var between = function (x, m, n) { return m <= x && x <= n; };
   var ftoi = function (x) { return x - (x % 1); };
   var tumble = function (x, n) { x=ftoi(x); n=ftoi(n||0); return (x+n-1)%n; };

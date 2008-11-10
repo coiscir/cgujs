@@ -5,7 +5,8 @@
   var phpf = function (format, base) {
     format = Type.clone(format).split('');
     
-    var monthc = [31, (base.l ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var lang = _lang[defaultLanguage];
+    var month_c = [31, (base.l ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     
     var buffer = '', rfc_colon = true;
     for (var i = 0; i < format.length; i += 1) {
@@ -13,11 +14,11 @@
       switch (format[i]) {
       // day
         case 'd': buffer += padnum(2, base.d); break;
-        case 'D': buffer += weekday[base.w].substr(0, 3); break;
+        case 'D': buffer += lang.week_s[base.w]; break;
         case 'j': buffer += base.d; break;
-        case 'l': buffer += weekday[base.w]; break;
+        case 'l': buffer += lang.week_f[base.w]; break;
         case 'N': buffer += tumblesh(base.w, 7); break;
-        case 'S': buffer += ordinal[between(base.d, 10, 19) ? 0 : (base.d % 10)] || ordinal[0]; break;
+        case 'S': buffer += lang.ordinal[between(base.d, 10, 19) ? 0 : (base.d % 10)] || ordinal[0]; break;
         case 'w': buffer += base.w; break;
         case 'z': buffer += ftoi((base.$$ - base.jc) / day); break;
       // week
@@ -29,11 +30,11 @@
                     ) / 7) + 1
                   )); break;
       // month
-        case 'F': buffer += months[base.m]; break;
+        case 'F': buffer += lang.month_f[base.m]; break;
         case 'm': buffer += padnum(2, base.n); break;
-        case 'M': buffer += months[base.m].substr(0, 3); break;
+        case 'M': buffer += lang.month_s[base.m]; break;
         case 'n': buffer += base.n; break;
-        case 't': buffer += monthc[base.m]; break;
+        case 't': buffer += month_c[base.m]; break;
       // year
         case 'L': buffer += base.l ? 1 : 0; break;
         case 'o': buffer += padnum(4, (
@@ -44,6 +45,8 @@
         case 'Y': buffer += padnum(4, base.y); break;
         case 'y': buffer += padnum(2, (base.y % 100)); break;
       // time
+        case 'a': buffer += lang.meridien[(base.h < 12 ? 0 : 1) + 2]; break;
+        case 'A': buffer += lang.meridien[(base.h < 12 ? 0 : 1) + 0]; break;
         case 'a': buffer += base.h < 12 ? 'am' : 'pm'; break;
         case 'A': buffer += base.h < 12 ? 'AM' : 'PM'; break;
         case 'B': buffer += padnum(3, (((
