@@ -121,8 +121,6 @@ document.writeln('');
 document.writeln('phpdate("r")                  //=> ', Time.phpdate("r"));
 document.writeln('phpdate("D, d M, Y H:i:s O")  //=> ', Time.phpdate("D, d M Y H:i:s O"));
 document.writeln('');
-document.writeln("JSON Formatting (Y-m-d\\TH:i:s.u\\Z): ", Time.phputc("Y-m-d\\TH:i:s.u\\Z"));
-document.writeln('');
 
 document.writeln('');
 document.writeln('--------------------------------------------------------------------------------');
@@ -130,6 +128,9 @@ document.writeln('============================================================= 
 document.writeln('--------------------------------------------------------------------------------');
 document.writeln('');
 
+document.writeln("JSON Formatting (%FT%T.%NZ): ", Time.strfutc("%FT%T.%NZ"));
+document.writeln('');
+document.writeln('');
 document.writeln('Completion');
 document.writeln('');
 document.writeln(Time.strftime('%%a: %a'));
@@ -154,6 +155,7 @@ document.writeln(Time.strftime('%%l: %l'));
 document.writeln(Time.strftime('%%m: %m'));
 document.writeln(Time.strftime('%%M: %M'));
 document.writeln(Time.strftime('%%n: \\n'));
+document.writeln(Time.strftime('%%N: %N'));
 document.writeln(Time.strftime('%%O: %O'));
 document.writeln(Time.strftime('%%p: %p'));
 document.writeln(Time.strftime('%%r: %r'));
@@ -198,6 +200,7 @@ document.writeln(Time.strfutc('%%l: %l'));
 document.writeln(Time.strfutc('%%m: %m'));
 document.writeln(Time.strfutc('%%M: %M'));
 document.writeln(Time.strfutc('%%n: \\n'));
+document.writeln(Time.strfutc('%%N: %N'));
 document.writeln(Time.strfutc('%%O: %O'));
 document.writeln(Time.strfutc('%%p: %p'));
 document.writeln(Time.strfutc('%%r: %r'));

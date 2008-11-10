@@ -18,7 +18,7 @@
  *
  *    Syntax: Time.abs([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])
  *
- *      (All parameters are optional. Default is '0/0/0000 00:00:00'.)
+ *      (All parameters are optional. Default is '0000-00-01 00:00:00'.)
  *
  *    Return: <Number>: Epoch timestamp.
  *----

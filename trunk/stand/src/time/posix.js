@@ -90,6 +90,7 @@
           case 'm': buffer += padnum(2, base.n); break;
           case 'M': buffer += padnum(2, base.i); break;
           case 'n': buffer += '\n'; break;
+          case 'N': buffer += padnum(3, base.$u / 1000); break;
           case 'O': break;
           case 'p': buffer += lang.meridien[(base.h < 12 ? 0 : 1)] || ''; break;
           case 'P': break; /* disable ruby-1.9 equivalents */

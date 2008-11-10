@@ -39,7 +39,7 @@ Date/Time Manipulation
 > > > sc = second `(0 - 59)`  
 > > > ms = milliseconds `(0 - 999)`  
 > > >  
-> > > (All parameters are optional. Default is '0/0/0000 00:00:00'.)  
+> > > (All parameters are optional. Default is '0000-00-01 00:00:00'.)  
 > >  
 > > **Examples**:  
 > >  
@@ -220,6 +220,7 @@ Date/Time Manipulation
 > > > >  `%m` - Numeric month with leading zeros.  
 > > > >  `%M` - Minutes with leading spaces.  
 > > > >  `%n` - newline.  
+> > > >  `%N` - Milliseconds with leading zeros.  
 > > > >  `%O` - [**unsupported**] POSIX locale extensions.  
 > > > >  `%p` - ante meridiem or post meridiem.  
 > > > >  `%r` - Equivalent to `"%I:%M:%S %p"`.  
