@@ -9,6 +9,7 @@ Date/Time Manipulation
 ### Tests ###
 
 > [Test Cases](../test/time.html)  
+> [Languages](../test/time.lang.html)  
 
 ----
 
