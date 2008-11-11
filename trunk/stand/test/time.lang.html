@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Time - Test Cases</title>
+  <title>Time - Languages</title>
 </head>
 <body>
 
@@ -10,7 +10,7 @@
       <option value="en">en - English</option>
     </select>
   </div>
-  <div><input id="utc" type="checkbox" onchange="format()"><span>utc?</span></div>
+  <div><input id="utc" type="checkbox" onchange="format()"><span>UTC</span></div>
 
   <div>&nbsp;</div>
   
@@ -27,6 +27,8 @@ var format = function () {
   if (!(window.Time && window.Time.Version)) {
     disp.innerHTML = "Time doesn't exist. Build with Ruby/Rake.";
   } else {
+    Time.langSet(lang.value);
+    
     disp.innerHTML = Time[utc ? 'strfutc' : 'strftime']([
       'Weekday       ~~  %A ~ %a ~ %u (0-6) ~ %w (1-7)',
       'Month         ~~  %B ~ %b ~ %m',
