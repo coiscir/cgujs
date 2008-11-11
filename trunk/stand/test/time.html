@@ -131,6 +131,61 @@ document.writeln('');
 document.writeln("JSON Formatting (%FT%T.%NZ): ", Time.strfutc("%FT%T.%NZ"));
 document.writeln('');
 document.writeln('');
+document.writeln('Spectrum');
+document.writeln('');
+document.writeln(Time.strftime([
+  'Local:',
+  '',
+  '  Weekday       : %A ~ %a ~ %u (0-6) ~ %w (1-7)',
+  '  Month         : %B ~ %b ~ %m',
+  '  Day           : %d ~ %e',
+  '  Year          : %C ~ %y ~ %Y',
+  '',
+  '  Hour          : %H (00-23) ~ %k (0-23) ~ %I (01-12) ~ %l (1-12) ~ %p ~ %P',
+  '  Minute        : %M',
+  '  Second        : %S ~ %s',
+  '  Millisecond   : %N',
+  '  Timezone      : %z',
+  '',
+  '  Day of Year   : %j',
+  '  Week Number   : %U (Sun-Sat) ~ %W (Mon-Sun)',
+  '',
+  '  ISO8601 Year  : %g ~ %G',
+  '  ISO8601 Week  : %V',
+  '',
+  '  Date          : %D ~ %F ~ %v',
+  '  Time          : %r ~ %R ~ %T',
+  '  Locale        : %c',
+  '                : %x ~ %X'
+].join("%n")));
+document.writeln('');
+document.writeln(Time.strfutc([
+  'UTC:',
+  '',
+  '  Weekday       : %A ~ %a ~ %u (0-6) ~ %w (1-7)',
+  '  Month         : %B ~ %b ~ %m',
+  '  Day           : %d ~ %e',
+  '  Year          : %C ~ %y ~ %Y',
+  '',
+  '  Hour          : %H (00-23) ~ %k (0-23) ~ %I (01-12) ~ %l (1-12) ~ %p ~ %P',
+  '  Minute        : %M',
+  '  Second        : %S ~ %s',
+  '  Millisecond   : %N',
+  '  Timezone      : %z',
+  '',
+  '  Day of Year   : %j',
+  '  Week Number   : %U (Sun-Sat) ~ %W (Mon-Sun)',
+  '',
+  '  ISO-8601 Year : %g ~ %G',
+  '  ISO-8601 Week : %V',
+  '',
+  '  Date          : %D ~ %F ~ %v',
+  '  Time          : %r ~ %R ~ %T',
+  '  Locale        : %c',
+  '                : %x ~ %X'
+].join("%n")));
+document.writeln('');
+document.writeln('');
 document.writeln('Completion');
 document.writeln('');
 document.writeln(Time.strftime('%%a: %a'));
@@ -158,6 +213,7 @@ document.writeln(Time.strftime('%%n: \\n'));
 document.writeln(Time.strftime('%%N: %N'));
 document.writeln(Time.strftime('%%O: %O'));
 document.writeln(Time.strftime('%%p: %p'));
+document.writeln(Time.strftime('%%P: %P'));
 document.writeln(Time.strftime('%%r: %r'));
 document.writeln(Time.strftime('%%R: %R'));
 document.writeln(Time.strftime('%%s: %s'));
@@ -177,51 +233,6 @@ document.writeln(Time.strftime('%%Y: %Y'));
 document.writeln(Time.strftime('%%z: %z'));
 document.writeln(Time.strftime('%%Z: %Z'));
 document.writeln(Time.strftime('%%%%: %%'));
-document.writeln('');
-document.writeln(Time.strfutc('%%a: %a'));
-document.writeln(Time.strfutc('%%A: %A'));
-document.writeln(Time.strfutc('%%b: %b'));
-document.writeln(Time.strfutc('%%B: %B'));
-document.writeln(Time.strfutc('%%c: %c'));
-document.writeln(Time.strfutc('%%C: %C'));
-document.writeln(Time.strfutc('%%d: %d'));
-document.writeln(Time.strfutc('%%D: %D'));
-document.writeln(Time.strfutc('%%e: %e'));
-document.writeln(Time.strfutc('%%E: %E'));
-document.writeln(Time.strfutc('%%F: %F'));
-document.writeln(Time.strfutc('%%g: %g'));
-document.writeln(Time.strfutc('%%G: %G'));
-document.writeln(Time.strfutc('%%h: %h'));
-document.writeln(Time.strfutc('%%H: %H'));
-document.writeln(Time.strfutc('%%I: %I'));
-document.writeln(Time.strfutc('%%j: %j'));
-document.writeln(Time.strfutc('%%k: %k'));
-document.writeln(Time.strfutc('%%l: %l'));
-document.writeln(Time.strfutc('%%m: %m'));
-document.writeln(Time.strfutc('%%M: %M'));
-document.writeln(Time.strfutc('%%n: \\n'));
-document.writeln(Time.strfutc('%%N: %N'));
-document.writeln(Time.strfutc('%%O: %O'));
-document.writeln(Time.strfutc('%%p: %p'));
-document.writeln(Time.strfutc('%%r: %r'));
-document.writeln(Time.strfutc('%%R: %R'));
-document.writeln(Time.strfutc('%%s: %s'));
-document.writeln(Time.strfutc('%%S: %S'));
-document.writeln(Time.strfutc('%%t: \\t'));
-document.writeln(Time.strfutc('%%T: %T'));
-document.writeln(Time.strfutc('%%u: %u'));
-document.writeln(Time.strfutc('%%U: %U'));
-document.writeln(Time.strfutc('%%v: %v'));
-document.writeln(Time.strfutc('%%V: %V'));
-document.writeln(Time.strfutc('%%w: %w'));
-document.writeln(Time.strfutc('%%W: %W'));
-document.writeln(Time.strfutc('%%x: %x'));
-document.writeln(Time.strfutc('%%X: %X'));
-document.writeln(Time.strfutc('%%y: %y'));
-document.writeln(Time.strfutc('%%Y: %Y'));
-document.writeln(Time.strfutc('%%z: %z'));
-document.writeln(Time.strfutc('%%Z: %Z'));
-document.writeln(Time.strfutc('%%%%: %%'));
 document.writeln('');
 
 document.write('</pre>');

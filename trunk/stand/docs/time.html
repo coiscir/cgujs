@@ -41,15 +41,15 @@
     <p><strong>Syntax</strong>: <code>Time.abs([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])</code>  </p>
     
     <blockquote>
-      <p>yr = year <code>(0 - 9999)</code> <br />
-      mn = month <code>(0 - 11)</code> <br />
-      dy = day <code>(1 - 31)</code> <br />
-      hr = hour <code>(0 - 23)</code> <br />
-      mi = minute <code>(0 - 59)</code> <br />
-      sc = second <code>(0 - 59)</code> <br />
-      ms = milliseconds <code>(0 - 999)</code>  </p>
+      <p><code>yr</code> = year <code>(0 - 9999)</code> <br />
+      <code>mn</code> = month <code>(0 - 11)</code> <br />
+      <code>dy</code> = day <code>(1 - 31)</code> <br />
+      <code>hr</code> = hour <code>(0 - 23)</code> <br />
+      <code>mi</code> = minute <code>(0 - 59)</code> <br />
+      <code>sc</code> = second <code>(0 - 59)</code> <br />
+      <code>ms</code> = milliseconds <code>(0 - 999)</code>  </p>
       
-      <p>(All parameters are optional. Default is '0000-00-01 00:00:00'.)  </p>
+      <p>(All parameters are optional. Default is <code>'0000-00-01 00:00:00'</code>.)  </p>
     </blockquote>
     
     <p><strong>Examples</strong>:  </p>
@@ -273,7 +273,8 @@
          <code>%n</code> - newline. <br />
          <code>%N</code> - Milliseconds with leading zeros. <br />
          <code>%O</code> - [<strong>unsupported</strong>] POSIX locale extensions. <br />
-         <code>%p</code> - ante meridiem or post meridiem. <br />
+         <code>%p</code> - Uppercase ante meridiem or post meridiem. <br />
+         <code>%P</code> - Lowercase ante meridiem or post meridiem. <br />
          <code>%r</code> - Equivalent to <code>"%I:%M:%S %p"</code>. <br />
          <code>%R</code> - Equivalent to <code>"%H:%M"</code>. <br />
          <code>%s</code> - Seconds since Unix Epoch. <br />
@@ -283,7 +284,7 @@
          <code>%u</code> - Day of the week. <code>(1 - 7 &lt;=&gt; Mon - Sun)</code> <br />
          <code>%U</code> - Week number of the year, Sunday-start, with leading zeros. <br />
          <code>%v</code> - Equivalent to <code>"%e-%b-%Y"</code>. <br />
-         <code>%V</code> - Week number of %G year, Monday-start, with leading zeros. <br />
+         <code>%V</code> - Week number of <code>%G</code> year, Monday-start, with leading zeros. <br />
          <code>%w</code> - Day of the week. <code>(0 - 6 &lt;=&gt; Sun - Sat)</code> <br />
          <code>%W</code> - Week number of the year, Monday-start, with leading zeros. <br />
          <code>%x</code> - Locale date. (based on <code>Date#toLocaleDateString</code>) <br />

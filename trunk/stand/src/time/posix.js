@@ -68,7 +68,6 @@
           case 'b': buffer += lang.month_abbr[base.m]; break;
           case 'B': buffer += lang.month_full[base.m]; break;
           case 'c': buffer += strf(locale.c, base); break;
-                    /* buffer += strf('%a %b %e %H:%M:%S %Y', base); break; */
           case 'C': buffer += padnum(2, ftoi(base.y / 100)); break;
           case 'd': buffer += padnum(2, base.d); break;
           case 'D': buffer += strf('%m/%d/%y', base); break;
@@ -93,8 +92,7 @@
           case 'N': buffer += padnum(3, base.$u / 1000); break;
           case 'O': break;
           case 'p': buffer += lang.meridiem[(base.h < 12 ? 0 : 1)] || ''; break;
-          case 'P': break; /* disable ruby-1.9 equivalents */
-                    buffer += base.h < 12 ? 'am' : 'pm'; break;
+          case 'P': buffer += lang.meridiem[(base.h < 12 ? 2 : 3)] || ''; break;
           case 'r': buffer += strf('%I:%M:%S %p', base); break;
           case 'R': buffer += strf('%H:%M', base); break;
           case 's': buffer += base.$t; break;
@@ -114,9 +112,7 @@
           case 'w': buffer += base.w; break;
           case 'W': buffer += padnum(2, ftoi((base.$$ - base.fm) / (7 * day))); break;
           case 'x': buffer += strf(locale.x, base); break;
-                    /* buffer += strf('%m/%d/%y', base); break; */
           case 'X': buffer += strf(locale.X, base); break;
-                    /* buffer += strf('%H:%M:%S', base); break; */
           case 'y': buffer += padnum(2, (base.y % 100)); break;
           case 'Y': buffer += padnum(4, base.y); break;
           case 'z': buffer += ''.concat(

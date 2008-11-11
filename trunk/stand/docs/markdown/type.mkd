@@ -73,11 +73,11 @@ Enhanced Data-Type Distinction
 > > **Examples**:  
 > >  
 > > > `Type.is_a([], Array);             //=> true`  
-> > > `Type.is_a([], "array"));          //=> true`  
-> > > `Type.is_a([], Object));           //=> true`  
-> > > `Type.is_a('foo', String));        //=> true`  
-> > > `Type.is_a(false, Boolean));       //=> true`  
-> > > `Type.is_a(null, Object));         //=> false`  
+> > > `Type.is_a([], "array");           //=> true`  
+> > > `Type.is_a([], Object);            //=> true`  
+> > > `Type.is_a('foo', String);         //=> true`  
+> > > `Type.is_a(false, Boolean);        //=> true`  
+> > > `Type.is_a(null, Object);          //=> false`  
 > > > `Type.is_a(new Foobar(), Foobar);  //=> true`  
 > >  
 > > **Warning**: Comparing against the `Object` constructor can result in false-positives, since everything is a variant of Object.  

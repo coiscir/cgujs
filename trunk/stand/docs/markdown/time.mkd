@@ -32,15 +32,15 @@ Date/Time Manipulation
 > >  
 > > **Syntax**: `Time.abs([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])`  
 > >  
-> > > yr = year `(0 - 9999)`  
-> > > mn = month `(0 - 11)`  
-> > > dy = day `(1 - 31)`  
-> > > hr = hour `(0 - 23)`  
-> > > mi = minute `(0 - 59)`  
-> > > sc = second `(0 - 59)`  
-> > > ms = milliseconds `(0 - 999)`  
+> > > `yr` = year `(0 - 9999)`  
+> > > `mn` = month `(0 - 11)`  
+> > > `dy` = day `(1 - 31)`  
+> > > `hr` = hour `(0 - 23)`  
+> > > `mi` = minute `(0 - 59)`  
+> > > `sc` = second `(0 - 59)`  
+> > > `ms` = milliseconds `(0 - 999)`  
 > > >  
-> > > (All parameters are optional. Default is '0000-00-01 00:00:00'.)  
+> > > (All parameters are optional. Default is `'0000-00-01 00:00:00'`.)  
 > >  
 > > **Examples**:  
 > >  
@@ -223,7 +223,8 @@ Date/Time Manipulation
 > > > >  `%n` - newline.  
 > > > >  `%N` - Milliseconds with leading zeros.  
 > > > >  `%O` - [**unsupported**] POSIX locale extensions.  
-> > > >  `%p` - ante meridiem or post meridiem.  
+> > > >  `%p` - Uppercase ante meridiem or post meridiem.  
+> > > >  `%P` - Lowercase ante meridiem or post meridiem.  
 > > > >  `%r` - Equivalent to `"%I:%M:%S %p"`.  
 > > > >  `%R` - Equivalent to `"%H:%M"`.  
 > > > >  `%s` - Seconds since Unix Epoch.  
@@ -233,7 +234,7 @@ Date/Time Manipulation
 > > > >  `%u` - Day of the week. `(1 - 7 <=> Mon - Sun)`  
 > > > >  `%U` - Week number of the year, Sunday-start, with leading zeros.  
 > > > >  `%v` - Equivalent to `"%e-%b-%Y"`.  
-> > > >  `%V` - Week number of %G year, Monday-start, with leading zeros.  
+> > > >  `%V` - Week number of `%G` year, Monday-start, with leading zeros.  
 > > > >  `%w` - Day of the week. `(0 - 6 <=> Sun - Sat)`  
 > > > >  `%W` - Week number of the year, Monday-start, with leading zeros.  
 > > > >  `%x` - Locale date. (based on `Date#toLocaleDateString`)  

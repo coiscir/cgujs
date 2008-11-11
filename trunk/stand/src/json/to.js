@@ -20,7 +20,7 @@
     
     var string = function (input) {
       var result = '', enc;
-      var against = options.ascii ? /[\\"]|[^\x20-\x7e]/ : /[\x00-\x1f\\"\x7f]/;
+      var against = options.ascii ? /[\\"]|[^\x20-\x7e]/ : /[\\"]|[\x00-\x1f\x7f]/;
       var specials = {
         '"'  : '\\"',
         '\b' : '\\b',

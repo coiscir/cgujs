@@ -151,7 +151,8 @@
  *        %n - newline.
  *        %N - Milliseconds with leading zeros.
  *        %O - [unsupported] POSIX locale extensions.
- *        %p - ante meridiem or post meridiem.
+ *        %p - Uppercase ante meridiem or post meridiem.
+ *        %P - Lowercase ante meridiem or post meridiem.
  *        %r - Equivalent to "%I:%M:%S %p".
  *        %R - Equivalent to "%H:%M".
  *        %s - Seconds since Unix Epoch.

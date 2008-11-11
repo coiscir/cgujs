@@ -30,27 +30,27 @@ var format = function () {
     Time.langSet(lang.value);
     
     disp.innerHTML = Time[utc ? 'strfutc' : 'strftime']([
-      'Weekday       ~~  %A ~ %a ~ %u (0-6) ~ %w (1-7)',
-      'Month         ~~  %B ~ %b ~ %m',
-      'Day           ~~  %d ~ %e',
-      'Year          ~~  %C ~ %y ~ %Y',
+      'Weekday       : %A ~ %a ~ %u (0-6) ~ %w (1-7)',
+      'Month         : %B ~ %b ~ %m',
+      'Day           : %d ~ %e',
+      'Year          : %C ~ %y ~ %Y',
       '',
-      'Hour          ~~  %H (00-23) ~ %k (0-23) ~ %I (01-12) ~ %l (1-12) ~ %p',
-      'Minute        ~~  %M',
-      'Second        ~~  %S ~ %s',
-      'Millisecond   ~~  %N',
-      'Timezone      ~~  %z',
+      'Hour          : %H (00-23) ~ %k (0-23) ~ %I (01-12) ~ %l (1-12) ~ %p ~ %P',
+      'Minute        : %M',
+      'Second        : %S ~ %s',
+      'Millisecond   : %N',
+      'Timezone      : %z',
       '',
-      'Day of Year   ~~  %j',
-      'Week Number   ~~  %U (Sun-Sat) ~ %W (Mon-Sun)',
+      'Day of Year   : %j',
+      'Week Number   : %U (Sun-Sat) ~ %W (Mon-Sun)',
       '',
-      'ISO8601 Year  ~~  %g ~ %G',
-      'ISO8601 Week  ~~  %V',
+      'ISO-8601 Year : %g ~ %G',
+      'ISO-8601 Week : %V',
       '',
-      'Date          ~~  %D ~ %F ~ %v',
-      'Time          ~~  %r ~ %R ~ %T',
-      'Locale        ~~  %c',
-      '              ~~  %x ~ %X'
+      'Date          : %D ~ %F ~ %v',
+      'Time          : %r ~ %R ~ %T',
+      'Locale        : %c',
+      '              : %x ~ %X'
     ].join("%n"));
   }
 };
