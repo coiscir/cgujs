@@ -2,22 +2,12 @@
  *  CGU-Stand :: Time :: Language
 **/
 // private
-  var defaultLanguage = 'en';
+  var $$lang = 'en'; // default language
   
-  var $lang = defaultLanguage; // language used
-  var _lang = {                // language list // a=abbreviated, f=full
-    $$ : { // language non-specific
-    },
-    
-    en : {
-      month_abbr : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      month_full : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      week_abbr  : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      week_full  : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      meridiem   : ['AM', 'PM', 'am', 'pm'],
-      ordinal    : ['th', 'st', 'nd', 'rd']
-    }
-  };
+  var $lang = $$lang; // language used
+  var _lang = {};     // language list // a=abbreviated, f=full
+
+<%= inc 2, true, 'lang/[a-z][a-z].js' %>
   
 // public
   this.lang = function () {
@@ -41,7 +31,7 @@
   };
   
   this.langReset = function () {
-    return this.langSet(defaultLanguage);
+    return this.langSet($$lang);
   };
   
   this.langDetect = function () {

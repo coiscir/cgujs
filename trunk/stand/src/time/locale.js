@@ -57,31 +57,38 @@
   
   // find locale formatting for local dates
   (function () {
+    var seg = function (name) { // segment from 3 to length - 1
+      var segs = [];
+      for (var i = (name.length - 1); i >= 3; i -= 1)
+        segs.push(name.substr(0, i));
+      return segs;
+    };
+    
     // build lists for searching
-    var month_abbr  = [];
-    var month_full  = [];
-    var week_abbr   = [];
-    var week_full   = [];
-    var meridiem = [];
-    var ordinal  = [];
+    var month_abbr = [];
+    var month_full = [];
+    var week_abbr  = [];
+    var week_full  = [];
+    var meridiem   = [];
+    var ordinal    = [];
     
     for (var l in _lang) {
       if (_lang.propertyIsEnumerable(l)) {
-        if (_lang[l].month_abbr) month_abbr = (month_abbr).concat([(_lang[l].month_abbr)[11]]);
-        if (_lang[l].month_full) month_full = (month_full).concat([(_lang[l].month_full)[11]]);
-        if (_lang[l].week_abbr ) week_abbr  = (week_abbr ).concat([(_lang[l].week_abbr )[00]]);
-        if (_lang[l].week_full ) week_full  = (week_full ).concat([(_lang[l].week_full )[00]]);
+        if (_lang[l].month_full) month_abbr = (month_abbr).concat(seg((_lang[l].month_full)[11]));
+        if (_lang[l].month_full) month_full = (month_full).concat(   [(_lang[l].month_full)[11]]);
+        if (_lang[l].week_full ) week_abbr  = (week_abbr ).concat(seg((_lang[l].week_full )[00]));
+        if (_lang[l].week_full ) week_full  = (week_full ).concat(   [(_lang[l].week_full )[00]]);
         if (_lang[l].meridiem  ) meridiem   = (meridiem  ).concat(_lang[l].meridiem);
         if (_lang[l].ordinal   ) ordinal    = (ordinal   ).concat(_lang[l].ordinal );
       }
     }
     
-    var re_month_abbr = new RegExp((month_abbr ).join('|'), 'gi');
-    var re_month_full = new RegExp((month_full ).join('|'), 'gi');
-    var re_week_abbr  = new RegExp((week_abbr  ).join('|'), 'gi');
-    var re_week_full  = new RegExp((week_full  ).join('|'), 'gi');
-    var re_meridiem   = new RegExp((meridiem).join('|'), 'gi');
-    var re_ordinal    = new RegExp((ordinal ).join('|'), 'gi');
+    var re_month_abbr = new RegExp((month_abbr).join('|'), 'gi');
+    var re_month_full = new RegExp((month_full).join('|'), 'gi');
+    var re_week_abbr  = new RegExp((week_abbr ).join('|'), 'gi');
+    var re_week_full  = new RegExp((week_full ).join('|'), 'gi');
+    var re_meridiem   = new RegExp((meridiem  ).join('|'), 'gi');
+    var re_ordinal    = new RegExp((ordinal   ).join('|'), 'gi');
     
     var conv = function (stage) {
       var f;

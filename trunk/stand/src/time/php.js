@@ -5,7 +5,7 @@
   var phpf = function (format, base) {
     format = Type.clone(format).split('');
     
-    var lang = _lang[defaultLanguage];
+    var lang = _lang.en;
     var month_c = [31, (base.l ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     
     var buffer = '', rfc_colon = true;
@@ -14,7 +14,7 @@
       switch (format[i]) {
       // day
         case 'd': buffer += padnum(2, base.d); break;
-        case 'D': buffer += lang.week_abbr[base.w]; break;
+        case 'D': buffer += lang.week_full[base.w].substr(0, 3); break;
         case 'j': buffer += base.d; break;
         case 'l': buffer += lang.week_full[base.w]; break;
         case 'N': buffer += tumblesh(base.w, 7); break;
@@ -32,7 +32,7 @@
       // month
         case 'F': buffer += lang.month_full[base.m]; break;
         case 'm': buffer += padnum(2, base.n); break;
-        case 'M': buffer += lang.month_abbr[base.m]; break;
+        case 'M': buffer += lang.month_full[base.m].substr(0, 3); break;
         case 'n': buffer += base.n; break;
         case 't': buffer += month_c[base.m]; break;
       // year
@@ -45,8 +45,8 @@
         case 'Y': buffer += padnum(4, base.y); break;
         case 'y': buffer += padnum(2, (base.y % 100)); break;
       // time
-        case 'a': buffer += lang.meridiem[base.h < 12 ? 2 : 3] || ''; break;
-        case 'A': buffer += lang.meridiem[base.h < 12 ? 0 : 1] || ''; break;
+        case 'a': buffer += lang.meridiem[base.h < 12 ? 2 : 3]; break;
+        case 'A': buffer += lang.meridiem[base.h < 12 ? 0 : 1]; break;
         case 'a': buffer += base.h < 12 ? 'am' : 'pm'; break;
         case 'A': buffer += base.h < 12 ? 'AM' : 'PM'; break;
         case 'B': buffer += padnum(3, (((

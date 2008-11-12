@@ -95,9 +95,7 @@ module Builder
     def inc(*files)
       pad = files.first.is_a?(Numeric) ? files.shift : 0
       min = files.first == true ? files.shift : false
-      files.reject{
-        |f| !File.file?(f)
-      }.map{
+      Dir.glob(files).map{
         |f| reader(f).strip
       }.map{
         |f| min ? JSMin.minify(f).gsub(/\n/, '').sub(/^ /, '') : f
