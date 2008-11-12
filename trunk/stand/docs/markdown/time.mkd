@@ -117,7 +117,9 @@ Date/Time Manipulation
 
 > #### `phpdate` | `phputc` ####
 >  
-> > **Description**: PHP date() formatting for local time.  
+> > **Description**: PHP `date()` formatting.  
+> >  
+> > **Note**: `phpdate` and `phputc` are English-only.
 > >  
 > > **Return**: `<String>`  
 > >  

@@ -64,6 +64,8 @@
  *
  *  phpdate | phputc -> PHP date() formatting.
  *
+ *    Note: phpdate and phputc are English-only.
+ *
  *    Syntax: Time.phpdate(format [, time])
  *
  *      format <String>: A string representing the date format.
