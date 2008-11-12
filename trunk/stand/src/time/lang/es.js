@@ -5,6 +5,6 @@
     month_abbr : [],
     month_full : ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
     week_abbr  : [],
-    week_full  : ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+    week_full  : ["Domingo", "Lunes", "Martes", "Mi\u00E9rcoles", "Jueves", "Viernes", "S\u00E1bado"],
     meridiem   : ['AM', 'PM', 'am', 'pm']
   };
