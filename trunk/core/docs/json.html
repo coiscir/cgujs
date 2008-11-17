@@ -1,0 +1,108 @@
+<hr />
+
+<h1>JSON</h1>
+
+<p>JSON Parsing and Writing</p>
+
+<hr />
+
+<h3>Properties</h3>
+
+<blockquote>
+  <h4><code>Version</code></h4>
+  
+  <blockquote>
+    <p>Formatting is based on the date built: <code>Y.MMDD</code> <br />
+    Where <code>Y</code> is the number of years since 2000.  </p>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Methods</h3>
+
+<blockquote>
+  <h4><code>from</code> | <code>parse</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Parse a JSON-formatted string.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Mixed&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>JSON.from(json [, options])</code> <br />
+    <strong>Syntax</strong>: <code>JSON.parse(json [, options])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>json</em></strong> <code>&lt;Mixed&gt;</code>: String to be parsed.  </p>
+      
+      <p><strong><em>options</em></strong> <code>&lt;Object&gt;</code>: (Optional)  </p>
+      
+      <blockquote>
+        <p><strong><em>errlen</em></strong> <code>&lt;Number&gt;</code>: Length of json string to grab with exceptions (default: 20).  </p>
+        
+        <p><strong><em>relax</em></strong> <code>&lt;Boolean&gt;</code>: Set all relax properties. <br />
+        <strong><em>relax</em></strong> <code>&lt;Object&gt;</code>: Allow parsing of more string elements.  </p>
+        
+        <blockquote>
+          <p><strong><em>date</em></strong> <code>&lt;Boolean&gt;</code>: Parse UTC date strings (format: <code>"####-##-##T##:##:##.###Z"</code>).  </p>
+          
+          <p><strong><em>keyword</em></strong> <code>&lt;Boolean&gt;</code>: Allow undefined keyword.  </p>
+          
+          <p><strong><em>number</em></strong> <code>&lt;Boolean&gt;</code>: Allow hexadecimal and octal numbers.  </p>
+          
+          <p><strong><em>objkey</em></strong> <code>&lt;Boolean&gt;</code>: Allow un-quoted object keys; limited to alpha, num, underscore and dollar.  </p>
+          
+          <p><strong><em>string</em></strong> <code>&lt;Boolean&gt;</code>: Allow single-quoted strings and hex encoding in strings (e.g., <code>"\x20"</code>).  </p>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>JSON.from(' "foobar" ');  //=&gt; 'foobar'</code> <br />
+      <code>JSON.parse('[ "foo" ]');  //=&gt; ['foo']</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>to</code> | <code>stringify</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Get a JSON-formatted string from an object.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>JSON.to(input [, options])</code> <br />
+    <strong>Syntax</strong>: <code>JSON.stringify(input [, options])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>input</em></strong> <code>&lt;Mixed&gt;</code>: Object being converted.  </p>
+      
+      <p><strong><em>options</em></strong> <code>&lt;Object&gt;</code>: (Optional)  </p>
+      
+      <blockquote>
+        <p><strong><em>allkey</em></strong> <code>&lt;Boolean&gt;</code>: Don't limit object keys to enumerables (i.e. <code>object.propertyIsEnumerable(prop)</code>)  </p>
+        
+        <p><strong><em>relax</em></strong> <code>&lt;Boolean&gt;</code>: Set all relax properties. <br />
+        <strong><em>relax</em></strong> <code>&lt;Object&gt;</code>: Allow parsing of more string elements.  </p>
+        
+        <blockquote>
+          <p><strong><em>date</em></strong> <code>&lt;Boolean&gt;</code>: Convert UTC dates to strings (format: <code>"####-##-##T##:##:##.###Z"</code>).  </p>
+          
+          <p><strong><em>keyword</em></strong> <code>&lt;Boolean&gt;</code>: Allow undefined keyword.  </p>
+        </blockquote>
+        
+        <p><strong><em>verify</em></strong> <code>&lt;Boolean&gt;</code>: Use JSON.from to verify string.  </p>
+      </blockquote>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>JSON.to('"foobar" ');  //=&gt; "\"foobar\" "</code> <br />
+      <code>JSON.stringify(null);  //=&gt; null</code>  </p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<hr />

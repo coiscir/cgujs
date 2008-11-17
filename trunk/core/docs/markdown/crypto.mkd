@@ -1,0 +1,166 @@
+----
+
+# Crypto #
+
+Cryptographic Hash and HMAC Algorithms
+
+----
+
+### Algorithms ###
+
+ * `MD4`
+ * `MD5`
+ * `SHA-1`
+ * `SHA-224`
+ * `SHA-256`
+ * `RIPEMD-128`
+ * `RIPEMD-160`
+
+----
+
+### Sequence Objects ###
+
+> Sequences are objects that enable multiple output formats of a hash.  
+
+> #### Formats (methods) ####
+> >  
+> > **_base16_** / **_hex_** `<String>`  
+> >  
+> > > Get the hash in base-16 (hexadecimal).  
+> > >  
+> > > `{0..9 a..f}: hex`  
+> > > `{0..9 A..F}: base16`  
+> >  
+> > **_base32_** / **_base32hex_** `<String>`  
+> >  
+> > > Get the hash in base-32.  
+> > >  
+> > > `{A..Z 2..7}: base32`  
+> > > `{0..9 a..v}: base32hex`  
+> >  
+> > **_base64_** / **_base64url_** `<String>`  
+> >  
+> > > Get the hash in base-64.  
+> > >  
+> > > `{A..Z a..z 0..9 + /}: base64`  
+> > > `{A..Z a..z 0..9 - _}: base64url`  
+> >  
+> > **_raw_** `<Array>`  
+> >  
+> > > Get the hash in a byte array.  
+> >  
+> > **_str_** `<String>`  
+> >  
+> > > Get the hash in a String of 8-bit characters.  
+
+> #### Methods ####
+>  
+> > **_valid_** `<Boolean>`  
+> >  
+> > > Verifies the Sequence was created properly.  
+
+> #### Overwritten Methods ####
+>  
+> > **_valueOf_**: _Same as **raw**_  
+>  
+> > **_toString_**: _Same as **hex**_  
+
+----
+
+### Properties ###
+
+> #### `Version` ####
+>  
+> > Formatting is based on the date built: `Y.MMDD`  
+> > Where `Y` is the number of years since 2000.  
+
+----
+
+### Methods ###
+
+> #### `algos` ####
+>  
+> > **Description**: Get a list of all available algorithm calls.  
+> >  
+> > **Return**: `<Array>`  
+> >  
+> > **Syntax**: `Crypto.algos(hmac)`  
+> >  
+> > > **_hmac_** `<Boolean>`: Limit the list to only algorithms with HMAC support. (In the current release, this should have no affect.)  
+> >  
+> > **Examples**:  
+> >  
+> > > `Crypto.algos();  //=> ['md4', 'md5', ...]`  
+
+> #### `hash` ####
+>  
+> > **Description**: Generate a hash from given input.  
+> >  
+> > **Return**: `<<Sequence>>`  
+> >  
+> > **Syntax**: `Crypto.hash(call, data [, options])`  
+> >  
+> > > **_call_** `<String>`: Name of the algorithm to use.  
+> > >  
+> > > **_data_** `<String>`: The data being hashed.  
+> > >  
+> > > **_options_** `<Object>`: (Optional)  
+> > >  
+> > > > **_key_** `<String>`: HMAC key. Leave this unset to hash without HMAC.  
+> > > >  
+> > > > **_unicode_** `<Boolean>`: Convert data from UTF-16 to UTF-8.  
+> >  
+> > **Examples**:  
+> >  
+> > > `Crypto.hash('md5', 'foo');`  
+> > > `Crypto.hash('sha256', 'foo');`  
+> > > `Crypto.hash('sha224', 'foo', {unicode: true}); //=> data becomes '\x00f\x00o\x00o'`  
+> > > `Crypto.hash('sha1', 'foo', {key: 'bar'}); //=> encrypts with HMAC key 'bar'`  
+
+> #### `methodize` ####
+>  
+> > **Description**: Add a String Prototype method for a specific algorithm.  
+> >  
+> > **Return**: `<Boolean>`  
+> >  
+> > **Syntax**: `Crypto.methodize(call)`  
+> >  
+> > > **_call_** `<String>`: The algorithm name to methodize.  
+> >  
+> > **Method**  
+> >  
+> > > **Return**: `<<Sequence>>`  
+> > >  
+> > > **Syntax**: `String::CALL([options])`  
+> > >  
+> > > > **_options_** `<Object>`: (Optional)  
+> > > >  
+> > > > > _Same as for Crypto.hash._  
+> >  
+> > **Examples**:  
+> >  
+> > > `Crypto.methodize('md5'); //=> true`  
+> > > `'Lorem ipsum ...'.md5(); //=> <<Sequence>>`  
+> > > `Crypto.methodize('sha224'); //=> true`  
+> > > `'Lorem ipsum ...'.sha224(); //=> <<Sequence>>`  
+
+> #### `search` ####
+>  
+> > **Description**: Verify an algorithm is available.  
+> >  
+> > **Return**: `<Boolean>`  
+> >  
+> > **Syntax**: `Crypto.search(call [, hmac])`  
+> >  
+> > > **_call_** `<String>`: The algorithm name to search for.  
+> > >  
+> > > **_hmac_** `<Boolean>`: Limit the search to only algorithms with HMAC support. (In the current release, this should have no affect.)  
+> >  
+> > **Examples**:  
+> >  
+> > > `Crypto.search('md2');  //=> false`  
+> > > `Crypto.search('md5');  //=> true`  
+> > > `Crypto.search('sha512');  //=> false`  
+> > > `Crypto.search('ripemd160');  //=> true`  
+
+----
