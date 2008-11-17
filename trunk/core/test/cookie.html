@@ -1,0 +1,71 @@
+<html>
+<head>
+  <title>Cookie - Showcase</title>
+</head>
+<body>
+
+<script src="../lib/cgu.js"></script>
+<script type="text/javascript">
+String.prototype.trim=function(){return String(this).replace(/^\s+|\s+$/g, '');};
+Array.prototype.filter=function(){for(var i=this.length-1;i>=0;i-=1)if(!this[i]&&this[i]!==false)this.splice(i,1);return this;};
+</script>
+<script type="text/javascript">
+if (!(window.CGU && window.CGU.Version && CGU.create('Cookie'))) {
+
+document.writeln("Cookie doesn't exist. Build with Ruby/Rake.");
+
+} else {
+
+CGU.create('JSON');
+
+document.write('<pre style="font-size:11px;">');
+
+document.writeln('================================================================================');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ HTTP Cookies ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~ CGU Stand-Alone Cookie ~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('================================================================================');
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('================================================== READ, WRITE, EXPIRE, TOOBJECT');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('write("TZ", ...)     //=> ', Cookie.write('TZ', ((new Date()).getTimezoneOffset() * 60)), '  // session');
+document.writeln('write("foo", ...)    //=> ', Cookie.write('foo', 'bar', {duration : 2}),                  '  // 2 days (see source)');
+document.writeln('write("+-?", ...)    //=> ', Cookie.write('+-?', 'demo', {duration : 2}),                 '  // 2 days (see source)');
+document.writeln('write(" ", "space")  //=> ', Cookie.write(' ', 'space'));
+document.writeln('write("und")         //=> ', Cookie.write('und'),  '  // uses String equivalent');
+document.writeln('write()              //=> ', Cookie.write(),       '  // even for key (name)');
+document.writeln('write("", "")        //=> ', Cookie.write('', ''), '  // only invalid value is an empty string');
+document.writeln('');
+document.writeln('toObject  //=> ', JSON.to(Cookie.toObject()).replace(/(^\{(?!\})|",)/g, '$1\n                 ').replace(/(\}$)/g, '\n               $1'));
+document.writeln('');
+document.writeln('read("TZ")     //=> ', Cookie.read('TZ'));
+document.writeln('read("foo")    //=> ', Cookie.read('foo'));
+document.writeln('read("+-?")    //=> ', Cookie.read('+-?'));
+document.writeln('read(" ")      //=> ', Cookie.read(' '));
+document.writeln('read("und")    //=> ', Cookie.read('und'));
+document.writeln('read()         //=> ', Cookie.read());
+document.writeln('read("")       //=> ', Cookie.read(''));
+document.writeln('read("unset")  //=> ', Cookie.read('unset'));
+document.writeln('');
+document.writeln('expire("TZ")   //=> ', Cookie.expire('TZ'));
+document.writeln('expire("foo")  //=> ', Cookie.expire('foo'));
+document.writeln('expire("+-?")  //=> ', Cookie.expire('+-?'));
+document.writeln('expire(" ")    //=> ', Cookie.expire(' '));
+document.writeln('expire("und")  //=> ', Cookie.expire('und'));
+document.writeln('expire()       //=> ', Cookie.expire());
+document.writeln('expire("")     //=> ', Cookie.expire(''));
+document.writeln('');
+document.writeln('toObject  //=> ', JSON.to(Cookie.toObject()).replace(/(^\{(?!\})|",)/g, '$1\n                 ').replace(/(\}$)/g, '\n               $1'));
+document.writeln('');
+
+document.write('</pre>');
+
+}
+</script>
+
+</body>
+</html>
