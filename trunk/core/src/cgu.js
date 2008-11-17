@@ -12,6 +12,11 @@ var CGU = new (function () {
   
   var CGUS = {};
   
+  this.extern = function (name) {
+    if (!CGUS.propertyIsEnumerable(name)) return null;
+    return CGUS[name];
+  };
+  
   this.create = function (name) {
     if (!CGUS.propertyIsEnumerable(name)) return null;
     return !!(window[name] = CGUS[name]);
@@ -23,7 +28,11 @@ var CGU = new (function () {
         return false;
     return true;
   };
-  
+
+
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  CGU :: Utilities
+**/
 <%= req INCS.keys.sort %>
 
 })();

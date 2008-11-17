@@ -45,7 +45,7 @@
   <div><label for="wkey" style="cursor: pointer"><input id="wkey" type="checkbox" onchange="calculate()">Use HMAC</label></div>
   <div><textarea id="hmac" style="width: 600px; height: 150px;" onkeyup="calculate();" onchange="calculate()"></textarea>
 
-<script src="../lib/crypto.js"></script>
+<script src="../lib/cgu.js"></script>
 <script type="text/javascript">
 var hash, calc, algo, code, text, wkey, hmac, ready = false;
 
@@ -57,7 +57,7 @@ window.onload = function () {
   wkey = document.getElementById('wkey');
   hmac = document.getElementById('hmac');
   
-  ready = !!(window.Crypto && window.Crypto.Version && hash && algo && code && text && wkey && hmac);
+  ready = !!(window.CGU && window.CGU.Version && CGU.create('Crypto') && hash && algo && code && text && wkey && hmac);
   if (!ready) alert('Error loading form!');
   else algo.focus();
   

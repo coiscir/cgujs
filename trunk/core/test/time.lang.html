@@ -19,14 +19,14 @@
   <div><b><u>Result</u></b></div>
   <div><textarea id="disp" style="width: 750px; height: 350px;" readonly></textarea></div>
 
-<script src="../lib/time.js"></script>
+<script src="../lib/cgu.js"></script>
 <script type="text/javascript">
 var format = function () {
   var disp = document.getElementById('disp');
   var lang = document.getElementById('lang');
   var utc  = document.getElementById('utc').checked;
   
-  if (!(window.Time && window.Time.Version)) {
+  if (!(window.CGU && window.CGU.Version)) {
     disp.innerHTML = "Time doesn't exist. Build with Ruby/Rake.";
   } else {
     Time.langSet(lang.value);
@@ -58,7 +58,7 @@ var format = function () {
 };
 
 window.onload = function () {
-  if (!(window.Time && window.Time.Version)) {
+  if (!(window.CGU && window.CGU.Version && CGU.create('Time'))) {
     alert("Time doesn't exist. Build with Ruby/Rake.");
   } else {
     document.getElementById('lang').value = Time.lang();
