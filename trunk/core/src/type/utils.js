@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Type :: Utils
+ *  CGU :: Type :: Utils
 **/
   this.get = function (object) {
     switch (typeof object) {

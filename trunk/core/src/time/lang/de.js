@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Time :: Language :: DE (German, Deutsch)
+ *  CGU :: Time :: Language :: DE (German, Deutsch)
 **/
   _lang.de = { // source => http://wiki.meebo.com/doku.php?id=translation_german (350-368)
     month_abbr : [],

@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Query :: Conversion
+ *  CGU :: Query :: Conversion
 **/
   this.toObject = function (key) {
     var object = {}, k, v;

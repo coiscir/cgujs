@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Crypto
+ *  CGU :: Crypto
  *    Cryptographic Hash and HMAC Algorithms
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * MD4 (c) 1990 R. Rivest                                             [RFC 1320]
@@ -88,7 +88,7 @@
 **/
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Crypto :: Sequence
+ *  CGU :: Crypto :: Sequence
  *
  *    An object that enables various output types for a hash.
  *
@@ -142,7 +142,7 @@ var Crypto = CGUS.Crypto = new (function () {
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Cookie :: Utils
+ *  CGU :: Cookie :: Utils
 **/
 <%= inc 2, true, 'crypto.utils.conv.js' %>
 
@@ -150,7 +150,7 @@ var Crypto = CGUS.Crypto = new (function () {
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Cookie :: Algorithms
+ *  CGU :: Cookie :: Algorithms
 **/
 <%= inc 2, true, 'hash.md4.js', 'hash.md5.js' %>
 

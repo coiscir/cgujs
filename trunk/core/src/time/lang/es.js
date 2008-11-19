@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Time :: Language :: ES (Spanish, Español)
+ *  CGU :: Time :: Language :: ES (Spanish, Español)
 **/
   _lang.es = { // source => http://wiki.meebo.com/doku.php?id=translation_spanish (350-368)
     month_abbr : [],

@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: JSON :: FROM
+ *  CGU :: JSON :: FROM
 **/
   this.from = this.parse = function (json, options) {
     json = Type.limit(json, String) || '';

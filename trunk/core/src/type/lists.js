@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Type :: Lists
+ *  CGU :: Type :: Lists
 **/
   this.isof = function () {
     var args = [], argc = arguments.length, argi;

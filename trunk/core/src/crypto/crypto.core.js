@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Crypto :: Core
+ *  CGU :: Crypto :: Core
 **/
   var ftoi  = function (num)  { return num - (num % 1); };
   var ready = function (call) { return call.replace(/^\s+|\s+$/g, '').toLowerCase(); };

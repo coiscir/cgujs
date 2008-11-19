@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Time :: POSIX {WIP}
+ *  CGU :: Time :: POSIX {WIP}
 **/
 // private
   var strflocale = function (utc) {

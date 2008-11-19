@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: JSON :: TO
+ *  CGU :: JSON :: TO
 **/
   this.to = this.stringify = function (input, options) {
     options = (function (o) { return {

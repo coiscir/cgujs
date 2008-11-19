@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Time :: Shared
+ *  CGU :: Time :: Shared
 **/
   var _abs = this.abs = function (yr, mn, dy, hr, mi, sc, ms) {
     var date = new Date(0);

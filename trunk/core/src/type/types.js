@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Type :: Types
+ *  CGU :: Type :: Types
 **/
   var UND = 'undefined', NUL = 'null',
       ARR = 'array',     BLN = 'boolean',

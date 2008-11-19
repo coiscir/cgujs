@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Crypto :: Sequence
+ *  CGU :: Crypto :: Sequence
 **/
   var Sequence = function (param) {
     // enable new operator shortcut

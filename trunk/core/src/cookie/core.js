@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Cookie :: Core
+ *  CGU :: Cookie :: Core
 **/
   this.read = function (key) {
     key = String(key);

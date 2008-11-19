@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Crypto :: Utils :: FILO
+ *  CGU :: Crypto :: Utils :: FILO
 **/
   ////////////
   // First In, Last Out

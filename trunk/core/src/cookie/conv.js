@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU-Stand :: Cookie :: Conversion
+ *  CGU :: Cookie :: Conversion
 **/
   this.toObject = function () {
     var object = {}, k, v;
