@@ -22,17 +22,40 @@
 <h3>Methods</h3>
 
 <blockquote>
+  <h4><code>param</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Convert an object's properties to a query-string.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Query.param(object [, all])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>object</em></strong> <code>&lt;Object&gt;</code>: Object to parameterize.  </p>
+      
+      <p><strong><em>all</em></strong> <code>&lt;Boolean&gt;</code>: Include inherited properties. Default is false.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Query.param({foo: 'bar', red: 'blah', l: 'Lorem ipsum.'});  //=&gt; foo=bar&amp;red=blah&amp;l=Lorem+ipsum.</code> <br />
+      <code>Query.param({nil: {foo: 'bar', red: 'blah'}, foo: 'bar'});  //=&gt; foo=bar&amp;red=blah&amp;foo=bar</code>  </p>
+    </blockquote>
+  </blockquote>
+  
   <h4><code>read</code></h4>
   
   <blockquote>
-    <p><strong>Description</strong>: Get all values for a specified name (key).  </p>
+    <p><strong>Description</strong>: Get all values for a key from the current query-string.  </p>
     
     <p><strong>Return</strong>: <code>&lt;Array&gt;</code>  </p>
     
     <p><strong>Syntax</strong>: <code>Query.read(key)</code>  </p>
     
     <blockquote>
-      <p><strong><em>key</em></strong> <code>&lt;Mixed&gt;</code>: Name of the query-string variable. Any non-String keys will first be casted to String.  </p>
+      <p><strong><em>key</em></strong> <code>&lt;Mixed&gt;</code>: Name of the query-string variable.  </p>
     </blockquote>
     
     <p><strong>Examples</strong>: (<em>Scenario</em>: <code>'?foo=bar&amp;xyz=1&amp;xyz=2'</code>)  </p>
@@ -40,6 +63,27 @@
     <blockquote>
       <p><code>Query.read('foo');  //=&gt; ['bar']</code> <br />
       <code>Query.read('xyz');  //=&gt; ['1', '2']</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>serialize</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Parameterize a Form's elements.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Query.serialize(form)</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>form</em></strong> <code>&lt;Object&gt;</code>: Either a Form DOM object or elements list.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Query.serialize(form);</code> <br />
+      <code>Query.serialize(form.elements);</code>  </p>
     </blockquote>
   </blockquote>
   

@@ -17,20 +17,52 @@ Read HTTP GET Variables
 
 ### Methods ###
 
+> #### `param` ####
+>  
+> > **Description**: Convert an object's properties to a query-string.  
+> >  
+> > **Return**: `<String>`  
+> >  
+> > **Syntax**: `Query.param(object [, all])`  
+> >  
+> > > **_object_** `<Object>`: Object to parameterize.  
+> > >  
+> > > **_all_** `<Boolean>`: Include inherited properties. Default is false.  
+> >  
+> > **Examples**:  
+> >  
+> > > `Query.param({foo: 'bar', red: 'blah', l: 'Lorem ipsum.'});  //=> foo=bar&red=blah&l=Lorem+ipsum.`  
+> > > `Query.param({nil: {foo: 'bar', red: 'blah'}, foo: 'bar'});  //=> foo=bar&red=blah&foo=bar`  
+
 > #### `read` ####
 >  
-> > **Description**: Get all values for a specified name (key).  
+> > **Description**: Get all values for a key from the current query-string.  
 > >  
 > > **Return**: `<Array>`  
 > >  
 > > **Syntax**: `Query.read(key)`  
 > >  
-> > > **_key_** `<Mixed>`: Name of the query-string variable. Any non-String keys will first be casted to String.  
+> > > **_key_** `<Mixed>`: Name of the query-string variable.  
 > >  
 > > **Examples**: (_Scenario_: `'?foo=bar&xyz=1&xyz=2'`)  
 > >  
 > > > `Query.read('foo');  //=> ['bar']`  
 > > > `Query.read('xyz');  //=> ['1', '2']`  
+
+> #### `serialize` ####
+>  
+> > **Description**: Parameterize a Form's elements.  
+> >  
+> > **Return**: `<String>`  
+> >  
+> > **Syntax**: `Query.serialize(form)`  
+> >  
+> > > **_form_** `<Object>`: Either a Form DOM object or elements list.  
+> >  
+> > **Examples**:  
+> >  
+> > > `Query.serialize(form);`  
+> > > `Query.serialize(form.elements);`  
 
 > #### `toObject` ####
 >  

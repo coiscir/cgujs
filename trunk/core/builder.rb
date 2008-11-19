@@ -98,7 +98,7 @@ module Builder
       Dir.glob(files.flatten).map{
         |f| reader(f).strip
       }.map{
-        |f| min ? JSMin.minify(f).gsub(/\n/, '').sub(/^ /, '') : f
+        |f| min ? JSMin.minify(f).gsub(/\s*\n\s*/, ' ').sub(/^ /, '') : f
       }.map{
         |f| f.gsub(/^/, (' ' * pad))
       }.join($/+(min ? '' : $/))
@@ -117,7 +117,7 @@ module Builder
       }.map{
         |p| Builder.start(p, @step)
       }.map{
-        |p| (min ? JSMin.minify(p).gsub(/\n/, '') : p.strip).sub(/^ +/, '')
+        |p| (min ? JSMin.minify(p).gsub(/\s*\n\s*/, ' ') : p.strip).sub(/^ +/, '')
       }.map{
         |p| p.gsub(/^/, (' ' * pad))
       }.join($/+(min ? '' : $/))
