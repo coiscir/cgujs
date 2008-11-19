@@ -16,18 +16,18 @@
     if (Type.is_a(object, 'object'))
       for (var p in object)
         if (all || object.propertyIsEnumerable(p))
-          if (!Type.isof(object[p], undefined, Error, Function, RegExp))
-            if (Type.is_a(object[p], 'object'))
-              serial.push(_param(object[p], all));
-            else if (Type.is_a(object[p], null)) // avoid "null" toString
-              append(p, '');
-            else if (Type.is_a(object[p], Array))
+          switch (Type.get(object[p])) {
+            case 'undefined':
+            case 'error'    :
+            case 'function' :
+            case 'regexp'   : break;
+            case 'array':
               for (i = 0; i < object[p].length; i += 1)
                 append(p, object[p][i]);
-            else if (Type.is_a(object[p], Date))
-              append(p, Time.strfutc('%FT%T.%NZ', object[p]));
-            else
-              append(p, object[p]);
+              break;
+            case 'date': append(p, Time.strfutc('%FT%T.%NZ', object[p])); break;
+            default: append(p, object[p]); break;
+          }
     
     return serial.join('&').replace(/%20/, '+');
   };
@@ -57,7 +57,7 @@
           default: add(fe[i].name, fe[i].value); break;
         }
     
-    return this.param(elems);
+    return _param(elems);
   };
 
   this.toObject = function (key) {
