@@ -6,7 +6,7 @@
 
 <script src="../lib/cgu.js"></script>
 <script type="text/javascript">
-if (!(window.CGU && window.CGU.Version && CGU.createAll())) {
+if (!(window.CGU && window.CGU.Version)) {
 
 document.writeln("Query doesn't exist. Build with Ruby/Rake.");
 
@@ -20,7 +20,23 @@ document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Common & General Use ~~~~~~~~~~~
 document.writeln('================================================================================');
 document.writeln('');
 
-document.writeln('Version : ', CGU.Version);
+document.writeln('Version: ', CGU.Version);
+document.writeln('');
+
+document.writeln('Utilities:');
+document.writeln('  ', CGU.list().sort().join('\n  '));
+document.writeln('');
+
+document.writeln('Create:');
+var utils = CGU.list().sort();
+for (var i = 0; i < utils.length; i += 1) {
+  document.writeln('  ', CGU.create(utils[i]), ' (', utils[i], ')');
+}
+document.writeln('');
+
+document.writeln('Extern: Crypto as Digest');
+document.writeln('  ', 'Digest = ', Digest = CGU.extern('Crypto'));
+document.writeln('  ', Digest.hash('md4', 'abc').hex());
 document.writeln('');
 
 document.writeln('');

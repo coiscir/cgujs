@@ -19,20 +19,30 @@ var CGU = new (function () {
   
   this.create = function (name) {
     if (!CGUS.propertyIsEnumerable(name)) return null;
-    return !!(window[name] = CGUS[name]);
+    return !!eval(name + ' = CGU.extern(' + CGUS.JSON.to(String(name)) + ')');
   };
   
   this.createAll = function () {
-    for (var prop in CGUS)
-      if (this.create(prop) === false)
+    for (var util in CGUS)
+      if (this.create(util) === false)
         return false;
     return true;
+  };
+  
+  this.list = function () {
+    var utils = [];
+    for (var util in CGUS)
+      if (CGUS.propertyIsEnumerable(util))
+        utils.push(util);
+    return utils;
   };
 
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU :: Utilities
 **/
-<%= req INCS.keys.sort %>
+(function(){ // avoid `create` interference
+<%= req 2, INCS.keys.sort %>
+})();
 
 })();
