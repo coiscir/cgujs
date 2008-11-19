@@ -107,8 +107,11 @@ document.writeln('==============================================================
 document.writeln('--------------------------------------------------------------------------------');
 document.writeln('');
 
+var form = document.getElementById('form');
 document.writeln('serialize(form)           //=> ', Query.serialize(form));
 document.writeln('serialize(form.elements)  //=> ', Query.serialize(form.elements));
+document.writeln('');
+document.writeln(' // see source for form HTML');
 document.writeln('');
 
 document.write('</pre>');
