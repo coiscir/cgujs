@@ -24,6 +24,7 @@
               break;
             case 'object':
               serial.push(_param(object[p], all));
+              break;
             case 'array':
               for (i = 0; i < object[p].length; i += 1)
                 append(p, object[p][i]);
