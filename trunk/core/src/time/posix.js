@@ -63,9 +63,9 @@
     for (var i = 0; i < format.length; i += 1) {
       if (format[i] == '%') {
         switch (format[(i += 1)]) {
-          case 'a': buffer += lang.week_abbr[base.w] || lang.week_full[base.w].substr(0, 3); break;
+          case 'a': buffer += lang.week_full[base.w].substr(0, 3); break;
           case 'A': buffer += lang.week_full[base.w]; break;
-          case 'b': buffer += lang.month_abbr[base.m] || lang.month_full[base.w].substr(0, 3); break;
+          case 'b': buffer += lang.month_full[base.m].substr(0, 3); break;
           case 'B': buffer += lang.month_full[base.m]; break;
           case 'c': buffer += strf(locale.c, base); break;
           case 'C': buffer += padnum(2, ftoi(base.y / 100)); break;

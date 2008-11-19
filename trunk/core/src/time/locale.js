@@ -49,7 +49,6 @@
   var _locale = {
     local : {},
     utc : {
-      c: '%www, %dd %mmm %yyyy %HHHH:%MM:%SS %z',
       x: '%yyyy-%mm-%dd',
       X: '%HHHH:%MM:%SS'
     }
@@ -91,22 +90,23 @@
     var re_ordinal    = new RegExp((ordinal   ).join('|'), 'gi');
     
     var conv = function (stage) {
-      var f;
+      var f, z;
       switch (stage) {
-        case 'c' : f = 'toLocaleString';     break;
-        case 'x' : f = 'toLocaleDateString'; break;
-        case 'X' : f = 'toLocaleTimeString'; break;
-        default  : f = 'toString';           break;
+        case 'c' : f = 'toLocaleString';     z = false; break;
+        case 'u' : f = 'toUTCString';        z = true;  break;
+        case 'x' : f = 'toLocaleDateString'; z = false; break;
+        case 'X' : f = 'toLocaleTimeString'; z = false; break;
+        default  : f = 'toString';           z = false; break;
       }
       
       // 0 or space padding
-      var mnZr = (/09/).test(new Date(_abs(0, 8))[f]());
-      var dyZr = (/09/).test(new Date(_abs(0, 0, 9))[f]());
-      var hrZr = (/09/).test(new Date(_abs(0, 0, 0, 9))[f]());
-      var miZr = (/09/).test(new Date(_abs(0, 0, 0, 0, 9))[f]());
-      var scZr = (/09/).test(new Date(_abs(0, 0, 0, 0, 0, 9))[f]());
+      var mnZr = (/09/).test(new Date((z?_utc:_abs)(0, 8))[f]());
+      var dyZr = (/09/).test(new Date((z?_utc:_abs)(0, 0, 9))[f]());
+      var hrZr = (/09/).test(new Date((z?_utc:_abs)(0, 0, 0, 9))[f]());
+      var miZr = (/09/).test(new Date((z?_utc:_abs)(0, 0, 0, 0, 9))[f]());
+      var scZr = (/09/).test(new Date((z?_utc:_abs)(0, 0, 0, 0, 0, 9))[f]());
       
-      return new Date(_abs(2000, 11, 31, 23, 30, 59, 999))[f]().
+      return new Date((z?_utc:_abs)(2000, 11, 31, 23, 30, 59, 999))[f]().
       // character replacements
         replace(/%/g, '%%').
       // grouping replacements
@@ -147,6 +147,8 @@
     _locale.local.c = conv('c') || '';
     _locale.local.x = conv('x') || '';
     _locale.local.X = conv('X') || '';
+    
+    _locale.utc.c = conv('u') || '';
     
     // for testing timezone encoding
     //_locale.local.$ = conv() || '';
