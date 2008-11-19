@@ -100,6 +100,8 @@ document.writeln("param({foo: 'bar', red: 'blah', l: 'Lorem ipsum.'})          /
 document.writeln("param({nil: {foo: 'bar', red: 'blah'}, foo: 'bar'})          //=> ", Query.param({nil: {foo: 'bar', red: 'blah'}, foo: 'bar'}));
 document.writeln("param({foo: function(){}, bar: /pattern/, red: new Date()})  //=> ", Query.param({foo: function(){}, bar: /pattern/, red: new Date()}));
 document.writeln('');
+document.writeln("param([123, 234, 345, 456, 567, 678, 789])  //=> ", Query.param([123, 234, 345, 456, 567, 678, 789]));
+document.writeln('');
 
 document.writeln('');
 document.writeln('--------------------------------------------------------------------------------');

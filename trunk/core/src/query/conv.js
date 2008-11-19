@@ -9,11 +9,10 @@
       serial.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
     };
     
-    if (Type.is_a(object, Array))
+    if (Type.is_a(object, Array) && object._seralized === true)
       for (i = 0; i < object.length; i += 1)
         append(object[i].name, object[i].value);
-    
-    if (Type.is_a(object, 'object'))
+    else
       for (var p in object)
         if (all || object.propertyIsEnumerable(p))
           switch (Type.get(object[p])) {
@@ -65,6 +64,7 @@
           default: add(fe[i].name, fe[i].value); break;
         }
     
+    elems._seralized = true;
     return _param(elems);
   };
 
