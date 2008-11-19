@@ -18,15 +18,22 @@
         if (all || object.propertyIsEnumerable(p))
           switch (Type.get(object[p])) {
             case 'undefined':
-            case 'error'    :
-            case 'function' :
-            case 'regexp'   : break;
+            case 'error':
+            case 'function':
+            case 'regexp':
+              break;
+            case 'object':
+              serial.push(_param(object[p], all));
             case 'array':
               for (i = 0; i < object[p].length; i += 1)
                 append(p, object[p][i]);
               break;
-            case 'date': append(p, Time.strfutc('%FT%T.%NZ', object[p])); break;
-            default: append(p, object[p]); break;
+            case 'date':
+              append(p, Time.strfutc('%FT%T.%NZ', object[p]));
+              break;
+            default:
+              append(p, object[p]);
+              break;
           }
     
     return serial.join('&').replace(/%20/, '+');
