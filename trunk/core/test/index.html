@@ -51,12 +51,14 @@ document.writeln('--------------------------------------------------------------
 document.writeln('');
 
 test = function (method, name, value, options, expected) {
-  var pass = (expected === Cookie[method](name, value, options));
+  var result = Cookie[method](name, value, options);
+  var pass = (expected === result);
   var report = (pass ? '+' : '-') + ' ';
   report += display(true, name);
   report += value !== null ? ' as ' + display(true, value) : '';
   report += options ? ' with ' + display(true, options, {relax: true}) : '';
   report += ' should be ' + display(true, expected);
+  report += !pass ? ' {got ' + display(true, result) + '}' : '';
   return report;
 };
 
@@ -86,11 +88,13 @@ document.writeln('');
 
 test = function (algo, algodisp, data, out, key, keydisp, expected) {
   var opts = key ? {key: key} : {};
-  var pass = (expected === Crypto.hash(algo, data, opts)[out]());
+  var result = Crypto.hash(algo, data, opts)[out]();
+  var pass = (expected === result);
   var report = (pass ? '+' : '-') + ' ';
   report += display(false, algodisp) + ' of ' + display(true, data)
   report += key ? ' with ' + (keydisp ? display(false, keydisp) : display(true, key)) : '';
   report += ' should be ' + display(false, expected);
+  report += !pass ? ' {got ' + display(true, result) + '}' : '';
   return report;
 };
 
