@@ -43,7 +43,7 @@ var CGU = new (function () {
  *  CGU :: Utilities
 **/
 (function(){ // avoid `create` interference
-<%= req 2, INCS.keys.sort %>
+<%= inc 2, true, INCS.keys.sort.map{|i| INCS[i]} %>
 })();
 
 })();

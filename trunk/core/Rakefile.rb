@@ -7,7 +7,7 @@ ROOT = File.expand_path(File.dirname(__FILE__))
 LIBS = File.join(ROOT, 'lib')
 SRCS = File.join(ROOT, 'src')
 
-GLOB = {
+MAIN = {
   'cgu' => File.join(SRCS, 'cgu.js')
 }
 INCS = {
@@ -18,7 +18,7 @@ INCS = {
   'json'   => File.join(SRCS, 'json', 'anchor.js'),
   'time'   => File.join(SRCS, 'time', 'anchor.js')
 };
-DIRS = GLOB.keys.sort
+DIRS = MAIN.keys.sort
 
 Dir.chdir(ROOT) do
   require 'builder'
@@ -50,12 +50,12 @@ end
 ################################################################################
 # Setup
 ####
-GLOB.each_pair do |name, anch|
+MAIN.each_pair do |name, anch|
   Builder.register(name, anch)
 end
-INCS.each_pair do |name, anch|
-  Builder.register(name, anch)
-end
+#INCS.each_pair do |name, anch|
+#  Builder.register(name, anch)
+#end
 
 ################################################################################
 # Tasks

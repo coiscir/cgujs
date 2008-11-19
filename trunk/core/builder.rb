@@ -94,7 +94,7 @@ module Builder
     
     def inc(*files)
       pad = files.first.is_a?(Numeric) ? files.shift : 0
-      min = files.first == true ? files.shift : false
+      min = files.first == true || files.first == false ? files.shift : false
       Dir.glob(files.flatten).map{
         |f| reader(f).strip
       }.map{
@@ -111,7 +111,7 @@ module Builder
       end
       
       pad = pkgs.first.is_a?(Numeric) ? pkgs.shift : 0
-      min = pkgs.first == false ? pkgs.shift : true
+      min = pkgs.first == true || pkgs.first == false ? pkgs.shift : true
       pkgs.flatten.reject{
         |p| !Builder.registered?(p) || @pkgs.include?(p)
       }.map{
@@ -135,7 +135,9 @@ module Builder
     
     def reader(file)
       @save_reqs = true
-      parse(IO.readlines(file).to_s)
+      Dir.chdir(File.split(file)[0]) do
+        parse(IO.readlines(File.split(file)[1]).to_s)
+      end
     end
     
     def final
