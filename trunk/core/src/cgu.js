@@ -37,6 +37,7 @@ var CGU = new (function () {
     return utils;
   };
 
+<%= inc 'shared.js' %>
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU :: Utilities

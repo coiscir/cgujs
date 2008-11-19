@@ -73,8 +73,6 @@
 
 var JSON = CGUS.JSON = new (function () {
   
-  var padnum = function (l, n) { n=String(n); while(n.length<l) n='0'+n; return n; };
-  
 <%= inc 'from.js', 'to.js' %>
 
 })();

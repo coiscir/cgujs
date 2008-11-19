@@ -1,11 +1,10 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU :: Crypto :: Core
 **/
-  var ftoi  = function (num)  { return num - (num % 1); };
+  var Algos = {};
+  
   var ready = function (call) { return call.replace(/^\s+|\s+$/g, '').toLowerCase(); };
   var valid = function (call) { return (/^[\$\_a-z][\$\_a-z0-9]*$/i).test(call); };
-  
-  var Algos = {};
   
   this.algos = function (hmac) {
     hmac = Type.limit(hmac, Boolean) || false;
