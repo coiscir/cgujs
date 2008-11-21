@@ -1,0 +1,90 @@
+require 'rake'
+
+################################################################################
+# Prepare
+####
+ROOT = File.expand_path(File.dirname(__FILE__))
+LIBS = File.join(ROOT, 'lib')
+SRCS = File.join(ROOT, 'src')
+
+FINAL = File.join(LIBS, 'cgu.js')
+START = File.join(SRCS, 'cgu.js')
+
+INCS = [
+  'type.js',
+  'query.js',
+  'cookie.js'
+].sort
+
+Dir.chdir(ROOT) do
+  require 'builder'
+end
+
+################################################################################
+# Versions
+####
+TIME = Time.now.utc
+
+def version
+  sprintf("%.04f", TIME.strftime("%y.%m%d").to_f)
+end
+
+################################################################################
+# Tasks
+####
+task :default => :build
+
+task :b  => :build
+task :r  => :remove
+task :rm => :remove
+task :s  => :status
+task :st => :status
+task :h  => :help
+
+desc "Build CGU Library Script"
+task :build do
+  print $/ + '== Build' + ' :: ' + TIME.strftime('%Y-%m-%d') + ' :: ' + version.to_s + $/
+  File.open(FINAL, 'w+') do |lib|
+    lib << Builder.build(START)
+  end
+  print ' + ' + File.basename(FINAL) + $/ if File.exists?(FINAL)
+end
+
+desc "Delete CGU Library Script"
+task :remove do
+  print $/ + '== Remove' + $/
+  print ' - ' + File.basename(FINAL) + $/ if File.exists?(FINAL) && File.delete(FINAL) > 0
+end
+
+desc "Check build status"
+task :status do
+  print $/ + '== Status' + $/
+  print ' ' + (File.exists?(FINAL) ? '+' : '-') + ' ' + File.basename(FINAL) + $/
+end
+
+desc "Display Rake Task Infomation"
+task :help do
+  print $/ + '== Help' + $/
+  print [
+    "Tasks:",
+    "  build  (b)",
+    "  clean  (c)",
+    "  status (s)",
+    "  help   (h)"
+  ].join($/) + $/
+end
+
+################################################################################
+# Monkey Patch
+####
+module Rake
+  class Task
+    def disable
+      @already_invoked = true
+    end
+    
+    def enable
+      @already_invoked = false
+    end
+  end
+end
