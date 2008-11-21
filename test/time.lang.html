@@ -1,0 +1,70 @@
+<html>
+<head>
+  <title>Time - Languages</title>
+</head>
+<body>
+
+  <div><b><u>Language</u></b></div>
+  <div>
+    <select id="lang" onchange="format()">
+      <option value="de">de - Deutsch (German)</option>
+      <option value="en">en - English</option>
+      <option value="es">es - Español (Spanish)</option>
+    </select>
+  </div>
+  <div><label for="utc" style="cursor: pointer"><input id="utc" type="checkbox" onchange="format()">UTC</label></div>
+
+  <div>&nbsp;</div>
+  
+  <div><b><u>Result</u></b></div>
+  <div><textarea id="disp" style="width: 750px; height: 350px;" readonly></textarea></div>
+
+<script src="../lib/time.js"></script>
+<script type="text/javascript">
+var format = function () {
+  var disp = document.getElementById('disp');
+  var lang = document.getElementById('lang');
+  var utc  = document.getElementById('utc').checked;
+  
+  if (!(window.Time && window.Time.Version)) {
+    disp.innerHTML = "Time doesn't exist. Build with Ruby/Rake.";
+  } else {
+    Time.langSet(lang.value);
+    
+    disp.innerHTML = Time[utc ? 'strfutc' : 'strftime']([
+      'Weekday       : %A ~ %a ~ %u (0-6) ~ %w (1-7)',
+      'Month         : %B ~ %b ~ %m',
+      'Day           : %d ~ %e',
+      'Year          : %C ~ %y ~ %Y',
+      '',
+      'Hour          : %H (00-23) ~ %k (0-23) ~ %I (01-12) ~ %l (1-12) ~ %p ~ %P',
+      'Minute        : %M',
+      'Second        : %S ~ %s',
+      'Millisecond   : %N',
+      'Timezone      : %z',
+      '',
+      'Day of Year   : %j',
+      'Week Number   : %U (Sun-Sat) ~ %W (Mon-Sun)',
+      '',
+      'ISO-8601 Year : %g ~ %G',
+      'ISO-8601 Week : %V',
+      '',
+      'Date          : %D ~ %F ~ %v',
+      'Time          : %r ~ %R ~ %T',
+      'Locale        : %c',
+      '              : %x ~ %X'
+    ].join("%n"));
+  }
+};
+
+window.onload = function () {
+  if (!(window.Time && window.Time.Version)) {
+    alert("Time doesn't exist. Build with Ruby/Rake.");
+  } else {
+    document.getElementById('lang').value = Time.lang();
+    format();
+  }
+};
+</script>
+</body>
+</html>
