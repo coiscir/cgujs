@@ -1,0 +1,171 @@
+<html>
+<head>
+  <title>CGU - Test Cases</title>
+</head>
+<body>
+
+<script src="../lib/cgu.js"></script>
+<script type="text/javascript">
+if (!(window.CGU && window.CGU.Version)) {
+
+document.writeln("CGU doesn't exist. Build with Ruby/Rake.");
+
+} else {
+
+var test; // redefine for each utility
+var display = function (j, v, o) {
+  return '<b>' + (j ? JSON.to(v, o) : v) + '</b>';
+};
+
+document.write('<pre style="font-size:11px;">');
+
+document.writeln('================================================================================');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ CGU-JS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Common & General Use ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+document.writeln('================================================================================');
+document.writeln('');
+
+document.writeln('Version: ', CGU.Version);
+document.writeln('');
+
+document.writeln('Utilities:');
+document.writeln('  ', CGU.list().sort().join('\n  '));
+document.writeln('');
+
+document.writeln('Create:');
+var utils = CGU.list().sort();
+for (var i = 0; i < utils.length; i += 1) {
+  document.writeln('  ', CGU.create(utils[i]), ' (', utils[i], ')');
+}
+document.writeln('');
+
+document.writeln('Extern: Crypto as Digest');
+document.writeln('  ', 'Digest = ', Digest = CGU.extern('Crypto'));
+document.writeln('  ', Digest.hash('md4', 'abc').hex());
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('========================================================================= COOKIE');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+test = function (method, name, value, options, expected) {
+  var result = Cookie[method](name, value, options);
+  var pass = (expected === result);
+  var report = (pass ? '+' : '-') + ' ';
+  report += display(true, name);
+  report += value !== null ? ' as ' + display(true, value) : '';
+  report += options ? ' with ' + display(true, options, {relax: true}) : '';
+  report += ' should be ' + display(true, expected);
+  report += !pass ? ' {got ' + display(true, result) + '}' : '';
+  return report;
+};
+
+document.writeln('<a href="showcase/cookie.html">Showcase</a>');
+document.writeln('');
+
+document.writeln('== Write ==');
+document.writeln(test('write', 'foo', 'bar', {duration: 2}, true));
+document.writeln(test('write', ' ', 'space', {duration: -1}, false));
+document.writeln('');
+
+document.writeln('== Read ==');
+document.writeln(test('read', 'foo', null, null, 'bar'));
+document.writeln(test('read', ' ', null, null, null));
+document.writeln('');
+
+document.writeln('== Expire ==');
+document.writeln(test('expire', 'foo', null, null, true));
+document.writeln(test('expire', ' ', null, null, null));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('========================================================================= CRYPTO');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+test = function (algo, algodisp, data, out, key, keydisp, expected) {
+  var opts = key ? {key: key} : {};
+  var result = Crypto.hash(algo, data, opts)[out]();
+  var pass = (expected === result);
+  var report = (pass ? '+' : '-') + ' ';
+  report += display(false, algodisp) + ' of ' + display(true, data)
+  report += key ? ' with ' + (keydisp ? display(false, keydisp) : display(true, key)) : '';
+  report += ' should be ' + display(false, expected);
+  report += !pass ? ' {got ' + display(true, result) + '}' : '';
+  return report;
+};
+
+document.writeln('<a href="showcase/crypto.demo.html">Active Demo</a>');
+document.writeln('<a href="showcase/crypto.html">Showcase</a>');
+document.writeln('');
+
+document.writeln('== Hash ==');
+document.writeln(test('md4', 'MD4', 'abc', 'hex', null, null, 'a448017aaf21d8525fc10ae87aa6729d'));
+document.writeln(test('md5', 'MD5', 'abc', 'hex', null, null, '900150983cd24fb0d6963f7d28e17f72'));
+document.writeln(test('sha1', 'SHA-1', 'abc', 'base16', null, null, 'A9993E364706816ABA3E25717850C26C9CD0D89D'));
+document.writeln(test('sha224', 'SHA-224', 'abc', 'base16', null, null, '23097D223405D8228642A477BDA255B32AADBCE4BDA0B3F7E36C9DA7'));
+document.writeln(test('sha256', 'SHA-256', 'abc', 'base16', null, null, 'BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD'));
+document.writeln(test('ripemd128', 'RIPEMD-128', 'abc', 'hex', null, null, 'c14a12199c66e4ba84636b0f69144c77'));
+document.writeln(test('ripemd160', 'RIPEMD-160', 'abc', 'hex', null, null, '8eb208f7e05d987a9b044a8e98c6b087f15a0bfc'));
+document.writeln('');
+
+var kx0b16 = '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b';
+var kx0b20 = '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b';
+var kx00FF = '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff';
+var kx0067 = '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x01\x23\x45\x67';
+document.writeln('== HMAC ==');
+document.writeln(test('md5', 'MD5', 'Hi There', 'hex', kx0b16, '0x0B*16', '9294727a3638bb1c13f48ef8158bfc9d'));
+document.writeln(test('sha1', 'SHA-1', 'Hi There', 'hex', kx0b20, '0x0B*20', 'b617318655057264e28bc0b6fb378c8ef146be00'));
+document.writeln(test('sha224', 'SHA-224', 'Hi There', 'hex', kx0b20, '0x0B*20', '896fb1128abbdf196832107cd49df33f47b4b1169912ba4f53684b22'));
+document.writeln(test('sha256', 'SHA-256', 'Hi There', 'hex', kx0b20, '0x0B*20', 'b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7'));
+document.writeln(test('ripemd128', 'RIPEMD-128', '', 'hex', kx00FF, '0x00..0xFF', 'ad9db2c1e22af9ab5ca9dbe5a86f67dc'));
+document.writeln(test('ripemd160', 'RIPEMD-160', '', 'hex', kx0067, '0x00..0x67', 'cf387677bfda8483e63b57e06c3b5ecd8b7fc055'));
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('=========================================================================== JSON');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('<a href="showcase/json.html">Showcase</a>');
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('========================================================================== QUERY');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('<a href="showcase/query.html">Showcase</a>');
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('=========================================================================== TIME');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('<a href="showcase/time.lang.html">Languages</a>');
+document.writeln('<a href="showcase/time.html">Showcase</a>');
+document.writeln('');
+
+document.writeln('');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('=========================================================================== TYPE');
+document.writeln('--------------------------------------------------------------------------------');
+document.writeln('');
+
+document.writeln('<a href="showcase/type.html">Showcase</a>');
+document.writeln('');
+
+document.write('</pre>');
+
+}
+</script>
+
+</body>
+</html>

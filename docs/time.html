@@ -1,0 +1,297 @@
+<hr />
+
+<h1>Time</h1>
+
+<p>Date/Time Manipulation</p>
+
+<hr />
+
+<h3>Properties</h3>
+
+<blockquote>
+  <h4><code>Version</code></h4>
+  
+  <blockquote>
+    <p>Formatting is based on the date built: <code>Y.MMDD</code> <br />
+    Where <code>Y</code> is the number of years since 2000.  </p>
+  </blockquote>
+</blockquote>
+
+<hr />
+
+<h3>Methods</h3>
+
+<blockquote>
+  <h4><code>abs</code> | <code>utc</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Absolute Date creation.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Number&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.abs([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])</code>  </p>
+    
+    <blockquote>
+      <p><code>yr</code> = year <code>(0 - 9999)</code> <br />
+      <code>mn</code> = month <code>(0 - 11)</code> <br />
+      <code>dy</code> = day <code>(1 - 31)</code> <br />
+      <code>hr</code> = hour <code>(0 - 23)</code> <br />
+      <code>mi</code> = minute <code>(0 - 59)</code> <br />
+      <code>sc</code> = second <code>(0 - 59)</code> <br />
+      <code>ms</code> = milliseconds <code>(0 - 999)</code>  </p>
+      
+      <p>(All parameters are optional. Default is <code>'0000-00-01 00:00:00'</code>.)  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.abs()</code> <br />
+      <code>Time.abs(0, 0, 1, 0, 0, 0, 0)</code> <br />
+      <code>Time.abs(9999, 11, 31, 23, 59, 59, 999)</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>lang</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Get current language in-use.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.lang()</code>  </p>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.lang() //=&gt; "en"</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>langDetect</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Get user, browser, or system languagee.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.langDetect()</code>  </p>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.langDetect() //=&gt; "en"</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>langList</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: List supported languages.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Array&gt;</code>  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.langList()</code>  </p>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.langList() //=&gt; ["en", "es"]</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>langReset</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Reset in-use language to configured default.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>: Success.  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.langReset()</code>  </p>
+  </blockquote>
+  
+  <h4><code>langSet</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Set in-use language.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>: Success.  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.langSet(lang)</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>lang</em></strong> <code>&lt;String&gt;</code>: Language to use.  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.langSet("en") //=&gt; true</code> <br />
+      <code>Time.langSet("fr") //=&gt; false</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>langSetDetect</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: Set in-use language to detected language.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;Boolean&gt;</code>: Success.  </p>
+    
+    <p><strong>Syntax</strong>: <code>Time.langSetDetect()</code>  </p>
+  </blockquote>
+  
+  <h4><code>phpdate</code> | <code>phputc</code></h4>
+  
+  <blockquote>
+    <p><strong>Description</strong>: PHP <code>date()</code> formatting.  </p>
+    
+    <p><strong>Note</strong>: <code>phpdate</code> and <code>phputc</code> are English-only.</p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <blockquote>
+      <p><code>&lt;undefined&gt;</code>: <code>time</code> is invalid.</p>
+      
+      <p><code>&lt;null&gt;</code>: Out of range. Range is: Jan 1, 0000 to Dec 31, 9999.  </p>
+    </blockquote>
+    
+    <p><strong>Syntax</strong>: <code>Time.phpdate(format [, time])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>format</em></strong> <code>&lt;String&gt;</code>: String to be parsed.  </p>
+      
+      <blockquote>
+        <p><code>d</code> - Day of the month, 2 digits with leading zeros <code>(01 - 31)</code> <br />
+         <code>D</code> - A textual representation of a day, three letters <code>(Mon - Sun)</code> <br />
+         <code>j</code> - Day of the month without leading zeros <code>(1 - 31)</code> <br />
+         <code>l</code> - A full textual representation of the day of week <code>(Sunday - Saturday)</code> <br />
+         <code>N</code> - ISO-8601 numeric representation of the day of the week <code>(1 - 7)</code> <br />
+         <code>S</code> - English ordinal suffix for the day of the month <code>(st, nd, rd, th)</code> <br />
+         <code>w</code> - Numeric representation of the day of the week <code>(0 - 6)</code> <br />
+         <code>z</code> - The day of the year <code>(0 - 366)</code>  </p>
+        
+        <p><code>W</code> - ISO-8601 week number of year, weeks starting on Monday <code>(00 - 53)</code>  </p>
+        
+        <p><code>F</code> - A full textual representation of a month. <code>(January - December)</code> <br />
+         <code>m</code> - Numeric representation of a month, with leading zeros. <code>(01 - 12)</code> <br />
+         <code>M</code> - A short textual representation of a month. <code>(Jan - Dec)</code> <br />
+         <code>n</code> - Numeric representation of a month, without leading zeros. <code>(1 - 12)</code> <br />
+         <code>t</code> - Number of days in the given month. <code>(28 - 31)</code>  </p>
+        
+        <p><code>L</code> - Whether it's a leap year. <code>(0 or 1)</code> <br />
+         <code>O</code> - ISO-8601 year number. <br />
+         <code>y</code> - A full numeric representation of a year, 4 digits. <br />
+         <code>Y</code> - A two digit representation of a year.  </p>
+        
+        <p><code>a</code> - Lowercase meridiem. <code>(am or pm)</code> <br />
+         <code>A</code> - Uppercase meridiem. <code>(AM or PM)</code> <br />
+         <code>B</code> - Swatch Internet Time. <code>(000 - 999)</code> <br />
+         <code>g</code> - 12-hour without leading zeros. <code>(1 - 12)</code> <br />
+         <code>G</code> - 24-hour without leading zeros. <code>(0 - 23)</code> <br />
+         <code>h</code> - 12-hour with leading zeros. <code>(01 - 12)</code> <br />
+         <code>H</code> - 24-hour with leading zeros. <code>(00 - 23)</code> <br />
+         <code>i</code> - Minutes with leading zeros. <code>(00 - 59)</code> <br />
+         <code>s</code> - Seconds with leading zeros. <code>(00 - 59)</code> <br />
+         <code>u</code> - Microseconds  </p>
+        
+        <p><code>e</code> - [<strong>unsupported</strong>] Timezone identifier. <br />
+         <code>I</code> - Whether daylight savings time. <code>(0 or 1)</code> <br />
+         <code>O</code> - Difference to Greenwich time. <code>(e.g. +0200)</code> <br />
+         <code>P</code> - Difference to Greenwich time. <code>(e.g. +02:00)</code> <br />
+         <code>T</code> - [<strong>unsupported</strong>] Timezone abbreviation. <br />
+         <code>Z</code> - Timezone offset is seconds. <code>(-43200 - 50400)</code>  </p>
+        
+        <p><code>c</code> - ISO-8601 date. <code>(e.g. 2004-02-12T15:19:21+00:00)</code> <br />
+         <code>r</code> - RFC 2822 date. <code>(e.g. Thu, 21 Dec 2000 16:01:07 +0200)</code> <br />
+         <code>U</code> - Seconds since Unix Epoch.  </p>
+      </blockquote>
+      
+      <p><strong><em>time</em></strong> <code>&lt;Mixed&gt;</code>: A date value: <code>&lt;Date&gt;</code>, <code>&lt;Number&gt;</code>, or <code>&lt;String&gt;</code>. (optional)  </p>
+    </blockquote>
+    
+    <p><strong>Examples</strong>:  </p>
+    
+    <blockquote>
+      <p><code>Time.phpdate("c")</code> <br />
+      <code>Time.phpdate("Y-m-d\\Th:i:sP")</code> <br />
+      <code>Time.phpdate("r")</code> <br />
+      <code>Time.phpdate("D, d M, Y h:i:s O")</code> <br />
+      <code>Time.phputc('"Y-m-d\\Th:i:s\\Z"') // JSON-formatted</code>  </p>
+    </blockquote>
+  </blockquote>
+  
+  <h4><code>strftime</code> | <code>strfutc</code></h4>
+  
+  <blockquote>
+    <p>(<strong>Work-in-progress</strong>)  </p>
+    
+    <p><strong>Description</strong>: POSIX date formatting.  </p>
+    
+    <p><strong>Return</strong>: <code>&lt;String&gt;</code>  </p>
+    
+    <blockquote>
+      <p><code>&lt;undefined&gt;</code>: <code>time</code> is invalid.</p>
+      
+      <p><code>&lt;null&gt;</code>: Out of range. Range is: Jan 1, 0000 to Dec 31, 9999.  </p>
+    </blockquote>
+    
+    <p><strong>Syntax</strong>: <code>Time.strftime(format [, time])</code>  </p>
+    
+    <blockquote>
+      <p><strong><em>format</em></strong> <code>&lt;String&gt;</code>: String to be parsed.  </p>
+      
+      <blockquote>
+        <p><code>%a</code> - Abbreviated week. <code>(Sun - Sat)</code> <br />
+         <code>%A</code> - Full week. <code>(Sunday - Saturday)</code> <br />
+         <code>%b</code> - Abbreviated month. <code>(Jan - Dec)</code> <br />
+         <code>%B</code> - Full month. <code>(January - December)</code> <br />
+         <code>%c</code> - Locale date and time. (based on <code>Date#toLocaleString</code>) <br />
+         <code>%C</code> - Century. <code>(year / 100)</code> <br />
+         <code>%d</code> - Day of the month with leading zeros. <br />
+         <code>%D</code> - Equivalent to <code>"%m/%d/%y"</code>. <br />
+         <code>%e</code> - Day of the month with leading spaces. <br />
+         <code>%E</code> - [<strong>unsupported</strong>] POSIX locale extensions. <br />
+         <code>%F</code> - Equivalent to <code>"%Y-%m-%d"</code>. <br />
+         <code>%g</code> - 2-digit year containing majority of the Monday-start week. <br />
+         <code>%G</code> - 4-digit year containing majority of the Monday-start week. <br />
+         <code>%h</code> - Same as <code>%b</code>. <br />
+         <code>%H</code> - Hour of 24-hour clock with leading zeros. <br />
+         <code>%I</code> - Hour of 12-hour clock with leading zeros. <br />
+         <code>%j</code> - Day of the year with leading zeros. <code>(000 - 366)</code> <br />
+         <code>%k</code> - Hour of 24-hour clock with leading spaces. <br />
+         <code>%l</code> - Hour of 12-hour clock with leading spaces. <br />
+         <code>%m</code> - Numeric month with leading zeros. <br />
+         <code>%M</code> - Minutes with leading spaces. <br />
+         <code>%n</code> - newline. <br />
+         <code>%N</code> - Milliseconds with leading zeros. <br />
+         <code>%O</code> - [<strong>unsupported</strong>] POSIX locale extensions. <br />
+         <code>%p</code> - Uppercase ante meridiem or post meridiem. <br />
+         <code>%P</code> - Lowercase ante meridiem or post meridiem. <br />
+         <code>%r</code> - Equivalent to <code>"%I:%M:%S %p"</code>. <br />
+         <code>%R</code> - Equivalent to <code>"%H:%M"</code>. <br />
+         <code>%s</code> - Seconds since Unix Epoch. <br />
+         <code>%S</code> - Seconds with leading zeros. <br />
+         <code>%t</code> - tab. <br />
+         <code>%T</code> - Equivalent to <code>"%H:%M:%S"</code>. <br />
+         <code>%u</code> - Day of the week. <code>(1 - 7 &lt;=&gt; Mon - Sun)</code> <br />
+         <code>%U</code> - Week number of the year, Sunday-start, with leading zeros. <br />
+         <code>%v</code> - Equivalent to <code>"%e-%b-%Y"</code>. <br />
+         <code>%V</code> - Week number of <code>%G</code> year, Monday-start, with leading zeros. <br />
+         <code>%w</code> - Day of the week. <code>(0 - 6 &lt;=&gt; Sun - Sat)</code> <br />
+         <code>%W</code> - Week number of the year, Monday-start, with leading zeros. <br />
+         <code>%x</code> - Locale date. (based on <code>Date#toLocaleDateString</code>) <br />
+         <code>%X</code> - Locale time. (based on <code>Date#toLocaleTimeString</code>) <br />
+         <code>%y</code> - 2-digit year. <br />
+         <code>%Y</code> - 4-digit year. <br />
+         <code>%z</code> - Offset from UTC. <code>(e.g. -0600)</code> <br />
+         <code>%Z</code> - [<strong>unsupported</strong>] Timezone name. <br />
+         <code>%%</code> - Percent sign.  </p>
+      </blockquote>
+      
+      <p><strong><em>time</em></strong> <code>&lt;Mixed&gt;</code>: A date value: <code>&lt;Date&gt;</code>, <code>&lt;Number&gt;</code>, or <code>&lt;String&gt;</code>. (optional)  </p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<hr />

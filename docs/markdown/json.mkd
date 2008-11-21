@@ -1,0 +1,82 @@
+----
+
+# JSON #
+
+JSON Parsing and Writing
+
+----
+
+### Properties ###
+
+> #### `Version` ####
+>  
+> > Formatting is based on the date built: `Y.MMDD`  
+> > Where `Y` is the number of years since 2000.  
+
+----
+
+### Methods ###
+
+> #### `from` | `parse` ####
+>  
+> > **Description**: Parse a JSON-formatted string.  
+> >  
+> > **Return**: `<Mixed>`  
+> >  
+> > **Syntax**: `JSON.from(json [, options])`  
+> > **Syntax**: `JSON.parse(json [, options])`  
+> >  
+> > > **_json_** `<Mixed>`: String to be parsed.  
+> > >  
+> > > **_options_** `<Object>`: (Optional)  
+> > >  
+> > > > **_errlen_** `<Number>`: Length of json string to grab with exceptions (default: 20).  
+> > > >  
+> > > > **_relax_** `<Boolean>`: Set all relax properties.  
+> > > > **_relax_** `<Object>`: Allow parsing of more string elements.  
+> > > >  
+> > > > > **_date_** `<Boolean>`: Parse UTC date strings (format: `"####-##-##T##:##:##.###Z"`).  
+> > > > >  
+> > > > > **_keyword_** `<Boolean>`: Allow undefined keyword.  
+> > > > >  
+> > > > > **_number_** `<Boolean>`: Allow hexadecimal and octal numbers.  
+> > > > >  
+> > > > > **_objkey_** `<Boolean>`: Allow un-quoted object keys; limited to alpha, num, underscore and dollar.  
+> > > > >  
+> > > > > **_string_** `<Boolean>`: Allow single-quoted strings and hex encoding in strings (e.g., `"\x20"`).  
+> >  
+> > **Examples**:  
+> >  
+> > > `JSON.from(' "foobar" ');  //=> 'foobar'`  
+> > > `JSON.parse('[ "foo" ]');  //=> ['foo']`  
+
+> #### `to` | `stringify` ####
+>  
+> > **Description**: Get a JSON-formatted string from an object.  
+> >  
+> > **Return**: `<String>`  
+> >  
+> > **Syntax**: `JSON.to(input [, options])`  
+> > **Syntax**: `JSON.stringify(input [, options])`  
+> >  
+> > > **_input_** `<Mixed>`: Object being converted.  
+> > >  
+> > > **_options_** `<Object>`: (Optional)  
+> > >  
+> > > > **_allkey_** `<Boolean>`: Don't limit object keys to enumerables (i.e. `object.propertyIsEnumerable(prop)`)  
+> > > >  
+> > > > **_relax_** `<Boolean>`: Set all relax properties.  
+> > > > **_relax_** `<Object>`: Allow parsing of more string elements.  
+> > > >  
+> > > > > **_date_** `<Boolean>`: Convert UTC dates to strings (format: `"####-##-##T##:##:##.###Z"`).  
+> > > > >  
+> > > > > **_keyword_** `<Boolean>`: Allow undefined keyword.  
+> > > >  
+> > > > **_verify_** `<Boolean>`: Use JSON.from to verify string.  
+> >  
+> > **Examples**:  
+> >  
+> > > `JSON.to('"foobar" ');  //=> "\"foobar\" "`  
+> > > `JSON.stringify(null);  //=> null`  
+
+----

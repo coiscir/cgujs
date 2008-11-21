@@ -1,0 +1,96 @@
+----
+
+# Cookie #
+
+> Read, Write, and Delete (Expire) HTTP Cookies  
+
+----
+
+### Properties ###
+
+> #### `Version` ####
+>  
+> > Formatting is based on the date built: `Y.MMDD`  
+> > Where `Y` is the number of years since 2000.  
+
+----
+
+### Methods ###
+
+> #### `expire` ####
+>  
+> > **Description**: Delete a cookie by forcing it to expire.  
+> >  
+> > **Return**: `<Boolean>`  
+> >  
+> > **Syntax**: `Cookie.expire(key [, options])`  
+> >  
+> > > **_key_** `<Mixed>`: Name of the cookie. Any non-String keys will first be casted to String.  
+> > >  
+> > > **_options_** `<Object>`: (Optional)  
+> > >  
+> > > > _Same as for Cookie.write, excluding duration._  
+> >  
+> > **Examples**:  
+> >  
+> > > `Cookie.expire('foo');`  
+> > > `Cookie.expire('foo', {path: '/'});`  
+> > > `Cookie.expire('foo', {path: '/', secure: true});`  
+> > > `Cookie.expire('foo', {domain: 'myhost', path: '/'});`  
+
+> #### `read` ####
+>  
+> > **Description**: Get the value of a cookie.  
+> >  
+> > **Return**: `<String>`  
+> >  
+> > **Syntax**: `Cookie.read(key)`  
+> >  
+> > > **_key_** `<Mixed>`: Name of the cookie. Any non-String keys will first be casted to String.  
+> >  
+> > **Examples**:  
+> >  
+> > > `Cookie.read('foo');`  
+
+> #### `toObject` ####
+>  
+> > **Description**: Create an object representation of cookies.  
+> >  
+> > **Return**: `<Object>`
+> >  
+> > > Cookie names are the object keys with string values respectively.  
+> >  
+> > **Syntax**: `Cookie.toObject()`  
+
+> #### `write` ####
+>  
+> > **Description**: Create a cookie.  
+> >  
+> > **Return**: `<Boolean>`  
+> >  
+> > **Syntax**: `Cookie.write(key, value [, options])`  
+> >  
+> > > **_key_** `<Mixed>`: Name of the cookie. Any non-String keys will first be casted to String.  
+> > >  
+> > > **_value_** `<Mixed>`: Value of the cookie. Any non-String values will first be casted to String.
+> > >  
+> > > **_options_** `<Object>`: (Optional)  
+> > >  
+> > > > **_domain_** `<String>`: The domain or host name associated with the cookie.  
+> > > >  
+> > > > **_duration_** `<Number>`: Time, in days, that the cookie should live. Leave this unset to create a session cookie.  
+> > > >  
+> > > > **_path_** `<String>`: The path associated with the cookie.  
+> > > >  
+> > > > **_secure_** `<Boolean>`: Use a secure cookie.  
+> >  
+> > **Examples**:  
+> >  
+> > > `Cookie.expire('foo', 'bar');`  
+> > > `Cookie.expire('foo', 'bar', {duration: 2});`  
+> > > `Cookie.expire('foo', 'bar', {duration: -1});  // same as Cookie.expire`  
+> > > `Cookie.expire('foo', 'bar', {path: '/'});`  
+> > > `Cookie.expire('foo', 'bar', {path: '/', secure: true});`  
+> > > `Cookie.expire('foo', 'bar', {domain: 'myhost', path: '/'});`  
+
+----
