@@ -1,7 +1,7 @@
-/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU :: Type
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  CGU :: Query
  *    HTTP GET Variables and Query-String Manipulation
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *~~~ Methods
  *----
  *
@@ -29,7 +29,7 @@
  *
  *    Syntax: CGU.query.toObject()
  *
- *    Return: <Object>: With query-string names as keys and an array of string values respectively.
+ *    Return: <Object>: of key properties of value arrays.
  *----
  *
  *  serialize -> Parameterize a Form's elements.
@@ -40,7 +40,7 @@
  *
  *    Return: <String>: Query-string of form's elements.
  *
- **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
 (function Query() { // enable private members
@@ -100,9 +100,9 @@
               for (i = 0; i < object[p].length; i += 1)
                 append(p, object[p][i]);
               break;
-            //case 'date':
-            //  append(p, Time.strfutc('%FT%T.%NZ', object[p]));
-            //  break;
+            case 'date':
+              append(p, CGU.strfutc('%FT%T.%NZ', object[p]));
+              break;
             default:
               append(p, object[p]);
               break;
@@ -132,7 +132,7 @@
               }
             break;
           case 'checkbox':
-          case 'radio'   : if (fe[i].checked) add(fe[i].name, fe[i].value); break;
+          case 'radio': if (fe[i].checked) add(fe[i].name, fe[i].value); break;
           default: add(fe[i].name, fe[i].value); break;
         }
     

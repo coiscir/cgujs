@@ -1,7 +1,7 @@
-/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU :: Cookie
  *    Read, Write, and Delete (Expire) Cookies
- **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *~~~ Methods
  *
  *
@@ -38,9 +38,9 @@
  *
  *      Write - key and value are given
  *
- *      Expire - key is given with (options.expire = true) or (options.duration < 0)
+ *      Expire - key is given with options.expire or options.duration < 0
  *
- **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
 (function Cookie() { // enable private members
@@ -59,14 +59,17 @@
     if (options.expire) options.duration = -1;
     
     var r = read(key);
-    if (CGU.isof(value, null, undefined) && options.duration === false) return r;
+    if (CGU.isof(value, null, undefined) && options.duration === false)
+      return r;
     
     var e = options.duration < 0;
     var w = write(key, value, options);
     return e ? (r === null ? r : !w) : w;
   };
   
-// private
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * private
+**/
   
   var read = function (key) {
     key = String(key);
