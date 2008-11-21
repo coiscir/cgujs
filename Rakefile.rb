@@ -44,7 +44,7 @@ task :h  => :help
 
 desc "Build CGU Library Script"
 task :build do
-  print $/ + '== Build' + ' :: ' + TIME.strftime('%Y-%m-%d') + ' :: ' + version.to_s + $/
+  print $/ + '== Build' + ' :: ' + TIME.strftime('%Y-%m-%d %H:%M:%S') + ' :: ' + version.to_s + $/
   File.open(FINAL, 'w+') do |lib|
     lib << Builder.build(START)
   end
