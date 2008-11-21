@@ -13,7 +13,8 @@ START = File.join(SRCS, 'cgu.js')
 INCS = [
   'type.js',
   'query.js',
-  'cookie.js'
+  'cookie.js',
+  'time.js'
 ].sort
 
 Dir.chdir(ROOT) do
