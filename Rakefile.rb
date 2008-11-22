@@ -14,7 +14,8 @@ INCS = [
   'type.js',
   'query.js',
   'cookie.js',
-  'time.js'
+  'time.js',
+  'crypto.js'
 ].sort
 
 Dir.chdir(ROOT) do
