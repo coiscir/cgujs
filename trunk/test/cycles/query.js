@@ -1,5 +1,52 @@
+var locationSerial = CGU.param({
+  "test": ["-1058.56e+2"],
+  "demo": ["+!\"#$%&'()*+,-./:;<=>?@[]^_`{|}~"],
+  "foo": ["b", "a", "r", "'", "d"],
+  " ": ["space"],
+  "n/a": [""],
+  "true": ["undefined"],
+  "num": ["-24"],
+  "date": ["1/1/2008"]
+});
+var locationSearch = '?' + locationSerial;
+
 cycles.Query = [
   {
+    title: 'location',
+    cases: [
+      [
+        'clone current', CGU.toJSON(location), function(){ return CGU.toJSON(CGU.location(null)); }
+      ]
+    ]
+  }, {
+    title: 'query serial',
+    cases: [
+      [
+        'missing lead "?"', undefined, function(){ return CGU.query('test', locationSerial); }
+      ]
+    ]
+  }, {
+    title: 'query',
+    cases: [
+      [
+        'test', "-1058.56e+2", function(){ return CGU.query('test', locationSearch).join(','); }
+      ], [
+        'demo', "+!\"#$%&'()*+,-./:;<=>?@[]^_`{|}~", function(){ return CGU.query('demo', locationSearch).join(','); }
+      ], [
+        'foo', "b,a,r,',d", function(){ return CGU.query('foo', locationSearch).join(','); }
+      ], [
+        '" "', "space", function(){ return CGU.query(' ', locationSearch).join(','); }
+      ], [
+        'n/a', "", function(){ return CGU.query('n/a', locationSearch).join(','); }
+      ], [
+        'true', "undefined", function(){ return CGU.query('true', locationSearch).join(','); }
+      ], [
+        'num', "-24", function(){ return CGU.query('num', locationSearch).join(','); }
+      ], [
+        'date', "1/1/2008", function(){ return CGU.query('date', locationSearch).join(','); }
+      ]
+    ]
+  }, {
     title: 'param',
     cases: [
       [

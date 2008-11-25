@@ -5,6 +5,21 @@
  *~~~ Methods
  *----
  *
+ *  location -> Get all values for a key from the current query-string.
+ *
+ *    Syntax: CGU.location(href)
+ *
+ *      href <String>: Create a location-like object from a URI.
+ *
+ *        <null>: Clone the global location.
+ *
+ *    Return: <Object>: List of values.
+ *
+ *      <null>: Invalid href string.
+ *
+ *      <undefined>: href was not specified.
+ *----
+ *
  *  param -> Convert an object's properties to a query-string.
  *
  *    Syntax: CGU.param(object [, all])
@@ -18,11 +33,21 @@
  *
  *  query -> Get all values for a key from the current query-string.
  *
- *    Syntax: CGU.query(key)
+ *    Syntax: CGU.query(key [, href])
  *
  *      key <String>: Name of the query-string variable.
  *
+ *      href <String>: Any URI accepted by CGU.location.
+ *
+ *        <undefined>: Use current location.
+ *
  *    Return: <Array>: List of values.
+ *
+ *      <undefined>: Invalid href.
+ *
+ *    Note: Precede param and serialize values with '?' for a valid href.
+ *
+ *      Example: CGU.query('foo', '?' + CGU.param(object))
  *----
  *
  *  query.toObject -> Get an object representation of the query-string.
@@ -44,10 +69,34 @@
 **/
 
 (function Query() { // enable private members
+  
+  CGU.location = function (href) {
+    if (CGU.is_a(href, null)) href = window.location.toString();
+    if (!CGU.is_a(href, String)) return;
+    
+    var seg = href.match(/^(?:([a-z\-]+:)\/\/)?(([a-z0-9\.]+)(?:\:(\d+))?)?(\/[^#?]*)?(\?[^#]*)?(\#.*)?$/i);
+    if (!seg) return null;
+    return {
+      constructor : {},
+      hash     : seg[7] || '',
+      host     : seg[2] || '',
+      hostname : seg[3] || '',
+      href     : seg[0] || '',
+      pathname : seg[5] || '',
+      port     : seg[4] || '',
+      protocol : seg[1] || '',
+      search   : seg[6] || '',
+      toString : function () { return this.href; },
+      valueOf  : function () { return this.href; }
+    };
+  };
 
-  CGU.query = function (key) {
+  CGU.query = function (key, href) {
     key = String(key);
-    var queries = CGU.clone(location.search).replace(/^\?/, '').split(/\&/);
+    var location = CGU.location(CGU.limit(href, String) || null);
+    if (!location) return;
+    
+    var queries = location.search.replace(/^\?/, '').replace(/\+/, '%20').split(/\&/);
     var matches = [];
     for (var i = 0; i < queries.length; i += 1)
       if (CGU.is_a(queries[i], String) && queries[i].match(/[^\=]+\=?/))
@@ -132,7 +181,7 @@
               }
             break;
           case 'checkbox':
-          case 'radio': if (fe[i].checked) add(fe[i].name, fe[i].value); break;
+          case 'radio': if (!fe[i].checked) break;
           default: add(fe[i].name, fe[i].value); break;
         }
     
