@@ -12,10 +12,10 @@ START = File.join(SRCS, 'cgu.js')
 
 INCS = [
   'type.js',
+  'crypto.js',
   'query.js',
   'cookie.js',
-  'time.js',
-  'crypto.js'
+  'time.js'
 ].sort
 
 Dir.chdir(ROOT) do
@@ -35,6 +35,18 @@ end
 # Tasks
 ####
 task :default => :build
+
+desc "Display Rake Task Infomation"
+task :help do
+  print $/ + '== Help' + $/
+  print [
+    "Tasks:",
+    "  build  (b)",
+    "  remove (r, rm)",
+    "  status (s, st)",
+    "  help   (h)"
+  ].join($/) + $/
+end
 
 task :b  => :build
 task :r  => :remove
@@ -62,18 +74,6 @@ desc "Check build status"
 task :status do
   print $/ + '== Status' + $/
   print ' ' + (File.exists?(FINAL) ? '+' : '-') + ' ' + File.basename(FINAL) + $/
-end
-
-desc "Display Rake Task Infomation"
-task :help do
-  print $/ + '== Help' + $/
-  print [
-    "Tasks:",
-    "  build  (b)",
-    "  clean  (c)",
-    "  status (s)",
-    "  help   (h)"
-  ].join($/) + $/
 end
 
 ################################################################################
