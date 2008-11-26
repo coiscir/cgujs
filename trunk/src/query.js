@@ -45,9 +45,9 @@
  *
  *      <undefined>: Invalid href.
  *
- *    Note: Precede param and serialize values with '?' for a valid href.
+ *    Note: Use complete with param and serialize for valid href.
  *
- *      Example: CGU.query('foo', '?' + CGU.param(object))
+ *      Example: CGU.query('foo', CGU.param({foo: 24}, true))
  *----
  *
  *  query.toObject -> Get an object representation of the query-string.
