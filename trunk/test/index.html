@@ -1,6 +1,11 @@
 <html>
 <head>
   <title>CGU - Tests</title>
+  <style type="text/css">
+    pre {
+      font-size: 11px;
+    }
+  </style>
 </head>
 <body>
 
@@ -10,7 +15,9 @@ var pass = '<span style="color:#0a0;">PASS</span>';
 var fail = '<span style="color:#f00;">FAIL</span>';
 
 var write = function (passfail, comment) {
-  if (passfail === !!passfail)
+  if (passfail === null)
+    document.writeln('  ', comment);
+  else if (passfail === !!passfail)
     document.writeln((passfail ? pass : fail), ' ', comment);
   else
     document.writeln();
@@ -20,11 +27,18 @@ var notate = function (title, comment, message) {
   return title + ': ' + comment + (message ? ' (' + message + ')' : '');
 };
 
-var cycle = function (tests) {
+var cycle = function (c) {
   var i, j, title, cases;
-  for (i = 0; i < tests.length; i += 1) {
-    title = tests[i].title;
-    cases = tests[i].cases;
+  
+  if (c.notes.length > 0) {
+    write();
+    for (i = 0; i < c.notes.length; i += 1)
+      write(null, c.notes[i]);
+  }
+  
+  for (i = 0; i < c.tests.length; i += 1) {
+    title = c.tests[i].title;
+    cases = c.tests[i].cases;
     
     write();
     
@@ -44,16 +58,17 @@ var cycle = function (tests) {
 <script type="text/javascript">
 var cycles = {};
 </script>
-<script src="cycles/exist.js"></script>
+<script src="cycles/cgu.js"></script>
 <script src="cycles/type.js"></script>
 <script src="cycles/crypto.js"></script>
 <script src="cycles/query.js"></script>
 <script src="cycles/cookie.js"></script>
 <script src="cycles/time.js"></script>
 <script type="text/javascript">
+
 (function () {
   for (var c in cycles) {
-    document.write('<pre style="font-size:11px;">');
+    document.write('<pre>');
     
     document.writeln(c);
     cycle(cycles[c]);

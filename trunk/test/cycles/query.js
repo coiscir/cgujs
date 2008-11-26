@@ -10,66 +10,70 @@ var locationSerial = CGU.param({
 });
 var locationSearch = '?' + locationSerial;
 
-cycles.Query = [
-  {
-    title: 'location',
-    cases: [
-      [
-        'clone current', CGU.toJSON(location), function(){ return CGU.toJSON(CGU.location(null)); }
+cycles.Query = {
+  notes: [
+  ],
+  tests: [
+    {
+      title: 'location',
+      cases: [
+        [
+          'clone current', CGU.toJSON(location), function(){ return CGU.toJSON(CGU.location(null)); }
+        ]
       ]
-    ]
-  }, {
-    title: 'query serial',
-    cases: [
-      [
-        'missing lead "?"', undefined, function(){ return CGU.query('test', locationSerial); }
+    }, {
+      title: 'query serial',
+      cases: [
+        [
+          'missing lead "?"', undefined, function(){ return CGU.query('test', locationSerial); }
+        ]
       ]
-    ]
-  }, {
-    title: 'query',
-    cases: [
-      [
-        'test', "-1058.56e+2", function(){ return CGU.query('test', locationSearch).join(','); }
-      ], [
-        'demo', "+!\"#$%&'()*+,-./:;<=>?@[]^_`{|}~", function(){ return CGU.query('demo', locationSearch).join(','); }
-      ], [
-        'foo', "b,a,r,',d", function(){ return CGU.query('foo', locationSearch).join(','); }
-      ], [
-        '" "', "space", function(){ return CGU.query(' ', locationSearch).join(','); }
-      ], [
-        'n/a', "", function(){ return CGU.query('n/a', locationSearch).join(','); }
-      ], [
-        'true', "undefined", function(){ return CGU.query('true', locationSearch).join(','); }
-      ], [
-        'num', "-24", function(){ return CGU.query('num', locationSearch).join(','); }
-      ], [
-        'date', "1/1/2008", function(){ return CGU.query('date', locationSearch).join(','); }
+    }, {
+      title: 'query',
+      cases: [
+        [
+          'test', "-1058.56e+2", function(){ return CGU.query('test', locationSearch).join(','); }
+        ], [
+          'demo', "+!\"#$%&'()*+,-./:;<=>?@[]^_`{|}~", function(){ return CGU.query('demo', locationSearch).join(','); }
+        ], [
+          'foo', "b,a,r,',d", function(){ return CGU.query('foo', locationSearch).join(','); }
+        ], [
+          '" "', "space", function(){ return CGU.query(' ', locationSearch).join(','); }
+        ], [
+          'n/a', "", function(){ return CGU.query('n/a', locationSearch).join(','); }
+        ], [
+          'true', "undefined", function(){ return CGU.query('true', locationSearch).join(','); }
+        ], [
+          'num', "-24", function(){ return CGU.query('num', locationSearch).join(','); }
+        ], [
+          'date', "1/1/2008", function(){ return CGU.query('date', locationSearch).join(','); }
+        ]
       ]
-    ]
-  }, {
-    title: 'param',
-    cases: [
-      [
-        'flat', 'foo=bar&red=blah', function(){ return CGU.param({foo: 'bar', red: 'blah'}); }
-      ], [
-        'flatten', 'foo=bar&red=blah', function(){ return CGU.param({nil: {foo: 'bar'}, red: 'blah'}); }
-      ], [
-        'exlusion', '', function(){ return CGU.param({foo: function(){}, bar: /pattern/}); }
-      ], [
-        'dates', 'foo=2008-12-31T23%3A59%3A59.999Z', function(){ return CGU.param({foo: new Date(CGU.utc(2008, 11, 31, 23, 59, 59, 999))}); }
+    }, {
+      title: 'param',
+      cases: [
+        [
+          'flat', 'foo=bar&red=blah', function(){ return CGU.param({foo: 'bar', red: 'blah'}); }
+        ], [
+          'flatten', 'foo=bar&red=blah', function(){ return CGU.param({nil: {foo: 'bar'}, red: 'blah'}); }
+        ], [
+          'exlusion', '', function(){ return CGU.param({foo: function(){}, bar: /pattern/}); }
+        ], [
+          'dates', 'foo=2008-12-31T23%3A59%3A59.999Z', function(){ return CGU.param({foo: new Date(CGU.utc(2008, 11, 31, 23, 59, 59, 999))}); }
+        ]
       ]
-    ]
-  }, {
-    title: 'serialize',
-    cases: [
-      [
-        'form', 'text=&checkbox=foo&checkbox=bar&radio=foo&select-s=foo&select-m=foo&select-m=bar&textarea=', function(){ return CGU.serialize(document.getElementById('serialize')); }
-      ], [
-        'form.elements', 'text=&checkbox=foo&checkbox=bar&radio=foo&select-s=foo&select-m=foo&select-m=bar&textarea=', function(){ return CGU.serialize(document.getElementById('serialize').elements); }
+    }, {
+      title: 'serialize',
+      cases: [
+        [
+          'form', 'text=&checkbox=foo&checkbox=bar&radio=foo&select-s=foo&select-m=foo&select-m=bar&textarea=', function(){ return CGU.serialize(document.getElementById('serialize')); }
+        ], [
+          'form.elements', 'text=&checkbox=foo&checkbox=bar&radio=foo&select-s=foo&select-m=foo&select-m=bar&textarea=', function(){ return CGU.serialize(document.getElementById('serialize').elements); }
+        ]
       ]
-    ]
-  }
-];
+    }
+  ]
+};
 
 document.writeln('\
 <div style="display: none;">\
