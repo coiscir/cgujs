@@ -76,18 +76,3 @@ task :status do
   print $/ + '== Status' + $/
   print ' ' + (File.exists?(FINAL) ? '+' : '-') + ' ' + File.basename(FINAL) + $/
 end
-
-################################################################################
-# Monkey Patch
-####
-module Rake
-  class Task
-    def disable
-      @already_invoked = true
-    end
-    
-    def enable
-      @already_invoked = false
-    end
-  end
-end
