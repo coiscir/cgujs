@@ -128,10 +128,11 @@
       case NUL : return CGU.type(object) === NUL;
       case STR : return CGU.type(object) === compare;
       case FNC :
-        switch (compare) { // promote primitives
-          case Boolean : return CGU.type(object) === BLN;
+        switch (compare) {
+          case Boolean : return CGU.type(object) === BLN; // promote primitives
           case Number  : return CGU.type(object) === NUM;
           case String  : return CGU.type(object) === STR;
+          case Object  : return CGU.type(object) === OBJ; // demote Object
           default      : return object instanceof compare;
         }
       default : return undefined;

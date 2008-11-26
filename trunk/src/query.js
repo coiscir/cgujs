@@ -22,11 +22,11 @@
  *
  *  param -> Convert an object's properties to a query-string.
  *
- *    Syntax: CGU.param(object [, all])
+ *    Syntax: CGU.param(object [, complete])
  *
  *      object <Object>: Object to parameterize.
  *
- *      all <Boolean>: Include inherited properties. Default is false.
+ *      complete <Boolean>: Return a complete search string.
  *
  *    Return: <String>: Query-string of object's properties.
  *----
@@ -39,7 +39,7 @@
  *
  *      href <String>: Any URI accepted by CGU.location.
  *
- *        <undefined>: Use current location.
+ *        <null>: Use current location.
  *
  *    Return: <Array>: List of values.
  *
@@ -52,16 +52,24 @@
  *
  *  query.toObject -> Get an object representation of the query-string.
  *
- *    Syntax: CGU.query.toObject()
+ *    Syntax: CGU.query.toObject([href])
+ *
+ *      href <String>: Any URI accepted by CGU.location.
+ *
+ *        <null>: Use current location.
  *
  *    Return: <Object>: of key properties of value arrays.
+ *
+ *      <undefined>: Invalid href.
  *----
  *
  *  serialize -> Parameterize a Form's elements.
  *
- *    Syntax: CGU.serialize(form)
+ *    Syntax: CGU.serialize(form [, complete])
  *
  *      form <Object>: Either a Form DOM object or elements list.
+ *
+ *      complete <Boolean>: Return a complete search string.
  *
  *    Return: <String>: Query-string of form's elements.
  *
@@ -74,18 +82,19 @@
     if (CGU.is_a(href, null)) href = window.location.toString();
     if (!CGU.is_a(href, String)) return;
     
+    var pathslash = (/\\/).test(window.location.pathname);
+    
     var seg = href.match(/^(?:([a-z\-]+:)\/\/)?(([a-z0-9\.]+)(?:\:(\d+))?)?(\/[^#?]*)?(\?[^#]*)?(\#.*)?$/i);
     if (!seg) return null;
     return {
-      constructor : {},
-      hash     : seg[7] || '',
-      host     : seg[2] || '',
-      hostname : seg[3] || '',
-      href     : seg[0] || '',
-      pathname : seg[5] || '',
-      port     : seg[4] || '',
-      protocol : seg[1] || '',
-      search   : seg[6] || '',
+      hash     : (seg[7] || ''),
+      host     : (seg[2] || ''),
+      hostname : (seg[3] || ''),
+      href     : (seg[0] || ''),
+      pathname : (seg[5] || '').replace(/(?!^)\//g, (pathslash ? '\\' : '/')),
+      port     : (seg[4] || ''),
+      protocol : (seg[1] || ''),
+      search   : (seg[6] || ''),
       toString : function () { return this.href; },
       valueOf  : function () { return this.href; }
     };
@@ -105,7 +114,10 @@
     return CGU.clone(matches);
   };
   
-  CGU.query.toObject = function () {
+  CGU.query.toObject = function (href) {
+    var location = CGU.location(CGU.limit(href, String) || null);
+    if (!location) return;
+    
     var object = {}, k, v;
     var queries = CGU.clone(location.search).replace(/^\?/, '').split(/\&/);
     for (var i = 0; i < queries.length; i += 1) {
@@ -119,12 +131,19 @@
     return CGU.clone(object);
   };
   
-  CGU.param = function (object, all) {
-    all = all === true ? true : false;
+  CGU.param = function (object, complete) {
+    complete = complete === true ? true : false;
     
     var serial = [], i;
     var append = function (key, value) {
       serial.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+    };
+    var insArr = function (name, arr) {
+      for (var i = 0; i < object[p].length; i += 1)
+        append(name, object[p][i]);
+    };
+    var insObj = function (obj) {
+      serial.push(CGU.param(obj));
     };
     
     // handle serialize arrays
@@ -135,32 +154,22 @@
     // handle other objects
     else
       for (var p in object)
-        if (all || object.propertyIsEnumerable(p))
+        if (object.propertyIsEnumerable(p))
           switch (CGU.type(object[p])) {
             case 'undefined':
-            case 'error':
-            case 'function':
-            case 'regexp':
-              break;
-            case 'object':
-              serial.push(CGU.param(object[p], all));
-              break;
-            case 'array':
-              for (i = 0; i < object[p].length; i += 1)
-                append(p, object[p][i]);
-              break;
-            case 'date':
-              append(p, CGU.strfutc('%FT%T.%NZ', object[p]));
-              break;
-            default:
-              append(p, object[p]);
-              break;
+            case 'error'    :
+            case 'function' :
+            case 'regexp'   : break;
+            case 'object': insObj(object[p]); break;
+            case 'array' : insArr(p, object[p]); break;
+            case 'date'  : append(p, CGU.strfutc('%FT%T.%NZ', object[p])); break;
+            default: append(p, object[p]); break;
           }
     
-    return serial.join('&').replace(/%20/, '+');
+    return (complete ? '?' : '') + serial.join('&').replace(/%20/, '+');
   };
   
-  CGU.serialize = function (fe) { // fe = form/elements
+  CGU.serialize = function (fe, complete) { // fe = form/elements
     fe = CGU.is_a(fe.elements, 'object') ? fe.elements : fe;
     if (!CGU.is_a(fe.length, Number)) return null;
     
@@ -185,8 +194,8 @@
           default: add(fe[i].name, fe[i].value); break;
         }
     
-    elems._seralized = true;
-    return CGU.param(elems);
+    elems._seralized = true; // add catch for param
+    return CGU.param(elems, complete);
   };
 
 })();

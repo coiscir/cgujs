@@ -269,7 +269,8 @@
   
   CGU.phpdate = function (format, time) {
     format = CGU.limit(format, String) || '';
-    time   = new Date(CGU.limit(time, Date, Number, String) || new Date().getTime());
+    time   = CGU.is_a(time, Date) ? time.getTime() : time;
+    time   = new Date(CGU.limit(time, Number, String) || new Date().getTime());
     
     if (time != 0 && !time) return;
     if (!inrange(time, false)) return null;
@@ -279,7 +280,8 @@
 
   CGU.phputc = function (format, time) {
     format = CGU.limit(format, String) || '';
-    time   = new Date(CGU.limit(time, Date, Number, String) || new Date().getTime());
+    time   = CGU.is_a(time, Date) ? time.getTime() : time;
+    time   = new Date(CGU.limit(time, Number, String) || new Date().getTime());
     
     if (time != 0 && !time) return;
     if (!inrange(time, true)) return null;
@@ -324,7 +326,7 @@
           case 'm': buffer += padnum(2, base.n); break;
           case 'M': buffer += padnum(2, base.i); break;
           case 'n': buffer += '\n'; break;
-          case 'N': buffer += padnum(3, base.$u / 1000); break;
+          case 'N': buffer += padnum(3, (base.$u / 1000)); break;
           case 'O': break;
           case 'p': buffer += lang.meridiem[(base.h < 12 ? 0 : 1)] || ''; break;
           case 'P': buffer += lang.meridiem[(base.h < 12 ? 2 : 3)] || ''; break;
@@ -368,7 +370,8 @@
 
   CGU.strftime = function (format, time) {
     format = CGU.limit(format, String) || '';
-    time   = new Date(CGU.limit(time, Date, Number, String) || new Date().getTime());
+    time   = CGU.is_a(time, Date) ? time.getTime() : time;
+    time   = new Date(CGU.limit(time, Number, String) || new Date().getTime());
     
     if (time != 0 && !time) return;
     if (!inrange(time, false)) return null;
@@ -378,7 +381,8 @@
 
   CGU.strfutc = function (format, time) {
     format = CGU.limit(format, String) || '';
-    time   = new Date(CGU.limit(time, Date, Number, String) || new Date().getTime());
+    time   = CGU.is_a(time, Date) ? time.getTime() : time;
+    time   = new Date(CGU.limit(time, Number, String) || new Date().getTime());
     
     if (time != 0 && !time) return;
     if (!inrange(time, true)) return null;

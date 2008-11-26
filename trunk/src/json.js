@@ -10,9 +10,12 @@
 
 (function JSON() { // enable private members
   
+  CGU.evalJSON = function (json) {
+    return eval('(' + json + ')');
+  };
+  
   CGU.fromJSON = function (json, strict) {
     strict = CGU.limit(strict, Boolean) || false;
-    
     if (CGU.is_a(json, String)) return null;
     
     var standard = {
@@ -50,40 +53,14 @@
     
     var errlen = 40;
     var kill = function (err) {
-      var msg = [
-        'JSON:', err,
-        [
-          '(',
-          (cuts + 1),
-          ': "',
-          json.substr(0, errlen),
-          (json.length > errlen ? '...' : ''),
-          '")'
-        ].join('')
-      ].join(' ');
-      throw new SyntaxError(msg);
+      var substr = json.substr(0, errlen) + (json.length > errlen ? '...' : '');
+      throw new SyntaxError(''.concat(
+        'JSON: ', err, ' (', (cuts + 1), ': "', substr, '")'
+      ));
     };
     
     var white = function () {
       return cut(reWhite);
-    };
-    
-    var keyword = function () {
-      var word = cut(reKeywd);
-      if (!(word.length > 0)) kill("Invalid keyword.");
-      return eval(word);
-    };
-    
-    var number = function () {
-      var num = cut(reNumber);
-      if (!(num.length > 0)) kill("Invalid Number.");
-      return eval(num);
-    };
-    
-    var string = function () {
-      var str = cut(reString);
-      if (!(str.length > 0)) kill("Invalid String.");
-      return eval(str);
     };
     
     var date = function () {
@@ -96,6 +73,7 @@
     var array = function () {
       var host = [];
       cut(/^\[/);
+      white();
       if (!(/^\]/).test(json)) {
         do {
           host.push(value());
@@ -111,22 +89,21 @@
       var host = {};
       
       var key = function () {
-        if (reString.test(json)) return string();
+        if (reString.test(json)) return eval(cut(reString));
         if (reObjKey.test(json)) return cut(reObjKey);
         kill("Invalid Object key.");
       };
       
       var pair = function () {
-        white();
         var k = key();
         white();
         if (!(cut(/^\:/).length > 0)) kill("Invalid Object. Expected ':'.");
         white();
-        var v = value();
-        host[k] = v;
+        host[k] = value();
       };
       
       cut(/^\{/);
+      white();
       if (!(/^\}/).test(json)) {
         do {
           pair();
@@ -142,9 +119,9 @@
       if ((/^\{/).test(json))  return object();
       if ((/^\[/).test(json))  return array();
       if (reDateTm.test(json)) return date();
-      if (reString.test(json)) return string();
-      if (reNumber.test(json)) return number();
-      if (reKeywd.test(json))  return keyword();
+      if (reString.test(json)) return eval(cut(reString));
+      if (reNumber.test(json)) return eval(cut(reNumber));
+      if (reKeywd.test(json))  return eval(cut(reKeywd));
       kill('Invalid value');
     };
     
@@ -158,18 +135,18 @@
     return start();
   };
   
-  CGU.toJSON = function (input, options) {
-    options = (function (o) { return {
-      allkey : CGU.limit(o.allkey, Boolean)         || false,
-      ascii  : CGU.limit(o.ascii,  Boolean)         || false,
-      relax  : CGU.limit(o.relax,  Boolean, Object) || false,
-      verify : CGU.limit(o.verify, Boolean)         || false
-    };})(options || {});
+/****************************************************************************/
+
+  CGU.toJSON = function (input, strict) {
+    strict = CGU.limit(strict, Boolean) || false;
     
-    var string = function (input) {
+    var date = function (input) {
+      return string(CGU.strfutc("%FT%T.%NZ", input));
+    };
+    
+    var str = function (input) {
       var result = '', enc;
-      var against = options.ascii ? /[\\"]|[^\x20-\x7e]/ : /[\\"]|[\x00-\x1f\x7f]/;
-      var specials = {
+      var escapes = {
         '"'  : '\\"',
         '\b' : '\\b',
         '\f' : '\\f',
@@ -179,11 +156,11 @@
         '\\' : '\\\\'
       };
       while (input.length > 0) {
-        if (match = input.match(against)) {
+        if (match = input.match(/[\\"]|[\x00-\x1f\x7f]/)) {
           enc = padnum(4, match[0].charCodeAt(0).toString(16));
           
           result += input.slice(0, match.index);
-          result += specials[match[0]] ? specials[match[0]] : ('\\u' + enc);
+          result += escapes[match[0]] ? escapes[match[0]] : ('\\u' + enc);
           input  = input.slice(match.index + match[0].length);
         } else {
           result += input; input = '';
@@ -192,12 +169,7 @@
       return '"' + result + '"';
     };
     
-    var date = function (input) {
-      if (!options.relax) return undefined;
-      return string(CGU.strfutc("%FT%T.%NZ", input));
-    };
-    
-    var array = function (input) {
+    var arr = function (input) {
       var elems = [], v;
       for (var i = 0; i < input.length; i += 1) {
         v = value(input[i]);
@@ -206,19 +178,23 @@
       return '[' + elems.join(', ') + ']';
     };
     
-    var object = function (input) {
+    var obj = function (input) {
       var key = function (k) {
-        if (options.relax)
-          if ((/^([0-9]+|[A-Za-z$_][A-Za-z0-9$_]*)$/).test(k))
-            return k.toString();
+        if (!strict && (/^([0-9]+|[A-Za-z$_][A-Za-z0-9$_]*)$/).test(k))
+          return k.toString();
         return string(k);
       };
       
-      var pairs = [], k, v;
+      var keys = [], pairs = [], i, k, v;
       for (var prop in input) {
-        if (options.allkey || input.propertyIsEnumerable(prop)) {
-          k = key(prop);
-          v = value(input[prop]);
+        if (prop === 'constructor') continue;
+        keys.push(prop);
+        keys = keys.sort();
+      }
+      for (i = 0; i < keys.length; i += 1) {
+        if (!input.propertyIsEnumerable || input.propertyIsEnumerable(keys[i])) {
+          k = key(keys[i]);
+          v = value(input[keys[i]]);
           if (CGU.is_a(v, String)) pairs.push(k + ': ' + v);
         }
       }
@@ -227,20 +203,19 @@
     
     var value = function (input) {
       switch (CGU.type(input)) {
-        case 'object'   : return object(input);
-        case 'array'    : return array(input);
+        case 'undefined': if (strict) return undefined;
+        case 'null'     :
+        case 'boolean'  :
+        case 'number'   : return ''.concat(input);
         case 'date'     : return date(input);
-        case 'string'   : return string(input);
-        case 'number'   :
-        case 'boolean'  : return input.toString();
-        case 'null'     : return 'null';
-        case 'undefined': if (options.relax) return 'undefined';
+        case 'string'   : return str(input);
+        case 'array'    : return arr(input);
+        case 'object'   : return obj(input);
         default : return undefined;
       }
     };
     
     var result = value(input);
-    if (options.verify) this.from(result, {relax : options.relax});
     return result;
   };
   
