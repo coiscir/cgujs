@@ -12,7 +12,7 @@ cycles.Time = {
         ]
       ]
     }, {
-      title: 'php',
+      title: 'phpdate',
       cases: [
         [
           'local 0000-01-01T00:00:00', '0000-01-01T00:00:00', function(){ return CGU.phpdate('Y-m-d\\TH:i:s', CGU.local(0, 0, 1, 0, 0, 0, 0)); }
@@ -29,7 +29,7 @@ cycles.Time = {
         ]
       ]
     }, {
-      title: 'posix',
+      title: 'strftime',
       cases: [
         [
           'local 0000-01-01T00:00:00', '0000-01-01T00:00:00', function(){ return CGU.strftime('%FT%T', CGU.local(0, 0, 1, 0, 0, 0, 0)); }
