@@ -29,7 +29,7 @@ end
 TIME = Time.now.utc
 
 def version
-  sprintf("%.04f", TIME.strftime("%y.%m%d").to_f)
+  sprintf("%.04f", TIME.strftime('%Y').to_i - 2000 + TIME.strftime("0.%m%d").to_f)
 end
 
 ################################################################################

@@ -27,7 +27,7 @@ cycles.Crypto = {
         ]
       ]
     }, {
-      title: 'hmac',
+      title: 'HMAC hash',
       cases: [
         [
           'MD5', '9294727a3638bb1c13f48ef8158bfc9d', function(){ return CGU.hash('md5', 'Hi There', {key: kx0b16}).hex(); }
