@@ -2,10 +2,25 @@
  *  CGU :: Crypto
  *    Cryptographic Hash and HMAC Algorithms
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *~~~ Algorithms
+ *----
+ *
+ *  MD4
+ *  MD5
+ *
+ *  SHA-1
+ *  SHA-224
+ *  SHA-256
+ *
+ *  RIPEMD-128
+ *  RIPEMD-160
+ *
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * MD4 (c) 1990 R. Rivest                                           [RFC 1320]
  * MD5 (c) 1992 R. Rivest                                           [RFC 1321]
  * SHA (c) 2006 The Internet Society                                [RFC 4634]
  * RMD (c) 1996 Hans Dobbertin, Antoon Bosselaers, and Bart Preneel
+ *
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *~~~ Methods
  *----
@@ -25,8 +40,82 @@
  *        unicode <Boolean>: Convert data from 16-bit to 8-bit.
  *
  *    Return: <<Sequence>>
+ *----
+ *
+ *  hash.algos -> Get a list of all available algorithms.
+ *
+ *    Syntax: Crypto.hash.algos()
+ *
+ *    Return: <Array>
  *
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**/
+
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  CGU :: Crypto :: Sequence
+ *    An object that enables various encodings for a hash.
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *~~~ Methods
+ *----
+ *
+ *  base16 / hex
+ *
+ *    Syntax: <<Sequence>>.base16([low])
+ *    Syntax: <<Sequence>>.hex()
+ *
+ *      low <Boolean>: If true, same as hex()
+ *
+ *    Return: <String>
+ *
+ *      base16: {0..9 A..F}
+ *      hex:    {0..9 a..f}
+ *----
+ *
+ *  base32 / base32hex
+ *
+ *    Syntax: <<Sequence>>.base32([hex])
+ *    Syntax: <<Sequence>>.base32hex()
+ *
+ *      hex <Boolean>: If true, same as base32hex()
+ *
+ *    Return: <String>
+ *
+ *      base32:    {A..Z 2..7}
+ *      base32hex: {0..9 a..v}
+ *----
+ *
+ *  base64 / base64url
+ *
+ *    Syntax: <<Sequence>>.base64([url])
+ *    Syntax: <<Sequence>>.base64url()
+ *
+ *      url <Boolean>: If true, same as base64url()
+ *
+ *    Return: <String>
+ *
+ *      base64:    {A..Z a..z 0..9 + /}
+ *      base64url: {A..Z a..z 0..9 - _}
+ *----
+ *
+ *  raw -> Get the hash in a byte array.
+ *
+ *    Return: <Array>
+ *----
+ *
+ *  str -> Get the hash in a String
+ *
+ *    Return: <String>
+ *
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *~~~ Overwritten Methods
+ *----
+ *
+ *  valueOf -> same as `raw`
+ *----
+ *
+ *  toString -> same as `hex`
+ *
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
 (function Crypto() { // enable private members
