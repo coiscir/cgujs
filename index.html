@@ -1,0 +1,44 @@
+<html>
+<head>
+  <title>CGU - Tests</title>
+  <style type="text/css">
+    pre {
+      font-size: 11px;
+    }
+    
+    .pass {
+      color: #0a0;
+    }
+    .fail {
+      color: #f00;
+    }
+  </style>
+</head>
+<body>
+
+<script src="bit64.js"></script>
+<script src="encode.js"></script>
+<script src="sha512.js"></script>
+<script type="text/javascript">
+document.write('<pre>');
+
+document.writeln('DDAF35A193617ABACC417349AE20413112E6FA4E89A97EA20A9EEEE64B55D39A2192992A274FC1A836BA3C23A3FEEBBD454D4423643CE80E2A9AC94FA54CA49F'.replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
+document.writeln(encode_base16(SHA512('abc')).replace(/([0-9A-F]{8}(?!$))/g, '$1 '));
+document.writeln();
+
+document.writeln('CF83E1357EEFB8BDF1542850D66D8007D620E4050B5715DC83F4A921D36CE9CE47D0D13C5D85F2B0FF8318D2877EEC2F63B931BD47417A81A538327AF927DA3E'.replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
+document.writeln(encode_base16(SHA512('')).replace(/([0-9A-F]{8}(?!$))/g, '$1 '));
+document.writeln();
+
+document.writeln(encode_hex(ENC([ADD([0x00000000, 0xffffffff], [0x00000000, 0xffffffff])])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
+document.writeln(encode_hex(ENC([AND([0xffffffff, 0x0000ffff], [0x0000ffff, 0xffffffff])])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
+document.writeln(encode_hex(ENC([OR ([0x0000ffff, 0x00000000], [0x0000ffff, 0xffff0000])])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
+document.writeln(encode_hex(ENC([XOR([0x0000ffff, 0x00000000], [0x0000ffff, 0xffff0000])])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
+document.writeln(encode_hex(ENC([NOT([0x0000ffff, 0x00000000])])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
+
+document.write('</pre>');
+</script>
+</script>
+
+</body>
+</html>
