@@ -24,10 +24,10 @@
       var S43 = 15;
       var S44 = 21;
       
-      var decode = FILO.decode;
-      var encode = FILO.encode;
+      var decode = BIT32.FILO.decode;
+      var encode = BIT32.FILO.encode;
       
-      var ROTL = CONV.ROTL;
+      var ROTL = BIT32.CONV.ROTL;
       
       var F = function (x, y, z) { return ((x & y) | ((~x) & z)); };
       var G = function (x, y, z) { return ((x & z) | (y & (~z))); };

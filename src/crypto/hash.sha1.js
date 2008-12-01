@@ -7,10 +7,10 @@
       
       var HASH = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0];
       
-      var decode = FIFO.decode;
-      var encode = FIFO.encode;
+      var decode = BIT32.FIFO.decode;
+      var encode = BIT32.FIFO.encode;
       
-      var ROTL = CONV.ROTL;
+      var ROTL = BIT32.CONV.ROTL;
       
       var F = function (t, b, c, d) {
         if (t < 20) return (b & c) | ((~b) & d);
