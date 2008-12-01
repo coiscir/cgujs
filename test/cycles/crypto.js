@@ -21,6 +21,8 @@ cycles.Crypto = {
         ], [
           'SHA-256', 'BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD', function(){ return CGU.hash('sha256', 'abc').base16(); }
         ], [
+          'SHA-512', 'DDAF35A193617ABACC417349AE20413112E6FA4E89A97EA20A9EEEE64B55D39A2192992A274FC1A836BA3C23A3FEEBBD454D4423643CE80E2A9AC94FA54CA49F', function(){ return CGU.hash('sha512', 'abc').base16(); }
+        ], [
           'RIPEMD-128', 'c14a12199c66e4ba84636b0f69144c77', function(){ return CGU.hash('ripemd128', 'abc').hex(); }
         ], [
           'RIPEMD-160', '8eb208f7e05d987a9b044a8e98c6b087f15a0bfc', function(){ return CGU.hash('ripemd160', 'abc').hex(); }
