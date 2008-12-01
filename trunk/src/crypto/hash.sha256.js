@@ -28,12 +28,12 @@
         0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
       ];
       
-      var decode = FIFO.decode;
-      var encode = FIFO.encode;
+      var decode = BIT32.FIFO.decode;
+      var encode = BIT32.FIFO.encode;
       
-      var ROTL = CONV.ROTL;
-      var ROTR = CONV.ROTR;
-      var SHR  = CONV.SHR;
+      var ROTL = BIT32.CONV.ROTL;
+      var ROTR = BIT32.CONV.ROTR;
+      var SHR  = BIT32.CONV.SHR;
       
       var BSIG0 = function (x) { return ROTR(x,  2) ^ ROTR(x, 13) ^ ROTR(x, 22); };
       var BSIG1 = function (x) { return ROTR(x,  6) ^ ROTR(x, 11) ^ ROTR(x, 25); };
