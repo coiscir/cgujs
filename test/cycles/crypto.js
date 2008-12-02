@@ -5,6 +5,8 @@ var kx0067 = '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x
 
 cycles.Crypto = {
   notes: [
+    '<a href="http://tools.ietf.org/html/rfc4634">RFC 4634 - Hash Tests</a>',
+    '<a href="http://tools.ietf.org/html/rfc4231">RFC 4231 - HMAC Tests</a>'
   ],
   tests: [
     {
@@ -20,6 +22,10 @@ cycles.Crypto = {
           'SHA-224', '23097D223405D8228642A477BDA255B32AADBCE4BDA0B3F7E36C9DA7', function(){ return CGU.hash('sha224', 'abc').base16(); }
         ], [
           'SHA-256', 'BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD', function(){ return CGU.hash('sha256', 'abc').base16(); }
+        ], [
+          'SHA-384', 'CB00753F45A35E8BB5A03D699AC65007272C32AB0EDED1631A8B605A43FF5BED8086072BA1E7CC2358BAECA134C825A7', function(){ return CGU.hash('sha384', 'abc').base16(); }
+        ], [
+          'SHA-512', 'DDAF35A193617ABACC417349AE20413112E6FA4E89A97EA20A9EEEE64B55D39A2192992A274FC1A836BA3C23A3FEEBBD454D4423643CE80E2A9AC94FA54CA49F', function(){ return CGU.hash('sha512', 'abc').base16(); }
         ], [
           'RIPEMD-128', 'c14a12199c66e4ba84636b0f69144c77', function(){ return CGU.hash('ripemd128', 'abc').hex(); }
         ], [
@@ -37,6 +43,10 @@ cycles.Crypto = {
           'SHA-224', '896fb1128abbdf196832107cd49df33f47b4b1169912ba4f53684b22', function(){ return CGU.hash('sha224', 'Hi There', {key: kx0b20}).hex(); }
         ], [
           'SHA-256', 'b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7', function(){ return CGU.hash('sha256', 'Hi There', {key: kx0b20}).hex(); }
+        ], [
+          'SHA-384', 'afd03944d84895626b0825f4ab46907f15f9dadbe4101ec682aa034c7cebc59cfaea9ea9076ede7f4af152e8b2fa9cb6', function(){ return CGU.hash('sha384', 'Hi There', {key: kx0b20}).hex(); }
+        ], [
+          'SHA-512', '87aa7cdea5ef619d4ff0b4241a1d6cb02379f4e2ce4ec2787ad0b30545e17cdedaa833b7d6b8a702038b274eaea3f4e4be9d914eeb61f1702e696c203a126854', function(){ return CGU.hash('sha512', 'Hi There', {key: kx0b20}).hex(); }
         ], [
           'RIPEMD-128', 'ad9db2c1e22af9ab5ca9dbe5a86f67dc', function(){ return CGU.hash('ripemd128', '', {key: kx00FF}).hex(); }
         ], [
