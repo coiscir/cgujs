@@ -5,7 +5,10 @@ encode_hex = function (input) {
     output += hx[(input[i] >> 4) & 0xf] || '?';
     output += hx[(input[i] >> 0) & 0xf] || '?';
   }
-  return output;
+  return output.
+    replace(/([0-9a-f]{128}(?!$))/g, '$1\n').
+    replace(/([0-9a-f]{16}(?!$))/gm, '$1 ').
+    replace(/([0-9a-f]{8})([0-9a-f]{8})/gm, '$1-$2');
 };
 
 encode_base16 = function (input) {

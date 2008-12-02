@@ -18,10 +18,12 @@
 
 <script src="bit64.js"></script>
 <script src="encode.js"></script>
+<script src="expect.js"></script>
 <script src="sha512.js"></script>
 <script type="text/javascript">
 document.write('<pre>');
 
+/*
 document.writeln('DDAF35A193617ABACC417349AE20413112E6FA4E89A97EA20A9EEEE64B55D39A2192992A274FC1A836BA3C23A3FEEBBD454D4423643CE80E2A9AC94FA54CA49F'.replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
 document.writeln(encode_base16(SHA512('abc')).replace(/([0-9A-F]{8}(?!$))/g, '$1 '));
 document.writeln();
@@ -30,11 +32,19 @@ document.writeln('CF83E1357EEFB8BDF1542850D66D8007D620E4050B5715DC83F4A921D36CE9
 document.writeln(encode_base16(SHA512('')).replace(/([0-9A-F]{8}(?!$))/g, '$1 '));
 document.writeln();
 
+document.writeln(encode_hex(ENC([NEW([0xff0000ff, 0xffff0000])])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
 document.writeln(encode_hex(ENC([ADD([0x00000000, 0xffffffff], [0x00000000, 0xffffffff])])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
 document.writeln(encode_hex(ENC([AND([0xffffffff, 0x0000ffff], [0x0000ffff, 0xffffffff])])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
 document.writeln(encode_hex(ENC([OR ([0x0000ffff, 0x00000000], [0x0000ffff, 0xffff0000])])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
 document.writeln(encode_hex(ENC([XOR([0x0000ffff, 0x00000000], [0x0000ffff, 0xffff0000])])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
 document.writeln(encode_hex(ENC([NOT([0x0000ffff, 0x00000000])])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
+document.writeln();
+
+document.writeln(encode_hex(ENC([])).replace(/([0-9a-f]{8}(?!$))/gi, '$1 '));
+document.writeln();
+*/
+
+SHA512('abc');
 
 document.write('</pre>');
 </script>
