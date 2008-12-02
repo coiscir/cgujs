@@ -5,31 +5,38 @@ NEW = function (x) {
   return [x[0] & 0xffffffff, x[1] & 0xffffffff];
 };
 
+LT = function (a, b) {
+  var c, d;
+  for (var i = 0; i < 32; i += 1) {
+    c = (a >> (31 - i)) & 0x1;
+    d = (b >> (31 - i)) & 0x1;
+    if (c == d) continue;
+    if (c < d) return true;
+    if (c > d) return false;
+  }
+  return false;
+};
+
 ADD = function (x, y) {
-  var b = (x[1] + y[1]) & 0xffffffff;
-  var a = (x[0] + y[0] + (b < x[1] ? 0x1 : 0x0)) & 0xffffffff;
+  var b = x[1] + y[1];
+  var a = x[0] + y[0] + (LT(b, x[1]) ? 0x1 : 0x0);
   return NEW([a, b]);
 };
 
 AND = function (x, y) {
-  var a = x[0] & y[0];
-  var b = x[1] & y[1];
-  return NEW([a, b]);
+  return NEW([x[0] & y[0], x[1] & y[1]]);
 };
 
 OR = function (x, y) {
-  var a = x[0] | y[0];
-  var b = x[1] | y[1];
-  return NEW([a, b]);
+  return NEW([x[0] | y[0], x[1] | y[1]]);
 };
 
 XOR = function (x, y) {
-  var a = x[0] ^ y[0];
-  var b = x[1] ^ y[1];
-  return NEW([a, b]);
+  return NEW([x[0] ^ y[0], x[1] ^ y[1]]);
 };
 
 NOT = function (x) {
+  return NEW([~x[0], ~x[1]]);
   var a = ~x[0];
   var b = ~x[1];
   return NEW([a, b]);

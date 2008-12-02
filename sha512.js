@@ -50,10 +50,14 @@ SHA512 = function (input) {
   ];
   
   var CH = function (x, y, z) {
-    return XOR(AND(x, y), AND(NOT(x), z));
+    var a = (x[0] & (y[0] ^ z[0])) ^ z[0];
+    var b = (x[1] & (y[1] ^ z[1])) ^ z[1];
+    return NEW([a, b]);
   };
   var MAJ = function (x, y, z) {
-    return XOR(AND(x, y), XOR(AND(x, z), AND(y, z)));
+    var a = (x[0] & (y[0] | z[0])) | (y[0] & z[0]);
+    var b = (x[1] & (y[1] | z[1])) | (y[1] & z[1]);
+    return NEW([a, b]);
   };
   
   var BSIG0 = function (x) {
@@ -78,7 +82,7 @@ SHA512 = function (input) {
   var padlen = ((length % 128) < 112 ? 112 : 240) - (length % 128);
   while (padding.length < padlen) padding += '\x00';
   
-  var a, b, c, d, e, f, g, h, t1, t2;
+  var a, b, c, d, e, f, g, h, t1, t2, t3, t4, t5;
   var x = [], w = [], i, t;
   
   var count1 = (bitlen / Math.pow(2, 32));
@@ -91,6 +95,11 @@ SHA512 = function (input) {
   ////////////
   // Update
   x = DEC(encode_raw(input));
+  
+  // debugging
+  document.writeln(encode_hex(ENC(EXPECT[1])));
+  document.writeln(encode_hex(ENC(x)));
+  document.writeln();
   
   for (i = 0; i < x.length; i += 16) {
     a = NEW(HASH[0]);
@@ -107,14 +116,23 @@ SHA512 = function (input) {
         w[t] = NEW(x[i+t]);
       } else {
         //w[t] = ADD(ADD(ADD(SSIG1(w[t-2]), w[t-7]), SSIG0(w[t-15])), w[t-16]);
-        w[t] = ADD(ADD(SSIG1(w[t-2]), w[t-7]), ADD(SSIG0(w[t-15]), w[t-16]))
+        w[t] = ADD(ADD(SSIG1(w[t-2]), w[t-7]), ADD(SSIG0(w[t-15]), w[t-16]));
       }
       
       //t1 = ADD(ADD(ADD(ADD(h, BSIG1(e)), CH(e, f, g)), K[t]), w[t]);
-      t1 = ADD(ADD(ADD(h, BSIG1(e)), CH(e, f, g)), ADD(K[t], w[t]));
+      //t1 = ADD(ADD(ADD(h, BSIG1(e)), CH(e, f, g)), ADD(K[t], w[t]));
+      t1 = BSIG1(e);
+      t2 = ADD(h, t1);
+      t3 = CH(e, f, g);
+      t4 = ADD(t2, t3);
+      t5 = ADD(K[t], w[t]);
+      t1 = ADD(t4, t5);
       
       //t2 = ADD(BSIG0(a), MAJ(a, b, c));
-      t2 = ADD(BSIG0(a), MAJ(a, b, c));
+      //t2 = ADD(BSIG0(a), MAJ(a, b, c));
+      t3 = BSIG0(a);
+      t4 = MAJ(a, b, c);
+      t2 = ADD(t3, t4);
       
       h = NEW(g);
       g = NEW(f);
@@ -124,6 +142,11 @@ SHA512 = function (input) {
       c = NEW(b);
       b = NEW(a);
       a = ADD(t1, t2);
+      
+      // debugging
+      document.writeln(encode_hex(ENC(EXPECT[t+2])));
+      document.writeln(encode_hex(ENC([a, b, c, d, e, f, g, h])));
+      document.writeln();
     }
     
     HASH[0] = ADD(HASH[0], a);
@@ -135,6 +158,11 @@ SHA512 = function (input) {
     HASH[6] = ADD(HASH[6], g);
     HASH[7] = ADD(HASH[7], h);
   }
+  
+  // debugging
+  document.writeln(encode_hex(ENC(EXPECT[0])));
+  document.writeln(encode_hex(ENC(HASH)));
+  document.writeln();
   
   return ENC(HASH);
 };
