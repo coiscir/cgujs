@@ -12,16 +12,11 @@ var locationSearch = '?' + locationSerial;
 
 cycles.Query = {
   notes: [
+    'Active Location: ' + CGU.toJSON(location),
+    'Cloned Location: ' + CGU.toJSON(CGU.location(null))
   ],
   tests: [
     {
-      title: 'location',
-      cases: [
-        [
-          'clone current', CGU.toJSON(location), function(){ return CGU.toJSON(CGU.location(null)); }
-        ]
-      ]
-    }, {
       title: 'query serial',
       cases: [
         [

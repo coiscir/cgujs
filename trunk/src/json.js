@@ -235,11 +235,9 @@
         keys = keys.sort();
       }
       for (i = 0; i < keys.length; i += 1) {
-        if (!input.propertyIsEnumerable || input.propertyIsEnumerable(keys[i])) {
-          k = key(keys[i]);
-          v = value(input[keys[i]]);
-          if (CGU.is_a(v, String)) pairs.push(k + ': ' + v);
-        }
+        k = key(keys[i]);
+        v = value(input[keys[i]]);
+        if (CGU.is_a(v, String)) pairs.push(k + ': ' + v);
       }
       return '{' + pairs.join(', ') + '}';
     };

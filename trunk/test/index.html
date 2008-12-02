@@ -73,6 +73,8 @@ var cycles = {};
 <script src="cycles/time.js"></script>
 <script type="text/javascript">
 
+var timerStart = CGU.local();
+
 (function () {
   for (var c in cycles) {
     document.write('<pre>');
@@ -83,6 +85,10 @@ var cycles = {};
     document.write('</pre>');
   };
 })();
+
+document.write('<pre>');
+document.writeln(CGU.local() - timerStart, 'ms');
+document.write('</pre>');
 </script>
 
 </body>
