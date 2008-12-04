@@ -27,7 +27,7 @@
  *~~~ Methods
  *----
  *
- *  hash -> Generate the cryptographic hash of the data.
+ *  hash -> Generate a cryptographic hash of given data.
  *
  *    Syntax: CGU.hash(algo, data [, options])
  *
@@ -37,14 +37,14 @@
  *
  *      options <Object>: Specify hash settings. (optional)
  *
- *        key <String>: Specify an HMAC key. HMAC is not used when key is unset.
+ *        hmac <String>: Specify an HMAC key. HMAC is not used when key is unset.
  *
  *        unicode <Boolean>: Convert data from 16-bit to 8-bit.
  *
  *    Return: <<Sequence>>
  *----
  *
- *  hashables -> Get a list of all available algorithms.
+ *  hashes -> Get a list of all available algorithms.
  *
  *    Syntax: Crypto.hashables()
  *
@@ -126,18 +126,20 @@
     algo = CGU.limit(algo, String);
     data = CGU.limit(data, String);
     options = (function (o) { return {
-      key     : CGU.limit(o.key,     String),
+      hmac    : CGU.limit(o.hmac,    String),
       unicode : CGU.limit(o.unicode, Boolean) || false
     };})(options || {});
     
+    if (CGU.is_a(algo, undefined) || CGU.is_a(data, undefined)) return;
+    
+    algo = ready(algo);
+    if (!valid(algo) || CGU.isof(Algos[algo], null, undefined)) return null;
+    
+    if (!options.unicode && data.match(/[^\x00-\xff]/)) return false;
+    
     return Sequence((function () {
-      if (CGU.is_a(algo, undefined) || CGU.is_a(data, undefined)) return;
-      
-      algo = ready(algo);
-      if (!valid(algo) || CGU.isof(Algos[algo], null, undefined)) return null;
-      
       // verify ascii data
-      if (options.unicode)
+      if (options.unicode) {
         data = (function () {
           for (var out = '', i = 0; i < data.length; i += 1) {
             out += String.fromCharCode((data.charCodeAt(i) >> 8) & 0xff);
@@ -145,11 +147,10 @@
           }
           return out;
         })();
-      else
-        if (data.match(/[^\x00-\xff]/)) return false;
+      }
       
       // revise data with HMAC key
-      if (CGU.is_a(options.key, String)) {
+      if (CGU.is_a(options.hmac, String)) {
         data = (function (key) {
           var block = Algos[algo].block, klen = key.length;
           var akey, i, ipad = [], opad = [];
@@ -162,14 +163,14 @@
           
           var ihash = Algos[algo].algo(Sequence(ipad).str() + data);
           return Sequence(opad).str() + Sequence(ihash).str();
-        })(options.key);
+        })(options.hmac);
       }
       
       return Algos[algo].algo(data);
     })());
   };
   
-  CGU.hashables = function () {
+  CGU.hashes = function () {
     var list = [];
     for (var algo in Algos)
       if (Algos.propertyIsEnumerable(algo))

@@ -5,13 +5,13 @@
  *~~~ Methods
  *----
  *
- *  local | utc -> Absolute Date creation.
+ *  local | utc -> Absolute time.
  *
  *    Syntax: Time.local([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])
  *
- *      (All parameters are optional. Default is '0000-01-01 00:00:00'.)
+ *      (All parameters are optional. Default is the current time.)
  *
- *    Return: <Number>: Epoch timestamp.
+ *    Return: <Number>: UNIX Epoch timestamp.
  *
  *----
  *
@@ -76,7 +76,7 @@
  *      <null>: Out of range. Range: Jan 1, 0000 to Dec 31, 9999.
  *----
  *
- *  strftime | strfutc -> POSIX date formatting. (Work-in-progress)
+ *  strftime | strfutc -> C/C++ date formatting.
  *
  *    Syntax: Time.strftime(format [, time])
  *
@@ -144,37 +144,27 @@
   CGU.local = function (yr, mn, dy, hr, mi, sc, ms) {
     var date = new Date();
     
-    if (arguments.length > 0) {
-      date.setFullYear(0, 0, 1);
-      date.setHours(0, 0, 0, 0);
-      
-      if (Number(yr)) date.setFullYear(yr);
-      if (Number(mn)) date.setMonth(mn);
-      if (Number(dy)) date.setDate(dy);
-      if (Number(hr)) date.setHours(hr);
-      if (Number(mi)) date.setMinutes(mi);
-      if (Number(sc)) date.setSeconds(sc);
-      if (Number(ms)) date.setMilliseconds(ms);
-    }
+    if (CGU.is_a(yr, Number)) date.setFullYear(yr);
+    if (CGU.is_a(mn, Number)) date.setMonth(mn);
+    if (CGU.is_a(dy, Number)) date.setDate(dy);
+    if (CGU.is_a(hr, Number)) date.setHours(hr);
+    if (CGU.is_a(mi, Number)) date.setMinutes(mi);
+    if (CGU.is_a(sc, Number)) date.setSeconds(sc);
+    if (CGU.is_a(ms, Number)) date.setMilliseconds(ms);
     
     return date.getTime();
   };
 
   CGU.utc = function (yr, mn, dy, hr, mi, sc, ms) {
     var date = new Date();
-    
-    if (arguments.length > 0) {
-      date.setUTCFullYear(0, 0, 1);
-      date.setUTCHours(0, 0, 0, 0);
       
-      if (Number(yr)) date.setUTCFullYear(yr);
-      if (Number(mn)) date.setUTCMonth(mn);
-      if (Number(dy)) date.setUTCDate(dy);
-      if (Number(hr)) date.setUTCHours(hr);
-      if (Number(mi)) date.setUTCMinutes(mi);
-      if (Number(sc)) date.setUTCSeconds(sc);
-      if (Number(ms)) date.setUTCMilliseconds(ms);
-    }
+    if (CGU.is_a(yr, Number)) date.setUTCFullYear(yr);
+    if (CGU.is_a(mn, Number)) date.setUTCMonth(mn);
+    if (CGU.is_a(dy, Number)) date.setUTCDate(dy);
+    if (CGU.is_a(hr, Number)) date.setUTCHours(hr);
+    if (CGU.is_a(mi, Number)) date.setUTCMinutes(mi);
+    if (CGU.is_a(sc, Number)) date.setUTCSeconds(sc);
+    if (CGU.is_a(ms, Number)) date.setUTCMilliseconds(ms);
     
     return date.getTime();
   };
