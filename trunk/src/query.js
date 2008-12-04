@@ -5,22 +5,22 @@
  *~~~ Methods
  *----
  *
- *  location -> Create a location clone object from a URI.
+ *  location -> Create a location clone from a URI.
  *
  *    Syntax: CGU.location(href)
  *
- *      href <String>: Create a location-like object from a URI.
+ *      href <String>: URI to create a location clone from.
  *
  *        <null>: Clone the global location.
  *
- *    Return: <Object>: List of values.
+ *    Return: <Object>: A location clone.
  *
  *      <null>: Invalid href string.
  *
  *      <undefined>: href was not specified.
  *----
  *
- *  param -> Create a query-string from an object's keys.
+ *  param -> Create a query-string from an object's properties.
  *
  *    Syntax: CGU.param(object [, complete])
  *
@@ -71,7 +71,7 @@
     
     var pathslash = (/\\/).test(window.location.pathname);
     
-    var seg = href.match(/^(?:([a-z\-]+:)\/\/)?(([a-z0-9\.]+)(?:\:(\d+))?)?(\/[^#?]*)?(\?[^#]*)?(\#.*)?$/i);
+    var seg = href.match(/^(?:([a-z\-]+:)\/\/)?(([a-z0-9\-\.]+)(?:\:(\d+))?)?(\/[^#?]*)?(\?[^#]*)?(\#.*)?$/i);
     if (!seg) return null;
     return {
       hash     : (seg[7] || ''),

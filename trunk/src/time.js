@@ -402,7 +402,8 @@
       X: '%H:%M:%S'
     }
   };
-  (function () {
+  
+  post.push(function () {
     var seg = function (name) { // segment from 3 to length - 1
       var segs = [];
       for (var i = (name.length - 1); i >= 3; i -= 1)
@@ -427,8 +428,8 @@
       }
       
       // 0 or space padding
-      var dyZr = (/09/).test(new Date(CGU.local(0, 0, 9))[f]());
-      var hrZr = (/09/).test(new Date(CGU.local(0, 0, 0, 9))[f]());
+      var dyZr = (/09/).test(new Date(CGU.local(0, 0, 9, 0, 0, 0, 0))[f]());
+      var hrZr = (/09/).test(new Date(CGU.local(0, 0, 0, 9, 0, 0, 0))[f]());
       
       return new Date(CGU.local(2000, 11, 31, 23, 30, 59, 999))[f]().
       // character replacements
@@ -470,7 +471,7 @@
     locale.local.c = conv('c') || '';
     locale.local.x = conv('x') || '';
     locale.local.X = conv('X') || '';
-  })();
+  });
   
   var inrange = function (time, utc) {
     if (utc) {

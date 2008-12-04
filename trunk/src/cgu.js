@@ -11,6 +11,8 @@ CGU = new (function () {
   this.Version = '<%= version %>';
   
   var CGU = this; // internal reference
+  
+  var post = [];
 
 <%= inc 2, true, INCS %>
   
@@ -23,4 +25,10 @@ CGU = new (function () {
   var padspc = function (l, n) { n=String(n); while(n.length<l) n=' '+n; return n; };
   var tumble = function (x, n) { x=ftoi(x); n=ftoi(n||0); return (x+n-1)%n; };
   var tumblesh = function (x, n) { return tumble(x, n) + 1; };
+  
+  (function () {
+    for (var i = 0; i < post.length; i += 1) {
+      post[i]();
+    };
+  })();
 })();
