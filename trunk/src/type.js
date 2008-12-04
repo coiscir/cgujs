@@ -35,7 +35,7 @@
  *    Return: <Boolean>: Object compared a type or Constructor.
  *----
  *
- *  limit -> Limit an object's type.
+ *  limit -> Limit an object to specific types.
  *
  *    Syntax: CGU.limit(object, compare [, ..])
  *

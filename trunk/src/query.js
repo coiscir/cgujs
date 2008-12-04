@@ -5,7 +5,7 @@
  *~~~ Methods
  *----
  *
- *  location -> Get all values for a key from the current query-string.
+ *  location -> Create a location clone object from a URI.
  *
  *    Syntax: CGU.location(href)
  *
@@ -20,7 +20,7 @@
  *      <undefined>: href was not specified.
  *----
  *
- *  param -> Convert an object's properties to a query-string.
+ *  param -> Create a query-string from an object's keys.
  *
  *    Syntax: CGU.param(object [, complete])
  *
@@ -31,7 +31,7 @@
  *    Return: <String>: Query-string of object's properties.
  *----
  *
- *  query -> Get all values for a key from the current query-string.
+ *  query -> Search a query-string for all values of a key.
  *
  *    Syntax: CGU.query(key [, href])
  *
