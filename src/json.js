@@ -31,7 +31,7 @@
  *    Return: <Mixed>
  *----
  *
- *  toJSON -> Create JSON-formatted string from an object.
+ *  toJSON -> Create a JSON-formatted string from an object.
  *
  *    Syntax: CGU.toJSON(input [, strict])
  *
@@ -184,7 +184,7 @@
     strict = CGU.limit(strict, Boolean) || false;
     
     var date = function (input) {
-      return string(CGU.strfutc("%FT%T.%NZ", input));
+      return str(CGU.strfutc("%FT%T.%NZ", input));
     };
     
     var str = function (input) {
@@ -225,7 +225,7 @@
       var key = function (k) {
         if (!strict && (/^([0-9]+|[A-Za-z$_][A-Za-z0-9$_]*)$/).test(k))
           return k.toString();
-        return string(k);
+        return str(k);
       };
       
       var keys = [], pairs = [], i, k, v;
