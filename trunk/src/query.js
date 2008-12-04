@@ -45,22 +45,9 @@
  *
  *      <undefined>: Invalid href.
  *
- *    Note: Use complete with param and serialize for valid href.
+ *    Note: Use complete with param and serialize for a valid href.
  *
  *      Example: CGU.query('foo', CGU.param({foo: 24}, true))
- *----
- *
- *  query.toObject -> Get an object representation of the query-string.
- *
- *    Syntax: CGU.query.toObject([href])
- *
- *      href <String>: Any URI accepted by CGU.location.
- *
- *        <null>: Use current location.
- *
- *    Return: <Object>: of key properties of value arrays.
- *
- *      <undefined>: Invalid href.
  *----
  *
  *  serialize -> Parameterize a Form's elements.
@@ -112,23 +99,6 @@
         if (key === decodeURIComponent(queries[i].split('=')[0]))
           matches.push(decodeURIComponent(queries[i].split('=')[1] || ''));
     return CGU.clone(matches);
-  };
-  
-  CGU.query.toObject = function (href) {
-    var location = CGU.location(CGU.limit(href, String) || null);
-    if (!location) return;
-    
-    var object = {}, k, v;
-    var queries = CGU.clone(location.search).replace(/^\?/, '').split(/\&/);
-    for (var i = 0; i < queries.length; i += 1) {
-      k = decodeURIComponent(queries[i].split('=')[0]);
-      v = decodeURIComponent(queries[i].split('=')[1]) || '';
-      if (k != '') {
-        object[k] = object[k] || [];
-        object[k].push(v);
-      }
-    }
-    return CGU.clone(object);
   };
   
   CGU.param = function (object, complete) {

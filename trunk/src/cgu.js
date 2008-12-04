@@ -3,7 +3,7 @@
  *  (c) 2008 Jonathan Lonowski
  *    http://code.google.com/p/cgujs/
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU is released under the MIT License.
+ *  CGU is released and distributable under the MIT License.
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 

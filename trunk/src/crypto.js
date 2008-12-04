@@ -44,9 +44,9 @@
  *    Return: <<Sequence>>
  *----
  *
- *  hash.algos -> Get a list of all available algorithms.
+ *  hashables -> Get a list of all available algorithms.
  *
- *    Syntax: Crypto.hash.algos()
+ *    Syntax: Crypto.hashables()
  *
  *    Return: <Array>
  *
@@ -169,7 +169,7 @@
     })());
   };
   
-  CGU.hash.algos = function () {
+  CGU.hashables = function () {
     var list = [];
     for (var algo in Algos)
       if (Algos.propertyIsEnumerable(algo))
