@@ -67,6 +67,8 @@
       
       <h1>JSON</h1>
       
+      <hr />
+      
       <h2>evalJSON</h2>
       
       <blockquote>
@@ -99,8 +101,10 @@
         <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">evalJSON</span><span class="pun">(</span><span class="str">'24'</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp;</span><span class="com">//=&gt; 24</span></code></pre>
         <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">evalJSON</span><span class="pun">(</span><span class="str">'[2, 4]'</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; [2, 4]</span></code></pre>
         <pre>&nbsp;</pre>
-        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">evalJSON</span><span class="pun">(</span><span class="str">'(function(){/*...*/})();'</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; function will execute</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">evalJSON</span><span class="pun">(</span><span class="str">'(function(){/*...*/})()'</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; function will execute</span></code></pre>
       </blockquote>
+      
+      <hr />
       
 <!-- Final: Content -->
       </div>
