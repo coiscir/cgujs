@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU - JSON - toJSON</title>
+  <script type="text/javascript" src="main.js"></script>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">Docs Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+      
+      <div class="navlist">
+        <h3>JSON</h3>
+        <ul>
+          <li><a href="function.evalJSON.html">evalJSON</a></li>
+          <li><a href="function.fromJSON.html">fromJSON</a></li>
+          <li class="active"><a href="function.toJSON.html">toJSON</a></li>
+        </ul>
+      </div>
+      
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utility.Cookie.html">Cookie</a></li>
+          <li><a href="utility.Crypto.html">Crypto</a></li>
+          <li><a href="utility.JSON.html">JSON</a></li>
+          <li><a href="utility.Query.html">Query</a></li>
+          <li><a href="utility.Time.html">Time</a></li>
+          <li><a href="utility.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+<!-- Start: Content -->
+      
+      <h1>JSON</h1>
+      
+      <h2>toJSON</h2>
+      
+      <blockquote>
+        <p>Create a JSON-formatted string from an object.</p>
+      </blockquote>
+      
+      <hr />
+      
+      <h3>Syntax</h3>
+      
+      <blockquote>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">toJSON</span><span class="pun">(</span><span class="pln">input </span><span class="pun">[,</span><span class="pln"> strict</span><span class="pun">])</span></code></pre>
+        
+        <blockquote>
+          <p><code><b>input</b> &lt;Mixed&gt;</code>: An object to be stringified.</p>
+          <p><code><b>strict</b> &lt;Boolean&gt;</code>: Only create <a href="http://json.org">JSON.org</a> specified JSON strings.</p>
+          <blockquote>
+            <p>Will not write <code>undefined</code> keyword.</p>
+            <p>Will not write object keys that are not string-formatted.</p>
+        </blockquote>
+      </blockquote>
+      
+      <h3>Return</h3>
+      
+      <blockquote>
+        <p><code>&lt;Mixed&gt;</code>: Actual type will depend on the JSON-string being parsed.</p>
+        <blockquote>
+          <p><code>&lt;SyntaxError&gt;</code>: <code>json</code> string is malformed. <i>(thrown)</i></p>
+        </blockquote>
+      </blockquote>
+      
+      <hr />
+      
+      <h3>Example</h3>
+      
+      <blockquote>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">toJSON</span><span class="pun">({</span><span class="pln">key</span><span class="pun">:</span><span class="pln"> </span><span class="str">"value"</span><span class="pun">,</span><span class="pln"> foo</span><span class="pun">:</span><span class="pln"> </span><span class="str">"bar"</span><span class="pun">,</span><span class="pln"> red</span><span class="pun">:</span><span class="pln"> </span><span class="lit">24.42</span><span class="pun">});</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">//=&gt; {foo: "bar", key: "value", red: 24.42}</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">toJSON</span><span class="pun">({</span><span class="pln">key</span><span class="pun">:</span><span class="pln"> </span><span class="str">"value"</span><span class="pun">,</span><span class="pln"> foo</span><span class="pun">:</span><span class="pln"> </span><span class="str">"bar"</span><span class="pun">,</span><span class="pln"> red</span><span class="pun">:</span><span class="pln"> </span><span class="lit">24.42</span><span class="pun">},</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; {"foo": "bar", "key": "value", "red": 24.42}</span></code></pre>
+        <pre>&nbsp;</pre>
+        <pre class="prettify"><code><span class="com">// excludes Function and RegExp Objects</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">toJSON</span><span class="pun">([</span><span class="kwd">function</span><span class="pun">(){},</span><span class="pln"> </span><span class="str">/pattern/</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">(</span><span class="lit">2008</span><span class="pun">,</span><span class="pln"> </span><span class="lit">11</span><span class="pun">,</span><span class="pln"> </span><span class="lit">31</span><span class="pun">,</span><span class="pln"> </span><span class="lit">23</span><span class="pun">,</span><span class="pln"> </span><span class="lit">59</span><span class="pun">,</span><span class="pln"> </span><span class="lit">59</span><span class="pun">)]);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; ["2009-01-01T05:59:59.000Z"]</span></code></pre>
+      </blockquote>
+      
+<!-- Final: Content -->
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
