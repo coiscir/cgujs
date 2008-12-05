@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU - Time - phpdate / phputc</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">Docs Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+      
+      <div class="navlist">
+        <h3>Time</h3>
+        <ul>
+          <li><a href="function.local-utc.html">local</a></li>
+          <li class="active"><a href="function.phpdate.html">phpdate</a></li>
+          <li class="active"><a href="function.phpdate.html">phputc</a></li>
+          <li><a href="function.strftime.html">strftime</a></li>
+          <li><a href="function.strftime.html">strfutc</a></li>
+          <li><a href="function.local-utc.html">utc</a></li>
+        </ul>
+      </div>
+      
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utility.Cookie.html">Cookie</a></li>
+          <li><a href="utility.Crypto.html">Crypto</a></li>
+          <li><a href="utility.JSON.html">JSON</a></li>
+          <li><a href="utility.Query.html">Query</a></li>
+          <li><a href="utility.Time.html">Time</a></li>
+          <li><a href="utility.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+<!-- Start: Content -->
+      
+      <h1>Time</h1>
+      
+      <hr />
+      
+      <h2>phpdate / phputc</h2>
+      
+      <blockquote>
+        <p>PHP <code>date()</code> formatting in local and UTC time.</p>
+      </blockquote>
+      
+      <hr />
+      
+      <h3>Syntax</h3>
+      
+      <blockquote>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">phpdate</span><span class="pun">(</span><span class="pln">format </span><span class="pun">[,</span><span class="pln"> time</span><span class="pun">])</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">phputc</span><span class="pun">(</span><span class="pln">format </span><span class="pun">[,</span><span class="pln"> time</span><span class="pun">])</span></code></pre>
+        
+        <blockquote>
+          <p><code><b>format</b> &lt;String&gt;</code>: A string representing the date format.</p>
+          <blockquote>
+            <h5>Day</h5>
+            <blockquote>
+              <p>
+                <code>d</code> - Day of the month, 2 digits with leading zeros <code>(01 - 31)</code><br />
+                <code>D</code> - A textual representation of a day, three letters <code>(Mon - Sun)</code><br />
+                <code>j</code> - Day of the month without leading zeros <code>(1 - 31)</code><br />
+                <code>l</code> - A full textual representation of the day of week <code>(Sunday - Saturday)</code><br />
+                <code>N</code> - ISO-8601 numeric representation of the day of the week <code>(1 - 7)</code><br />
+                <code>S</code> - English ordinal suffix for the day of the month <code>(st, nd, rd, th)</code><br />
+                <code>w</code> - Numeric representation of the day of the week <code>(0 - 6)</code><br />
+                <code>z</code> - The day of the year <code>(0 - 365)</code><br />
+              </p>
+            </blockquote>
+            
+            <h5>Week</h5>
+            <blockquote>
+              <p>
+                <code>W</code> - ISO-8601 week number of year, weeks starting on Monday <code>(00 - 53)</code><br />
+              </p>
+            </blockquote>
+            
+            <h5>Month</h5>
+            <blockquote>
+              <p>
+                <code>F</code> - A full textual representation of a month. <code>(January - December)</code><br />
+                <code>m</code> - Numeric representation of a month, with leading zeros. <code>(01 - 12)</code><br />
+                <code>M</code> - A short textual representation of a month. <code>(Jan - Dec)</code><br />
+                <code>n</code> - Numeric representation of a month, without leading zeros. <code>(1 - 12)</code><br />
+                <code>t</code> - Number of days in the given month. <code>(28 - 31)</code><br />
+              </p>
+            </blockquote>
+            
+            <h5>Year</h5>
+            <blockquote>
+              <p>
+                <code>L</code> - Whether it's a leap year. <code>(0 or 1)</code><br />
+                <code>O</code> - ISO-8601 year number.<br />
+                <code>y</code> - A full numeric representation of a year, 4 digits.<br />
+                <code>Y</code> - A two digit representation of a year.<br />
+              </p>
+            </blockquote>
+            
+            <h5>Time</h5>
+            <blockquote>
+              <p>
+                <code>a</code> - Lowercase meridiem. <code>(am or pm)</code><br />
+                <code>A</code> - Uppercase meridiem. <code>(AM or PM)</code><br />
+                <code>B</code> - Swatch Internet Time. <code>(000 - 999)</code><br />
+                <code>g</code> - 12-hour without leading zeros. <code>(1 - 12)</code><br />
+                <code>G</code> - 24-hour without leading zeros. <code>(0 - 23)</code><br />
+                <code>h</code> - 12-hour with leading zeros. <code>(01 - 12)</code><br />
+                <code>H</code> - 24-hour with leading zeros. <code>(00 - 23)</code><br />
+                <code>i</code> - Minutes with leading zeros. <code>(00 - 59)</code><br />
+                <code>s</code> - Seconds with leading zeros. <code>(00 - 59)</code><br />
+                <code>u</code> - Microseconds<br />
+              </p>
+            </blockquote>
+            
+            <h5>Timezone</h5>
+            <blockquote>
+              <p>
+                <code>e</code> - [unsupported] Timezone identifier.<br />
+                <code>I</code> - Whether daylight savings time. <code>(0 or 1)</code><br />
+                <code>O</code> - Difference to Greenwich time. <code>(e.g. +0200)</code><br />
+                <code>P</code> - Difference to Greenwich time. <code>(e.g. +02:00)</code><br />
+                <code>T</code> - [unsupported] Timezone abbreviation.<br />
+                <code>Z</code> - Timezone offset is seconds. <code>(-43200 - 50400)</code><br />
+              </p>
+            </blockquote>
+            
+            <h5>Full Date/Time</h5>
+            <blockquote>
+              <p>
+                <code>c</code> - ISO-8601 date. <code>(e.g. 2004-02-12T15:19:21+00:00)</code><br />
+                <code>r</code> - RFC 2822 date. <code>(e.g. Thu, 21 Dec 2000 16:01:07 +0200)</code><br />
+                <code>U</code> - Seconds since Unix Epoch.<br />
+              </p>
+            </blockquote>
+          </blockquote>
+          
+          <p><code><b>time</b> &lt;Date&gt;</code>: A date to format.</p>
+          <blockquote>
+            <p><code>&lt;Number&gt;</code>: Unix Epoch time in milliseconds.</p>
+            <p><code>&lt;null&gt;</code>: Use current time.</p>
+          </blockquote>
+      </blockquote>
+      
+      <h3>Return</h3>
+      
+      <blockquote>
+        <p><code>&lt;String&gt;</code>: A formatted date string.</p>
+        <blockquote>
+          <p><code>&lt;null&gt;</code>: Out of range: Jan 1, 0000 to Dec 31, 9999..</p>
+          <p><code>&lt;undefined&gt;</code>: Invalid <code>time</code>.</p>
+        </blockquote>
+      </blockquote>
+      
+      <hr />
+      
+<!-- Final: Content -->
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

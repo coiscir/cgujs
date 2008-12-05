@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU - Time - local / utc</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">Docs Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+      
+      <div class="navlist">
+        <h3>Time</h3>
+        <ul>
+          <li class="active"><a href="function.local-utc.html">local</a></li>
+          <li><a href="function.phpdate.html">phpdate</a></li>
+          <li><a href="function.phpdate.html">phputc</a></li>
+          <li><a href="function.strftime.html">strftime</a></li>
+          <li><a href="function.strftime.html">strfutc</a></li>
+          <li class="active"><a href="function.local-utc.html">utc</a></li>
+        </ul>
+      </div>
+      
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utility.Cookie.html">Cookie</a></li>
+          <li><a href="utility.Crypto.html">Crypto</a></li>
+          <li><a href="utility.JSON.html">JSON</a></li>
+          <li><a href="utility.Query.html">Query</a></li>
+          <li><a href="utility.Time.html">Time</a></li>
+          <li><a href="utility.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+<!-- Start: Content -->
+      
+      <h1>Time</h1>
+      
+      <hr />
+      
+      <h2>local / utc</h2>
+      
+      <blockquote>
+        <p>Absolute local and UTC time.</p>
+      </blockquote>
+      
+      <hr />
+      
+      <h3>Syntax</h3>
+      
+      <blockquote>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">local</span><span class="pun">([</span><span class="pln">yr </span><span class="pun">[,</span><span class="pln"> mn </span><span class="pun">[,</span><span class="pln"> dy </span><span class="pun">[,</span><span class="pln"> hr </span><span class="pun">[,</span><span class="pln"> mi </span><span class="pun">[,</span><span class="pln"> sc </span><span class="pun">[,</span><span class="pln"> ms</span><span class="pun">]]]]]]])</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">utc</span><span class="pun">([</span><span class="pln">yr </span><span class="pun">[,</span><span class="pln"> mn </span><span class="pun">[,</span><span class="pln"> dy </span><span class="pun">[,</span><span class="pln"> hr </span><span class="pun">[,</span><span class="pln"> mi </span><span class="pun">[,</span><span class="pln"> sc </span><span class="pun">[,</span><span class="pln"> ms</span><span class="pun">]]]]]]])</span></code></pre>
+        
+        <blockquote>
+          <p><code><b>yr</b> &lt;Number&gt;</code>: Full Year (<code>0 - 9999</code>).</p>
+          <p><code><b>mn</b> &lt;Number&gt;</code>: Month (<code>0 - 11</code>).</p>
+          <p><code><b>dy</b> &lt;Number&gt;</code>: Date (<code>1 - 31</code>).</p>
+          <p><code><b>hr</b> &lt;Number&gt;</code>: Hour (<code>0 - 23</code>).</p>
+          <p><code><b>mi</b> &lt;Number&gt;</code>: Minute (<code>0 - 59</code>).</p>
+          <p><code><b>sc</b> &lt;Number&gt;</code>: Second (<code>0 - 59</code>).</p>
+          <p><code><b>ms</b> &lt;Number&gt;</code>: Millisecond (<code>0 - 999</code>).</p>
+          <blockquote>
+            <p><code>&lt;null&gt;</code>: Any unspecified values will default to that value of the current time.</p>
+          </blockquote>
+      </blockquote>
+      
+      <h3>Return</h3>
+      
+      <blockquote>
+        <p><code>&lt;Number&gt;</code>: Unix Epoch time in milliseconds.</p>
+      </blockquote>
+      
+      <hr />
+      
+<!-- Final: Content -->
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

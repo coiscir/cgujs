@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU - Type - type</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">Docs Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+      
+      <div class="navlist">
+        <h3>Type</h3>
+        <ul>
+          <li><a href="function.clone.html">clone</a></li>
+          <li><a href="function.is_a.html">is_a</a></li>
+          <li><a href="function.isof.html">isof</a></li>
+          <li><a href="function.limit.html">limit</a></li>
+          <li class="active"><a href="function.type.html">type</a></li>
+          <li><a href="function.types.html">types</a></li>
+        </ul>
+      </div>
+      
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utility.Cookie.html">Cookie</a></li>
+          <li><a href="utility.Crypto.html">Crypto</a></li>
+          <li><a href="utility.JSON.html">JSON</a></li>
+          <li><a href="utility.Query.html">Query</a></li>
+          <li><a href="utility.Time.html">Time</a></li>
+          <li><a href="utility.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+<!-- Start: Content -->
+      
+      <h1>Type</h1>
+      
+      <hr />
+      
+      <h2>type</h2>
+      
+      <blockquote>
+        <p>Enhanced <code>typeof</code>.</p>
+      </blockquote>
+      
+      <hr />
+      
+      <h3>Syntax</h3>
+      
+      <blockquote>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">(</span><span class="pln">object</span><span class="pun">)</span></code></pre>
+        
+        <blockquote>
+          <p><code><b>object</b> &lt;Mixed&gt;</code>: The object being tested.</p>
+        </blockquote>
+      </blockquote>
+      
+      <h3>Return</h3>
+      
+      <blockquote>
+        <p><code>&lt;String&gt;</code>: The object's type.</p>
+      </blockquote>
+      
+      <hr />
+      
+      <h3>Example</h3>
+      
+      <blockquote>
+        <pre class="prettify"><code><span class="kwd">typeof</span><span class="pun">(</span><span class="kwd">undefined</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">//=&gt; 'undefined'</span></code></pre>
+        <pre class="prettify"><code><span class="kwd">typeof</span><span class="pun">(</span><span class="kwd">null</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com">//=&gt; 'object'</span></code></pre>
+        <pre class="prettify"><code><span class="kwd">typeof</span><span class="pun">([]);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com">//=&gt; 'object'</span></code></pre>
+        <pre class="prettify"><code><span class="kwd">typeof</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">());</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com">//=&gt; 'object'</span></code></pre>
+        <pre class="prettify"><code><span class="kwd">typeof</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Error</span><span class="pun">());</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">//=&gt; 'object'</span></code></pre>
+        <pre class="prettify"><code><span class="kwd">typeof</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(){});</span><span class="pln"> &nbsp; &nbsp; &nbsp; </span><span class="com">//=&gt; 'function'</span></code></pre>
+        <pre class="prettify"><code><span class="kwd">typeof</span><span class="pun">(</span><span class="str">/pattern/</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">//=&gt; 'object' or 'function'</span></code></pre>
+        <pre>&nbsp;</pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">(</span><span class="kwd">undefined</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">//=&gt; 'undefined'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">(</span><span class="kwd">null</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com">//=&gt; 'null'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">([]);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com">//=&gt; 'array'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">(</span><span class="kwd">true</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com">//=&gt; 'boolean'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">());</span><span class="pln"> &nbsp; &nbsp; &nbsp; </span><span class="com">//=&gt; 'date'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Error</span><span class="pun">());</span><span class="pln"> &nbsp; &nbsp; &nbsp;</span><span class="com">//=&gt; 'error'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">TypeError</span><span class="pun">());</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; 'error'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(){});</span><span class="pln"> &nbsp; &nbsp; </span><span class="com">//=&gt; 'function'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">(</span><span class="lit">0</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">//=&gt; 'number'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">({});</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com">//=&gt; 'object'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">(</span><span class="str">/pattern/</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">//=&gt; 'regexp'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">type</span><span class="pun">(</span><span class="str">''</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com">//=&gt; 'string'</span></code></pre>
+      </blockquote>
+      
+      <hr />
+      
+<!-- Final: Content -->
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

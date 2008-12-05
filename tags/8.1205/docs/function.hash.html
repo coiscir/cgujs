@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU - Crypto - hash</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">Docs Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+      
+      <div class="navlist">
+        <h3>Crypto</h3>
+        <ul>
+          <li class="active"><a href="function.hash.html">hash</a></li>
+          <li><a href="function.hashes.html">hashes</a></li>
+        </ul>
+      </div>
+      
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utility.Cookie.html">Cookie</a></li>
+          <li><a href="utility.Crypto.html">Crypto</a></li>
+          <li><a href="utility.JSON.html">JSON</a></li>
+          <li><a href="utility.Query.html">Query</a></li>
+          <li><a href="utility.Time.html">Time</a></li>
+          <li><a href="utility.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+<!-- Start: Content -->
+      
+      <h1>Crypto</h1>
+      
+      <hr />
+      
+      <h2>hash</h2>
+      
+      <blockquote>
+        <p>Generate a cryptographic hash of given data.</p>
+      </blockquote>
+      
+      <hr />
+      
+      <h3>Syntax</h3>
+      
+      <blockquote>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">hash</span><span class="pun">(</span><span class="pln">algo</span><span class="pun">,</span><span class="pln"> data </span><span class="pun">[,</span><span class="pln"> options</span><span class="pun">])</span></code></pre>
+        
+        <blockquote>
+          <p><code><b>algo</b> &lt;String&gt;</code>: Name of the algorithm to use.</p>
+          <p><code><b>data</b> &lt;String&gt;</code>: The data to be hashed.</p>
+          <p><code><b>options</b> &lt;Object&gt;</code>: Specify cookie options. <i>(optional)</i>
+          <blockquote>
+            <p><code><b>hmac</b> &lt;String&gt;</code>: Specify an HMAC key.
+            <blockquote>
+              <p><code>&lt;null&gt;</code>: Do not use HMAC.
+            </blockquote>
+            <p><code><b>unicode</b> &lt;Boolean&gt;</code>: Convert data from 16-bit to 8-bit before hashing.</p>
+          </blockquote>
+        </blockquote>
+      </blockquote>
+      
+      <h3>Return</h3>
+      
+      <blockquote>
+        <p><code>&lt;&lt;Sequence&gt;&gt;</code>: An anonymous object that enables various encodings for a hash.</p>
+        <blockquote>
+          <p><code>&lt;undefined&gt;</code>: Either <code>algo</code> or <code>data</code> were not specified.</p>
+          <p><code>&lt;null&gt;</code>: <code>algo</code> is not an available algorithm.</p>
+          <p><code>&lt;false&gt;</code>: <code>data</code> is not an 8-bit string and <code>options.unicode</code> is not used.</p>
+        </blockquote>
+      </blockquote>
+      
+      <hr />
+      
+      <h3>Example</h3>
+      
+      <blockquote>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">hash</span><span class="pun">(</span><span class="str">'md4'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'abc'</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; </span><span class="com">//=&gt; &lt;&lt;Sequence&gt;&gt;</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">hash</span><span class="pun">(</span><span class="str">'sha256'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'abc'</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; &lt;&lt;Sequence&gt;&gt;</span></code></pre>
+        <pre>&nbsp;</pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">hash</span><span class="pun">(</span><span class="str">'md5'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'abc'</span><span class="pun">).</span><span class="pln">hex</span><span class="pun">();</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">//=&gt; '900150983cd24fb0d6963f7d28e17f72'</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">hash</span><span class="pun">(</span><span class="str">'sha512'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'abc'</span><span class="pun">).</span><span class="pln">base16</span><span class="pun">();</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; 'DDAF35A193617ABACC417349AE204...'</span></code></pre>
+      </blockquote>
+      
+      <hr />
+      
+<!-- Final: Content -->
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>
