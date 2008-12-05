@@ -67,6 +67,8 @@
       
       <h1>JSON</h1>
       
+      <hr />
+      
       <h2>toJSON</h2>
       
       <blockquote>
@@ -107,8 +109,10 @@
         <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">toJSON</span><span class="pun">({</span><span class="pln">key</span><span class="pun">:</span><span class="pln"> </span><span class="str">"value"</span><span class="pun">,</span><span class="pln"> foo</span><span class="pun">:</span><span class="pln"> </span><span class="str">"bar"</span><span class="pun">,</span><span class="pln"> red</span><span class="pun">:</span><span class="pln"> </span><span class="lit">24.42</span><span class="pun">},</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; {"foo": "bar", "key": "value", "red": 24.42}</span></code></pre>
         <pre>&nbsp;</pre>
         <pre class="prettify"><code><span class="com">// excludes Function and RegExp Objects</span></code></pre>
-        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">toJSON</span><span class="pun">([</span><span class="kwd">function</span><span class="pun">(){},</span><span class="pln"> </span><span class="str">/pattern/</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">(</span><span class="lit">2008</span><span class="pun">,</span><span class="pln"> </span><span class="lit">11</span><span class="pun">,</span><span class="pln"> </span><span class="lit">31</span><span class="pun">,</span><span class="pln"> </span><span class="lit">23</span><span class="pun">,</span><span class="pln"> </span><span class="lit">59</span><span class="pun">,</span><span class="pln"> </span><span class="lit">59</span><span class="pun">)]);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; ["2009-01-01T05:59:59.000Z"]</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">toJSON</span><span class="pun">([</span><span class="kwd">function</span><span class="pun">(){},</span><span class="pln"> </span><span class="str">/pattern/</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">(</span><span class="lit">2008</span><span class="pun">,</span><span class="pln"> </span><span class="lit">11</span><span class="pun">,</span><span class="pln"> </span><span class="lit">31</span><span class="pun">,</span><span class="pln"> </span><span class="lit">23</span><span class="pun">,</span><span class="pln"> </span><span class="lit">59</span><span class="pun">,</span><span class="pln"> </span><span class="lit">59</span><span class="pun">)]);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; ["2009-01-01T05:59:59.000Z"] &nbsp;// CST</span></code></pre>
       </blockquote>
+      
+      <hr />
       
 <!-- Final: Content -->
       </div>

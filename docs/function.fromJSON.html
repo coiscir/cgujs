@@ -67,6 +67,8 @@
       
       <h1>JSON</h1>
       
+      <hr />
+      
       <h2>fromJSON</h2>
       
       <blockquote>
@@ -112,8 +114,10 @@
         <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">fromJSON</span><span class="pun">(</span><span class="str">'{foo: "bar"}'</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">//=&gt; {foo: "bar"}</span></code></pre>
         <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">fromJSON</span><span class="pun">(</span><span class="str">'{foo: "bar"}'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; throw SyntaxError</span></code></pre>
         <pre>&nbsp;</pre>
-        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">fromJSON</span><span class="pun">(</span><span class="str">'(function(){/*...*/})();'</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; throw SyntaxError</span></code></pre>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">fromJSON</span><span class="pun">(</span><span class="str">'(function(){/*...*/})()'</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; throw SyntaxError</span></code></pre>
       </blockquote>
+      
+      <hr />
       
 <!-- Final: Content -->
       </div>
