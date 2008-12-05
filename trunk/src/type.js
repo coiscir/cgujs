@@ -23,16 +23,16 @@
  *      compare <String>: A type.
  *      compare <Function>: A constructor.
  *
- *    Return: <Boolean>: Object compared the type or Constructor.
+ *    Return: <Boolean>: The object compared to the type or Constructor.
  *----
  *
  *  isof -> Multiple is_a with OR testing.
  *
- *    Syntax: CGU.isof(object, compare [, ..])
+ *    Syntax: CGU.isof(object, compare [, ...])
  *
  *      Arguments are the same as is_a.
  *
- *    Return: <Boolean>: Object compared a type or Constructor.
+ *    Return: <Boolean>: The object compared to a type or Constructor.
  *----
  *
  *  limit -> Limit an object to specific types.

@@ -1,5 +1,6 @@
 cycles.Type = {
   notes: [
+    'types: ' + CGU.toJSON(CGU.types())
   ],
   tests: [
     {

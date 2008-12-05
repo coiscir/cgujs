@@ -7,7 +7,7 @@
  *
  *  local | utc -> Absolute time.
  *
- *    Syntax: Time.local([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])
+ *    Syntax: CGU.local([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])
  *
  *      (All parameters are optional. Default is the current time.)
  *
@@ -19,7 +19,7 @@
  *
  *    Note: phpdate and phputc are English-only.
  *
- *    Syntax: Time.phpdate(format [, time])
+ *    Syntax: CGU.phpdate(format [, time])
  *
  *      format <String>: A string representing the date format.
  *
@@ -67,7 +67,7 @@
  *        r - RFC 2822 date. (e.g. Thu, 21 Dec 2000 16:01:07 +0200)
  *        U - Seconds since Unix Epoch.
  *
- *      time <Mixed>: A date value. <Date>, <Number>, or <String>.
+ *      time <Mixed>: A date value. <Date> or <Number>.
  *
  *    Return: <String>: A formatted date string.
  *
@@ -78,7 +78,7 @@
  *
  *  strftime | strfutc -> C/C++ date formatting.
  *
- *    Syntax: Time.strftime(format [, time])
+ *    Syntax: CGU.strftime(format [, time])
  *
  *      format <String>: A string representing the date format.
  *
@@ -128,11 +128,11 @@
  *        %Z - [unsupported] Timezone name.
  *        %% - Percent sign.
  *
- *      time <Mixed>: A date value. <Date>, <Number>, or <String>.
+ *      time <Mixed>: A date value. <Date> or <Number>.
  *
  *    Return: <String>: A formatted date string.
  *
- *      <undefined>: `time` created an invalid .
+ *      <undefined>: Invalid `time`.
  *
  *      <null>: Out of range. Range: Jan 1, 0000 to Dec 31, 9999.
  *
@@ -260,7 +260,7 @@
   CGU.phpdate = function (format, time) {
     format = CGU.limit(format, String) || '';
     time   = CGU.is_a(time, Date) ? time.getTime() : time;
-    time   = new Date(CGU.limit(time, Number, String) || new Date().getTime());
+    time   = new Date(CGU.limit(time, Number) || new Date().getTime());
     
     if (time != 0 && !time) return;
     if (!inrange(time, false)) return null;
@@ -271,7 +271,7 @@
   CGU.phputc = function (format, time) {
     format = CGU.limit(format, String) || '';
     time   = CGU.is_a(time, Date) ? time.getTime() : time;
-    time   = new Date(CGU.limit(time, Number, String) || new Date().getTime());
+    time   = new Date(CGU.limit(time, Number) || new Date().getTime());
     
     if (time != 0 && !time) return;
     if (!inrange(time, true)) return null;
@@ -361,7 +361,7 @@
   CGU.strftime = function (format, time) {
     format = CGU.limit(format, String) || '';
     time   = CGU.is_a(time, Date) ? time.getTime() : time;
-    time   = new Date(CGU.limit(time, Number, String) || new Date().getTime());
+    time   = new Date(CGU.limit(time, Number) || new Date().getTime());
     
     if (time != 0 && !time) return;
     if (!inrange(time, false)) return null;
@@ -372,7 +372,7 @@
   CGU.strfutc = function (format, time) {
     format = CGU.limit(format, String) || '';
     time   = CGU.is_a(time, Date) ? time.getTime() : time;
-    time   = new Date(CGU.limit(time, Number, String) || new Date().getTime());
+    time   = new Date(CGU.limit(time, Number) || new Date().getTime());
     
     if (time != 0 && !time) return;
     if (!inrange(time, true)) return null;
