@@ -26,9 +26,5 @@ CGU = new (function () {
   var tumble = function (x, n) { x=ftoi(x); n=ftoi(n||0); return (x+n-1)%n; };
   var tumblesh = function (x, n) { return tumble(x, n) + 1; };
   
-  (function () {
-    for (var i = 0; i < post.length; i += 1) {
-      post[i]();
-    };
-  })();
+  (function(){ for (var i = 0; i < post.length; i += 1) { post[i](); } })();
 })();
