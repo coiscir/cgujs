@@ -45,6 +45,7 @@
   
   var decode = BIT64.FIFO.decode;
   var encode = BIT64.FIFO.encode;
+  var padded = BIT64.FIFO.padded;
   
   var ROTL = BIT64.CONV.ROTL;
   var ROTR = BIT64.CONV.ROTR;
@@ -94,26 +95,12 @@
       
       ////////////
       // Init
-      var length = input.length;
-      var bitlen = length * 8;
-      
-      var padding = '\x80';
-      var padlen = ((length % 128) < 112 ? 112 : 240) - (length % 128);
-      while (padding.length < padlen) padding += '\x00';
-      
       var a, b, c, d, e, f, g, h, t1, t2;
       var x = [], w = [], i, t;
       
-      var count1 = (bitlen / Math.pow(2, 32));
-      var count2 = (count1 / Math.pow(2, 32));
-      var count3 = (count2 / Math.pow(2, 32));
-      input += padding;
-      input += Sequence(encode([[count3 & 0xffffffff, count2 & 0xffffffff]])).str();
-      input += Sequence(encode([[count1 & 0xffffffff, bitlen & 0xffffffff]])).str();
-      
       ////////////
       // Update
-      x = decode((Sequence(input)).raw());
+      x = decode((Sequence(padded(input))).raw());
       
       for (i = 0; i < x.length; i += 16) {
         a = NEW(HASH[0]);
@@ -175,26 +162,12 @@
       
       ////////////
       // Init
-      var length = input.length;
-      var bitlen = length * 8;
-      
-      var padding = '\x80';
-      var padlen = ((length % 128) < 112 ? 112 : 240) - (length % 128);
-      while (padding.length < padlen) padding += '\x00';
-      
       var a, b, c, d, e, f, g, h, t1, t2;
       var x = [], w = [], i, t;
       
-      var count1 = (bitlen / Math.pow(2, 32));
-      var count2 = (count1 / Math.pow(2, 32));
-      var count3 = (count2 / Math.pow(2, 32));
-      input += padding;
-      input += Sequence(encode([[count3 & 0xffffffff, count2 & 0xffffffff]])).str();
-      input += Sequence(encode([[count1 & 0xffffffff, bitlen & 0xffffffff]])).str();
-      
       ////////////
       // Update
-      x = decode((Sequence(input)).raw());
+      x = decode((Sequence(padded(input))).raw());
       
       for (i = 0; i < x.length; i += 16) {
         a = NEW(HASH[0]);
