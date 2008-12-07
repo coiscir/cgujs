@@ -1,6 +1,6 @@
 cycles.Cookie = {
   notes: [
-    'Cookies may be disabled in Google Chrome for local files.'
+    'Cookies may be disabled for local files.'
   ],
   tests: [
     {

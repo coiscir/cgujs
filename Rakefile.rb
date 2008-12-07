@@ -4,11 +4,9 @@ require 'rake'
 # Prepare
 ####
 ROOT = File.expand_path(File.dirname(__FILE__))
-LIBS = File.join(ROOT, 'lib')
-SRCS = File.join(ROOT, 'src')
 
-FINAL = File.join(LIBS, 'cgu.js')
-START = File.join(SRCS, 'cgu.js')
+FINAL = File.join(ROOT, 'lib', 'cgu.js')
+START = File.join(ROOT, 'src', 'cgu.js')
 
 INCS = [
   'type.js',
@@ -29,7 +27,8 @@ end
 TIME = Time.now.utc
 
 def version
-  sprintf("%.04f", TIME.strftime('%Y').to_i - 2000 + TIME.strftime("0.%m%d").to_f)
+  # functions until 2100-01-01
+  sprintf("%.04f", TIME.strftime('%y.%m%d').to_f)
 end
 
 ################################################################################
