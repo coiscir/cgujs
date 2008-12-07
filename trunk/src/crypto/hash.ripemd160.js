@@ -7,231 +7,103 @@
       
       var HASH = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0];
       
+      var S = [
+        11, 14, 15, 12,  5,  8,  7,  9, 11, 13, 14, 15,  6,  7,  9,  8, // round 1
+         7,  6,  8, 13, 11,  9,  7, 15,  7, 12, 15,  9, 11,  7, 13, 12, // round 2
+        11, 13,  6,  7, 14,  9, 13, 15, 14,  8, 13,  6,  5, 12,  7,  5, // round 3
+        11, 12, 14, 15, 14, 15,  9,  8,  9, 14,  5,  6,  8,  6,  5, 12, // round 4
+         9, 15,  5, 11,  6,  8, 13, 12,  5, 12, 13, 14, 11,  8,  5,  6, // round 5
+         8,  9,  9, 11, 13, 15, 15,  5,  7,  7,  8, 11, 14, 14, 12,  6, // parallel round 1
+         9, 13, 15,  7, 12,  8,  9, 11,  7,  7, 12,  7,  6, 15, 13, 11, // parallel round 2
+         9,  7, 15, 11,  8,  6,  6, 14, 12, 13,  5, 14, 13, 13,  7,  5, // parallel round 3
+        15,  5,  8, 11, 14, 14,  6, 14,  6,  9, 12,  9, 12,  5, 15,  8, // parallel round 4
+         8,  5, 12,  9, 12,  5, 14,  6,  8, 13,  6,  5, 15, 13, 11, 11  // parallel round 5
+      ];
+      
+      var X = [
+         0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, // round 1
+         7,  4, 13,  1, 10,  6, 15,  3, 12,  0,  9,  5,  2, 14, 11,  8, // round 2
+         3, 10, 14,  4,  9, 15,  8,  1,  2,  7,  0,  6, 13, 11,  5, 12, // round 3
+         1,  9, 11, 10,  0,  8, 12,  4, 13,  3,  7, 15, 14,  5,  6,  2, // round 4
+         4,  0,  5,  9,  7, 12,  2, 10, 14,  1,  3,  8, 11,  6, 15, 13, // round 5
+         5, 14,  7,  0,  9,  2, 11,  4, 13,  6, 15,  8,  1, 10,  3, 12, // parallel round 1
+         6, 11,  3,  7,  0, 13,  5, 10, 14, 15,  8, 12,  4,  9,  1,  2, // parallel round 2
+        15,  5,  1,  3,  7, 14,  6,  9, 11,  8, 12,  2, 10,  0,  4, 13, // parallel round 3
+         8,  6,  4,  1,  3, 11, 15,  0,  5, 12,  2, 13,  9,  7, 10, 14, // parallel round 4
+        12, 15, 10,  4,  1,  5,  8,  7,  6,  2, 13, 14,  0,  3,  9, 11  // parallel round 5
+      ];
+      
+      var F = function (t, x, y, z) {
+        t = t < 80 ? t : 80 - (t % 80) - 1;
+        if (t <  16) return (x ^ y ^ z);
+        if (t <  32) return (x & y) | ((~x) & z);
+        if (t <  48) return ((x | (~y)) ^ z);
+        if (t <  64) return (x & z) | (y & (~z));
+        if (t <  80) return (x ^ (y | (~z)));
+      };
+      
+      var K = function (t) {
+        if (t <  16) return 0x00000000; // FF
+        if (t <  32) return 0x5a827999; // GG
+        if (t <  48) return 0x6ed9eba1; // HH
+        if (t <  64) return 0x8f1bbcdc; // II
+        if (t <  80) return 0xa953fd4e; // JJ
+        if (t <  96) return 0x50a28be6; // JJJ
+        if (t < 112) return 0x5c4dd124; // III
+        if (t < 128) return 0x6d703ef3; // HHH
+        if (t < 144) return 0x7a6d76e9; // GGG
+        if (t < 160) return 0x00000000; // FFF
+      };
+      
       var decode = BIT32.FILO.decode;
       var encode = BIT32.FILO.encode;
       var padded = BIT32.FILO.padded;
       
       var ROL = BIT32.CONV.ROTL;
       
-      var F = function (x, y, z) { return (x ^ y ^ z); };
-      var G = function (x, y, z) { return ((x & y) | ((~x) & z)); };
-      var H = function (x, y, z) { return ((x | (~y)) ^ z); };
-      var I = function (x, y, z) { return ((x & z) | (y & (~z))); };
-      var J = function (x, y, z) { return (x ^ (y | (~z))); };
-      
-      /* left */
-      var FF = 0x00000000;
-      var GG = 0x5a827999;
-      var HH = 0x6ed9eba1;
-      var II = 0x8f1bbcdc;
-      var JJ = 0xa953fd4e;
-      
-      /* right */
-      var JJJ = 0x50a28be6;
-      var III = 0x5c4dd124;
-      var HHH = 0x6d703ef3;
-      var GGG = 0x7a6d76e9;
-      var FFF = 0x00000000;
-      
-      var C = function (f, k, a, b, c, d, e, x, s) {
-        return ROL((a + f(b, c, d) + x + k), s) + e;
+      var C = function (t, a, b, c, d, e, x) {
+        return ROL((a + F(t, b, c, d) + x + K(t)), S[t]) + e;
       };
       
       ////////////
       // Init
       var aa, bb, cc, dd, ee, aaa, bbb, ccc, ddd, eee;
-      var x = [], i;
+      var x = [], i, t, tmp;
       
       ////////////
       // Update
       x = decode((Sequence(padded(input))).raw());
       
-      for (i = 0; i < x.length; i += 16) {
+      for (i = 0, t = 0; i < x.length; i += 16, t = 0) {
         aa = aaa = HASH[0];
         bb = bbb = HASH[1];
         cc = ccc = HASH[2];
         dd = ddd = HASH[3];
         ee = eee = HASH[4];
         
-        /* round 1 */
-        aa = C(F, FF, aa, bb, cc, dd, ee, x[i+ 0], 11);          cc = ROL(cc, 10);
-        ee = C(F, FF, ee, aa, bb, cc, dd, x[i+ 1], 14);          bb = ROL(bb, 10);
-        dd = C(F, FF, dd, ee, aa, bb, cc, x[i+ 2], 15);          aa = ROL(aa, 10);
-        cc = C(F, FF, cc, dd, ee, aa, bb, x[i+ 3], 12);          ee = ROL(ee, 10);
-        bb = C(F, FF, bb, cc, dd, ee, aa, x[i+ 4],  5);          dd = ROL(dd, 10);
-        aa = C(F, FF, aa, bb, cc, dd, ee, x[i+ 5],  8);          cc = ROL(cc, 10);
-        ee = C(F, FF, ee, aa, bb, cc, dd, x[i+ 6],  7);          bb = ROL(bb, 10);
-        dd = C(F, FF, dd, ee, aa, bb, cc, x[i+ 7],  9);          aa = ROL(aa, 10);
-        cc = C(F, FF, cc, dd, ee, aa, bb, x[i+ 8], 11);          ee = ROL(ee, 10);
-        bb = C(F, FF, bb, cc, dd, ee, aa, x[i+ 9], 13);          dd = ROL(dd, 10);
-        aa = C(F, FF, aa, bb, cc, dd, ee, x[i+10], 14);          cc = ROL(cc, 10);
-        ee = C(F, FF, ee, aa, bb, cc, dd, x[i+11], 15);          bb = ROL(bb, 10);
-        dd = C(F, FF, dd, ee, aa, bb, cc, x[i+12],  6);          aa = ROL(aa, 10);
-        cc = C(F, FF, cc, dd, ee, aa, bb, x[i+13],  7);          ee = ROL(ee, 10);
-        bb = C(F, FF, bb, cc, dd, ee, aa, x[i+14],  9);          dd = ROL(dd, 10);
-        aa = C(F, FF, aa, bb, cc, dd, ee, x[i+15],  8);          cc = ROL(cc, 10);
+        /* left */
+        for (; t < 80; t += 1) {
+          aa = C(t, aa, bb, cc, dd, ee, x[i+X[t]]);
+          
+          tmp = ee;
+          ee = dd;
+          dd = ROL(cc, 10);
+          cc = bb;
+          bb = aa;
+          aa = tmp;
+        }
         
-        /* round 2 */
-        ee = C(G, GG, ee, aa, bb, cc, dd, x[i+ 7],  7);          bb = ROL(bb, 10);
-        dd = C(G, GG, dd, ee, aa, bb, cc, x[i+ 4],  6);          aa = ROL(aa, 10);
-        cc = C(G, GG, cc, dd, ee, aa, bb, x[i+13],  8);          ee = ROL(ee, 10);
-        bb = C(G, GG, bb, cc, dd, ee, aa, x[i+ 1], 13);          dd = ROL(dd, 10);
-        aa = C(G, GG, aa, bb, cc, dd, ee, x[i+10], 11);          cc = ROL(cc, 10);
-        ee = C(G, GG, ee, aa, bb, cc, dd, x[i+ 6],  9);          bb = ROL(bb, 10);
-        dd = C(G, GG, dd, ee, aa, bb, cc, x[i+15],  7);          aa = ROL(aa, 10);
-        cc = C(G, GG, cc, dd, ee, aa, bb, x[i+ 3], 15);          ee = ROL(ee, 10);
-        bb = C(G, GG, bb, cc, dd, ee, aa, x[i+12],  7);          dd = ROL(dd, 10);
-        aa = C(G, GG, aa, bb, cc, dd, ee, x[i+ 0], 12);          cc = ROL(cc, 10);
-        ee = C(G, GG, ee, aa, bb, cc, dd, x[i+ 9], 15);          bb = ROL(bb, 10);
-        dd = C(G, GG, dd, ee, aa, bb, cc, x[i+ 5],  9);          aa = ROL(aa, 10);
-        cc = C(G, GG, cc, dd, ee, aa, bb, x[i+ 2], 11);          ee = ROL(ee, 10);
-        bb = C(G, GG, bb, cc, dd, ee, aa, x[i+14],  7);          dd = ROL(dd, 10);
-        aa = C(G, GG, aa, bb, cc, dd, ee, x[i+11], 13);          cc = ROL(cc, 10);
-        ee = C(G, GG, ee, aa, bb, cc, dd, x[i+ 8], 12);          bb = ROL(bb, 10);
-        
-        /* round 3 */
-        dd = C(H, HH, dd, ee, aa, bb, cc, x[i+ 3], 11);          aa = ROL(aa, 10);
-        cc = C(H, HH, cc, dd, ee, aa, bb, x[i+10], 13);          ee = ROL(ee, 10);
-        bb = C(H, HH, bb, cc, dd, ee, aa, x[i+14],  6);          dd = ROL(dd, 10);
-        aa = C(H, HH, aa, bb, cc, dd, ee, x[i+ 4],  7);          cc = ROL(cc, 10);
-        ee = C(H, HH, ee, aa, bb, cc, dd, x[i+ 9], 14);          bb = ROL(bb, 10);
-        dd = C(H, HH, dd, ee, aa, bb, cc, x[i+15],  9);          aa = ROL(aa, 10);
-        cc = C(H, HH, cc, dd, ee, aa, bb, x[i+ 8], 13);          ee = ROL(ee, 10);
-        bb = C(H, HH, bb, cc, dd, ee, aa, x[i+ 1], 15);          dd = ROL(dd, 10);
-        aa = C(H, HH, aa, bb, cc, dd, ee, x[i+ 2], 14);          cc = ROL(cc, 10);
-        ee = C(H, HH, ee, aa, bb, cc, dd, x[i+ 7],  8);          bb = ROL(bb, 10);
-        dd = C(H, HH, dd, ee, aa, bb, cc, x[i+ 0], 13);          aa = ROL(aa, 10);
-        cc = C(H, HH, cc, dd, ee, aa, bb, x[i+ 6],  6);          ee = ROL(ee, 10);
-        bb = C(H, HH, bb, cc, dd, ee, aa, x[i+13],  5);          dd = ROL(dd, 10);
-        aa = C(H, HH, aa, bb, cc, dd, ee, x[i+11], 12);          cc = ROL(cc, 10);
-        ee = C(H, HH, ee, aa, bb, cc, dd, x[i+ 5],  7);          bb = ROL(bb, 10);
-        dd = C(H, HH, dd, ee, aa, bb, cc, x[i+12],  5);          aa = ROL(aa, 10);
-        
-        /* round 4 */
-        cc = C(I, II, cc, dd, ee, aa, bb, x[i+ 1], 11);          ee = ROL(ee, 10);
-        bb = C(I, II, bb, cc, dd, ee, aa, x[i+ 9], 12);          dd = ROL(dd, 10);
-        aa = C(I, II, aa, bb, cc, dd, ee, x[i+11], 14);          cc = ROL(cc, 10);
-        ee = C(I, II, ee, aa, bb, cc, dd, x[i+10], 15);          bb = ROL(bb, 10);
-        dd = C(I, II, dd, ee, aa, bb, cc, x[i+ 0], 14);          aa = ROL(aa, 10);
-        cc = C(I, II, cc, dd, ee, aa, bb, x[i+ 8], 15);          ee = ROL(ee, 10);
-        bb = C(I, II, bb, cc, dd, ee, aa, x[i+12],  9);          dd = ROL(dd, 10);
-        aa = C(I, II, aa, bb, cc, dd, ee, x[i+ 4],  8);          cc = ROL(cc, 10);
-        ee = C(I, II, ee, aa, bb, cc, dd, x[i+13],  9);          bb = ROL(bb, 10);
-        dd = C(I, II, dd, ee, aa, bb, cc, x[i+ 3], 14);          aa = ROL(aa, 10);
-        cc = C(I, II, cc, dd, ee, aa, bb, x[i+ 7],  5);          ee = ROL(ee, 10);
-        bb = C(I, II, bb, cc, dd, ee, aa, x[i+15],  6);          dd = ROL(dd, 10);
-        aa = C(I, II, aa, bb, cc, dd, ee, x[i+14],  8);          cc = ROL(cc, 10);
-        ee = C(I, II, ee, aa, bb, cc, dd, x[i+ 5],  6);          bb = ROL(bb, 10);
-        dd = C(I, II, dd, ee, aa, bb, cc, x[i+ 6],  5);          aa = ROL(aa, 10);
-        cc = C(I, II, cc, dd, ee, aa, bb, x[i+ 2], 12);          ee = ROL(ee, 10);
-        
-        /* round 5 */
-        bb = C(J, JJ, bb, cc, dd, ee, aa, x[i+ 4],  9);          dd = ROL(dd, 10);
-        aa = C(J, JJ, aa, bb, cc, dd, ee, x[i+ 0], 15);          cc = ROL(cc, 10);
-        ee = C(J, JJ, ee, aa, bb, cc, dd, x[i+ 5],  5);          bb = ROL(bb, 10);
-        dd = C(J, JJ, dd, ee, aa, bb, cc, x[i+ 9], 11);          aa = ROL(aa, 10);
-        cc = C(J, JJ, cc, dd, ee, aa, bb, x[i+ 7],  6);          ee = ROL(ee, 10);
-        bb = C(J, JJ, bb, cc, dd, ee, aa, x[i+12],  8);          dd = ROL(dd, 10);
-        aa = C(J, JJ, aa, bb, cc, dd, ee, x[i+ 2], 13);          cc = ROL(cc, 10);
-        ee = C(J, JJ, ee, aa, bb, cc, dd, x[i+10], 12);          bb = ROL(bb, 10);
-        dd = C(J, JJ, dd, ee, aa, bb, cc, x[i+14],  5);          aa = ROL(aa, 10);
-        cc = C(J, JJ, cc, dd, ee, aa, bb, x[i+ 1], 12);          ee = ROL(ee, 10);
-        bb = C(J, JJ, bb, cc, dd, ee, aa, x[i+ 3], 13);          dd = ROL(dd, 10);
-        aa = C(J, JJ, aa, bb, cc, dd, ee, x[i+ 8], 14);          cc = ROL(cc, 10);
-        ee = C(J, JJ, ee, aa, bb, cc, dd, x[i+11], 11);          bb = ROL(bb, 10);
-        dd = C(J, JJ, dd, ee, aa, bb, cc, x[i+ 6],  8);          aa = ROL(aa, 10);
-        cc = C(J, JJ, cc, dd, ee, aa, bb, x[i+15],  5);          ee = ROL(ee, 10);
-        bb = C(J, JJ, bb, cc, dd, ee, aa, x[i+13],  6);          dd = ROL(dd, 10);
-        
-        /* parallel round 1 */
-        aaa = C(J, JJJ, aaa, bbb, ccc, ddd, eee, x[i+ 5],  8); ccc = ROL(ccc, 10);
-        eee = C(J, JJJ, eee, aaa, bbb, ccc, ddd, x[i+14],  9); bbb = ROL(bbb, 10);
-        ddd = C(J, JJJ, ddd, eee, aaa, bbb, ccc, x[i+ 7],  9); aaa = ROL(aaa, 10);
-        ccc = C(J, JJJ, ccc, ddd, eee, aaa, bbb, x[i+ 0], 11); eee = ROL(eee, 10);
-        bbb = C(J, JJJ, bbb, ccc, ddd, eee, aaa, x[i+ 9], 13); ddd = ROL(ddd, 10);
-        aaa = C(J, JJJ, aaa, bbb, ccc, ddd, eee, x[i+ 2], 15); ccc = ROL(ccc, 10);
-        eee = C(J, JJJ, eee, aaa, bbb, ccc, ddd, x[i+11], 15); bbb = ROL(bbb, 10);
-        ddd = C(J, JJJ, ddd, eee, aaa, bbb, ccc, x[i+ 4],  5); aaa = ROL(aaa, 10);
-        ccc = C(J, JJJ, ccc, ddd, eee, aaa, bbb, x[i+13],  7); eee = ROL(eee, 10);
-        bbb = C(J, JJJ, bbb, ccc, ddd, eee, aaa, x[i+ 6],  7); ddd = ROL(ddd, 10);
-        aaa = C(J, JJJ, aaa, bbb, ccc, ddd, eee, x[i+15],  8); ccc = ROL(ccc, 10);
-        eee = C(J, JJJ, eee, aaa, bbb, ccc, ddd, x[i+ 8], 11); bbb = ROL(bbb, 10);
-        ddd = C(J, JJJ, ddd, eee, aaa, bbb, ccc, x[i+ 1], 14); aaa = ROL(aaa, 10);
-        ccc = C(J, JJJ, ccc, ddd, eee, aaa, bbb, x[i+10], 14); eee = ROL(eee, 10);
-        bbb = C(J, JJJ, bbb, ccc, ddd, eee, aaa, x[i+ 3], 12); ddd = ROL(ddd, 10);
-        aaa = C(J, JJJ, aaa, bbb, ccc, ddd, eee, x[i+12],  6); ccc = ROL(ccc, 10);
-        
-        /* parallel round 2 */
-        eee = C(I, III, eee, aaa, bbb, ccc, ddd, x[i+ 6],  9); bbb = ROL(bbb, 10);
-        ddd = C(I, III, ddd, eee, aaa, bbb, ccc, x[i+11], 13); aaa = ROL(aaa, 10);
-        ccc = C(I, III, ccc, ddd, eee, aaa, bbb, x[i+ 3], 15); eee = ROL(eee, 10);
-        bbb = C(I, III, bbb, ccc, ddd, eee, aaa, x[i+ 7],  7); ddd = ROL(ddd, 10);
-        aaa = C(I, III, aaa, bbb, ccc, ddd, eee, x[i+ 0], 12); ccc = ROL(ccc, 10);
-        eee = C(I, III, eee, aaa, bbb, ccc, ddd, x[i+13],  8); bbb = ROL(bbb, 10);
-        ddd = C(I, III, ddd, eee, aaa, bbb, ccc, x[i+ 5],  9); aaa = ROL(aaa, 10);
-        ccc = C(I, III, ccc, ddd, eee, aaa, bbb, x[i+10], 11); eee = ROL(eee, 10);
-        bbb = C(I, III, bbb, ccc, ddd, eee, aaa, x[i+14],  7); ddd = ROL(ddd, 10);
-        aaa = C(I, III, aaa, bbb, ccc, ddd, eee, x[i+15],  7); ccc = ROL(ccc, 10);
-        eee = C(I, III, eee, aaa, bbb, ccc, ddd, x[i+ 8], 12); bbb = ROL(bbb, 10);
-        ddd = C(I, III, ddd, eee, aaa, bbb, ccc, x[i+12],  7); aaa = ROL(aaa, 10);
-        ccc = C(I, III, ccc, ddd, eee, aaa, bbb, x[i+ 4],  6); eee = ROL(eee, 10);
-        bbb = C(I, III, bbb, ccc, ddd, eee, aaa, x[i+ 9], 15); ddd = ROL(ddd, 10);
-        aaa = C(I, III, aaa, bbb, ccc, ddd, eee, x[i+ 1], 13); ccc = ROL(ccc, 10);
-        eee = C(I, III, eee, aaa, bbb, ccc, ddd, x[i+ 2], 11); bbb = ROL(bbb, 10);
-        
-        /* parallel round 3 */
-        ddd = C(H, HHH, ddd, eee, aaa, bbb, ccc, x[i+15],  9); aaa = ROL(aaa, 10);
-        ccc = C(H, HHH, ccc, ddd, eee, aaa, bbb, x[i+ 5],  7); eee = ROL(eee, 10);
-        bbb = C(H, HHH, bbb, ccc, ddd, eee, aaa, x[i+ 1], 15); ddd = ROL(ddd, 10);
-        aaa = C(H, HHH, aaa, bbb, ccc, ddd, eee, x[i+ 3], 11); ccc = ROL(ccc, 10);
-        eee = C(H, HHH, eee, aaa, bbb, ccc, ddd, x[i+ 7],  8); bbb = ROL(bbb, 10);
-        ddd = C(H, HHH, ddd, eee, aaa, bbb, ccc, x[i+14],  6); aaa = ROL(aaa, 10);
-        ccc = C(H, HHH, ccc, ddd, eee, aaa, bbb, x[i+ 6],  6); eee = ROL(eee, 10);
-        bbb = C(H, HHH, bbb, ccc, ddd, eee, aaa, x[i+ 9], 14); ddd = ROL(ddd, 10);
-        aaa = C(H, HHH, aaa, bbb, ccc, ddd, eee, x[i+11], 12); ccc = ROL(ccc, 10);
-        eee = C(H, HHH, eee, aaa, bbb, ccc, ddd, x[i+ 8], 13); bbb = ROL(bbb, 10);
-        ddd = C(H, HHH, ddd, eee, aaa, bbb, ccc, x[i+12],  5); aaa = ROL(aaa, 10);
-        ccc = C(H, HHH, ccc, ddd, eee, aaa, bbb, x[i+ 2], 14); eee = ROL(eee, 10);
-        bbb = C(H, HHH, bbb, ccc, ddd, eee, aaa, x[i+10], 13); ddd = ROL(ddd, 10);
-        aaa = C(H, HHH, aaa, bbb, ccc, ddd, eee, x[i+ 0], 13); ccc = ROL(ccc, 10);
-        eee = C(H, HHH, eee, aaa, bbb, ccc, ddd, x[i+ 4],  7); bbb = ROL(bbb, 10);
-        ddd = C(H, HHH, ddd, eee, aaa, bbb, ccc, x[i+13],  5); aaa = ROL(aaa, 10);
-        
-        /* parallel round 4 */
-        ccc = C(G, GGG, ccc, ddd, eee, aaa, bbb, x[i+ 8], 15); eee = ROL(eee, 10);
-        bbb = C(G, GGG, bbb, ccc, ddd, eee, aaa, x[i+ 6],  5); ddd = ROL(ddd, 10);
-        aaa = C(G, GGG, aaa, bbb, ccc, ddd, eee, x[i+ 4],  8); ccc = ROL(ccc, 10);
-        eee = C(G, GGG, eee, aaa, bbb, ccc, ddd, x[i+ 1], 11); bbb = ROL(bbb, 10);
-        ddd = C(G, GGG, ddd, eee, aaa, bbb, ccc, x[i+ 3], 14); aaa = ROL(aaa, 10);
-        ccc = C(G, GGG, ccc, ddd, eee, aaa, bbb, x[i+11], 14); eee = ROL(eee, 10);
-        bbb = C(G, GGG, bbb, ccc, ddd, eee, aaa, x[i+15],  6); ddd = ROL(ddd, 10);
-        aaa = C(G, GGG, aaa, bbb, ccc, ddd, eee, x[i+ 0], 14); ccc = ROL(ccc, 10);
-        eee = C(G, GGG, eee, aaa, bbb, ccc, ddd, x[i+ 5],  6); bbb = ROL(bbb, 10);
-        ddd = C(G, GGG, ddd, eee, aaa, bbb, ccc, x[i+12],  9); aaa = ROL(aaa, 10);
-        ccc = C(G, GGG, ccc, ddd, eee, aaa, bbb, x[i+ 2], 12); eee = ROL(eee, 10);
-        bbb = C(G, GGG, bbb, ccc, ddd, eee, aaa, x[i+13],  9); ddd = ROL(ddd, 10);
-        aaa = C(G, GGG, aaa, bbb, ccc, ddd, eee, x[i+ 9], 12); ccc = ROL(ccc, 10);
-        eee = C(G, GGG, eee, aaa, bbb, ccc, ddd, x[i+ 7],  5); bbb = ROL(bbb, 10);
-        ddd = C(G, GGG, ddd, eee, aaa, bbb, ccc, x[i+10], 15); aaa = ROL(aaa, 10);
-        ccc = C(G, GGG, ccc, ddd, eee, aaa, bbb, x[i+14],  8); eee = ROL(eee, 10);
-        
-        /* parallel round 5 */
-        bbb = C(F, FFF, bbb, ccc, ddd, eee, aaa, x[i+12],  8); ddd = ROL(ddd, 10);
-        aaa = C(F, FFF, aaa, bbb, ccc, ddd, eee, x[i+15],  5); ccc = ROL(ccc, 10);
-        eee = C(F, FFF, eee, aaa, bbb, ccc, ddd, x[i+10], 12); bbb = ROL(bbb, 10);
-        ddd = C(F, FFF, ddd, eee, aaa, bbb, ccc, x[i+ 4],  9); aaa = ROL(aaa, 10);
-        ccc = C(F, FFF, ccc, ddd, eee, aaa, bbb, x[i+ 1], 12); eee = ROL(eee, 10);
-        bbb = C(F, FFF, bbb, ccc, ddd, eee, aaa, x[i+ 5],  5); ddd = ROL(ddd, 10);
-        aaa = C(F, FFF, aaa, bbb, ccc, ddd, eee, x[i+ 8], 14); ccc = ROL(ccc, 10);
-        eee = C(F, FFF, eee, aaa, bbb, ccc, ddd, x[i+ 7],  6); bbb = ROL(bbb, 10);
-        ddd = C(F, FFF, ddd, eee, aaa, bbb, ccc, x[i+ 6],  8); aaa = ROL(aaa, 10);
-        ccc = C(F, FFF, ccc, ddd, eee, aaa, bbb, x[i+ 2], 13); eee = ROL(eee, 10);
-        bbb = C(F, FFF, bbb, ccc, ddd, eee, aaa, x[i+13],  6); ddd = ROL(ddd, 10);
-        aaa = C(F, FFF, aaa, bbb, ccc, ddd, eee, x[i+14],  5); ccc = ROL(ccc, 10);
-        eee = C(F, FFF, eee, aaa, bbb, ccc, ddd, x[i+ 0], 15); bbb = ROL(bbb, 10);
-        ddd = C(F, FFF, ddd, eee, aaa, bbb, ccc, x[i+ 3], 13); aaa = ROL(aaa, 10);
-        ccc = C(F, FFF, ccc, ddd, eee, aaa, bbb, x[i+ 9], 11); eee = ROL(eee, 10);
-        bbb = C(F, FFF, bbb, ccc, ddd, eee, aaa, x[i+11], 11); ddd = ROL(ddd, 10);
+        /* right */
+        for (; t < 160; t += 1) {
+          aaa = C(t, aaa, bbb, ccc, ddd, eee, x[i+X[t]]);
+          
+          tmp = eee;
+          eee = ddd;
+          ddd = ROL(ccc, 10);
+          ccc = bbb;
+          bbb = aaa;
+          aaa = tmp;
+        }
         
         /* combine results */
         ddd     = HASH[1] + cc + ddd;
