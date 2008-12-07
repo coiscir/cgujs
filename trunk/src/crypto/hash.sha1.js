@@ -9,6 +9,7 @@
       
       var decode = BIT32.FIFO.decode;
       var encode = BIT32.FIFO.encode;
+      var padded = BIT32.FIFO.padded;
       
       var ROTL = BIT32.CONV.ROTL;
       
@@ -27,24 +28,12 @@
       
       ////////////
       // Init
-      var length = input.length;
-      var bitlen = length * 8;
-      
-      var padding = '\x80';
-      var padlen = (((length % 64) < 56 ? 56 : 120) - (length % 64));
-      while (padding.length < padlen) padding += '\x00';
-      
       var a, b, c, d, e, tmp;
       var x = [], w = [], i, t;
       
-      var count = (bitlen / Math.pow(2, 32));
-      input += padding;
-      input += Sequence(encode([(count  & 0xffffff)])).str();
-      input += Sequence(encode([(bitlen & 0xffffff)])).str();
-      
       ////////////
       // Update
-      x = decode((Sequence(input)).raw());
+      x = decode((Sequence(padded(input))).raw());
       
       for (i = 0; i < x.length; i += 16) {
         a = HASH[0];

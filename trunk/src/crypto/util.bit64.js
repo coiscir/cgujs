@@ -96,6 +96,24 @@ var BIT64 = {
         output.push((input[i][1] >> 0 ) & 0xff);
       }
       return output;
+    },
+    
+    padded : function (input) {
+      var length = input.length;
+      var bitlen = length * 8;
+      
+      var padding = '\x80';
+      var padlen = ((length % 128) < 112 ? 112 : 240) - (length % 128);
+      while (padding.length < padlen) padding += '\x00';
+      
+      var count1 = (bitlen / Math.pow(2, 32));
+      var count2 = (count1 / Math.pow(2, 32));
+      var count3 = (count2 / Math.pow(2, 32));
+      input += padding;
+      input += Sequence(BIT64.FIFO.encode([[count3 & 0xffffffff, count2 & 0xffffffff]])).str();
+      input += Sequence(BIT64.FIFO.encode([[count1 & 0xffffffff, bitlen & 0xffffffff]])).str();
+      
+      return input;
     }
   }
 };

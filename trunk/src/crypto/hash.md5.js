@@ -26,6 +26,7 @@
       
       var decode = BIT32.FILO.decode;
       var encode = BIT32.FILO.encode;
+      var padded = BIT32.FILO.padded;
       
       var ROTL = BIT32.CONV.ROTL;
       
@@ -43,20 +44,9 @@
       var a, b, c, d;
       var x = [], i;
       
-      var length = input.length;
-      var bitlen = length * 8;
-      
-      var padding = '\x80';
-      var padlen = (((length % 64) < 56 ? 56 : 120) - (length % 64));
-      while (padding.length < padlen) padding += '\x00';
-      
-      var count = (bitlen / Math.pow(2, 32));
-      input += padding;
-      input += (Sequence(encode([bitlen, count]))).str();
-      
       ////////////
       // Update
-      x = decode((Sequence(input)).raw());
+      x = decode((Sequence(padded(input))).raw());
       
       for (i = 0; i < x.length; i += 16) {
         a = HASH[0], b = HASH[1], c = HASH[2], d = HASH[3];

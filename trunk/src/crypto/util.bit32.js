@@ -39,6 +39,22 @@ var BIT32 = {
         output.push((input[i] >> 0 ) & 0xff);
       }
       return output;
+    },
+    
+    padded : function (input) {
+      var length = input.length;
+      var bitlen = length * 8;
+      
+      var padding = '\x80';
+      var padlen = (((length % 64) < 56 ? 56 : 120) - (length % 64));
+      while (padding.length < padlen) padding += '\x00';
+      
+      var count = (bitlen / Math.pow(2, 32));
+      input += padding;
+      input += Sequence(BIT32.FIFO.encode([(count  & 0xffffff)])).str();
+      input += Sequence(BIT32.FIFO.encode([(bitlen & 0xffffff)])).str();
+      
+      return input;
     }
   },
   
@@ -63,6 +79,21 @@ var BIT32 = {
         output.push((input[i] >> 24) & 0xff);
       }
       return output;
+    },
+    
+    padded : function (input) {
+      var length = input.length;
+      var bitlen = length * 8;
+      
+      var padding = '\x80';
+      var padlen = (((length % 64) < 56 ? 56 : 120) - (length % 64));
+      while (padding.length < padlen) padding += '\x00';
+      
+      var count = (bitlen / Math.pow(2, 32));
+      input += padding;
+      input += (Sequence(BIT32.FILO.encode([bitlen, count]))).str();
+      
+      return input;
     }
   }
 };
