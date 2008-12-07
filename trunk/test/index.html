@@ -21,13 +21,19 @@
 var pass = '<span class="pass">PASS</span>';
 var fail = '<span class="fail">FAIL</span>';
 
+var print = function () {
+  for (var a = 0; a < arguments.length; a += 1)
+    document.write(arguments[a]);
+  document.write('<br />');
+};
+
 var write = function (passfail, comment) {
   if (passfail === null)
-    document.write('  ', comment, '<br />');
+    print('  ', comment);
   else if (passfail === !!passfail)
-    document.write((passfail ? pass : fail), ' ', comment, '<br />');
+    print((passfail ? pass : fail), ' ', comment);
   else
-    document.write('<br />');
+    print();
 };
 
 var notate = function (title, comment, message) {
@@ -79,7 +85,7 @@ var timerStart = CGU.local();
   for (var c in cycles) {
     document.write('<pre>');
     
-    document.write(c, '<br />');
+    print(c);
     cycle(cycles[c]);
     
     document.write('</pre>');
@@ -87,7 +93,7 @@ var timerStart = CGU.local();
 })();
 
 document.write('<pre>');
-document.write(CGU.local() - timerStart, 'ms', '<br />');
+print(CGU.local() - timerStart, 'ms');
 document.write('</pre>');
 </script>
 
