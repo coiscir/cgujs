@@ -5,8 +5,7 @@ var kx0067 = '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x
 
 cycles.Crypto = {
   notes: [
-    '<a href="http://tools.ietf.org/html/rfc4634">RFC 4634 - Hash Tests</a>',
-    '<a href="http://tools.ietf.org/html/rfc4231">RFC 4231 - HMAC Tests</a>'
+    'Hashes: ' + CGU.toJSON(CGU.hashes())
   ],
   tests: [
     {

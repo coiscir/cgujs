@@ -185,7 +185,7 @@
   var Algos = {};
   
   var ready = function (algo) { return algo.replace(/^\s+|\s+$/g, '').toLowerCase(); };
-  var valid = function (algo) { return (/^[\$\_a-z][\$\_a-z0-9]*$/i).test(algo); };
+  var valid = function (algo) { return (/^[\$\_a-z][\$\_a-z0-9]*(,[0-9]+)?$/i).test(algo); };
   
 <%= inc 'crypto/util.*.js', 'crypto/hash.*.js' %>
   

@@ -4,20 +4,27 @@ var BIT64 = {
       return [x[0] & 0xffffffff, x[1] & 0xffffffff];
     },
     
-    LT : function (a, b) {
-      for (var c, d, i = 0; i < 32; i += 1) {
-        c = (a >> (31 - i)) & 0x1;
-        d = (b >> (31 - i)) & 0x1;
-        if (c == d) continue;
-        if (c < d) return true;
-        if (c > d) break;
-      }
-      return false;
-    },
-    
     ADD : function (x, y) {
       var b = x[1] + y[1];
-      var a = x[0] + y[0] + (BIT64.OPER.LT(b, x[1]) ? 0x1 : 0x0);
+      var a = x[0] + y[0] + (BIT32.OPER.LT(b, x[1]) ? 0x1 : 0x0);
+      return BIT64.OPER.NEW([a, b]);
+    },
+    
+    MULT : function (x, y) {
+      var $ = BIT64.OPER.NEW([0x00000000, 0x00000000]);
+      
+      for (var i = 0; i < 64; i += 1) {
+        if (BIT64.CONV.SHR(y, i)[1] & 0x1) {
+          $ = BIT64.OPER.ADD($, BIT64.CONV.SHL(x, i));
+        }
+      }
+      
+      return BIT64.OPER.NEW($);
+    },
+    
+    SUBT : function (x, y) {
+      var b = x[1] - y[1];
+      var a = x[0] - y[0] - (BIT32.OPER.GT(b, x[1]) ? 0x1 : 0x0);
       return BIT64.OPER.NEW([a, b]);
     },
     
