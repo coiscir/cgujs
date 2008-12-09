@@ -11,7 +11,7 @@
       var encode = BIT32.FIFO.encode;
       var padded = BIT32.FIFO.padded;
       
-      var ROTL = BIT32.CONV.ROTL;
+      var ROTL = BIT32.ROTL;
       
       var F = function (t, b, c, d) {
         if (t < 20) return (b & c) | ((~b) & d);

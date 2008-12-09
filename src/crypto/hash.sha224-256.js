@@ -58,9 +58,9 @@
     var encode = BIT32.FIFO.encode;
     var padded = BIT32.FIFO.padded;
     
-    var ROTL = BIT32.CONV.ROTL;
-    var ROTR = BIT32.CONV.ROTR;
-    var SHR  = BIT32.CONV.SHR;
+    var ROTL = BIT32.ROTL;
+    var ROTR = BIT32.ROTR;
+    var SHR  = BIT32.SHR;
     
     var BSIG0 = function (x) { return ROTR(x,  2) ^ ROTR(x, 13) ^ ROTR(x, 22); };
     var BSIG1 = function (x) { return ROTR(x,  6) ^ ROTR(x, 11) ^ ROTR(x, 25); };
