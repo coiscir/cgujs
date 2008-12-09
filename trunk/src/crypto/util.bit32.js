@@ -1,44 +1,41 @@
 var BIT32 = {
-  OPER : {
-    GT : function (a, b) {
-      for (var c, d, i = 0; i < 32; i += 1) {
-        c = (a >> (31 - i)) & 0x1;
-        d = (b >> (31 - i)) & 0x1;
-        if (c == d) continue;
-        if (c > d) return true;
-        if (c < d) break;
-      }
-      return false;
-    },
-    
-    LT : function (a, b) {
-      for (var c, d, i = 0; i < 32; i += 1) {
-        c = (a >> (31 - i)) & 0x1;
-        d = (b >> (31 - i)) & 0x1;
-        if (c == d) continue;
-        if (c < d) return true;
-        if (c > d) break;
-      }
-      return false;
-    },
+  
+  GT : function (a, b) {
+    for (var c, d, i = 0; i < 32; i += 1) {
+      c = (a >> (31 - i)) & 0x1;
+      d = (b >> (31 - i)) & 0x1;
+      if (c == d) continue;
+      if (c > d) return true;
+      if (c < d) break;
+    }
+    return false;
   },
   
-  CONV : {
-    ROTL : function (x, n) {
-      return ((x << n) | (x >>> (32 - n)));
-    },
-    
-    ROTR : function (x, n) {
-      return ((x >>> n) | (x << (32 - n)));
-    },
-    
-    SHL : function (x, n) {
-      return x << n;
-    },
-    
-    SHR : function (x, n) {
-      return x >>> n;
+  LT : function (a, b) {
+    for (var c, d, i = 0; i < 32; i += 1) {
+      c = (a >> (31 - i)) & 0x1;
+      d = (b >> (31 - i)) & 0x1;
+      if (c == d) continue;
+      if (c < d) return true;
+      if (c > d) break;
     }
+    return false;
+  },
+  
+  ROTL : function (x, n) {
+    return ((x << n) | (x >>> (32 - n)));
+  },
+  
+  ROTR : function (x, n) {
+    return ((x >>> n) | (x << (32 - n)));
+  },
+  
+  SHL : function (x, n) {
+    return x << n;
+  },
+  
+  SHR : function (x, n) {
+    return x >>> n;
   },
   
   FIFO : {

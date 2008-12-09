@@ -83,16 +83,16 @@
     var encode = BIT64.FIFO.encode;
     var padded = BIT64.FIFO.padded;
     
-    var ROTL = BIT64.CONV.ROTL;
-    var ROTR = BIT64.CONV.ROTR;
-    var SHR  = BIT64.CONV.SHR;
+    var ROTL = BIT64.ROTL;
+    var ROTR = BIT64.ROTR;
+    var SHR  = BIT64.SHR;
     
-    var NEW = BIT64.OPER.NEW;
-    var ADD = BIT64.OPER.ADD;
-    var AND = BIT64.OPER.AND;
-    var OR  = BIT64.OPER.OR;
-    var XOR = BIT64.OPER.XOR;
-    var NOT = BIT64.OPER.NOT;
+    var NEW = BIT64.NEW;
+    var ADD = BIT64.ADD;
+    var AND = BIT64.AND;
+    var OR  = BIT64.OR;
+    var XOR = BIT64.XOR;
+    var NOT = BIT64.NOT;
     
     var CH = function (x, y, z) {
       return XOR(AND(x, y), AND(NOT(x), z));

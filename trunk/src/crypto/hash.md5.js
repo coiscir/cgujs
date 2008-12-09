@@ -49,7 +49,7 @@
       var encode = BIT32.FILO.encode;
       var padded = BIT32.FILO.padded;
       
-      var ROTL = BIT32.CONV.ROTL;
+      var ROTL = BIT32.ROTL;
       
       var C = function (t, a, b, c, d, x, ac) {
         return ROTL((a + F(t, b, c, d) + x + ac), S(t)) + b;

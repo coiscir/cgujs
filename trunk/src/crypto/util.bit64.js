@@ -1,75 +1,74 @@
 var BIT64 = {
-  OPER : {
-    NEW : function (x) {
-      return [x[0] & 0xffffffff, x[1] & 0xffffffff];
-    },
-    
-    ADD : function (x, y) {
-      var b = x[1] + y[1];
-      var a = x[0] + y[0] + (BIT32.OPER.LT(b, x[1]) ? 0x1 : 0x0);
-      return BIT64.OPER.NEW([a, b]);
-    },
-    
-    MULT : function (x, y) {
-      var $ = BIT64.OPER.NEW([0x00000000, 0x00000000]);
-      
-      for (var i = 0; i < 64; i += 1) {
-        if (BIT64.CONV.SHR(y, i)[1] & 0x1) {
-          $ = BIT64.OPER.ADD($, BIT64.CONV.SHL(x, i));
-        }
-      }
-      
-      return BIT64.OPER.NEW($);
-    },
-    
-    SUBT : function (x, y) {
-      var b = x[1] - y[1];
-      var a = x[0] - y[0] - (BIT32.OPER.GT(b, x[1]) ? 0x1 : 0x0);
-      return BIT64.OPER.NEW([a, b]);
-    },
-    
-    AND : function (x, y) {
-      return BIT64.OPER.NEW([x[0] & y[0], x[1] & y[1]]);
-    },
-    
-    OR : function (x, y) {
-      return BIT64.OPER.NEW([x[0] | y[0], x[1] | y[1]]);
-    },
-    
-    XOR : function (x, y) {
-      return BIT64.OPER.NEW([x[0] ^ y[0], x[1] ^ y[1]]);
-    },
-    
-    NOT : function (x) {
-      return BIT64.OPER.NEW([~x[0], ~x[1]]);
-    }
+  
+  NEW : function (x) {
+    return [x[0] & 0xffffffff, x[1] & 0xffffffff];
   },
   
-  CONV : {
-    ROTL : function (x, n) {
-      return BIT64.OPER.OR(BIT64.CONV.SHR(x, (64 - n)), BIT64.CONV.SHL(x, n));
-    },
+  ADD : function (x, y) {
+    x = BIT64.NEW(x); y = BIT64.NEW(y);
+    var b = x[1] + y[1];
+    var a = x[0] + y[0] + (BIT32.LT(b, x[1]) ? 0x1 : 0x0);
+    return BIT64.NEW([a, b]);
+  },
+  
+  MULT : function (x, y) {
+    var $ = BIT64.NEW([0x00000000, 0x00000000]);
     
-    ROTR : function (x, n) {
-      return BIT64.OPER.OR(BIT64.CONV.SHR(x, n), BIT64.CONV.SHL(x, (64 - n)));
-    },
-    
-    SHL : function (x, n) {
-      var a = x[0];
-      var b = x[1];
-      var c = n >= 32 ? (b << (n - 32)) :
-              n == 0 ? a : ((a << n) | (b >>> (32 - n)));
-      var d = n >= 32 ? 0x00000000 : (b << n);
-      return BIT64.OPER.NEW([c, d]);
-    },
-    
-    SHR : function (x, n) {
-      var a = x[0], b = x[1];
-      var c = n >= 32 ? 0x00000000 : (a >>> n);
-      var d = n >= 32 ? (a >>> (n - 32)) :
-              n == 0 ? b : ((a << (32 - n)) | (b >>> n));
-      return BIT64.OPER.NEW([c, d]);
+    for (var i = 0; i < 64; i += 1) {
+      if (BIT64.SHR(y, i)[1] & 0x1) {
+        $ = BIT64.ADD($, BIT64.SHL(x, i));
+      }
     }
+    
+    return BIT64.NEW($);
+  },
+  
+  SUBT : function (x, y) {
+    x = BIT64.NEW(x); y = BIT64.NEW(y);
+    var b = x[1] - y[1];
+    var a = x[0] - y[0] - (BIT32.GT(b, x[1]) ? 0x1 : 0x0);
+    return BIT64.NEW([a, b]);
+  },
+  
+  AND : function (x, y) {
+    return BIT64.NEW([x[0] & y[0], x[1] & y[1]]);
+  },
+  
+  OR : function (x, y) {
+    return BIT64.NEW([x[0] | y[0], x[1] | y[1]]);
+  },
+  
+  XOR : function (x, y) {
+    return BIT64.NEW([x[0] ^ y[0], x[1] ^ y[1]]);
+  },
+  
+  NOT : function (x) {
+    return BIT64.NEW([~x[0], ~x[1]]);
+  },
+  
+  ROTL : function (x, n) {
+    return BIT64.OR(BIT64.SHR(x, (64 - n)), BIT64.SHL(x, n));
+  },
+  
+  ROTR : function (x, n) {
+    return BIT64.OR(BIT64.SHR(x, n), BIT64.SHL(x, (64 - n)));
+  },
+  
+  SHL : function (x, n) {
+    var a = x[0];
+    var b = x[1];
+    var c = n >= 32 ? (b << (n - 32)) :
+            n == 0 ? a : ((a << n) | (b >>> (32 - n)));
+    var d = n >= 32 ? 0x00000000 : (b << n);
+    return BIT64.NEW([c, d]);
+  },
+  
+  SHR : function (x, n) {
+    var a = x[0], b = x[1];
+    var c = n >= 32 ? 0x00000000 : (a >>> n);
+    var d = n >= 32 ? (a >>> (n - 32)) :
+            n == 0 ? b : ((a << (32 - n)) | (b >>> n));
+    return BIT64.NEW([c, d]);
   },
   
   FIFO : {
