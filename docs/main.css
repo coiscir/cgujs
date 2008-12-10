@@ -197,47 +197,51 @@ div.navlist {
   #content h5 a { color: #ea5; }
   #content h6 a { color: #fb7; }
 
-
 /***************
  * Excerpt: Google Code Prettify
 **/
 
+.codebox {
+  padding: 5px 8px;
+  border-left: 4px solid #79b;
+  background: #eee;
+}
+
+/* code highlight/prettify */   /* GC Prettify */
+.codebox .str { color: #a00; }  /* color: #080 */
+.codebox .kwd { color: #00a; }  /* color: #008 */
+.codebox .com { color: #999; }  /* color: #800 */
+.codebox .typ { color: #39b; }  /* color: #606 */
+.codebox .lit { color: #a00; }  /* color: #066 */
+.codebox .pun { color: #d90; }  /* color: #660 */
+.codebox .pln { color: #000; }  /* color: #000 */
+.codebox .tag { color: #a00; }  /* color: #008 */
+.codebox .atn { color: #f00; }  /* color: #606 */
+.codebox .atv { color: #00f; }  /* color: #080 */
+.codebox .dec { color: #0ff; }  /* color: #606 */
+
 /** StackOverflow.com colors **/
 .prettify .str { color:maroon; }
-.prettify .kwd { color:#00008B }
-.prettify .com { color:gray }
-.prettify .typ { color:#2B91AF }
+.prettify .kwd { color:#00008B; }
+.prettify .com { color:gray; }
+.prettify .typ { color:#2B91AF; }
 .prettify .lit { color:maroon; }
-.prettify .pun { color:black }
-.prettify .pln { color:black }
-.prettify .tag { color:maroon }
-.prettify .atn { color:red }
-.prettify .atv { color:blue }
-.prettify .dec { color:purple }
-
-/**
-.prettify .str { color: #080; }
-.prettify .kwd { color: #008; }
-.prettify .com { color: #800; }
-.prettify .typ { color: #606; }
-.prettify .lit { color: #066; }
-.prettify .pun { color: #660; }
-.prettify .pln { color: #000; }
-.prettify .tag { color: #008; }
-.prettify .atn { color: #606; }
-.prettify .atv { color: #080; }
-.prettify .dec { color: #606; }
-**/
+.prettify .pun { color:black; }
+.prettify .pln { color:black; }
+.prettify .tag { color:maroon; }
+.prettify .atn { color:red; }
+.prettify .atv { color:blue; }
+.prettify .dec { color:purple; }
 
 @media print {
-  .prettify .str { color: #060; }
-  .prettify .kwd { color: #006; font-weight: bold; }
-  .prettify .com { color: #600; font-style: italic; }
-  .prettify .typ { color: #404; font-weight: bold; }
-  .prettify .lit { color: #044; }
-  .prettify .pun { color: #440; }
-  .prettify .pln { color: #000; }
-  .prettify .tag { color: #006; font-weight: bold; }
-  .prettify .atn { color: #404; }
-  .prettify .atv { color: #060; }
+  .str { color: #060; }
+  .kwd { color: #006; font-weight: bold; }
+  .com { color: #600; font-style: italic; }
+  .typ { color: #404; font-weight: bold; }
+  .lit { color: #044; }
+  .pun { color: #440; }
+  .pln { color: #000; }
+  .tag { color: #006; font-weight: bold; }
+  .atn { color: #404; }
+  .atv { color: #060; }
 }
