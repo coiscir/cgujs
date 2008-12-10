@@ -58,7 +58,7 @@
 **/
   CGU.fromJSON = function (json, strict) {
     strict = CGU.limit(strict, Boolean) || false;
-    if (CGU.is_a(json, String)) return null;
+    if (!CGU.is_a(json, String)) return null;
     
     var standard = {
       datetm : /^(?:!.)./,                                 /* match nothing */
