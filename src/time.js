@@ -253,8 +253,8 @@
         case 'T': break;  /* unsupported */
         case 'Z': buffer += base.z * 60; break;
       // full date/time
-        case 'c': buffer += phpf('Y-m-d\\TH:i:sP', base); break;
-        case 'r': buffer += phpf('D, d M Y H:i:s O', base); break;
+        case 'c': buffer += phpf('Y-m-d\\TH:i:sP', base, locale); break;
+        case 'r': buffer += phpf('D, d M Y H:i:s O', base, locale); break;
         case 'U': buffer += base.$t; break;
         
         case '\\': i += 1;
@@ -304,20 +304,20 @@
           case 'A': buffer += lang.weekdays[base.w]; break;
           case 'b': buffer += lang.months[base.m].substr(0, 3); break;
           case 'B': buffer += lang.months[base.m]; break;
-          case 'c': buffer += strf(locale.c, base); break;
+          case 'c': buffer += strf(locale.c, base, locale); break;
           case 'C': buffer += padnum(2, ftoi(base.y / 100)); break;
           case 'd': buffer += padnum(2, base.d); break;
-          case 'D': buffer += strf('%m/%d/%y', base); break;
+          case 'D': buffer += strf('%m/%d/%y', base, locale); break;
           case 'e': buffer += padspc(2, base.d); break;
           case 'E': break;
-          case 'F': buffer += strf('%Y-%m-%d', base); break;
-          case 'g': buffer += padnum(2, strf('%G', base) % 100); break;
+          case 'F': buffer += strf('%Y-%m-%d', base, locale); break;
+          case 'g': buffer += padnum(2, strf('%G', base, locale) % 100); break;
           case 'G': buffer += padnum(4, (
                       (base.$$ < base.ac ? (base.y - 1) :
                         (base.$$ >= base.an ? (base.y + 1) : base.y)
                       )
                     )); break;
-          case 'h': buffer += strf('%b', base); break;
+          case 'h': buffer += strf('%b', base, locale); break;
           case 'H': buffer += padnum(2, base.h); break;
           case 'I': buffer += padnum(2, tumblesh((base.h % 12), 12)); break;
           case 'j': buffer += padnum(3, ftoi((base.$$ - base.jc) / day) + 1); break;
@@ -330,15 +330,15 @@
           case 'O': break;
           case 'p': buffer += lang.meridiem[(base.h < 12 ? 0 : 1)] || ''; break;
           case 'P': buffer += lang.meridiem[(base.h < 12 ? 2 : 3)] || ''; break;
-          case 'r': buffer += strf('%I:%M:%S %p', base); break;
-          case 'R': buffer += strf('%H:%M', base); break;
+          case 'r': buffer += strf('%I:%M:%S %p', base, locale); break;
+          case 'R': buffer += strf('%H:%M', base, locale); break;
           case 's': buffer += base.$t; break;
           case 'S': buffer += padnum(2, base.s); break;
           case 't': buffer += '\t'; break;
-          case 'T': buffer += strf('%H:%M:%S', base); break;
+          case 'T': buffer += strf('%H:%M:%S', base, locale); break;
           case 'u': buffer += tumblesh(base.w, 7); break;
           case 'U': buffer += padnum(2, ftoi((base.$$ - base.fs) / (7 * day))); break;
-          case 'v': buffer += strf('%e-%b-%Y', base); break;
+          case 'v': buffer += strf('%e-%b-%Y', base, locale); break;
           case 'V': buffer += padnum(2, (
                       ftoi((
                         ftoi(base.$$ / day) -
@@ -348,8 +348,8 @@
                     )); break;
           case 'w': buffer += base.w; break;
           case 'W': buffer += padnum(2, ftoi((base.$$ - base.fm) / (7 * day))); break;
-          case 'x': buffer += strf(locale.x, base); break;
-          case 'X': buffer += strf(locale.X, base); break;
+          case 'x': buffer += strf(locale.x, base, locale); break;
+          case 'X': buffer += strf(locale.X, base, locale); break;
           case 'y': buffer += padnum(2, (base.y % 100)); break;
           case 'Y': buffer += padnum(4, base.y); break;
           case 'z': buffer += ''.concat(
