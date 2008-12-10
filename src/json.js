@@ -69,7 +69,7 @@
     };
     
     var relaxed = {
-      datetm : /^(['"])(\d{4})-(\d{2})-(\d{2})[T\x20](\d{2}):(\d{2}):(\d{2})(?:\.(\d{3})\d*)?Z?(\1)/,
+      datetm : /^(['"])(\d{4}-\d{2}-\d{2}[T\x20]\d{2}:\d{2}:\d{2}(?:\.\d{3}\d*)?Z?)(\1)/,
       keywrd : /^undefined|null|true|false/,
       number : /^(0([0-7]+|x[0-9a-fA-F]+))|([+-]?(0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[Ee][+-]?[0-9]+)?)/,
       objkey : /^([0-9]+|[A-Za-z$_][A-Za-z0-9$_]*)/,
@@ -108,8 +108,7 @@
     var date = function () {
       var str = cut(reDateTm);
       if (!(str.length > 0)) kill("Invalid Date.");
-      var d = reDateTm.exec(str);
-      return new Date(CGU.utc(+d[2], +d[3] - 1, +d[4], +d[5], +d[6], +d[7], +d[8]));
+      return CGU.toTime(reDateTm.exec(str)[2]);
     };
     
     var array = function () {
@@ -184,7 +183,7 @@
     strict = CGU.limit(strict, Boolean) || false;
     
     var date = function (input) {
-      return str(CGU.strfutc("%FT%T.%NZ", input));
+      return str(CGU.fromTime(input));
     };
     
     var str = function (input) {
