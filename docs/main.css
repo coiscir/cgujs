@@ -60,7 +60,7 @@ h6 { font-size: 10px; }
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 0;
+  z-index: 1;
 }
   #head {
     top: 0;
@@ -75,6 +75,7 @@ h6 { font-size: 10px; }
     overflow: auto; /* opera */
     overflow-x: hidden;
     overflow-y: auto;
+    z-index: 0;
   }
   #foot {
     bottom: 0;
