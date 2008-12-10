@@ -518,7 +518,7 @@
     // core
       base.$$ = time.getTime();
       base.$t = ftoi(base.$$ / 1000);
-      base.$u = (base.$$ % 1000) * 1000;
+      base.$u = (((base.$$ % 1000) + 1000) % 1000) * 1000;
     // reference
       base.ac = ac;
       base.an = an;
