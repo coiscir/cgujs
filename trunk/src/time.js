@@ -12,6 +12,22 @@
  *      (All parameters are optional. Default is the current time.)
  *
  *    Return: <Number>: UNIX Epoch timestamp.
+ *----
+ *
+ *  fromTime | toTime -> Date and "YYYY-MM-DDThh:mm:ss.sssZ" conversions.
+ *
+ *    Syntax: CGU.fromTime(time)
+ *    Syntax: CGU.toTime(string)
+ *
+ *      string <String>: A formatted string to convert.
+ *
+ *      time <Date>: A Date object to convert.
+ *
+ *    Return: <Date|String>: The opposite of the specified input.
+ *
+ *      <undefined>: Invalid type for input.
+ *
+ *      <null>: Improperly formatted string for toTime.
  *
  *----
  *
@@ -149,7 +165,7 @@
       date.setHours(0, 0, 0, 0);
       
       if (CGU.is_a(yr, Number)) date.setFullYear(yr);
-      if (CGU.is_a(mn, Number)) date.setMonth(mn);
+      if (CGU.is_a(mn, Number)) date.setMonth(mn - 1);
       if (CGU.is_a(dy, Number)) date.setDate(dy);
       if (CGU.is_a(hr, Number)) date.setHours(hr);
       if (CGU.is_a(mi, Number)) date.setMinutes(mi);
@@ -168,7 +184,7 @@
       date.setUTCHours(0, 0, 0, 0);
       
       if (CGU.is_a(yr, Number)) date.setUTCFullYear(yr);
-      if (CGU.is_a(mn, Number)) date.setUTCMonth(mn);
+      if (CGU.is_a(mn, Number)) date.setUTCMonth(mn - 1);
       if (CGU.is_a(dy, Number)) date.setUTCDate(dy);
       if (CGU.is_a(hr, Number)) date.setUTCHours(hr);
       if (CGU.is_a(mi, Number)) date.setUTCMinutes(mi);
@@ -178,6 +194,20 @@
     
     return date.getTime();
   };
+  
+  CGU.fromTime = function (time) {
+    if (!CGU.is_a(time, Date)) return;
+    return CGU.strfutc("%FT%T.%NZ", time);
+  };
+  
+  CGU.toTime = function (string) {
+    if (!CGU.is_a(string, String)) return;
+    if (!isTime.test(string)) return null;
+    var dt = isTime.exec(string);
+    return new Date(CGU.utc(+dt[1], +dt[2], +dt[3], +dt[4], +dt[5], +dt[6], +dt[7]));
+  };
+  
+  var isTime = /(\d{4})-(\d{2})-(\d{2})[T\x20](\d{2}):(\d{2}):(\d{2})(?:\.(\d{3})\d*)?Z?/;
   
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * PHP Date Formatting
@@ -438,10 +468,10 @@
       }
       
       // 0 or space padding
-      var dyZr = (/09/).test(new Date(CGU.local(0, 0, 9, 0, 0, 0, 0))[f]());
-      var hrZr = (/09/).test(new Date(CGU.local(0, 0, 0, 9, 0, 0, 0))[f]());
+      var dyZr = (/09/).test(new Date(CGU.local(0, 1, 9, 0, 0, 0, 0))[f]());
+      var hrZr = (/09/).test(new Date(CGU.local(0, 1, 0, 9, 0, 0, 0))[f]());
       
-      return new Date(CGU.local(2000, 11, 31, 23, 30, 59, 999))[f]().
+      return new Date(CGU.local(2000, 12, 31, 23, 30, 59, 999))[f]().
       // character replacements
         replace(/%/g, '%%').
       // grouping replacements
@@ -486,13 +516,13 @@
   var inrange = function (time, utc) {
     if (utc) {
       return between(time,
-        CGU.utc(   0,  0,  1,  0,  0,  0,   0),
-        CGU.utc(9999, 11, 31, 23, 59, 59, 999)
+        CGU.utc(   0,  1,  1,  0,  0,  0,   0),
+        CGU.utc(9999, 12, 31, 23, 59, 59, 999)
       );
     } else {
       return between(time,
-        CGU.local(   0,  0,  1,  0,  0,  0,   0),
-        CGU.local(9999, 11, 31, 23, 59, 59, 999)
+        CGU.local(   0,  1,  1,  0,  0,  0,   0),
+        CGU.local(9999, 12, 31, 23, 59, 59, 999)
       );
     };
   };

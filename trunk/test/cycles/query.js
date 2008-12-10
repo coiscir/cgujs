@@ -54,7 +54,7 @@ cycles.Query = {
         ], [
           'exlusion', '', function(){ return CGU.param({foo: function(){}, bar: /pattern/}); }
         ], [
-          'dates', 'foo=2008-12-31T23%3A59%3A59.999Z', function(){ return CGU.param({foo: new Date(CGU.utc(2008, 11, 31, 23, 59, 59, 999))}); }
+          'dates', 'foo=2008-12-31T23%3A59%3A59.999Z', function(){ return CGU.param({foo: new Date(CGU.utc(2008, 12, 31, 23, 59, 59, 999))}); }
         ]
       ]
     }, {

@@ -132,7 +132,7 @@
             case 'regexp'   : break;
             case 'object': insObj(object[p]); break;
             case 'array' : insArr(p, object[p]); break;
-            case 'date'  : append(p, CGU.strfutc('%FT%T.%NZ', object[p])); break;
+            case 'date'  : append(p, CGU.fromTime(object[p])); break;
             default: append(p, object[p]); break;
           }
     
