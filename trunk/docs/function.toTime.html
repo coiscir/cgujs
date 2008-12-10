@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-  <title>CGU - Time</title>
+  <title>CGU - Time - toTime</title>
   <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 
@@ -44,7 +44,7 @@
           <li><a href="function.phpdate.html">phputc</a></li>
           <li><a href="function.strftime.html">strftime</a></li>
           <li><a href="function.strftime.html">strfutc</a></li>
-          <li><a href="function.toTime.html">toTime</a></li>
+          <li class="active"><a href="function.toTime.html">toTime</a></li>
           <li><a href="function.local-utc.html">utc</a></li>
         </ul>
       </div>
@@ -56,7 +56,7 @@
           <li><a href="utility.Crypto.html">Crypto</a></li>
           <li><a href="utility.JSON.html">JSON</a></li>
           <li><a href="utility.Query.html">Query</a></li>
-          <li class="active"><a href="utility.Time.html">Time</a></li>
+          <li><a href="utility.Time.html">Time</a></li>
           <li><a href="utility.Type.html">Type</a></li>
         </ul>
       </div>
@@ -71,52 +71,37 @@
       
       <h1>Time</h1>
       
-      <blockquote>
-        <p>Time enables enhanced Date/Time manipulation.</p>
-      </blockquote>
-      
       <hr />
       
-      <h3>Functions</h3>
+      <h2>toTime</h2>
       
-      <h4><a href="function.local-utc.html">fromTime</a></h4>
-      <blockquote>
-        <p>Convert a Date Object to a <code>&quot;YYYY-MM-DDThh:mm:ss.sssZ&quot;</code> formatted string.</p>
-      </blockquote>
-      
-      <h4><a href="function.local-utc.html">local</a></h4>
-      <blockquote>
-        <p>Absolute local time.</p>
-      </blockquote>
-      
-      <h4><a href="function.phpdate.html">phpdate</a></h4>
-      <blockquote>
-        <p>PHP <code>date()</code> formatting in local time.</p>
-      </blockquote>
-      
-      <h4><a href="function.phpdate.html">phputc</a></h4>
-      <blockquote>
-        <p>PHP <code>date()</code> formatting in UTC time.</p>
-      </blockquote>
-      
-      <h4><a href="function.strftime.html">strftime</a></h4>
-      <blockquote>
-        <p>C/C++ date formatting in local time.</p>
-      </blockquote>
-      
-      <h4><a href="function.strftime.html">strfutc</a></h4>
-      <blockquote>
-        <p>C/C++ date formatting in UTC time.</p>
-      </blockquote>
-      
-      <h4><a href="function.toTime.html">toTime</a></h4>
       <blockquote>
         <p>Convert a <code>&quot;YYYY-MM-DDThh:mm:ss.sssZ&quot;</code> formatted string to a Date Object.</p>
       </blockquote>
       
-      <h4><a href="function.local-utc.html">utc</a></h4>
+      <hr />
+      
+      <h3>Syntax</h3>
+      
       <blockquote>
-        <p>Absolute UTC time.</p>
+        <pre class="prettify"><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">toTime</span><span class="pun">(</span><span class="pln">string</span><span class="pun">)</span></code></pre>
+        
+        <blockquote>
+          <p><code><b>string</b> &lt;String&gt;</code>: A date string in the <code>&quot;YYYY-MM-DDThh:mm:ss.sssZ&quot;</code> format.</p>
+          <blockquote>
+            <p>Alternate format: <code>&quot;YYYY-MM-DD hh:mm:ss&quot;</code></p>
+          </blockquote>
+        </blockquote>
+      </blockquote>
+      
+      <h3>Return</h3>
+      
+      <blockquote>
+        <p><code>&lt;Date&gt;</code>: A Date with the UTC time represented by the string.</p>
+        <blockquote>
+          <p><code>&lt;null&gt;</code>: <code>string</code> was malformatted.</p>
+          <p><code>&lt;undefined&gt;</code>: <code>string</code> was not specified.</p>
+        </blockquote>
       </blockquote>
       
       <hr />

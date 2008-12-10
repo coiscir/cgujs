@@ -196,7 +196,6 @@
   };
   
   CGU.fromTime = function (time) {
-    if (!CGU.is_a(time, Date)) return;
     return CGU.strfutc("%FT%T.%NZ", time);
   };
   
