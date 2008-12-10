@@ -114,7 +114,7 @@
         <pre><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">fromJSON</span><span class="pun">(</span><span class="str">'{foo: "bar"}'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; throw SyntaxError</span></code></pre>
         <pre>&nbsp;</pre>
         <pre><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">fromJSON</span><span class="pun">(</span><span class="str">'(function(){/*...*/})()'</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; </span><span class="com">//=&gt; prevents function execution (throws SyntaxError)</span></code></pre>
-        <pre><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">fromJSON</span><span class="pun">(</span><span class="str">'{foo: function(){/*...*/}}'</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; but, doesn't allow function values (returns an empty object)</span></code></pre>
+        <pre><code><span class="pln">CGU</span><span class="pun">.</span><span class="pln">fromJSON</span><span class="pun">(</span><span class="str">'{foo: function(){/*...*/}}'</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">//=&gt; but, doesn't allow function values</span></code></pre>
       </blockquote>
       
       <hr />
