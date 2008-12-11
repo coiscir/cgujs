@@ -79,7 +79,7 @@
     var reWhite  = /^\s+/;
     var reObjKey = strict ? standard.objkey : relaxed.objkey;
     var reDateTm = strict ? standard.datetm : relaxed.datetm;
-    var reKeywd  = strict ? standard.keywrd : relaxed.keywrd;
+    var reKeywrd = strict ? standard.keywrd : relaxed.keywrd;
     var reNumber = strict ? standard.number : relaxed.number;
     var reString = strict ? standard.string : relaxed.string;
     
@@ -162,7 +162,7 @@
       if (reDateTm.test(json)) return date();
       if (reString.test(json)) return eval(cut(reString));
       if (reNumber.test(json)) return eval(cut(reNumber));
-      if (reKeywd.test(json))  return eval(cut(reKeywd));
+      if (reKeywrd.test(json)) return eval(cut(reKeywrd));
       kill('Invalid value');
     };
     
