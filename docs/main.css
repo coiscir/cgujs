@@ -60,7 +60,7 @@ h6 { font-size: 10px; }
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 0;
 }
   #head {
     top: 0;
@@ -69,13 +69,12 @@ h6 { font-size: 10px; }
     overflow: hidden;
   }
   #body {
-    top: 40px;
-    bottom: 16px;
-    height: expression(document.body.clientHeight-56 + 'px');
+    top: 41px;
+    bottom: 17px;
+    height: expression(document.body.clientHeight-58 + 'px');
     overflow: auto; /* opera */
     overflow-x: hidden;
     overflow-y: auto;
-    z-index: 0;
   }
   #foot {
     bottom: 0;
