@@ -3,7 +3,7 @@
  *    Read, Write, and Delete (Expire) Cookies
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *~~~ Methods
- *
+ *----
  *
  *  cookie -> Read, Write, or Expire Cookies.
  *
@@ -46,7 +46,7 @@
 (function Cookie() { // enable private members
   
   CGU.cookie = function (key, value, options) {
-    if (CGU.isof(key, null, undefined)) return undefined;
+    if (CGU.isNil(key)) return undefined;
     
     options = (function (o) { return {
       domain   : CGU.limit(o.domain,   String)  || false,
@@ -59,7 +59,7 @@
     if (options.expire) options.duration = -1;
     
     var r = read(key);
-    if (CGU.isof(value, null, undefined) && options.duration === false)
+    if (CGU.isNil(value) && options.duration === false)
       return r;
     
     var e = options.duration < 0;

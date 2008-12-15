@@ -227,17 +227,12 @@
         return str(k);
       };
       
-      var keys = [], pairs = [], i, k, v;
-      for (var prop in input) {
-        if (prop === 'constructor') continue;
-        keys.push(prop);
-        keys = keys.sort();
-      }
-      for (i = 0; i < keys.length; i += 1) {
-        k = key(keys[i]);
-        v = value(input[keys[i]]);
+      var pairs = [];
+      CGU.iterate(CGU.keys(input).sort(), function (v, k) {
+        k = key(v);
+        v = value(input[v]);
         if (CGU.is_a(v, String)) pairs.push(k + ': ' + v);
-      }
+      });
       return '{' + pairs.join(', ') + '}';
     };
     
