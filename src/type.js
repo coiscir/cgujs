@@ -103,7 +103,9 @@
   CGU.clone = function (object) {
     var $object = function (object) {
       var obj = {};
-      for (var prop in object) obj[prop] = CGU.clone(object[prop]);
+      CGU.iterate(object, function (v, k, t) {
+        obj[k] = CGU.clone(v);
+      });
       return obj;
     };
     
@@ -156,6 +158,10 @@
     for (argi = 0; argi < argc; argi += 1)
       args[argi] = arguments[argi];
     return CGU.isof.apply(CGU, args) ? CGU.clone(args[0]) : undefined;
+  };
+  
+  CGU.isNil = function (object) {
+    return CGU.isof(object, null, undefined);
   };
 
 })();

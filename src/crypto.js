@@ -133,49 +133,20 @@
     if (CGU.is_a(algo, undefined) || CGU.is_a(data, undefined)) return;
     
     algo = ready(algo);
-    if (!valid(algo) || CGU.isof(Algos[algo], null, undefined)) return null;
+    if (!valid(algo) || CGU.isNil(Algos[algo])) return null;
     
-    if (!options.unicode && data.match(/[^\x00-\xff]/)) return false;
+    if (options.unicode) data = c16t8(data);
     
-    return Sequence((function () {
-      // verify ascii data
-      if (options.unicode) {
-        data = (function () {
-          for (var out = '', i = 0; i < data.length; i += 1) {
-            out += String.fromCharCode((data.charCodeAt(i) >> 8) & 0xff);
-            out += String.fromCharCode((data.charCodeAt(i) >> 0) & 0xff);
-          }
-          return out;
-        })();
-      }
-      
-      // revise data with HMAC key
-      if (CGU.is_a(options.hmac, String)) {
-        data = (function (key) {
-          var block = Algos[algo].block, klen = key.length;
-          var akey, i, ipad = [], opad = [];
-          
-          akey = Sequence(klen > block ? Algos[algo].algo(key) : key).raw();
-          for (i = 0; i < block && CGU.is_a(akey, 'array'); i += 1) {
-            ipad[i] = (akey[i] || 0x00) ^ 0x36;
-            opad[i] = (akey[i] || 0x00) ^ 0x5C;
-          }
-          
-          var ihash = Algos[algo].algo(Sequence(ipad).str() + data);
-          return Sequence(opad).str() + Sequence(ihash).str();
-        })(options.hmac);
-      }
-      
-      return Algos[algo].algo(data);
-    })());
+    if (CGU.is_a(options.hmac, String)) {
+      data = hmac(algo, data, options.hmac);
+      if (CGU.isNil(data)) return;
+    }
+    
+    return Sequence(call(algo, data));
   };
   
   CGU.hashes = function () {
-    var list = [];
-    for (var algo in Algos)
-      if (Algos.propertyIsEnumerable(algo))
-        list.push(algo);
-    return CGU.clone(list);
+    return CGU.keys(Algos, true);
   };
   
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -186,6 +157,33 @@
   
   var ready = function (algo) { return algo.replace(/^\s+|\s+$/g, '').toLowerCase(); };
   var valid = function (algo) { return (/^[\$\_a-z][\$\_a-z0-9]*(,[0-9]+)?$/i).test(algo); };
+  
+  var call = function (algo, data) {
+    return Algos[algo].algo(data);
+  };
+  
+  var c16t8 = function (str) { // convert 16-bit string to 8-bit
+    for (var out = '', i = 0; i < str.length; i += 1) {
+      out += String.fromCharCode((str.charCodeAt(i) >> 8) & 0xff);
+      out += String.fromCharCode((str.charCodeAt(i) >> 0) & 0xff);
+    }
+    return out;
+  };
+  
+  var hmac = function (algo, data, key) {
+    var block = Algos[algo].block, klen = key.length;
+    var akey, i, ipad = [], opad = [];
+    
+    akey = Sequence(klen > block ? call(algo, key) : key).raw();
+    if (!CGU.is_a(akey, 'array')) return;
+    for (i = 0; i < block && CGU.is_a(akey, 'array'); i += 1) {
+      ipad[i] = (akey[i] || 0x00) ^ 0x36;
+      opad[i] = (akey[i] || 0x00) ^ 0x5c;
+    }
+    
+    var ihash = call(algo, (Sequence(ipad).str() + data));
+    return Sequence(opad).str() + Sequence(ihash).str();
+  };
   
 <%= inc 'crypto/util.*.js', "crypto/hash.{#{CRYPTO.join(',')}}.js" %>
   

@@ -109,8 +109,8 @@
       serial.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
     };
     var insArr = function (name, arr) {
-      for (var i = 0; i < object[p].length; i += 1)
-        append(name, object[p][i]);
+      for (var i = 0; i < arr.length; i += 1)
+        append(name, arr[i]);
     };
     var insObj = function (obj) {
       serial.push(CGU.param(obj));
@@ -123,18 +123,18 @@
     
     // handle other objects
     else
-      for (var p in object)
-        if (object.propertyIsEnumerable(p))
-          switch (CGU.type(object[p])) {
-            case 'undefined':
-            case 'error'    :
-            case 'function' :
-            case 'regexp'   : break;
-            case 'object': insObj(object[p]); break;
-            case 'array' : insArr(p, object[p]); break;
-            case 'date'  : append(p, CGU.fromTime(object[p])); break;
-            default: append(p, object[p]); break;
-          }
+      CGU.iterate(object, function (v, k) {
+        switch (CGU.type(v)) {
+          case 'undefined':
+          case 'error'    :
+          case 'function' :
+          case 'regexp'   : break;
+          case 'object': insObj(v); break;
+          case 'array' : insArr(k, v); break;
+          case 'date'  : append(k, CGU.fromTime(v)); break;
+          default: append(k, v); break;
+        }
+      }, true);
     
     return (complete ? '?' : '') + serial.join('&').replace(/%20/, '+');
   };

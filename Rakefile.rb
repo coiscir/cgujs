@@ -14,7 +14,8 @@ INCS = [
   'query.js',
   'cookie.js',
   'time.js',
-  'json.js'
+  'json.js',
+  'iterator.js'
 ].sort
 
 CRYPTO = [

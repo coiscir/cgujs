@@ -6,7 +6,7 @@ var Sequence = function (param) {
   if (param instanceof Sequence) param = param.raw();
   
   var sequence = (function () {
-    if (CGU.isof(param, null, undefined)) return undefined;
+    if (CGU.isNil(param)) return undefined;
     
     switch (CGU.type(param)) {
       case 'array':
