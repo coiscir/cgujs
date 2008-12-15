@@ -17,13 +17,11 @@
     
     var type = CGU.type(object);
     var inst = inherit === true || type != 'object';
-    var host;
     
     for (var p in object)
-      if (!inst || object.propertyIsEnumerable(p)) {
-        host = iterator(object[p], p);
-        if (!CGU.isNil(host)) return host;
-      }
+      if (!inst || object.propertyIsEnumerable(p))
+        if (CGU.is_a(iterator(object[p], p, type), null))
+          return null;
     
     return true;
   };
@@ -39,8 +37,8 @@
   CGU.map = function (object, mapping, inherit) {
     if (!CGU.is_a(mapping, Function)) return;
     
-    var host = CGU.iterate(object, function (v, k) {
-      object[k] = mapping(v, k);
+    var host = CGU.iterate(object, function (v, k, t) {
+      object[k] = mapping(v, k, t);
     }, (inherit === false ? false : true));
     
     return CGU.isNil(host) ? host : object;
