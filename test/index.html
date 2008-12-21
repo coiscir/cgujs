@@ -33,7 +33,7 @@ var write = function (passfail, comment) {
   else if (passfail === !!passfail)
     print((passfail ? pass : fail), ' ', comment);
   else
-    print();
+    print(' ');
 };
 
 var notate = function (title, comment, message) {
