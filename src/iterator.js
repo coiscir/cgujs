@@ -16,7 +16,7 @@
     if (!CGU.isof(iterator, Function)) return;
     
     var type = CGU.type(object);
-    var inst = inherit === true || type != 'object';
+    var inst = inherit === !!inherit ? inherit : (type != 'object');
     
     for (var p in object)
       if (!inst || object.propertyIsEnumerable(p))
@@ -30,7 +30,7 @@
     var ks = [];
     CGU.iterate(object, function (v, k) {
       ks.push(k);
-    }, inherit);
+    }, (inherit === false ? false : true));
     return ks;
   };
   
