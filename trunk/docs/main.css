@@ -221,17 +221,17 @@ div.navlist {
 .codebox .dec { color: #0ff; }  /* color: #606 */
 
 /** StackOverflow.com colors **/
-.prettify .str { color:maroon; }
-.prettify .kwd { color:#00008B; }
-.prettify .com { color:gray; }
-.prettify .typ { color:#2B91AF; }
-.prettify .lit { color:maroon; }
-.prettify .pun { color:black; }
-.prettify .pln { color:black; }
-.prettify .tag { color:maroon; }
-.prettify .atn { color:red; }
-.prettify .atv { color:blue; }
-.prettify .dec { color:purple; }
+.str { color:maroon; }
+.kwd { color:#00008B; }
+.com { color:gray; }
+.typ { color:#2B91AF; }
+.lit { color:maroon; }
+.pun { color:black; }
+.pln { color:black; }
+.tag { color:maroon; }
+.atn { color:red; }
+.atv { color:blue; }
+.dec { color:purple; }
 
 @media print {
   .str { color: #060; }
