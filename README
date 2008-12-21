@@ -14,6 +14,8 @@ Download
 
 Usage
 
+  Download the latest release and copy to `lib/cgu.js` to a suitable location.
+
   <script type="text/javascript" src="/path/to/cgu.js"></script>
 
 --------------------------------
@@ -22,13 +24,13 @@ Building
 
   To build CGU, you'll need:
 
-    - A copy of the CGU source tree, distributed archive or Subversion repository
+    - A copy of the CGU source tree, by release archive or Subversion repository
     - Ruby 1.8.7 (http://www.ruby-lang.org/en/)
     - RubyGems 1.3.1 (http://www.rubygems.org/)
       - gem install rake
       - gem install jsmin
 
-  From the CGU root directory, run either of the following:
+  From the source tree root directory, run either of the following:
 
     $ rake
     $ rake build
