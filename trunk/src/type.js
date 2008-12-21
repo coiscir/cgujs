@@ -163,5 +163,20 @@
   CGU.isNil = function (object) {
     return CGU.isof(object, null, undefined);
   };
+  
+  CGU.isElement = function (object) {
+    if (window.Element)
+      if (CGU.is_a(object, Element))
+        return true;
+    
+    try {
+      var tag = object.tagName;
+      object.tagName = '';  // read-only, should throw exception
+      object.tagName = tag; // restore for normal objects
+      return false;
+    } catch (e) {
+      return true;
+    }
+  };
 
 })();
