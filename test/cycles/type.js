@@ -114,6 +114,15 @@ cycles.Type = {
           'String to Date, Number is undefined', undefined, function(){ return CGU.limit('', Date, Number); }
         ]
       ]
+    }, {
+      title: 'isElement',
+      cases: [
+        [
+          'Element', true, function(){ return CGU.isElement(document.createElement('div')); }
+        ], [
+          'Object', false, function(){ return CGU.isElement({tagName: 'foobar something'}); }
+        ]
+      ]
     }
   ]
 };
