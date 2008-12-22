@@ -1,36 +1,22 @@
 require 'rake'
+require 'maruku'
+
+require 'build/builder'
+require 'build/crypto'
+require 'build/incs'
+require 'build/pages'
 
 ################################################################################
 # Prepare
 ####
 ROOT = File.expand_path(File.dirname(__FILE__))
+DOCS = File.join(ROOT, 'md')
+
+DPUB = File.join(DOCS, 'pub')
+DSRC = File.join(DOCS, 'src')
 
 FINAL = File.join(ROOT, 'lib', 'cgu.js')
 START = File.join(ROOT, 'src', 'cgu.js')
-
-INCS = [
-  'type.js',
-  'crypto.js',
-  'query.js',
-  'cookie.js',
-  'time.js',
-  'json.js',
-  'iterator.js'
-].sort
-
-CRYPTO = [
-  'md4',
-  'md5',
-  'sha1',
-  'sha224-256',
-  'sha384-512',
-  'ripemd128',
-  'ripemd160'
-]
-
-Dir.chdir(ROOT) do
-  require 'builder'
-end
 
 ################################################################################
 # Versions
@@ -59,6 +45,7 @@ task :help do
   ].join($/) + $/
 end
 
+# short
 task :b  => :build
 task :r  => :remove
 task :rm => :remove
@@ -66,23 +53,41 @@ task :s  => :status
 task :st => :status
 task :h  => :help
 
-desc "Build CGU Library Script"
-task :build do
-  print $/ + '== Build' + ' :: ' + TIME.strftime('%Y-%m-%d %H:%M:%S') + ' :: ' + version.to_s + $/
+# full
+desc "Build CGU library script and document pages"
+task :build => [:lib, :docs]
+
+desc "Delete CGU library script and document pages"
+task :remove => [:rlib, :rdocs]
+
+desc "Check build status of CGU library script and document pages"
+task :status => [:slib, :sdocs]
+
+# library script
+task :lib do
+  print $/ + '== Build' + ' :: Library :: ' + version.to_s + ' (' + TIME.strftime('%Y-%m-%d %H:%M:%S') + ')' + $/
   File.open(FINAL, 'w+') do |lib|
     lib << Builder.build(START)
   end
   print ' + ' + File.basename(FINAL) + $/ if File.exists?(FINAL)
 end
 
-desc "Delete CGU Library Script"
-task :remove do
+task :rlib do
   print $/ + '== Remove' + $/
   print ' - ' + File.basename(FINAL) + $/ if File.exists?(FINAL) && File.delete(FINAL) > 0
 end
 
-desc "Check build status"
-task :status do
+task :slib do
   print $/ + '== Status' + $/
   print ' ' + (File.exists?(FINAL) ? '+' : '-') + ' ' + File.basename(FINAL) + $/
+end
+
+# document pages
+task :docs do
+end
+
+task :rdocs do
+end
+
+task :sdocs do
 end
