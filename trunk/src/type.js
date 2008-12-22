@@ -129,7 +129,7 @@
       case UND : return CGU.type(object) === UND;
       case NUL : return CGU.type(object) === NUL;
       case STR : return CGU.type(object) === compare;
-      case FNC :
+      default :
         switch (compare) {
           case Boolean : return CGU.type(object) === BLN; // promote primitives
           case Number  : return CGU.type(object) === NUM;
@@ -137,7 +137,6 @@
           case Object  : return CGU.type(object) === OBJ; // demote Object
           default      : return object instanceof compare;
         }
-      default : return undefined;
     }
   };
   
@@ -165,13 +164,22 @@
   };
   
   CGU.isElement = function (object) {
-    if (window.Element)
-      if (CGU.is_a(object, Element))
-        return true;
+    // DOM, Level 2
+    try {
+      return CGU.is_a(object, HTMLElement);
+    } catch (e) {}
     
+    // exclude obvious non-matches
+    if (!CGU.is_a(object, Object)) return false;
+    if (!CGU.is_a(object.tagName, String)) return false;
+    
+    // test read-only property
     try {
       var tag = object.tagName;
-      object.tagName = '';  // read-only, should throw exception
+      object.tagName = ''; // read-only, should throw exception
+      
+      if (object.tagName !== '') return true; // silent read-only (WebKit)
+      
       object.tagName = tag; // restore for normal objects
       return false;
     } catch (e) {
