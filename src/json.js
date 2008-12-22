@@ -212,11 +212,11 @@
     };
     
     var arr = function (input) {
-      var elems = [], v;
-      for (var i = 0; i < input.length; i += 1) {
-        v = value(input[i]);
+      var elems = [];
+      CGU.iterate(input, function (v) {
+        v = value(v);
         if (CGU.is_a(v, String)) elems.push(v);
-      }
+      });
       return '[' + elems.join(', ') + ']';
     };
     
@@ -232,7 +232,7 @@
         k = key(v);
         v = value(input[v]);
         if (CGU.is_a(v, String)) pairs.push(k + ': ' + v);
-      });
+      }, true);
       return '{' + pairs.join(', ') + '}';
     };
     
