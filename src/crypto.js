@@ -185,6 +185,6 @@
     return Sequence(opad).str() + Sequence(ihash).str();
   };
   
-<%= inc 'crypto/util.*.js', "crypto/hash.{#{CRYPTO.join(',')}}.js" %>
+<%= inc 'crypto/util.{bit32,bit64,seq}.js', "crypto/hash.{#{CRYPTO.join(',')}}.js" %>
   
 })();
