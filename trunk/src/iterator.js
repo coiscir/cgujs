@@ -13,13 +13,15 @@
 (function Iterator() { // enable private members
   
   CGU.iterate = function (object, iterator, inherit) {
-    if (!CGU.isof(iterator, Function)) return;
+    if (!CGU.is_a(iterator, Function)) return;
+    if (!object.hasOwnProperty)
+      object.hasOwnProperty = Object.prototype.hasOwnProperty;
     
     var type = CGU.type(object);
     var inst = inherit === !!inherit ? inherit : (type != 'object');
     
     for (var p in object)
-      if (!inst || object.propertyIsEnumerable(p))
+      if (!inst || object.hasOwnProperty(p))
         if (CGU.is_a(iterator(object[p], p, type), null))
           return null;
     
