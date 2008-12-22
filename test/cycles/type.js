@@ -121,6 +121,10 @@ cycles.Type = {
           'Element', true, function(){ return CGU.isElement(document.createElement('div')); }
         ], [
           'Object', false, function(){ return CGU.isElement({tagName: 'foobar something'}); }
+        ], [
+          'Object empty', false, function(){ var obj = {}; CGU.isElement(obj); return obj.hasOwnProperty('tagName'); }
+        ], [
+          'Object property', 'foobar something', function(){ var obj = {tagName: 'foobar something'}; CGU.isElement(obj); return obj.tagName; }
         ]
       ]
     }
