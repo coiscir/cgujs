@@ -12,36 +12,34 @@
 
 (function Iterator() { // enable private members
   
-  CGU.iterate = function (object, iterator, inherit) {
+  CGU.iterate = function (object, iterator, instance) {
     if (!CGU.is_a(iterator, Function)) return;
-    if (!object.hasOwnProperty)
-      object.hasOwnProperty = Object.prototype.hasOwnProperty;
     
     var type = CGU.type(object);
-    var inst = inherit === !!inherit ? inherit : (type != 'object');
+    var inst = instance === !!instance ? instance : (type != 'object');
     
     for (var p in object)
-      if (!inst || object.hasOwnProperty(p))
+      if (!inst || Object.prototype.hasOwnProperty.call(object, p))
         if (CGU.is_a(iterator(object[p], p, type), null))
           return null;
     
     return true;
   };
   
-  CGU.keys = function (object, inherit) {
+  CGU.keys = function (object, instance) {
     var ks = [];
     CGU.iterate(object, function (v, k) {
       ks.push(k);
-    }, (inherit === false ? false : true));
+    }, (instance === false ? false : true));
     return ks;
   };
   
-  CGU.map = function (object, mapping, inherit) {
+  CGU.map = function (object, mapping, instance) {
     if (!CGU.is_a(mapping, Function)) return;
     
     var host = CGU.iterate(object, function (v, k, t) {
       object[k] = mapping(v, k, t);
-    }, (inherit === false ? false : true));
+    }, (instance === false ? false : true));
     
     return CGU.isNil(host) ? host : object;
   };
