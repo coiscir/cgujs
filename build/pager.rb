@@ -101,19 +101,22 @@ module Pager
       
       def import
         globbed.reject {|r|
-          !(r =~ /^\w+(?:\.\w+){0,2}$/i)
+          !(r =~ /^\w+(?:\.\w+){0,2}(?:\.md)?$/i)
         }.each {|f|
           addpage(f)
         }
       end
       
-      def navitem(name, items)
+      def navitem(file, name, items)
         nav  = '<div class="navlist">' + $/
         nav += '  <h3>' + name + '</h3>' + $/
         nav += '  <ul>' + $/
         
         items.each {|i|
-          nav += '    <li><a href="' + getlink(i[0]) + '">' + i[1] + '</a></li>' + $/
+          nav += '    '
+          nav += '<li' + (i[0] == file ? ' class="active"' : '') + '>'
+          nav += '<a href="' + getlink(i[0]) + '">' + i[1] + '</a>'
+          nav += '</li>' + $/
         }
         
         nav += '  </ul>' + $/
@@ -124,7 +127,7 @@ module Pager
         seg = file.split(/\./)
         nav = []
         
-        nav.push(navitem(@name, [
+        nav.push(navitem(file, @name, [
           [@ind, 'API Home'],
           ['Functions', 'Functions']
         ]))
@@ -134,21 +137,21 @@ module Pager
           UTILS[seg[1]]['funcs'].each {|f|
             funcs.push([FUNCS[f]['file'], f])
           }
-          nav.push(navitem(seg[1], funcs))
+          nav.push(navitem(file, seg[1], funcs))
         end
         
         utils = []
         UTILS.keys.sort.each {|u|
           utils.push([UTILS[u]['file'], u])
         }
-        nav.push(navitem('Utilities', utils))
+        nav.push(navitem(file, 'Utilities', utils))
         
         if (seg[1].nil?)
           funcs = []
           FUNCS.keys.sort.each {|f|
             funcs.push([FUNCS[f]['file'], f])
           }
-          nav.push(navitem('Functions', funcs))
+          nav.push(navitem(file, 'Functions', funcs))
         end
         
         nav.join($/ + $/).gsub(/^/, (' ' * 6)).gsub(/[ \t]+$/m, '')
@@ -191,8 +194,6 @@ module Pager
             content = ERB.new(PAGES[f]['src']).result(binding)
             content = Maruku.new(content).to_html
             
-            #content += $/ + $/ + funclist(f) + $/ + $/ + '<hr />' if seg[2].nil? && f != @ind
-            
             File.open(File.join(@dst, getlink(f)), 'w+') do |dst|
               dst << ERB.new(temp).result(binding)
             end
@@ -205,7 +206,7 @@ module Pager
     public
       
       def getlink(name)
-        PAGES[name]['link']
+        PAGES[name].nil? ? nil : PAGES[name]['link']
       end
       
       def page(name, dst, src, index, temp)
