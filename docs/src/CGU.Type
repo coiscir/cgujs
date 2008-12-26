@@ -1,0 +1,9 @@
+Type offers enhanced `typeof` and `instanceof` testing as well as type-oriented methods, such as cloning.
+
+----
+
+### Functions ###
+
+<%= funcs %>
+
+----

@@ -1,0 +1,3 @@
+Convert a `"YYYY-MM-DDThh:mm:ss.sssZ"` formatted string to a Date Object.
+
+----

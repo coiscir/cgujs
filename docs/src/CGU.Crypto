@@ -1,0 +1,11 @@
+Crypto adds [cryptographic hash functions](http://wikipedia.org/wiki/Cryptographic_hash_function) to JavaScript.
+>
+> It's designed to be simple to use, allowing 1-way and HMAC hashing through the use of a single function.
+
+----
+
+### Functions ###
+
+<%= funcs %>
+
+----
