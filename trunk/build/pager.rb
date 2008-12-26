@@ -47,13 +47,14 @@ module Pager
         end
       end
       
+      def subname(name)
+        name.gsub(/_/, '\\_')
+      end
+      
       def header(file)
         seg = file.split(/\./)
-        head = ""
-        head += '# ' + seg[0] + ' # {: #'+@ind+'-Main}' + $/ + $/
-        head += '## ' + seg[1] + ' ## {: #'+@ind+'-Util}' + $/ + $/ if !seg[1].nil?
-        head += '### ' + seg[2].gsub(/_/, '\\_') + ' ### {: #'+@ind+'-Func}' + $/ + $/ if !seg[2].nil?
-        head += '> '
+        use = !seg[2].nil? ? seg[2] : !seg[1].nil? ? seg[1] : seg[0]
+        '# ' + subname(use) + ' # {: #'+@ind+'-Main}' + $/+$/ + '> '
       end
       
       def addpage(file)
@@ -64,7 +65,7 @@ module Pager
           PAGES[file] = {
             'desc' => desc,
             'link' => link,
-            'src'  => header(file) + (src || '')
+            'src'  => header(file).to_s + (src || '')
           }
         end
         
@@ -162,16 +163,11 @@ module Pager
           file = FUNCS[func]['file']
           desc = PAGES[file]['desc'].strip
           
-          fp = func.gsub(/_/, '\\_')
-          fi = func.gsub(/_/, '-')
+          fp = func.gsub(/_/, '\\_') # function print
+          fi = func.gsub(/_/, '-')   # function id
           
           md  = '#### [' + fp + '](' + getlink(file) + ') #### {: #func-' + fi + '}' + $/ + $/
           md += '> ' + desc
-          
-          #html  = '<h4><a href="' + getlink(file) + '">' + func + '</a></h4>' + $/
-          #html += '<blockquote>' + $/
-          #html += '  ' + Maruku.new(desc).to_html.strip + $/
-          #html += '</blockquote>'
           
           list.push(md)
         }
@@ -200,6 +196,8 @@ module Pager
             File.open(File.join(@dst, getlink(f)), 'w+') do |dst|
               dst << ERB.new(temp).result(binding)
             end
+            
+            status(@dst, @src, @ind, f)
           }
         end
       end
@@ -232,23 +230,25 @@ module Pager
           globbed.each {|f|
             link = setlink(f)
             File.delete(link) if File.exists?(link)
+            
+            status(@dst, @src, @ind, f)
           }
         end
       end
       
-      def status(dst, src, index)
+      def status(dst, src, index, file)
         @dst = File.expand_path(dst)
         @src = File.expand_path(src)
         @ind = index
         
         if (ready?)
           Dir.chdir(@dst) do
-            globbed.each {|f|
+            (file.nil? ? globbed : [file]).each {|f|
               if (f =~ /^\w+(?:\.\w+){0,2}$/i)
                 link = setlink(f)
-                puts ' ' + (File.exists?(link) ? '+' : '-') + ' ' + f.gsub(/\./, ' - ')
+                puts ' ' + (File.exists?(link) ? '+' : '-') + ' ' + f + $/
               else
-                puts " ? " + f
+                puts " ? " + f + $/
               end
             }
           end
