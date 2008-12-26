@@ -4,15 +4,13 @@ require 'maruku'
 require 'build/builder'
 require 'build/crypto'
 require 'build/incs'
-require 'build/pages'
 
 ################################################################################
 # Prepare
 ####
 ROOT = File.expand_path(File.dirname(__FILE__))
-DOCS = File.join(ROOT, 'md')
 
-DPUB = File.join(DOCS, 'pub')
+DOCS = File.join(ROOT, 'docs')
 DSRC = File.join(DOCS, 'src')
 
 FINAL = File.join(ROOT, 'lib', 'cgu.js')
@@ -65,7 +63,7 @@ task :status => [:slib, :sdocs]
 
 # library script
 task :lib do
-  print $/ + '== Build' + ' :: Library :: ' + version.to_s + ' (' + TIME.strftime('%Y-%m-%d %H:%M:%S') + ')' + $/
+  print $/ + '== Build :: Library :: ' + version.to_s + ' (' + TIME.strftime('%Y-%m-%d %H:%M:%S') + ')' + $/
   File.open(FINAL, 'w+') do |lib|
     lib << Builder.build(START)
   end
@@ -73,12 +71,12 @@ task :lib do
 end
 
 task :rlib do
-  print $/ + '== Remove' + $/
+  print $/ + '== Remove :: Library' + $/
   print ' - ' + File.basename(FINAL) + $/ if File.exists?(FINAL) && File.delete(FINAL) > 0
 end
 
 task :slib do
-  print $/ + '== Status' + $/
+  print $/ + '== Status :: Library' + $/
   print ' ' + (File.exists?(FINAL) ? '+' : '-') + ' ' + File.basename(FINAL) + $/
 end
 

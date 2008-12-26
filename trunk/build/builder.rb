@@ -1,14 +1,12 @@
 require 'erb'
-require 'jsmin' # rubygem
+require 'jsmin' # RubyGems
 
 ################################################################################
 ### Builder
-### ERB Wrapper
+### ERB Wrapper for Library Scripts
 ################################################################################
-# Requires:
-#
-#   jsmin (http://rubyforge.org/projects/riposte/)
-#     $ gem install jsmin
+# Requires: jsmin (http://rubyforge.org/projects/riposte/)
+#   $ gem install jsmin
 #
 # More info at http://www.crockford.com/javascript/jsmin.html
 ################################################################################
