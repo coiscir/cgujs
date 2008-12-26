@@ -94,10 +94,11 @@
     
     var queries = location.search.replace(/^\?/, '').replace(/\+/, '%20').split(/\&/);
     var matches = [];
-    for (var i = 0; i < queries.length; i += 1)
-      if (CGU.is_a(queries[i], String) && queries[i].match(/[^\=]+\=?/))
-        if (key === decodeURIComponent(queries[i].split('=')[0]))
-          matches.push(decodeURIComponent(queries[i].split('=')[1] || ''));
+    CGU.iterate(queries, function (v) {
+      var s = v.split(/=/);
+      if (key == decodeURIComponent(s[0]))
+        matches.push(decodeURIComponent(s[1] || ''));
+    });
     return CGU.clone(matches);
   };
   
@@ -105,21 +106,18 @@
     complete = complete === true ? true : false;
     
     var serial = [], i;
-    var append = function (key, value) {
-      serial.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+    var add = function (k, v) {
+      serial.push(encodeURIComponent(k) + '=' + encodeURIComponent(v));
     };
-    var insArr = function (name, arr) {
-      for (var i = 0; i < arr.length; i += 1)
-        append(name, arr[i]);
-    };
-    var insObj = function (obj) {
-      serial.push(CGU.param(obj));
+    var append = function (s) {
+      serial.push(s);
     };
     
     // handle serialize arrays
     if (CGU.is_a(object, Array) && object._seralized === true)
-      for (i = 0; i < object.length; i += 1)
-        append(object[i].name, object[i].value);
+      CGU.iterate(object, function (v, k, t) {
+        add(v.name, v.value);
+      });
     
     // handle other objects
     else
@@ -129,10 +127,10 @@
           case 'error'    :
           case 'function' :
           case 'regexp'   : break;
-          case 'object': insObj(v); break;
-          case 'array' : insArr(k, v); break;
-          case 'date'  : append(k, CGU.fromTime(v)); break;
-          default: append(k, v); break;
+          case 'object': append(CGU.param(v)); break;
+          case 'array' : CGU.iterate(v, function(v){ add(k, v); }); break;
+          case 'date'  : add(k, CGU.fromTime(v)); break;
+          default: add(k, v); break;
         }
       }, true);
     
@@ -140,29 +138,28 @@
   };
   
   CGU.serialize = function (fe, complete) { // fe = form/elements
-    fe = CGU.is_a(fe.elements, 'object') ? fe.elements : fe;
-    if (!CGU.is_a(fe.length, Number)) return null;
-    
-    var elems = [], i, j, first;
+    var elems = [], i, j;
     var add = function (name, value) {
       elems.push({name: name, value: (value || '')});
     };
     
-    for (i = 0; i < fe.length; i += 1, first = false)
-      if (fe[i].name.length > 0)
-        switch (fe[i].type) {
+    CGU.iterate(CGU.asArray(fe.elements || fe), function (e) {
+      var first = false;
+      if (e.name.length > 0)
+        switch (e.type) {
           case 'select-one': first = true;
           case 'select-multiple':
-            for (j = 0; j < fe[i].options.length; j += 1)
-              if (fe[i].options[j].selected) {
-                add(fe[i].name, fe[i].options[j].value);
-                if (first) break;
+            CGU.iterate(e.options, function (o) {
+              if (o.selected) {
+                add(e.name, o.value);
+                if (first) return null;
               }
-            break;
+            });
           case 'checkbox':
-          case 'radio': if (!fe[i].checked) break;
-          default: add(fe[i].name, fe[i].value); break;
+          case 'radio': if (!e.checked) break;
+          default: add(e.name, e.value); break;
         }
+    });
     
     elems._seralized = true; // add catch for param
     return CGU.param(elems, complete);
