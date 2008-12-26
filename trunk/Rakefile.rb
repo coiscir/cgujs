@@ -4,6 +4,7 @@ require 'maruku'
 require 'build/builder'
 require 'build/crypto'
 require 'build/incs'
+require 'build/pager'
 
 ################################################################################
 # Prepare
@@ -82,10 +83,18 @@ end
 
 # document pages
 task :docs do
+  print $/ + '== Build :: Documents' + $/
+  Pager.page('CGU', DOCS, DSRC, 'CGU', 'template.html')
+  Pager.status(DOCS, DSRC, 'CGU')
 end
 
 task :rdocs do
+  print $/ + '== Remove :: Documents' + $/
+  Pager.remove(DOCS, DSRC, 'CGU')
+  Pager.status(DOCS, DSRC, 'CGU')
 end
 
 task :sdocs do
+  print $/ + '== Status :: Documents' + $/
+  Pager.status(DOCS, DSRC, 'CGU')
 end

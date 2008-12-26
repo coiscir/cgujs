@@ -1,0 +1,11 @@
+JSON enables the creation and parsing of JSON strings.
+>
+> It offers opposing functions for **more-secure** and **non-secure** JSON string parsing.
+
+----
+
+### Functions ###
+
+<%= funcs %>
+
+----
