@@ -17,13 +17,14 @@
     
     var type = CGU.type(object);
     var inst = instance === !!instance ? instance : (type != 'object');
+    if (type == 'array' && inst) object = CGU.clone(object);
     
     for (var p in object)
       if (!inst || Object.prototype.hasOwnProperty.call(object, p))
         if (CGU.is_a(iterator(object[p], p, type), null))
-          return null;
+          return object;
     
-    return true;
+    return object;
   };
   
   CGU.keys = function (object, instance) {
@@ -42,6 +43,14 @@
     }, (instance === false ? false : true));
     
     return CGU.isNil(host) ? host : object;
+  };
+  
+  CGU.asArray = function (object) {
+    var arr = [];
+    if (CGU.is_a(object.length, Number))
+      for (var i = 0; i < object.length; i += 1)
+        arr.push(object[i]);
+    return arr;
   };
   
 })();
