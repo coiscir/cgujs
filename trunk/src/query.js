@@ -149,12 +149,13 @@
         switch (e.type) {
           case 'select-one': first = true;
           case 'select-multiple':
-            CGU.iterate(e.options, function (o) {
+            CGU.iterate(CGU.asArray(e.options), function (o) {
               if (o.selected) {
                 add(e.name, o.value);
                 if (first) return null;
               }
             });
+            break;
           case 'checkbox':
           case 'radio': if (!e.checked) break;
           default: add(e.name, e.value); break;
