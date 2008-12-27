@@ -164,27 +164,11 @@
   };
   
   CGU.isElement = function (object) {
-    // DOM, Level 2
-    try {
-      return CGU.is_a(object, HTMLElement);
-    } catch (e) {}
-    
-    // exclude obvious non-matches
-    if (!CGU.is_a(object, Object)) return false;
-    if (!CGU.is_a(object.tagName, String)) return false;
-    
-    // test read-only property
-    try {
-      var tag = object.tagName;
-      object.tagName = ''; // read-only, should throw exception
-      
-      if (object.tagName !== '') return true; // silent read-only (WebKit)
-      
-      object.tagName = tag; // restore for normal objects
-      return false;
-    } catch (e) {
-      return true;
-    }
+    return window.HTMLElement ? CGU.is_a(object, HTMLElement) :
+      CGU.is_a(object, Object) &&
+      CGU.is_a(object.nodeType, Number) &&
+      CGU.is_a(object.nodeName, String) &&
+      CGU.is_a(object.tagName, String);
   };
-
+  
 })();
