@@ -1,3 +1,45 @@
 Iterate through each Object property or Array index.
 
 ----
+
+### Syntax ###
+
+>     CGU.iterate(object, iterator [, instance])
+> {: class=prettyprint}
+>
+> > **`object`** `<Array>`: Iterate through each Array index.
+> > **`object`** `<Object>`: Iterate through each Object property.
+> >
+> > **`iterator`** `<Function>`: A function called for each property/index.
+> >
+> > >     function (value, key, type) { /* ... */ }
+> > > {: class=prettyprint}
+> >
+> > **`instance`** `<Boolean>`: Limit iteration through instance properties. _(optional)_
+
+### Return ###
+
+> `object`: Returns the original `object`.
+
+----
+
+### Example ###
+
+>     var o = {foo: 'bar', red: null};
+>
+>     var values = [];
+>     CGU.iterate(o, function (v) {
+>       values.push(v);
+>     });
+>
+>     var keys = [];
+>     CGU.iterate(o, function (v, k) {
+>       keys.push(k);
+>     });
+>
+>     // values => ['bar', null]
+>     // keys   => ['foo', 'red']
+> {: class=prettyprint}
+{: class=codebox}
+
+----

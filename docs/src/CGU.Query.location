@@ -1,3 +1,47 @@
-Create a location clone from a URI.
+Create a `location` clone from a URI.
+
+----
+
+### Syntax ###
+
+>     CGU.location(href)
+> {: class=prettyprint}
+>
+> > **`href`** `<String>`: A URI to create a `location` clone from.
+> >
+> > > `<null>`: Clone the global `location`.
+
+### Return ###
+
+> `<Object>`: A `location` clone based on the URI.
+>
+> > `<null>`: Invalid `href`.
+> >
+> > `<undefined>`: Unspecified `href`.
+
+----
+
+### Example ###
+
+>     // make sure query-strings start with '?'
+>     // (`param` and `serialize` both have a 2nd argument for this)
+>     CGU.location('foo=bar&red=foo');   //=> null (invalid URI)
+>     CGU.location('?foo=bar&red=foo');  //=> {search: '?foo=-bar&red=foo', ...}
+>     
+>     // this is due to `location` expecting a full URI
+>     CGU.location('http://localhost:8080/path/to/file.ext?foo=bar#red');  /*=>
+>       {
+>         hash: '#red',
+>         host: 'localhost:8080',
+>         hostname: 'localhost',
+>         href: 'http://localhost:8080/path/to/file.ext?foo=bar#red',
+>         pathname: '/path/to/file.ext',
+>         port: '8080',
+>         protocol: 'http:',
+>         search: '?foo=bar'
+>       }
+>     */
+> {: class=prettyprint}
+{: class=codebox}
 
 ----

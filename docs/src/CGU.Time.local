@@ -1,3 +1,36 @@
 Absolute local time.
 
 ----
+
+### Syntax ###
+
+>     CGU.local([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])
+> {: class=prettyprint}
+>
+> > `<undefined>`: If no arguments are given, returns current time.
+> >
+> > **`yr`** `<Number>`: Full year `(0 - 9999)`.
+> >
+> > **`mn`** `<Number>`: Month `(1 - 12)`.
+> >
+> > **`dy`** `<Number>`: Day `(1 - 31)`.
+> >
+> > **`hr`** `<Number>`: Hour `(0 - 23)`.
+> >
+> > **`mn`** `<Number>`: Minute `(0 - 59)`.
+> >
+> > **`sc`** `<Number>`: Second `(0 - 59)`.
+> >
+> > **`ms`** `<Number>`: Millisecond `(0 - 999)`.
+
+### Return ###
+
+> `<Number>`: Unix Epoch time in milliseconds.
+
+----
+
+### Example ###
+
+> (See [`utc`](<%=getlink('CGU.Time.utc')%>))
+
+----

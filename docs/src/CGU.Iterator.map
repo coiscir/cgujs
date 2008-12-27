@@ -1,3 +1,35 @@
-Iterate and replace each Object property or Array index.
+Iterate and replace the value of each Object property or Array index.
+
+----
+
+### Syntax ###
+
+>     CGU.map(object, mapping [, instance])
+> {: class=prettyprint}
+>
+> > **`object`** `<Array>`: Iterate through each Array index.
+> > **`object`** `<Object>`: Iterate through each Object property.
+> >
+> > **`mapping`** `<Function>`: A function called for each property/index that returns a new value.
+> >
+> > >     function (value, key, type) { /* ... */ return value; }
+> > > {: class=prettyprint}
+> >
+> > **`instance`** `<Boolean>`: Limit iteration through instance properties. _(optional)_
+
+### Return ###
+
+> `object`: Returns the original `object`.
+
+----
+
+### Example ###
+
+>     CGU.map([0, 1, 2, 3, 4, 5], function (v) {
+>       return Math.pow(2, v);
+>     });
+>     //=> [1, 2, 4, 8, 16, 32]
+> {: class=prettyprint}
+{: class=codebox}
 
 ----
