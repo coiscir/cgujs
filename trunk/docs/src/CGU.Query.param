@@ -1,3 +1,36 @@
 Create a query-string from an object's keys.
 
 ----
+
+### Syntax ###
+
+>     CGU.param(object [, complete])
+> {: class=prettyprint}
+>
+> > **`object`** `<Object>`: An object to parameterize.
+> >
+> > **`complete`** `<Boolean>`: Return a complete `location.search` query-string. _(optional)_
+
+### Return ###
+
+> `<String>`: A query-string of the object.
+
+----
+
+### Example ###
+
+>     CGU.param({foo: 'bar', red: 'foo'});         //=> "foo=bar&red=foo"
+>     CGU.param({foo: 'bar', red: 'foo'}, true);   //=> "?foo=bar&red=foo"
+>     
+>     // objects are flattened, keeping the inner-most property name
+>     CGU.param({nil: {foo: 'bar'}, red: 'foo'});  //=> "foo=bar&red=foo"
+>     
+>     // Time.fromTime on all Date objects
+>     CGU.param({foo: new Date(2008, 11, 31, 23, 59, 59, 999)});  //=> "foo=2009-01-01T05%3A59%3A59.999Z"  // US/Central
+>     
+>     // excludes Function and RegExp Objects
+>     CGU.param({foo: function(){}, bar: /pattern/});  //=> ""
+> {: class=prettyprint}
+{: class=codebox}
+
+----

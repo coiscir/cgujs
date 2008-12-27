@@ -1,3 +1,16 @@
 Determine if an object is a DOM Element.
 
 ----
+
+### Syntax ###
+
+>     CGU.isElement(object)
+> {: class=prettyprint}
+>
+> > **`object`** `<Mixed>`: The object to be tested.
+
+### Return ###
+
+> `<Boolean>`: The `object` is an Element.
+
+----

@@ -1,0 +1,31 @@
+Convert Array-like Objects to Array.
+
+----
+
+### Syntax ###
+
+>     CGU.asArray(object)
+> {: class=prettyprint}
+>
+> > **`object`** `<Object>`: An Array-like Object.
+
+### Return ###
+
+> `<Array>`: Returns the original `object`.
+
+----
+
+### Example ###
+
+>     function ARGV() {
+>       return CGU.asArray(arguments);
+>     }
+>     ARGV('foo', 'bar', 'red', null);  //=> ['foo', 'bar', 'red', null]
+>     
+>     function elements(form) {
+>       return CGU.asArray(form.elements);
+>     }
+> {: class=prettyprint}
+{: class=codebox}
+
+----

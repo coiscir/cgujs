@@ -1,3 +1,90 @@
 Read, write, or expire a cookie.
 
 ----
+
+### Syntax ###
+
+>     CGU.cookie(key, value [, options]);
+> {: class=prettyprint}
+>
+> > **`key`** `<String>`: Name of the cookie.
+> > 
+> > **`value`** `<String>`: Value of the cookie.
+> > 
+> > **`options`** `<Object>`: Specify additional settings. _(optional)_
+> >
+> > > **`domain`** `<String>`: Domain/hostname associated with the cookie.
+> > >
+> > > **`duration`** `<String>`: Number of days the cookie should live.
+> > >
+> > > > `<null>`: Creates a session cookie.
+> > > >
+> > > > `(duration < 0)`: Forces the cookie to expire (method 2).
+> > >
+> > > **`expire`** `<Boolean>`: Forces the cookie to expire (method 1).
+> > >
+> > > **`path`** `<String>`: Pathname associated with the cookie.
+> > >
+> > > **`secure`** `<Boolean>`: Create a secure cookie.
+
+----
+
+### Modes ###
+
+> #### Read #### {: #modes-read}
+>
+> > ##### Syntax ##### {: #modes-read-syntax}
+> >
+> > >     CGU.cookie(key);
+> > > {: class=prettyprint}
+> >
+> > ##### Return ##### {: #modes-read-return}
+> >
+> > > `<String>`: Value of the cookie.
+> > >
+> > > > `<null>`: Cookie wasn't found.
+>
+> #### Write #### {: #modes-write}
+>
+> > ##### Syntax ##### {: #modes-write-syntax}
+> >
+> > >     CGU.cookie(key, value [, options]);
+> > > {: class=prettyprint}
+> >
+> > ##### Return ##### {: #modes-write-return}
+> >
+> > > `<Boolean>`: Success.
+>
+> #### Expire #### {: #modes-expire}
+>
+> > ##### Syntax ##### {: #modes-expire-syntax}
+> >
+> > >     CGU.cookie(key, ..., {duration: -1}); // duration < 0
+> > >     CGU.cookie(key, ..., {expire: true});
+> > > {: class=prettyprint}
+> >
+> > ##### Return ##### {: #modes-expire-return}
+> >
+> > > `<Boolean>`: Success.
+> > >
+> > > > `<null>`: Cookie wasn't found.
+
+----
+
+### Example ###
+
+>     CGU.cookie('foo', 'bar', {duration: 2});   //=> true (Write)
+>     CGU.cookie('   ', 'spc', {duration: -1});  //=> null (Write/Expire)
+>     
+>     CGU.cookie('foo');  //=> 'bar' (Read)
+>     CGU.cookie('   ');  //=> null (Read)
+>     
+>     CGU.cookie('foo', null, {expire: true});  //=> true (Expire)
+>     CGU.cookie('   ', null, {expire: true});  //=> null (Expire)
+>    
+>     CGU.cookie('foo');  //=> null (Read)
+>     CGU.cookie('   ');  //=> null (Read)
+>  {: class=prettyprint}
+{: class=codebox}
+
+----

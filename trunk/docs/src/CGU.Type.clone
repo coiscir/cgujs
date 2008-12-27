@@ -1,3 +1,16 @@
 Clone an object.
 
 ----
+
+### Syntax ###
+
+>     CGU.clone(object)
+> {: class=prettyprint}
+>
+> > **`object`** `<Mixed>`: The object to be cloned.
+
+### Return ###
+
+> `<Mixed>`: The object's clone.
+
+----

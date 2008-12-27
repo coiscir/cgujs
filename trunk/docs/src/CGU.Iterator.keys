@@ -1,3 +1,31 @@
 Gather a list of an Object's properties.
 
 ----
+
+### Syntax ###
+
+>     CGU.keys(object [, instance])
+> {: class=prettyprint}
+>
+> > **`object`** `<Object>`: Gather properties of this object.
+> >
+> > **`instance`** `<Boolean>`: Limit iteration through instance properties. _(optional)_
+
+## Return ##
+
+> `<Array>`: List of properties
+
+----
+
+### Example ###
+
+>     Object.prototype.bar = function () {};
+>     
+>     var o = {foo: "bar", red: null}
+>
+>     CGU.keys(o)        //=> ['bar', 'foo', 'red']
+>     CGU.keys(o, true)  //=> ['foo', 'red']
+> {: class=prettyprint}
+{: class=codebox}
+
+----

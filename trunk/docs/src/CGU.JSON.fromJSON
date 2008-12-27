@@ -1,3 +1,43 @@
 A **_more-secure_** JSON interpreter.
 
 ----
+
+### Syntax ###
+
+>     CGU.fromJSON(json [, strict])
+> {: class=prettyprint}
+>
+> > **`json`** `<String>`: A JSON-formatted string.
+> >
+> > **`strict`** `<Boolean>`: Only allow [JSON.org](http://json.org) specified JSON strings.
+> >
+> > > Will not convert date string (`"0000-01-01T00:00:00Z"`) to Date Objects.
+> > >
+> > > Will not recognize `undefined` keywords.
+> > >
+> > > Will not accept octal or hexadecimal number literatls.
+> > >
+> > > Will not accept object keys that are not string-formatted.
+> > >
+> > > Will not accept single-quoted strings or hex encodings (`"\x20"`).
+
+### Return ###
+
+> `<Mixed>`: The object represented by the string.
+>
+> > `<SyntaxError>`: `json` string was malformed. _(thrown)_
+
+----
+
+### Example ###
+
+>     CGU.fromJSON('24');      //=> 24
+>     CGU.fromJSON('[2, 4]');  //=> [2, 4]
+>     
+>     CGU.fromJSON('{foo: "bar"}');        //=> {foo: "bar"}
+>     CGU.fromJSON('{foo: "bar"}', true);  //=> throws SyntaxError
+>     
+>     CGU.fromJSON('(function(){/*...*/})()');     //=> prevents function execution (throws SyntaxError)
+>     CGU.fromJSON('{foo: function(){/*...*/}}');  //=> but, doesn't allow function values
+> {: class=prettyprint}
+{: class=codebox}
