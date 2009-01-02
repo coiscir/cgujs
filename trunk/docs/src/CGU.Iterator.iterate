@@ -21,7 +21,7 @@ Iterate through each Object property or Array index.
 
 > `object`: Returns the original `object`.
 >
-> > `interrupt`:
+> > `interrupt`: The defined value returned from `iterator`.
 
 ----
 
