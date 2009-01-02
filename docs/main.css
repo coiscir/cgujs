@@ -177,12 +177,14 @@ div.navlist {
       background: #136;
     }
 
+#content p {
+  margin: 6px 0;
+}
 #content blockquote {
-  margin-left: 20px;
-  margin-left: 20px;
+  margin: 6px 20px;
 }
   #content blockquote blockquote {
-    margin-right: 0;
+    margin: 0 0 0 20px;
   }
 #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
   margin: 3px 0 8px 0;
@@ -206,7 +208,7 @@ div.navlist {
 **/
 
 .codebox {
-  padding: 5px 8px;
+  padding: 3px 5px;
   border-left: 4px solid #79b;
   background: #eee;
 }

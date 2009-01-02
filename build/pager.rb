@@ -194,6 +194,8 @@ module Pager
             content = ERB.new(PAGES[f]['src']).result(binding)
             content = Maruku.new(content).to_html
             
+            content = content.gsub(/<code>.*?<\/code>/m) {|c| c.gsub(/\r?\n/, '<br />')}
+            
             File.open(File.join(@dst, getlink(f)), 'w+') do |dst|
               dst << ERB.new(temp).result(binding)
             end
