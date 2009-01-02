@@ -21,7 +21,7 @@ Gather a list of an Object's properties.
 
 >     Object.prototype.bar = function () {};
 >     
->     var o = {foo: "bar", red: null}
+>     var o = {foo: "bar", red: null};
 >
 >     CGU.keys(o)        //=> ['bar', 'foo', 'red']
 >     CGU.keys(o, true)  //=> ['foo', 'red']
