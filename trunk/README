@@ -29,6 +29,7 @@ Building
     - RubyGems 1.3.1 (http://www.rubygems.org/)
       - gem install rake
       - gem install jsmin
+      - gem install maruku
 
   From the source tree root directory, run either of the following:
 
