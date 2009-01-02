@@ -1,0 +1,17 @@
+Get a list of recognized types.
+
+----
+
+### Syntax ###
+
+>     CGU.types()
+> {: class=prettyprint}
+
+### Return ###
+
+> `<Array>`: List of recognized types.
+>
+> >     ["undefined", "null", "array", "boolean", "date", "error", "function", "number", "object", "regexp", "string", "unknown"];
+> > {: class=prettyprint}
+
+----

@@ -1,0 +1,18 @@
+Parameterize a Form's elements.
+
+----
+
+### Syntax ###
+
+>     CGU.serialize(form [, complete])
+> {: class=prettyprint}
+>
+> > **`form`** `<Object>`: Form DOM/Element Object or `elements` list.
+> >
+> > **`complete`** `<Boolean>`: Return a complete `location.search` query-string. _(optional)_
+
+### Return ###
+
+> `<String>`: A query-string of the object.
+
+----

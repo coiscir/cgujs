@@ -1,0 +1,78 @@
+C/C++ date formatting in local time.
+
+----
+
+### Syntax ###
+
+>     CGU.strftime(format [, time])
+> {: class=prettyprint}
+>
+> > **`format`** `<String>`: A string representing the date format.
+> >
+> > > _(see below)_
+> >
+> > **`time`** `<Date>`: A date to format.
+> >
+> > > `<Number>`: Unix Epoch time in milliseconds.
+> > >
+> > > `<null>`: Use current time.
+
+### Return ###
+
+> `<String>`: A formatted date string.
+>
+> > `<null>`: Out of range. `(Jan 1, 0000 - Dec 31, 9999)`
+> >
+> > `<undefined>`: Invalid `time`.
+
+----
+
+### Format ###
+
+> `%a` - Abbreviated week. `(Sun - Sat)`  
+> `%A` - Full week. `(Sunday - Saturday)`  
+> `%b` - Abbreviated month. `(Jan - Dec)`  
+> `%B` - Full month. `(January - December)`  
+> `%c` - Locale date and time. `(based on Date#toLocaleString)`  
+> `%C` - Century. `(year / 100)`  
+> `%d` - Day of the month with leading zeros.  
+> `%D` - Equivalent to `"%m/%d/%y"`.  
+> `%e` - Day of the month with leading spaces.  
+> `%E` - POSIX locale extensions. _(**unsupported**)_  
+> `%F` - Equivalent to `"%Y-%m-%d"`.  
+> `%g` - 2-digit year containing majority of the Monday-start week.  
+> `%G` - 4-digit year containing majority of the Monday-start week.  
+> `%h` - `%b`.  
+> `%H` - Hour of 24-hour clock with leading zeros.  
+> `%I` - Hour of 12-hour clock with leading zeros.  
+> `%j` - Day of the year with leading zeros. `(000 - 366)`  
+> `%k` - Hour of 24-hour clock with leading spaces.  
+> `%l` - Hour of 12-hour clock with leading spaces.  
+> `%m` - Numeric month with leading zeros.  
+> `%M` - Minutes with leading spaces.  
+> `%n` - newline.  
+> `%N` - Milliseconds with leading zeros.  
+> `%O` - POSIX locale extensions. _(**unsupported**)_  
+> `%p` - Uppercase ante meridiem or post meridiem.  
+> `%P` - Lowercase ante meridiem or post meridiem.  
+> `%r` - Equivalent to `"%I:%M:%S %p"`.  
+> `%R` - Equivalent to `"%H:%M"`.  
+> `%s` - Seconds since Unix Epoch.  
+> `%S` - Seconds with leading zeros.  
+> `%t` - tab.  
+> `%T` - Equivalent to <code>"%H:%M:%S"</code>.  
+> `%u` - Day of the week. `(1 - 7 <=> Mon - Sun)`  
+> `%U` - Week number of the year, Sunday-start, with leading zeros.  
+> `%v` - Equivalent to `"%e-%b-%Y"`.  
+> `%V` - Week number of `%G` year, Monday-start, with leading zeros.  
+> `%w` - Day of the week. `(0 - 6 <=> Sun - Sat)`  
+> `%W` - Week number of the year, Monday-start, with leading zeros.  
+> `%x` - Locale date. `(based on Date#toLocaleDateString)`  
+> `%X` - Locale time. `(based on Date#toLocaleTimeString)`  
+> `%y` - 2-digit year.  
+> `%Y` - 4-digit year.  
+> `%z` - Offset from UTC. `(e.g. -0600)`  
+> `%Z` - Timezone name. _(**unsupported**)_  
+> `%%` - Percent sign.  
+
+----

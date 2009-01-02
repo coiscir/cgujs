@@ -1,0 +1,49 @@
+Absolute UTC time.
+
+----
+
+### Syntax ###
+
+>     CGU.utc([yr [, mn [, dy [, hr [, mi [, sc [, ms]]]]]]])
+> {: class=prettyprint}
+>
+> > > `<null>`: If no arguments are given, returns current time.
+> >
+> > **`yr`** `<Number>`: Full year `(0 - 9999)`.
+> >
+> > **`mn`** `<Number>`: Month `(1 - 12)`.
+> >
+> > **`dy`** `<Number>`: Day `(1 - 31)`.
+> >
+> > **`hr`** `<Number>`: Hour `(0 - 23)`.
+> >
+> > **`mn`** `<Number>`: Minute `(0 - 59)`.
+> >
+> > **`sc`** `<Number>`: Second `(0 - 59)`.
+> >
+> > **`ms`** `<Number>`: Millisecond `(0 - 999)`.
+
+### Return ###
+
+> `<Number>`: Unix Epoch time in milliseconds.
+
+----
+
+### Example ###
+
+
+>     Date.UTC(0)    //=>  -2208988800000, 1900-01-01
+>     CGU.utc(0)     //=> -62167219200000, 0000-01-01
+>     
+>     Date.UTC(99)   //=>    915148800000, 1999-01-01
+>     CGU.utc(99)    //=> -59042995200000, 0099-01-01
+>     
+>     Date.UTC(100)  //=> -59011459200000, 0100-01-01
+>     CGU.utc(100)   //=> -59011459200000, 0100-01-01
+>     
+>     CGU.utc()      //=> no arguments = current time
+> {: class=prettyprint}
+{: class=codebox}
+
+
+----

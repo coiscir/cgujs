@@ -1,0 +1,33 @@
+Multiple `is_a` comparing.
+
+----
+
+### Syntax ###
+
+>     CGU.isof(object, compare [, ...])
+> {: class=prettyprint}
+>
+> > **`object`** `<Mixed>`: The object to be compared.
+> >
+> > **`compare`** `<Mixed>`
+> >
+> > > `<String>`: A type name. (see [`types`](<%=getlink('CGU.Type.types')%>))
+> > > `<Function>`: A constructor function. (`Array`, `String`, etc.)
+> > > `<null>`: Alternative for constructor.
+> > > `<undefined>`: Same as `<null>`.
+
+### Return ###
+
+> `<Boolean>`: The `object` was comparable to any `compare` argument.
+
+----
+
+### Example ###
+
+>     CGU.isof([24], Array, String);          // true
+>     CGU.isof('""', 'array', 'string');      // true
+>     CGU.isof(true, Array, Number, String);  // false
+> {: class=prettyprint}
+{: class=codebox}
+
+----

@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU API 9.0102 - Query - param</title>
+  <link rel="stylesheet" type="text/css" href="reset.css" />
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">API Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Query</h3>
+        <ul>
+          <li><a href="functions.location.html">location</a></li>
+          <li class="active"><a href="functions.param.html">param</a></li>
+          <li><a href="functions.query.html">query</a></li>
+          <li><a href="functions.serialize.html">serialize</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utilities.Cookie.html">Cookie</a></li>
+          <li><a href="utilities.Crypto.html">Crypto</a></li>
+          <li><a href="utilities.Iterator.html">Iterator</a></li>
+          <li><a href="utilities.JSON.html">JSON</a></li>
+          <li><a href="utilities.Query.html">Query</a></li>
+          <li><a href="utilities.Time.html">Time</a></li>
+          <li><a href="utilities.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+
+<h1 id='CGU-Main'>param</h1>
+
+<blockquote>
+<p>Create a query-string from an object&#8217;s keys.</p>
+</blockquote>
+<hr />
+<h3 id='syntax'>Syntax</h3>
+
+<blockquote>
+<pre class='prettyprint'><code>CGU.param(object [, complete])</code></pre>
+
+<blockquote>
+<p><strong><code>object</code></strong> <code>&lt;Object&gt;</code>: An object to parameterize.</p>
+
+<p><strong><code>complete</code></strong> <code>&lt;Boolean&gt;</code>: Return a complete <code>location.search</code> query-string. <em>(optional)</em></p>
+</blockquote>
+</blockquote>
+
+<h3 id='return'>Return</h3>
+
+<blockquote>
+<p><code>&lt;String&gt;</code>: A query-string of the object.</p>
+</blockquote>
+<hr />
+<h3 id='example'>Example</h3>
+
+<blockquote class='codebox'>
+<pre class='prettyprint'><code>CGU.param({foo: &#39;bar&#39;, red: &#39;foo&#39;}); &nbsp; &nbsp; &nbsp; &nbsp; //=&gt; &quot;foo=bar&amp;red=foo&quot;<br />CGU.param({foo: &#39;bar&#39;, red: &#39;foo&#39;}, true); &nbsp; //=&gt; &quot;?foo=bar&amp;red=foo&quot;<br /><br />// objects are flattened, keeping the inner-most property name<br />CGU.param({nil: {foo: &#39;bar&#39;}, red: &#39;foo&#39;}); &nbsp;//=&gt; &quot;foo=bar&amp;red=foo&quot;<br /><br />// Time.fromTime on all Date objects<br />CGU.param({foo: new Date(2008, 11, 31, 23, 59, 59, 999)}); &nbsp;//=&gt; &quot;foo=2009-01-01T05%3A59%3A59.999Z&quot; &nbsp;// US/Central<br /><br />// excludes Function and RegExp Objects<br />CGU.param({foo: function(){}, bar: /pattern/}); &nbsp;//=&gt; &quot;&quot;</code></pre>
+</blockquote>
+<hr />
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="prettify.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

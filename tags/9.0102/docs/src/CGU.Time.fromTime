@@ -1,0 +1,29 @@
+Convert a Date Object to a `"YYYY-MM-DDThh:mm:ss.sssZ"` formatted string.
+
+----
+
+### Syntax ###
+
+>     CGU.fromTime(time)
+> {: class=prettyprint}
+>
+> > **`time`** `<Mixed>`: A Date or Number (milliseconds) object.
+
+
+
+### Return ###
+
+> `<String>`: String representation of the `time`.
+
+----
+
+### Example ###
+
+>     var time = new Date(2008, 11, 31, 23, 59, 59, 999);
+>     
+>     CGU.fromTime(time);              //=> "2009-01-01T05:59:59.999Z"  // US/Central
+>     CGU.strfutc("%FT%T.%NZ", time);  //=> "2009-01-01T05:59:59.999Z"
+> {: class=prettyprint}
+{: class=codebox}
+
+-----

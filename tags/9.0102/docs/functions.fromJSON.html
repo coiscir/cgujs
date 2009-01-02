@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU API 9.0102 - JSON - fromJSON</title>
+  <link rel="stylesheet" type="text/css" href="reset.css" />
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">API Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>JSON</h3>
+        <ul>
+          <li><a href="functions.evalJSON.html">evalJSON</a></li>
+          <li class="active"><a href="functions.fromJSON.html">fromJSON</a></li>
+          <li><a href="functions.toJSON.html">toJSON</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utilities.Cookie.html">Cookie</a></li>
+          <li><a href="utilities.Crypto.html">Crypto</a></li>
+          <li><a href="utilities.Iterator.html">Iterator</a></li>
+          <li><a href="utilities.JSON.html">JSON</a></li>
+          <li><a href="utilities.Query.html">Query</a></li>
+          <li><a href="utilities.Time.html">Time</a></li>
+          <li><a href="utilities.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+
+<h1 id='CGU-Main'>fromJSON</h1>
+
+<blockquote>
+<p>A <strong><em>more-secure</em></strong> JSON interpreter.</p>
+</blockquote>
+<hr />
+<h3 id='syntax'>Syntax</h3>
+
+<blockquote>
+<pre class='prettyprint'><code>CGU.fromJSON(json [, strict])</code></pre>
+
+<blockquote>
+<p><strong><code>json</code></strong> <code>&lt;String&gt;</code>: A JSON-formatted string.</p>
+
+<p><strong><code>strict</code></strong> <code>&lt;Boolean&gt;</code>: Only allow <a href='http://json.org'>JSON.org</a> specified JSON strings.</p>
+
+<blockquote>
+<p>Will not convert date string (<code>&quot;0000-01-01T00:00:00Z&quot;</code>) to Date Objects.</p>
+
+<p>Will not recognize <code>undefined</code> keywords.</p>
+
+<p>Will not accept octal or hexadecimal number literatls.</p>
+
+<p>Will not accept object keys that are not string-formatted.</p>
+
+<p>Will not accept single-quoted strings or hex encodings (<code>&quot;\x20&quot;</code>).</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+<h3 id='return'>Return</h3>
+
+<blockquote>
+<p><code>&lt;Mixed&gt;</code>: The object represented by the string.</p>
+
+<blockquote>
+<p><code>&lt;SyntaxError&gt;</code>: <code>json</code> string was malformed. <em>(thrown)</em></p>
+</blockquote>
+</blockquote>
+<hr />
+<h3 id='example'>Example</h3>
+
+<blockquote class='codebox'>
+<pre class='prettyprint'><code>CGU.fromJSON(&#39;24&#39;); &nbsp; &nbsp; &nbsp;//=&gt; 24<br />CGU.fromJSON(&#39;[2, 4]&#39;); &nbsp;//=&gt; [2, 4]<br /><br />CGU.fromJSON(&#39;{foo: &quot;bar&quot;}&#39;); &nbsp; &nbsp; &nbsp; &nbsp;//=&gt; {foo: &quot;bar&quot;}<br />CGU.fromJSON(&#39;{foo: &quot;bar&quot;}&#39;, true); &nbsp;//=&gt; throws SyntaxError<br /><br />CGU.fromJSON(&#39;(function(){/*...*/})()&#39;); &nbsp; &nbsp; //=&gt; prevents function execution (throws SyntaxError)<br />CGU.fromJSON(&#39;{foo: function(){/*...*/}}&#39;); &nbsp;//=&gt; but, doesn&#39;t allow function values</code></pre>
+</blockquote>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="prettify.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

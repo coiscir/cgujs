@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU API 9.0102 - Cookie - cookie</title>
+  <link rel="stylesheet" type="text/css" href="reset.css" />
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">API Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Cookie</h3>
+        <ul>
+          <li class="active"><a href="functions.cookie.html">cookie</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utilities.Cookie.html">Cookie</a></li>
+          <li><a href="utilities.Crypto.html">Crypto</a></li>
+          <li><a href="utilities.Iterator.html">Iterator</a></li>
+          <li><a href="utilities.JSON.html">JSON</a></li>
+          <li><a href="utilities.Query.html">Query</a></li>
+          <li><a href="utilities.Time.html">Time</a></li>
+          <li><a href="utilities.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+
+<h1 id='CGU-Main'>cookie</h1>
+
+<blockquote>
+<p>Read, write, or expire a cookie.</p>
+</blockquote>
+<hr />
+<h3 id='syntax'>Syntax</h3>
+
+<blockquote>
+<pre class='prettyprint'><code>CGU.cookie(key, value [, options]);</code></pre>
+
+<blockquote>
+<p><strong><code>key</code></strong> <code>&lt;String&gt;</code>: Name of the cookie.</p>
+
+<p><strong><code>value</code></strong> <code>&lt;String&gt;</code>: Value of the cookie.</p>
+
+<p><strong><code>options</code></strong> <code>&lt;Object&gt;</code>: Specify additional settings. <em>(optional)</em></p>
+
+<blockquote>
+<p><strong><code>domain</code></strong> <code>&lt;String&gt;</code>: Domain/hostname associated with the cookie.</p>
+
+<p><strong><code>duration</code></strong> <code>&lt;String&gt;</code>: Number of days the cookie should live.</p>
+
+<blockquote>
+<p><code>&lt;null&gt;</code>: Creates a session cookie.</p>
+
+<p><code>(duration &lt; 0)</code>: Forces the cookie to expire (method 2).</p>
+</blockquote>
+
+<p><strong><code>expire</code></strong> <code>&lt;Boolean&gt;</code>: Forces the cookie to expire (method 1).</p>
+
+<p><strong><code>path</code></strong> <code>&lt;String&gt;</code>: Pathname associated with the cookie.</p>
+
+<p><strong><code>secure</code></strong> <code>&lt;Boolean&gt;</code>: Create a secure cookie.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<hr />
+<h3 id='modes'>Modes</h3>
+
+<blockquote>
+<h4 id='modes-read'>Read</h4>
+
+<blockquote>
+<h5 id='modes-read-syntax'>Syntax</h5>
+
+<blockquote>
+<pre class='prettyprint'><code>CGU.cookie(key);</code></pre>
+</blockquote>
+
+<h5 id='modes-read-return'>Return</h5>
+
+<blockquote>
+<p><code>&lt;String&gt;</code>: Value of the cookie.</p>
+
+<blockquote>
+<p><code>&lt;null&gt;</code>: Cookie wasn&#8217;t found.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+<h4 id='modes-write'>Write</h4>
+
+<blockquote>
+<h5 id='modes-write-syntax'>Syntax</h5>
+
+<blockquote>
+<pre class='prettyprint'><code>CGU.cookie(key, value [, options]);</code></pre>
+</blockquote>
+
+<h5 id='modes-write-return'>Return</h5>
+
+<blockquote>
+<p><code>&lt;Boolean&gt;</code>: Success.</p>
+</blockquote>
+</blockquote>
+
+<h4 id='modes-expire'>Expire</h4>
+
+<blockquote>
+<h5 id='modes-expire-syntax'>Syntax</h5>
+
+<blockquote>
+<pre class='prettyprint'><code>CGU.cookie(key, ..., {duration: -1}); // duration &lt; 0<br />CGU.cookie(key, ..., {expire: true});</code></pre>
+</blockquote>
+
+<h5 id='modes-expire-return'>Return</h5>
+
+<blockquote>
+<p><code>&lt;Boolean&gt;</code>: Success.</p>
+
+<blockquote>
+<p><code>&lt;null&gt;</code>: Cookie wasn&#8217;t found.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<hr />
+<h3 id='example'>Example</h3>
+
+<blockquote class='codebox'>
+<pre class='prettyprint'><code>CGU.cookie(&#39;foo&#39;, &#39;bar&#39;, {duration: 2}); &nbsp; //=&gt; true (Write)<br />CGU.cookie(&#39; &nbsp; &#39;, &#39;spc&#39;, {duration: -1}); &nbsp;//=&gt; null (Write/Expire)<br /><br />CGU.cookie(&#39;foo&#39;); &nbsp;//=&gt; &#39;bar&#39; (Read)<br />CGU.cookie(&#39; &nbsp; &#39;); &nbsp;//=&gt; null (Read)<br /><br />CGU.cookie(&#39;foo&#39;, null, {expire: true}); &nbsp;//=&gt; true (Expire)<br />CGU.cookie(&#39; &nbsp; &#39;, null, {expire: true}); &nbsp;//=&gt; null (Expire)<br /><br />CGU.cookie(&#39;foo&#39;); &nbsp;//=&gt; null (Read)<br />CGU.cookie(&#39; &nbsp; &#39;); &nbsp;//=&gt; null (Read)</code></pre>
+</blockquote>
+<hr />
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="prettify.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

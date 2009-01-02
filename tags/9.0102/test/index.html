@@ -1,0 +1,103 @@
+<html>
+<head>
+  <title>CGU - Tests</title>
+  <style type="text/css">
+    pre {
+      font-size: 11px;
+    }
+    
+    .pass {
+      color: #0a0;
+    }
+    .fail {
+      color: #f00;
+    }
+  </style>
+</head>
+<body>
+
+<script src="../lib/cgu.js"></script>
+<script type="text/javascript">
+var pass = '<span class="pass">PASS</span>';
+var fail = '<span class="fail">FAIL</span>';
+
+var print = function () {
+  for (var a = 0; a < arguments.length; a += 1)
+    document.write(arguments[a]);
+  document.write('<br />');
+};
+
+var write = function (passfail, comment) {
+  if (passfail === null)
+    print('  ', comment);
+  else if (passfail === !!passfail)
+    print((passfail ? pass : fail), ' ', comment);
+  else
+    print(' ');
+};
+
+var notate = function (title, comment, message) {
+  return title + ': ' + comment + (message ? ' (' + message + ')' : '');
+};
+
+var cycle = function (c) {
+  var i, j, title, cases;
+  
+  if (c.notes.length > 0) {
+    write();
+    for (i = 0; i < c.notes.length; i += 1)
+      write(null, c.notes[i]);
+  }
+  
+  for (i = 0; i < c.tests.length; i += 1) {
+    title = c.tests[i].title;
+    cases = c.tests[i].cases;
+    
+    write();
+    
+    for (j = 0; j < cases.length; j += 1) {
+      try {
+        write((cases[j][1] === cases[j][2]()), notate(title, cases[j][0]));
+      } catch (e) {
+        write(false, notate(title, cases[j][0], e.message));
+      }
+    }
+  }
+  
+  write();
+}
+</script>
+
+<script type="text/javascript">
+var cycles = {};
+</script>
+<script src="cycles/cgu.js"></script>
+<script src="cycles/type.js"></script>
+<script src="cycles/crypto.js"></script>
+<script src="cycles/json.js"></script>
+<script src="cycles/cookie.js"></script>
+<script src="cycles/query.js"></script>
+<script src="cycles/time.js"></script>
+<script src="cycles/iterator.js"></script>
+<script type="text/javascript">
+
+var timerStart = CGU.local();
+
+(function () {
+  for (var c in cycles) {
+    document.write('<pre>');
+    
+    print(c);
+    cycle(cycles[c]);
+    
+    document.write('</pre>');
+  };
+})();
+
+document.write('<pre>');
+print(CGU.local() - timerStart, 'ms');
+document.write('</pre>');
+</script>
+
+</body>
+</html>
