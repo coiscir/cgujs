@@ -179,7 +179,11 @@ div.navlist {
 
 #content blockquote {
   margin-left: 20px;
+  margin-left: 20px;
 }
+  #content blockquote blockquote {
+    margin-right: 0;
+  }
 #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
   margin: 3px 0 8px 0;
   padding: 0 3px;

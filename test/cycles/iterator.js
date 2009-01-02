@@ -22,7 +22,7 @@ cycles.Iterator = {
         ], [
           'values', 'bar, blah', function(){ var vs = []; CGU.iterate(iterObj, function (v, k, t) { vs.push(v); }); return vs.join(', '); }
         ], [
-          'type', 'object', function(){ var ty; CGU.iterate(iterObj, function (v, k, t) { ty = t; return null; }); return ty; }
+          'type (interrupt)', 'object', function(){ return CGU.iterate(iterObj, function (v, k, t) { return t; }); }
         ]
       ]
     }, {
