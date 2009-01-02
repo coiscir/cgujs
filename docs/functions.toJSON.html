@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU API 9.0102 - JSON - toJSON</title>
+  <link rel="stylesheet" type="text/css" href="reset.css" />
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">API Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>JSON</h3>
+        <ul>
+          <li><a href="functions.evalJSON.html">evalJSON</a></li>
+          <li><a href="functions.fromJSON.html">fromJSON</a></li>
+          <li class="active"><a href="functions.toJSON.html">toJSON</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utilities.Cookie.html">Cookie</a></li>
+          <li><a href="utilities.Crypto.html">Crypto</a></li>
+          <li><a href="utilities.Iterator.html">Iterator</a></li>
+          <li><a href="utilities.JSON.html">JSON</a></li>
+          <li><a href="utilities.Query.html">Query</a></li>
+          <li><a href="utilities.Time.html">Time</a></li>
+          <li><a href="utilities.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+
+<h1 id='CGU-Main'>toJSON</h1>
+
+<blockquote>
+<p>Create a JSON-formatted string from an object.</p>
+</blockquote>
+<hr />
+<h3 id='syntax'>Syntax</h3>
+
+<blockquote>
+<pre class='prettyprint'><code>CGU.toJSON(input [, strict])</code></pre>
+
+<blockquote>
+<p><strong><code>input</code></strong> <code>&lt;Mixed&gt;</code>: An object to be stringified.</p>
+
+<p><strong><code>strict</code></strong> <code>&lt;Boolean&gt;</code>: Only create <a href='http://json.org'>JSON.org</a> specified JSON strings.</p>
+</blockquote>
+</blockquote>
+
+<h3 id='return'>Return</h3>
+
+<blockquote>
+<p><code>&lt;String&gt;</code>: The JSON-formatted string representing the object.</p>
+</blockquote>
+<hr />
+<h3 id='example'>Example</h3>
+
+<blockquote class='codebox'>
+<pre class='prettyprint'><code>CGU.toJSON({key: &quot;value&quot;, foo: &quot;bar&quot;, red: 24.42}); &nbsp; &nbsp; &nbsp; &nbsp;//=&gt; {foo: &quot;bar&quot;, key: &quot;value&quot;, red: 24.42}<br />CGU.toJSON({key: &quot;value&quot;, foo: &quot;bar&quot;, red: 24.42}, true); &nbsp;//=&gt; {&quot;foo&quot;: &quot;bar&quot;, &quot;key&quot;: &quot;value&quot;, &quot;red&quot;: 24.42}<br /><br />// Time.fromTime on all Date objects<br />CGU.toJSON(new Date(2008, 11, 31, 23, 59, 59)) &nbsp; &nbsp; &nbsp; &nbsp;//=&gt; [&quot;2009-01-01T05:59:59.000Z&quot;] &nbsp;// US/Central<br />CGU.toJSON(new Date(2008, 11, 31, 23, 59, 59), true) &nbsp;//=&gt; [&quot;2009-01-01T05:59:59.000Z&quot;] &nbsp;// US/Central<br /><br />// ignores Function and RegExp Objects<br />CGU.toJSON([function(){}, /pattern/]); &nbsp;//=&gt; []</code></pre>
+</blockquote>
+<hr />
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="prettify.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

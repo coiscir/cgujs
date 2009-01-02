@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU API 9.0102 - Iterator - iterate</title>
+  <link rel="stylesheet" type="text/css" href="reset.css" />
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">API Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Iterator</h3>
+        <ul>
+          <li><a href="functions.asArray.html">asArray</a></li>
+          <li class="active"><a href="functions.iterate.html">iterate</a></li>
+          <li><a href="functions.keys.html">keys</a></li>
+          <li><a href="functions.map.html">map</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utilities.Cookie.html">Cookie</a></li>
+          <li><a href="utilities.Crypto.html">Crypto</a></li>
+          <li><a href="utilities.Iterator.html">Iterator</a></li>
+          <li><a href="utilities.JSON.html">JSON</a></li>
+          <li><a href="utilities.Query.html">Query</a></li>
+          <li><a href="utilities.Time.html">Time</a></li>
+          <li><a href="utilities.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+
+<h1 id='CGU-Main'>iterate</h1>
+
+<blockquote>
+<p>Iterate through each Object property or Array index.</p>
+</blockquote>
+<hr />
+<h3 id='syntax'>Syntax</h3>
+
+<blockquote>
+<pre class='prettyprint'><code>CGU.iterate(object, iterator [, instance])</code></pre>
+
+<blockquote>
+<p><strong><code>object</code></strong> <code>&lt;Array&gt;</code>: Iterate through each Array index. <strong><code>object</code></strong> <code>&lt;Object&gt;</code>: Iterate through each Object property.</p>
+
+<p><strong><code>iterator</code></strong> <code>&lt;Function&gt;</code>: A function called for each property/index.</p>
+
+<blockquote>
+<pre class='prettyprint'><code>iterator(value, key, type)</code></pre>
+</blockquote>
+
+<p><strong><code>instance</code></strong> <code>&lt;Boolean&gt;</code>: Limit iteration through instance properties. <em>(optional)</em></p>
+</blockquote>
+</blockquote>
+
+<h3 id='return'>Return</h3>
+
+<blockquote>
+<p><code>object</code>: Returns the original <code>object</code>.</p>
+
+<blockquote>
+<p><code>interrupt</code>:</p>
+</blockquote>
+</blockquote>
+<hr />
+<h3 id='interrupt'>Interrupt</h3>
+
+<blockquote>
+<p><code>CGU.iterator</code> expects <code>undefined</code> from <code>iterator</code>. Returning any other value from <code>iterator</code> will interrupt iteration.</p>
+
+<blockquote class='codebox'>
+<pre class='prettyprint'><code>var array = [9, 8, 7];<br /><br />CGU.iterate(array, function (v) {<br /> &nbsp; &nbsp;alert(v);<br />});<br />//=&gt; array<br /><br />CGU.iterate(array, function (v) {<br /> &nbsp; &nbsp;return v;<br />});<br />//=&gt; 9</code></pre>
+</blockquote>
+</blockquote>
+<hr />
+<h3 id='example'>Example</h3>
+
+<blockquote class='codebox'>
+<pre class='prettyprint'><code>var o = {foo: &#39;bar&#39;, red: null};<br /><br />var values = [];<br />CGU.iterate(o, function (v) {<br /> &nbsp;values.push(v);<br />});<br /><br />var keys = [];<br />CGU.iterate(o, function (v, k) {<br /> &nbsp;keys.push(k);<br />});<br /><br />// values =&gt; [&#39;bar&#39;, null]<br />// keys &nbsp; =&gt; [&#39;foo&#39;, &#39;red&#39;]</code></pre>
+</blockquote>
+<hr />
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="prettify.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

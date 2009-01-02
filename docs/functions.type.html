@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU API 9.0102 - Type - type</title>
+  <link rel="stylesheet" type="text/css" href="reset.css" />
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">API Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Type</h3>
+        <ul>
+          <li><a href="functions.clone.html">clone</a></li>
+          <li><a href="functions.isElement.html">isElement</a></li>
+          <li><a href="functions.isNil.html">isNil</a></li>
+          <li><a href="functions.is_a.html">is_a</a></li>
+          <li><a href="functions.isof.html">isof</a></li>
+          <li><a href="functions.limit.html">limit</a></li>
+          <li class="active"><a href="functions.type.html">type</a></li>
+          <li><a href="functions.types.html">types</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utilities.Cookie.html">Cookie</a></li>
+          <li><a href="utilities.Crypto.html">Crypto</a></li>
+          <li><a href="utilities.Iterator.html">Iterator</a></li>
+          <li><a href="utilities.JSON.html">JSON</a></li>
+          <li><a href="utilities.Query.html">Query</a></li>
+          <li><a href="utilities.Time.html">Time</a></li>
+          <li><a href="utilities.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+
+<h1 id='CGU-Main'>type</h1>
+
+<blockquote>
+<p>Enhanced <code>typeof</code>.</p>
+</blockquote>
+<hr />
+<h3 id='syntax'>Syntax</h3>
+
+<blockquote>
+<pre class='prettyprint'><code>CGU.type(object)</code></pre>
+
+<blockquote>
+<p><strong><code>object</code></strong> <code>&lt;Mixed&gt;</code>: The object being tested.</p>
+</blockquote>
+</blockquote>
+
+<h3 id='return'>Return</h3>
+
+<blockquote>
+<p><code>&lt;String&gt;</code>: The object&#8217;s type.</p>
+</blockquote>
+<hr />
+<h3 id='example'>Example</h3>
+
+<blockquote class='codebox'>
+<pre class='prettyprint'><code>typeof(undefined); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//=&gt; &#39;undefined&#39;<br />typeof(null); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //=&gt; &#39;object&#39;<br />typeof([]); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //=&gt; &#39;object&#39;<br />typeof(new Date()); &nbsp; &nbsp; &nbsp; &nbsp; //=&gt; &#39;object&#39;<br />typeof(new Error()); &nbsp; &nbsp; &nbsp; &nbsp;//=&gt; &#39;object&#39;<br />typeof(function(){}); &nbsp; &nbsp; &nbsp; //=&gt; &#39;function&#39;<br />typeof(/pattern/); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//=&gt; &#39;object&#39; or &#39;function&#39;<br /><br />CGU.type(undefined); &nbsp; &nbsp; &nbsp; &nbsp;//=&gt; &#39;undefined&#39;<br />CGU.type(null); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //=&gt; &#39;null&#39;<br />CGU.type([]); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //=&gt; &#39;array&#39;<br />CGU.type(true); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //=&gt; &#39;boolean&#39;<br />CGU.type(new Date()); &nbsp; &nbsp; &nbsp; //=&gt; &#39;date&#39;<br />CGU.type(new Error()); &nbsp; &nbsp; &nbsp;//=&gt; &#39;error&#39;<br />CGU.type(new TypeError()); &nbsp;//=&gt; &#39;error&#39;<br />CGU.type(function(){}); &nbsp; &nbsp; //=&gt; &#39;function&#39;<br />CGU.type(0); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//=&gt; &#39;number&#39;<br />CGU.type({}); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //=&gt; &#39;object&#39;<br />CGU.type(/pattern/); &nbsp; &nbsp; &nbsp; &nbsp;//=&gt; &#39;regexp&#39;<br />CGU.type(&#39;&#39;); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //=&gt; &#39;string&#39;</code></pre>
+</blockquote>
+<hr />
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="prettify.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

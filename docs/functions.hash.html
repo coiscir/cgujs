@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CGU API 9.0102 - Crypto - hash</title>
+  <link rel="stylesheet" type="text/css" href="reset.css" />
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+
+<div id="head">
+  <div id="title">
+    <h1>CGU</h1>&nbsp;&nbsp;<h2>Common &amp; General Use JavaScript</h2>
+  </div>
+</div>
+
+<div id="foot">
+  <div id="copy">
+    <span>&copy; 2008 CGU</span>
+  </div>
+</div>
+
+<div id="body">
+  <div id="nav">
+    <div class="pad">
+      
+      <div class="navlist">
+        <h3>CGU</h3>
+        <ul>
+          <li><a href="index.html">API Home</a></li>
+          <li><a href="functions.html">Functions</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Crypto</h3>
+        <ul>
+          <li class="active"><a href="functions.hash.html">hash</a></li>
+          <li><a href="functions.hashes.html">hashes</a></li>
+        </ul>
+      </div>
+
+      <div class="navlist">
+        <h3>Utilities</h3>
+        <ul>
+          <li><a href="utilities.Cookie.html">Cookie</a></li>
+          <li><a href="utilities.Crypto.html">Crypto</a></li>
+          <li><a href="utilities.Iterator.html">Iterator</a></li>
+          <li><a href="utilities.JSON.html">JSON</a></li>
+          <li><a href="utilities.Query.html">Query</a></li>
+          <li><a href="utilities.Time.html">Time</a></li>
+          <li><a href="utilities.Type.html">Type</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="docs">
+    <div class="pad">
+      <div id="content">
+
+<h1 id='CGU-Main'>hash</h1>
+
+<blockquote>
+<p>Generate a cryptographic hash of given data.</p>
+</blockquote>
+<hr />
+<h3 id='syntax'>Syntax</h3>
+
+<blockquote>
+<pre class='prettyprint'><code>CGU.hash(algo, data [, options])</code></pre>
+
+<blockquote>
+<p><strong><code>algo</code></strong> <code>&lt;String&gt;</code>: Name of the algorithm to use.</p>
+
+<p><strong><code>data</code></strong> <code>&lt;String&gt;</code>: The data to be hashed.</p>
+
+<p><strong><code>options</code></strong> <code>&lt;Object&gt;</code>: Specify additional settings. <em>(optional)</em></p>
+
+<blockquote>
+<p><strong><code>hmac</code></strong> <code>&lt;String&gt;</code>: Specify an HMAC key.</p>
+
+<blockquote>
+<p><code>&lt;null&gt;</code>: HMAC is not used.</p>
+</blockquote>
+
+<p><strong><code>unicode</code></strong> <code>&lt;Boolean&gt;</code>: Convert data from 16-bit to 8-bit before hashing.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+<h3 id='return'>Return</h3>
+
+<blockquote>
+<p><code>&lt;&lt;Sequence&gt;&gt;</code>: An object that allows various encodings for a hash.</p>
+
+<blockquote>
+<p><code>&lt;undefined&gt;</code>: Either <code>algo</code> or <code>data</code> were not given.</p>
+
+<p><code>&lt;null&gt;</code>: <code>algo</code> is not an available algorithm.</p>
+
+<p><code>&lt;false&gt;</code>: <code>data</code> is not an 8-bit string and <code>options.unicode</code> is not used.</p>
+</blockquote>
+</blockquote>
+<hr />
+<h3 id='example'>Example</h3>
+
+<blockquote class='codebox'>
+<pre class='prettyprint'><code>CGU.hash(&#39;md4&#39;, &#39;abc&#39;); &nbsp; &nbsp; //=&gt; &lt;&lt;Sequence&gt;&gt;<br />CGU.hash(&#39;sha256&#39;, &#39;abc&#39;); &nbsp;//=&gt; &lt;&lt;Sequence&gt;&gt;<br /> <br />CGU.hash(&#39;md5&#39;, &#39;abc&#39;).hex(); &nbsp; &nbsp; &nbsp; &nbsp;//=&gt; &#39;900150983cd24fb0d6963f7d28e17f72&#39;<br />CGU.hash(&#39;sha512&#39;, &#39;abc&#39;).base16(); &nbsp;//=&gt; &#39;DDAF35A193617ABACC417349AE204...&#39;</code></pre>
+</blockquote>
+<hr />
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="prettify.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>
