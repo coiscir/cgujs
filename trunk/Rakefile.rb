@@ -1,16 +1,18 @@
+ROOT = File.expand_path(File.dirname(__FILE__))
+
 require 'rake'
 require 'maruku'
 
-require 'build/builder'
-require 'build/crypto'
-require 'build/incs'
-require 'build/pager'
+Dir.chdir(ROOT) do
+  require 'build/builder'
+  require 'build/crypto'
+  require 'build/incs'
+  require 'build/pager'
+end
 
 ################################################################################
 # Prepare
 ####
-ROOT = File.expand_path(File.dirname(__FILE__))
-
 DOCS = File.join(ROOT, 'docs')
 DSRC = File.join(DOCS, 'src')
 

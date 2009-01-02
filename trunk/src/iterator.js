@@ -15,14 +15,22 @@
   CGU.iterate = function (object, iterator, instance) {
     if (!CGU.is_a(iterator, Function)) return;
     
+    var host;
     var type = CGU.type(object);
     var inst = instance === !!instance ? instance : (type != 'object');
     if (type == 'array' && inst) object = CGU.clone(object);
     
     for (var p in object)
       if (!inst || Object.prototype.hasOwnProperty.call(object, p))
+        if (!CGU.is_a((host = iterator(object[p], p, type)), undefined))
+          return host;
+    
+    /*
+    for (var p in object)
+      if (!inst || Object.prototype.hasOwnProperty.call(object, p))
         if (CGU.is_a(iterator(object[p], p, type), null))
           return object;
+    */
     
     return object;
   };
