@@ -188,8 +188,11 @@ module Pager
             seg = f.split(/\./)
             
             funcs = funclist(f)
-            title = seg[0] == 'Functions' ? seg[0] : seg[1]
-            title = [@name, title, seg[2]].reject{|i| i.nil?}.join(' - ')
+            title = [
+              (@name.strip + ' API ' + version),
+              (seg[0] == 'Functions' ? seg[0] : seg[1]),
+              (seg[2])
+            ].reject{|i| i.nil?}.join(' - ')
             navlist = navbar(f)
             content = ERB.new(PAGES[f]['src']).result(binding)
             content = Maruku.new(content).to_html
