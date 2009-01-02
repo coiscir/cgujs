@@ -5,7 +5,6 @@ require 'maruku'
 
 Dir.chdir(ROOT) do
   require 'build/builder'
-  require 'build/crypto'
   require 'build/incs'
   require 'build/pager'
 end
