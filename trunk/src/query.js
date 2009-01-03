@@ -1,69 +1,11 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU :: Query
- *    HTTP GET Variables and Query-String Manipulation
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *~~~ Methods
- *----
- *
- *  location -> Create a location clone from a URI.
- *
- *    Syntax: CGU.location(href)
- *
- *      href <String>: URI to create a location clone from.
- *
- *        <null>: Clone the global location.
- *
- *    Return: <Object>: A location clone.
- *
- *      <null>: Invalid href string.
- *
- *      <undefined>: href was not specified.
- *----
- *
- *  param -> Create a query-string from an object's properties.
- *
- *    Syntax: CGU.param(object [, complete])
- *
- *      object <Object>: Object to parameterize.
- *
- *      complete <Boolean>: Return a complete search string.
- *
- *    Return: <String>: Query-string of object's properties.
- *----
- *
- *  query -> Search a query-string for all values of a key.
- *
- *    Syntax: CGU.query(key [, href])
- *
- *      key <String>: Name of the query-string variable.
- *
- *      href <String>: Any URI accepted by CGU.location.
- *
- *        <null>: Use current location.
- *
- *    Return: <Array>: List of values.
- *
- *      <undefined>: Invalid href.
- *
- *    Note: Use complete with param and serialize for a valid href.
- *
- *      Example: CGU.query('foo', CGU.param({foo: 24}, true))
- *----
- *
- *  serialize -> Parameterize a Form's elements.
- *
- *    Syntax: CGU.serialize(form [, complete])
- *
- *      form <Object>: Either a Form DOM object or elements list.
- *
- *      complete <Boolean>: Return a complete search string.
- *
- *    Return: <String>: Query-string of form's elements.
- *
+ *  CGU - Query
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  CGU is released and distributable under the terms of the MIT License.
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
-(function Query() { // enable private members
+(function Query() {
   
   CGU.location = function (href) {
     if (CGU.is_a(href, null)) href = window.location.toString();

@@ -1,16 +1,11 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU :: Iterator
- *    Object and Array Iteration
+ *  CGU - Iterator
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *~~~ Methods
- *----
- *
- *  
- *
+ *  CGU is released and distributable under the terms of the MIT License.
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
-(function Iterator() { // enable private members
+(function Iterator() {
   
   CGU.iterate = function (object, iterator, instance) {
     if (!CGU.is_a(iterator, Function)) return;

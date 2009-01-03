@@ -1,49 +1,11 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU :: Cookie
- *    Read, Write, and Delete (Expire) Cookies
+ *  CGU - Cookie
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *~~~ Methods
- *----
- *
- *  cookie -> Read, Write, or Expire Cookies.
- *
- *    Syntax: CGU.cookie(key [, value [, options]])
- *
- *      key <String>: Name of the cookie.
- *
- *      value <String>: Value of the cookie.
- *
- *      options <Object>: Specify cookie settings. (optional)
- *
- *        domain <String>: The domain associated with the cookie.
- *
- *        duration <Number>: Number of days the cookie should live.
- *                           Leave unset to create a session cookie.
- *
- *        expire <Boolean>: Force a cookie to expire.
- *
- *        path <String>: The path associated with the cookie.
- *
- *        secure <Boolean>: Create a secure cookie.
- *
- *    Return: <Boolean>: Successful or not.
- *
- *      <undefined>: Key was not specified.
- *
- *      <null>: Key wasn't found (Read). Key didn't exist (Expire).
- *
- *    Modes ("given" = not null or undefined)
- *
- *      Read - key is given
- *
- *      Write - key and value are given
- *
- *      Expire - key is given with options.expire or options.duration < 0
- *
+ *  CGU is released and distributable under the terms of the MIT License.
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
-(function Cookie() { // enable private members
+(function Cookie() {
   
   CGU.cookie = function (key, value, options) {
     if (CGU.isNil(key)) return undefined;

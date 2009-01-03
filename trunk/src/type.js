@@ -1,70 +1,11 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU :: Type
- *    Enhanced Data-Type Distinction
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *~~~ Methods
- *----
- *
- *  clone -> Clone any type of object.
- *
- *    Syntax: CGU.clone(object)
- *
- *      object <Mixed>: The object to be cloned.
- *
- *    Return: <Mixed>: The object's clone.
- *----
- *
- *  is_a -> Enhanced instanceof.
- *
- *    Syntax: CGU.is_a(object, compare)
- *
- *      object <Mixed>: The object to be compared.
- *
- *      compare <String>: A type.
- *      compare <Function>: A constructor.
- *
- *    Return: <Boolean>: The object compared to the type or Constructor.
- *----
- *
- *  isof -> Multiple is_a with OR testing.
- *
- *    Syntax: CGU.isof(object, compare [, ...])
- *
- *      Arguments are the same as is_a.
- *
- *    Return: <Boolean>: The object compared to a type or Constructor.
- *----
- *
- *  limit -> Limit an object to specific types.
- *
- *    Syntax: CGU.limit(object, compare [, ..])
- *
- *      Arguments are the same as is_a and isof.
- *
- *    Return: <Mixed>: A clone of the object.
- *
- *      <undefined>: Object did not compare.
- *----
- *
- *  type -> Enhanced typeof.
- *
- *    Syntax: CGU.type(object)
- *
- *      object <Mixed>: The object to be tested.
- *
- *    Return: <String>: The object's type.
- *----
- *
- *  types -> Get a list of recognized types.
- *
- *    Syntax: CGU.types()
- *
- *    Return: <Array>: List of recognized types.
- *
+ *  CGU - Type
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  CGU is released and distributable under the terms of the MIT License.
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
-(function Type() { // enable private members
+(function Type() {
 
   var UND = 'undefined', NUL = 'null',
       ARR = 'array',     BLN = 'boolean',

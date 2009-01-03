@@ -1,53 +1,11 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU :: JSON
- *    JSON Parsing and Writing
+ *  CGU - JSON
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *~~~ Methods
- *----
- *
- *  evalJSON -> Unsecured JSON interpreter.
- *
- *    Syntax: CGU.evalJSON(json)
- *
- *      json <String>: A JSON-formatted string.
- *
- *    Return: <Mixed>
- *----
- *
- *  fromJSON -> A more-secure JSON interpreter.
- *
- *    Syntax: CGU.fromJSON(json [, strict])
- *
- *      json <String>: A JSON-formatted string.
- *
- *      strict <Boolean>: Only allow strings that exactly match JSON.org specifications.
- *
- *        Will not convert date strings ("0000-00-00T00:00:00Z") to Date Objects.
- *        Will not recognize `undefined` keyword.
- *        Will not accept octal or hexadecimal number literals.
- *        Will not accept object keys that are not string-formatted.
- *        Will not accept single-quoted strings or hex encodings ("\xFF").
- *
- *    Return: <Mixed>
- *----
- *
- *  toJSON -> Create a JSON-formatted string from an object.
- *
- *    Syntax: CGU.toJSON(input [, strict])
- *
- *      input <Mixed>: An object to be stringified.
- *
- *      strict <Boolean>: Only allow strings that exactly match JSON.org specifications.
- *
- *        Will not write `undefined` keyword.
- *        Will not write object keys that are not string-formatted.
- *
- *    Return: <String>
- *
+ *  CGU is released and distributable under the terms of the MIT License.
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
-(function JSON() { // enable private members
+(function JSON() {
   
   CGU.evalJSON = function (json) {
     return eval('(' + json + ')');
