@@ -33,7 +33,25 @@ cycles.Iterator = {
         ], [
           'number array', '1, 2, 4, 8, 16, 32', function(){ return CGU.map([0, 1, 2, 3, 4, 5], function (v) { return Math.pow(2, v); }).join(', '); }
         ], [
-          'object', '{foo: "foo", red: "red"}', function(){ return CGU.toJSON(CGU.map(CGU.clone(iterObj), function (v, k) { return k; })); }
+          'object', '{foo: "foo", red: "red"}', function(){ return CGU.toJSON(CGU.map(iterObj, function (v, k) { return k; })); }
+        ]
+      ]
+    }, {
+      title: 'trials',
+      cases: [
+        [
+          'Ajax Object', false, function(){ return CGU.is_a(CGU.trials(
+            function () { return new XMLHttpRequest(); },
+            function () { return new ActiveXObject('Msxml2.XMLHTTP.6.0'); },
+            function () { return new ActiveXObject('Msxml2.XMLHTTP.3.0'); },
+            function () { return new ActiveXObject('Msxml2.XMLHTTP'); },
+            function () { return new ActiveXObject('Microsoft.XMLHTTP'); }
+          ), undefined); }
+        ], [
+          'fail case', undefined, function(){ return CGU.trials(
+            function () { return new NilFooBar(); },
+            function () { return new FooBarRed(); }
+          ); }
         ]
       ]
     }
