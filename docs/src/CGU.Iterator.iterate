@@ -19,9 +19,9 @@ Iterate through each Object property or Array index.
 
 ### Return ###
 
-> `object`: Returns the original `object`.
+> **`interrupt`** `<mixed>`: A defined value returned from `iterator`.
 >
-> > `interrupt`: The defined value returned from `iterator`.
+> > `<undefined>`: No interrupt was returned.
 
 ----
 
