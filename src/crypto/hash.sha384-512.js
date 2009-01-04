@@ -11,6 +11,7 @@
   
   Algos.sha384 = {
     block: 128,
+    reqkey: false,
     algo: function (input) {
       if (!CGU.is_a(input, String)) return;
       
@@ -27,6 +28,7 @@
   
   Algos.sha512 = {
     block: 128,
+    reqkey: false,
     algo: function (input) {
       if (!CGU.is_a(input, String)) return;
       

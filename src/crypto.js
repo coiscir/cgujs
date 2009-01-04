@@ -35,8 +35,10 @@
     return Sequence(call(algo, data));
   };
   
-  CGU.hashes = function () {
-    return CGU.keys(Algos, true);
+  CGU.hashes = function (reqkey) {
+    var where = !CGU.is_a(reqkey, Boolean) ? null :
+      function (v) { return v.reqkey === reqkey; };
+    return CGU.keys(Algos, where, true);
   };
   
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
