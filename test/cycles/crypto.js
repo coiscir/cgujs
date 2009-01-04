@@ -5,9 +5,9 @@ var kx0067 = '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x
 
 cycles.Crypto = {
   notes: [
-    'Hash Algorithms: ' + CGU.toJSON(CGU.hashes()),
-    'HMAC Algorithms: ' + CGU.toJSON(CGU.hashes(false)),
-    'Key Alrorithms:  ' + CGU.toJSON(CGU.hashes(true))
+    'Hashes: ' + CGU.toJSON(CGU.hashes()),
+    'HMAC:   ' + CGU.toJSON(CGU.hashes(false)),
+    'Keyed:  ' + CGU.toJSON(CGU.hashes(true))
   ],
   tests: [
     {
@@ -37,21 +37,21 @@ cycles.Crypto = {
       title: 'HMAC hash',
       cases: [
         [
-          'MD5', '9294727a3638bb1c13f48ef8158bfc9d', function(){ return CGU.hash('md5', 'Hi There', {hmac: kx0b16}).hex(); }
+          'MD5', '9294727a3638bb1c13f48ef8158bfc9d', function(){ return CGU.hash('md5', 'Hi There', kx0b16).hex(); }
         ], [
-          'SHA-1', 'b617318655057264e28bc0b6fb378c8ef146be00', function(){ return CGU.hash('sha1', 'Hi There', {hmac: kx0b20}).hex(); }
+          'SHA-1', 'b617318655057264e28bc0b6fb378c8ef146be00', function(){ return CGU.hash('sha1', 'Hi There', kx0b20).hex(); }
         ], [
-          'SHA-224', '896fb1128abbdf196832107cd49df33f47b4b1169912ba4f53684b22', function(){ return CGU.hash('sha224', 'Hi There', {hmac: kx0b20}).hex(); }
+          'SHA-224', '896fb1128abbdf196832107cd49df33f47b4b1169912ba4f53684b22', function(){ return CGU.hash('sha224', 'Hi There', kx0b20).hex(); }
         ], [
-          'SHA-256', 'b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7', function(){ return CGU.hash('sha256', 'Hi There', {hmac: kx0b20}).hex(); }
+          'SHA-256', 'b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7', function(){ return CGU.hash('sha256', 'Hi There', kx0b20).hex(); }
         ], [
-          'SHA-384', 'afd03944d84895626b0825f4ab46907f15f9dadbe4101ec682aa034c7cebc59cfaea9ea9076ede7f4af152e8b2fa9cb6', function(){ return CGU.hash('sha384', 'Hi There', {hmac: kx0b20}).hex(); }
+          'SHA-384', 'afd03944d84895626b0825f4ab46907f15f9dadbe4101ec682aa034c7cebc59cfaea9ea9076ede7f4af152e8b2fa9cb6', function(){ return CGU.hash('sha384', 'Hi There', kx0b20).hex(); }
         ], [
-          'SHA-512', '87aa7cdea5ef619d4ff0b4241a1d6cb02379f4e2ce4ec2787ad0b30545e17cdedaa833b7d6b8a702038b274eaea3f4e4be9d914eeb61f1702e696c203a126854', function(){ return CGU.hash('sha512', 'Hi There', {hmac: kx0b20}).hex(); }
+          'SHA-512', '87aa7cdea5ef619d4ff0b4241a1d6cb02379f4e2ce4ec2787ad0b30545e17cdedaa833b7d6b8a702038b274eaea3f4e4be9d914eeb61f1702e696c203a126854', function(){ return CGU.hash('sha512', 'Hi There', kx0b20).hex(); }
         ], [
-          'RIPEMD-128', 'ad9db2c1e22af9ab5ca9dbe5a86f67dc', function(){ return CGU.hash('ripemd128', '', {hmac: kx00FF}).hex(); }
+          'RIPEMD-128', 'ad9db2c1e22af9ab5ca9dbe5a86f67dc', function(){ return CGU.hash('ripemd128', '', kx00FF).hex(); }
         ], [
-          'RIPEMD-160', 'cf387677bfda8483e63b57e06c3b5ecd8b7fc055', function(){ return CGU.hash('ripemd160', '', {hmac: kx0067}).hex(); }
+          'RIPEMD-160', 'cf387677bfda8483e63b57e06c3b5ecd8b7fc055', function(){ return CGU.hash('ripemd160', '', kx0067).hex(); }
         ]
       ]
     }

@@ -12,27 +12,21 @@
 
 (function Crypto() {
   
-  CGU.hash = function (algo, data, options) {
+  CGU.hash = function (algo, data, key, uni) {
     algo = CGU.limit(algo, String);
     data = CGU.limit(data, String);
-    options = (function (o) { return {
-      hmac    : CGU.limit(o.hmac,    String),
-      unicode : CGU.limit(o.unicode, Boolean) || false
-    };})(options || {});
+    key  = CGU.limit(key, String);
+    uni  = CGU.limit(uni, Boolean) || false;
     
-    if (CGU.is_a(algo, undefined) || CGU.is_a(data, undefined)) return;
+    if (CGU.isNil(Algos[algo]) || CGU.isNil(data)) return;
+    if (Algos[algo].reqkey && CGU.isNil(key)) return;
     
-    algo = ready(algo);
-    if (!valid(algo) || CGU.isNil(Algos[algo])) return null;
+    if (uni) data = c16t8(data);
     
-    if (options.unicode) data = c16t8(data);
-    
-    if (CGU.is_a(options.hmac, String)) {
-      data = hmac(algo, data, options.hmac);
-      if (CGU.isNil(data)) return;
-    }
-    
-    return Sequence(call(algo, data));
+    if (!Algos[algo].reqkey && !CGU.isNil(key))
+      return Sequence(call(algo, hmac(algo, data, key)));
+    else
+      return Sequence(call(algo, data, key));
   };
   
   CGU.hashes = function (reqkey) {
@@ -50,8 +44,8 @@
   var ready = function (algo) { return algo.replace(/^\s+|\s+$/g, '').toLowerCase(); };
   var valid = function (algo) { return (/^[\$\_a-z][\$\_a-z0-9]*(,[0-9]+)?$/i).test(algo); };
   
-  var call = function (algo, data) {
-    return Algos[algo].algo(data);
+  var call = function (algo, data, key) {
+    return Algos[algo].algo(data, key);
   };
   
   var c16t8 = function (str) { // convert 16-bit string to 8-bit
@@ -67,7 +61,6 @@
     var akey, i, ipad = [], opad = [];
     
     akey = Sequence(klen > block ? call(algo, key) : key).raw();
-    if (!CGU.is_a(akey, 'array')) return;
     for (i = 0; i < block && CGU.is_a(akey, 'array'); i += 1) {
       ipad[i] = (akey[i] || 0x00) ^ 0x36;
       opad[i] = (akey[i] || 0x00) ^ 0x5c;
