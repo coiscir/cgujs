@@ -75,6 +75,7 @@
     return Sequence(opad).str() + Sequence(ihash).str();
   };
   
-<%= inc 'crypto/util.*.js', "crypto/hash.{md*,sha*,ripemd*}.js" %>
+<%= inc 'crypto/util.*.js', true %>
+<%= inc "crypto/hash.{md*,sha*,ripemd*}.js" %>
   
 })();
