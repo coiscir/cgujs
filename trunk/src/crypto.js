@@ -76,6 +76,8 @@
   };
   
 <%= inc 'crypto/util.*.js', true %>
-<%= inc "crypto/hash.{md*,sha*,ripemd*}.js" %>
+<%= inc 'crypto/hash.md*.js', true %>
+<%= inc 'crypto/hash.sha*.js', true %>
+<%= inc 'crypto/hash.ripemd*.js', true %>
   
 })();
