@@ -16,7 +16,7 @@ require 'jsmin' # RubyGems
 #
 #     `file` (String): Anchor file
 #
-#   inc([padding,] [minify,] file [, ..])
+#   inc([padding,] [minify,] file [, ..] [, sort])
 #
 #     `padding` (Numeric):   Precedes each line with spaces. Default is 0.
 #     `minify` (true/false): Minifies the included source. Default is false.
@@ -32,13 +32,16 @@ module Builder
       # min = minify using jsmin
       pad = files.first.is_a?(Numeric) ? files.shift : 0
       min = files.first == !!files.first ? files.shift : false
+      srt = files.last == !!files.last ? files.pop : false
       
       ### glob, read, parse and alter files
       # reject = verify file stats
       # map    = read and ERB parse files
       # map    = minify, removing extra newlines and lead spaces
       # map    = add padding, remove trailing
-      Dir.glob(files.flatten).reject{|file|
+      Dir.glob(files.flatten).sort{|a,b|
+        srt ? a <=> b : 0
+      }.reject{|file|
         !(File.file?(file) && File.readable?(file))
       }.map{|file|
         Dir.chdir(File.dirname(file)) do
