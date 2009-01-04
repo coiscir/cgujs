@@ -11,6 +11,7 @@
   
   Algos.md5 = {
     block: 64,
+    reqkey: false,
     algo: function (input) {
       if (!CGU.is_a(input, String)) return;
       

@@ -22,6 +22,7 @@ require 'jsmin' # RubyGems
 #     `minify` (true/false): Minifies the included source. Default is false.
 #     `file` (String):       File name. Path is relative to the file including.
 #     `..` (Strings):        Further files to include.
+#     `sort` (true/false):   Sort the file names using Array#sort.
 ################################################################################
 
 module Builder

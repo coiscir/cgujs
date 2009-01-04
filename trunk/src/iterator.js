@@ -28,10 +28,11 @@
     return arr;
   };
   
-  CGU.keys = function (object, instance) {
+  CGU.keys = function (object, where, instance) {
     var ks = [];
-    CGU.iterate(object, function (v, k) {
-      ks.push(k);
+    CGU.iterate(object, function (v, k, t) {
+      if (!CGU.is_a(where, Function) || where(v, k, t) == true)
+        ks.push(k);
     }, (instance === false ? false : true));
     return ks;
   };
