@@ -19,19 +19,19 @@
     uni  = CGU.limit(uni, Boolean) || false;
     
     if (CGU.isNil(Algos[algo]) || CGU.isNil(data)) return;
-    if (Algos[algo].reqkey && CGU.isNil(key)) return;
+    if (Algos[algo].usekey && CGU.isNil(key)) return;
     
     if (uni) data = c16t8(data);
     
-    if (!Algos[algo].reqkey && !CGU.isNil(key))
+    if (!Algos[algo].usekey && !CGU.isNil(key))
       return Sequence(call(algo, hmac(algo, data, key)));
     else
       return Sequence(call(algo, data, key));
   };
   
-  CGU.hashes = function (reqkey) {
-    var where = !CGU.is_a(reqkey, Boolean) ? null :
-      function (v) { return v.reqkey === reqkey; };
+  CGU.hashes = function (usekey) {
+    var where = !CGU.is_a(usekey, Boolean) ? null :
+      function (v) { return v.usekey === usekey; };
     return CGU.keys(Algos, where, true);
   };
   
