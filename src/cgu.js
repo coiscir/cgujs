@@ -1,6 +1,6 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU Javascript Library
- *  (c) 2008 Jonathan Lonowski
+ *  (c) 2008-2009 Jonathan Lonowski
  *    http://code.google.com/p/cgujs/
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU is released and distributable under the terms of the MIT License.
