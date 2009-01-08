@@ -1,6 +1,7 @@
 CGU: Common & General Use
 
   http://cgujs.com
+  http://code.google.com/p/cgujs/
 
 Documentation
 
@@ -10,11 +11,12 @@ Documentation
 
 Download
 
-  http://code.google.com/p/cgujs/downloads/list
+  http://code.google.com/p/cgujs/downloads/
 
 Usage
 
-  Download the latest release and copy to `lib/cgu.js` to a suitable location.
+  Download the latest release (`lib/cgu.js` in Source Tree releases)
+  and copy to a suitable location.
 
   <script type="text/javascript" src="/path/to/cgu.js"></script>
 
@@ -24,12 +26,13 @@ Building
 
   To build CGU, you'll need:
 
-    - A copy of the CGU source tree, by release archive or Subversion repository
-    - Ruby 1.8.7 (http://www.ruby-lang.org/en/)
-    - RubyGems 1.3.1 (http://www.rubygems.org/)
-      - gem install rake
-      - gem install jsmin
-      - gem install maruku
+    - A copy of the CGU Source Tree, by release or Subversion repository
+    - Ruby 1.8.7 or later (http://www.ruby-lang.org/en/)
+    - RubyGems 1.3.1 or later (http://www.rubygems.org/)
+
+      $ gem install rake
+      $ gem install jsmin
+      $ gem install maruku
 
   From the source tree root directory, run either of the following:
 
@@ -44,4 +47,4 @@ Building
 
 Subversion
 
-  http://code.google.com/p/cgujs/source/checkout
+  http://code.google.com/p/cgujs/source/

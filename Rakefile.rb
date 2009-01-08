@@ -1,7 +1,6 @@
 ROOT = File.expand_path(File.dirname(__FILE__))
 
 require 'rake'
-require 'maruku'
 
 Dir.chdir(ROOT) do
   require 'build/builder'
