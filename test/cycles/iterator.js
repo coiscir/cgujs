@@ -1,5 +1,5 @@
 var iterArr = ['foo', 'bar'];
-var iterObj = {foo:'bar', red:'blah'};
+var iterObj = {foo:'bar', red:'foo'};
 
 cycles.Iterator = {
   notes: [
@@ -20,7 +20,7 @@ cycles.Iterator = {
         [
           'keys', 'foo, red', function(){ var ks = []; CGU.iterate(iterObj, function (v, k, t) { ks.push(k); }); return ks.join(', '); }
         ], [
-          'values', 'bar, blah', function(){ var vs = []; CGU.iterate(iterObj, function (v, k, t) { vs.push(v); }); return vs.join(', '); }
+          'values', 'bar, foo', function(){ var vs = []; CGU.iterate(iterObj, function (v, k, t) { vs.push(v); }); return vs.join(', '); }
         ], [
           'type (interrupt)', 'object', function(){ return CGU.iterate(iterObj, function (v, k, t) { return t; }); }
         ]
@@ -34,6 +34,17 @@ cycles.Iterator = {
           'number array', '1, 2, 4, 8, 16, 32', function(){ return CGU.map([0, 1, 2, 3, 4, 5], function (v) { return Math.pow(2, v); }).join(', '); }
         ], [
           'object', '{foo: "foo", red: "red"}', function(){ return CGU.toJSON(CGU.map(iterObj, function (v, k) { return k; })); }
+        ]
+      ]
+    }, {
+      title: 'reject',
+      cases: [
+        [
+          'string array', '["foo"]', function(){ return CGU.toJSON(CGU.reject(iterArr, function (v) { return v === 'bar'; })); }
+        ], [
+          'number array', '1, 3, 5', function(){ return CGU.reject([0, 1, 2, 3, 4, 5], function (v) { return (v % 2) == 0; }).join(', '); }
+        ], [
+          'object', '{red: "foo"}', function(){ return CGU.toJSON(CGU.reject(iterObj, function (v) { return v === 'bar'; })); }
         ]
       ]
     }, {
