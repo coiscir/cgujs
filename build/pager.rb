@@ -24,13 +24,13 @@ module Pager
       def ready?
         File.directory?(@dst) && File.writable?(@dst) &&
         File.directory?(@src) && File.readable?(@src) &&
-        @ind =~ /^\w+$/ && !(@ind =~ /^functions$/i) &&
+        @ind =~ /^\w+$/ && !(@ind =~ /^index$/i) &&
         File.file?(File.join(@src, @ind)) && File.readable?(File.join(@src, @ind))
       end
       
       def globbed
         Dir.chdir(@src) do
-          Dir.glob("{#{@ind},#{@ind}.*,Functions}").sort
+          Dir.glob("{#{@ind},#{@ind}.*,Index}").sort
         end
       end
       
@@ -40,8 +40,6 @@ module Pager
           "functions.#{seg[2]}.html"
         elsif (!seg[1].nil?)
           "utilities.#{seg[1]}.html"
-        elsif (seg[0] == @ind)
-          "index.html"
         else
           "#{seg[0].downcase}.html"
         end
@@ -53,7 +51,7 @@ module Pager
       
       def header(file)
         seg = file.split(/\./)
-        use = !seg[2].nil? ? seg[2] : !seg[1].nil? ? seg[1] : seg[0]
+        use = !seg[2].nil? ? seg[2] : (!seg[1].nil? ? seg[1] : (seg[0] == 'Index' ? (@name + ' ' + @vers) : seg[0]))
         '# ' + subname(use) + ' # {: #'+@ind+'-Main}' + $/+$/ + '> '
       end
       
@@ -128,8 +126,8 @@ module Pager
         nav = []
         
         nav.push(navitem(file, @name, [
-          [@ind, 'API Home'],
-          ['Functions', 'Functions']
+          ['Index', 'API Home'],
+          [@ind, (@ind + ' Namespace')]
         ]))
         
         if (!seg[1].nil?)
@@ -146,14 +144,6 @@ module Pager
         }
         nav.push(navitem(file, 'Utilities', utils))
         
-        if (seg[1].nil?)
-          funcs = []
-          FUNCS.keys.sort.each {|f|
-            funcs.push([FUNCS[f]['file'], f])
-          }
-          nav.push(navitem(file, 'Functions', funcs))
-        end
-        
         nav.join($/ + $/).gsub(/^/, (' ' * 6)).gsub(/[ \t]+$/m, '')
       end
       
@@ -169,8 +159,9 @@ module Pager
           fp = func.gsub(/_/, '\\_') # function print
           fi = func.gsub(/_/, '-')   # function id
           
-          md  = '#### [' + fp + '](' + getlink(file) + ') #### {: #func-' + fi + '}' + $/ + $/
-          md += '> ' + desc
+          md  = '> #### [' + fp + '](' + getlink(file) + ') #### {: #func-' + fi + '}' + $/
+          md += '> ' + $/
+          md += '> > ' + desc
           
           list.push(md)
         }
@@ -189,8 +180,9 @@ module Pager
             
             funcs = funclist(f)
             title = [
-              (@name.strip + ' API ' + version),
-              (seg[0] == 'Functions' ? seg[0] : seg[1]),
+              (@name),
+              (seg[0] == 'Index' ? nil : (seg[0] == @ind ? seg[1] : seg[0])),
+              (seg[1]),
               (seg[2])
             ].reject{|i| i.nil?}.join(' - ')
             navlist = navbar(f)
@@ -216,8 +208,9 @@ module Pager
         PAGES[name].nil? ? nil : PAGES[name]['link']
       end
       
-      def page(name, dst, src, index, temp)
+      def page(name, vers, dst, src, index, temp)
         @name = name
+        @vers = vers
         @dst  = File.expand_path(dst)
         @src  = File.expand_path(src)
         @ind  = index

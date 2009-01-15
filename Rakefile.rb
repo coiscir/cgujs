@@ -83,7 +83,7 @@ end
 # document pages
 task :docs do
   print $/ + '== Build :: Documents' + $/
-  Pager.page('CGU', DOCS, DSRC, 'CGU', 'template.html')
+  Pager.page('CGU API', version, DOCS, DSRC, 'CGU', 'template.html')
 end
 
 task :rdocs do
