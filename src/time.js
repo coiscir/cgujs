@@ -292,7 +292,7 @@
     }
   };
   
-  post.push(function () {
+  (function () {
     var seg = function (name) { // segment from 3 to length - 1
       var segs = [];
       for (var i = (name.length - 1); i >= 3; i -= 1)
@@ -360,7 +360,7 @@
     locale.local.c = conv('c') || '';
     locale.local.x = conv('x') || '';
     locale.local.X = conv('X') || '';
-  });
+  })();
   
   var inrange = function (time, utc) {
     if (utc) {
