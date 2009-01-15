@@ -4,7 +4,6 @@ require 'rake'
 
 Dir.chdir(ROOT) do
   require 'build/builder'
-  require 'build/incs'
   require 'build/pager'
 end
 
