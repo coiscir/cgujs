@@ -47,6 +47,19 @@
     return object;
   };
   
+  CGU.reject = function (object, rejector, instance) {
+    if (!CGU.is_a(rejector, Function)) return;
+    var array = CGU.is_a(object, Array);
+    var rejected = array ? [] : {};
+    
+    CGU.iterate(object, function (v, k, t) {
+      if (rejector(v, k, t) !== true)
+        array ? (rejected.push(v)) : (rejected[k] = v);
+    }, (instance === false ? false : true));
+    
+    return rejected;
+  };
+  
   CGU.trials = function () {
     return CGU.iterate(CGU.asArray(arguments), function (v) {
       try { return v(); } catch (e) {}
