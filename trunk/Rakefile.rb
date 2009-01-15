@@ -82,7 +82,7 @@ end
 
 # document pages
 task :docs do
-  print $/ + '== Build :: Documents' + $/
+  print $/ + '== Build :: Documents :: ' + version.to_s + ' (' + TIME.strftime('%Y-%m-%d %H:%M:%S') + ')' + $/
   Pager.page('CGU API', version, DOCS, DSRC, 'CGU', 'template.html')
 end
 
