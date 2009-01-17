@@ -87,12 +87,12 @@
     
     CGU.iterate(CGU.asArray(fe.elements || fe), function (e) {
       var first = false;
-      if (e.name.length > 0)
+      if (e.name.length > 0 && !e.disabled)
         switch (e.type) {
           case 'select-one': first = true;
           case 'select-multiple':
             CGU.iterate(CGU.asArray(e.options), function (o) {
-              if (o.selected) {
+              if (o.selected && !o.disabled) {
                 add(e.name, o.value);
                 if (first) return null;
               }
@@ -100,7 +100,7 @@
             break;
           case 'checkbox':
           case 'radio': if (!e.checked) break;
-          default: add(e.name, e.value); break;
+          default: if (CGU.is_a(e.value, String)) add(e.name, e.value); break;
         }
     });
     
