@@ -97,6 +97,7 @@ document.writeln('\
     <textarea name="textarea"></textarea>\
     \
     <input type="button" value="Press">\
+    <input type="button" name="disabled" value="Enable" disabled>\
     \
     <input type="submit" value="Go">\
   </form>\
