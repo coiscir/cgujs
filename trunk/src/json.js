@@ -171,7 +171,7 @@
     
     var arr = function (input) {
       var elems = [];
-      CGU.iterate(input, function (v) {
+      CGU.each(input, function (v) {
         v = value(v);
         if (CGU.is_a(v, String)) elems.push(v);
       });
@@ -186,11 +186,11 @@
       };
       
       var pairs = [];
-      CGU.iterate(CGU.keys(input).sort(), function (v, k) {
+      CGU.each(CGU.properties(input).sort(), function (v, k) {
         k = key(v);
         v = value(input[v]);
         if (CGU.is_a(v, String)) pairs.push(k + ': ' + v);
-      }, true);
+      });
       return '{' + pairs.join(', ') + '}';
     };
     

@@ -85,6 +85,8 @@ var timerStart = CGU.local();
 
 (function () {
   for (var c in cycles) {
+    if (!cycles[c].notes || !cycles[c].tests) continue;
+    
     document.write('<pre>');
     
     print(c);
