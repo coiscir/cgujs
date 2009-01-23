@@ -42,14 +42,6 @@
   };
   
   CGU.clone = function (object) {
-    var $object = function (object) {
-      var obj = {};
-      CGU.iterate(object, function (v, k, t) {
-        obj[k] = CGU.clone(v);
-      });
-      return obj;
-    };
-    
     switch (CGU.type(object)) {
       case NUL : return null;
       case ARR : return [].concat(object.valueOf());
@@ -58,7 +50,7 @@
       case ERR : /* continue */
       case FNC : return object.valueOf();
       case NUM : return 0 + object.valueOf();
-      case OBJ : return $object(object.valueOf());
+      case OBJ : return CGU.map(object, function (v) { return v; });
       case RGX : return new RegExp(object.valueOf());
       case STR : return '' + object.valueOf();
       default  : return undefined
