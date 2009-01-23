@@ -36,7 +36,7 @@
     
     var queries = location.search.replace(/^\?/, '').replace(/\+/, '%20').split(/\&/);
     var matches = [];
-    CGU.iterate(queries, function (v) {
+    CGU.each(queries, function (v) {
       var s = v.split(/=/);
       if (key == decodeURIComponent(s[0]))
         matches.push(decodeURIComponent(s[1] || ''));
@@ -57,20 +57,20 @@
     
     // handle serialize arrays
     if (CGU.is_a(object, Array) && object._seralized === true)
-      CGU.iterate(object, function (v, k, t) {
+      CGU.each(object, function (v, k, t) {
         add(v.name, v.value);
       });
     
     // handle other objects
     else
-      CGU.iterate(object, function (v, k) {
+      CGU.each(object, function (v, k) {
         switch (CGU.type(v)) {
           case 'undefined':
           case 'error'    :
           case 'function' :
           case 'regexp'   : break;
           case 'object': append(CGU.param(v)); break;
-          case 'array' : CGU.iterate(v, function(v){ add(k, v); }); break;
+          case 'array' : CGU.each(v, function(v){ add(k, v); }); break;
           case 'date'  : add(k, CGU.fromTime(v)); break;
           default: add(k, v); break;
         }
@@ -85,13 +85,13 @@
       elems.push({name: name, value: (value || '')});
     };
     
-    CGU.iterate(CGU.asArray(fe.elements || fe), function (e) {
+    CGU.each(CGU.asArray(fe.elements || fe), function (e) {
       var first = false;
       if (e.name.length > 0 && !e.disabled)
         switch (e.type) {
           case 'select-one': first = true;
           case 'select-multiple':
-            CGU.iterate(CGU.asArray(e.options), function (o) {
+            CGU.each(CGU.asArray(e.options), function (o) {
               if (o.selected && !o.disabled) {
                 add(e.name, o.value);
                 if (first) return null;
