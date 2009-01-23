@@ -6,9 +6,9 @@ cycles.JSON = {
       title: 'from/to',
       cases: [
         [
-          'relaxed', '{foo: "bar"}', function(){ return CGU.toJSON(CGU.fromJSON('{foo: "bar"}')); }
+          'strict', '{"foo": "bar"}', function(){ return CGU.toJSON(CGU.fromJSON('{"foo": "bar"}')); }
         ], [
-          'strict', '{"foo": "bar"}', function(){ return CGU.toJSON(CGU.fromJSON('{"foo": "bar"}', true), true); }
+          'relaxed', '{foo: "bar"}', function(){ return CGU.toJSON(CGU.fromJSON('{foo: "bar"}', false), false); }
         ]
       ]
     }, {

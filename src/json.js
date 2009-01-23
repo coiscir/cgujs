@@ -15,7 +15,7 @@
  * CGU :: JSON :: from
 **/
   CGU.fromJSON = function (json, strict) {
-    strict = CGU.limit(strict, Boolean) || false;
+    strict = strict === false ? false : true;
     if (!CGU.is_a(json, String)) return null;
     
     var standard = {
@@ -138,7 +138,7 @@
  * CGU :: JSON :: to
 **/
   CGU.toJSON = function (input, strict) {
-    strict = CGU.limit(strict, Boolean) || false;
+    strict = strict === false ? false : true;
     
     var date = function (input) {
       return str(CGU.fromTime(input));
