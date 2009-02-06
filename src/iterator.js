@@ -70,22 +70,26 @@
   var iterate = function (object, iterator, every) {
     if (!CGU.is_a(iterator, Function)) return;
     
-    var iter = function (key) {
-      var instance = Object.prototype.propertyIsEnumerable.call(object, key);
-      if (every || instance)
-        return iterator(object[key], key, instance);
-    };
-    
     var interrupt, instance;
     if (CGU.is_a(object, Array) && !every) {
-      for (var i = 0; i < object.length; i += 1)
-        if (!CGU.is_a((interrupt = iter(i)), undefined))
+      for (var i = 0; i < object.length; i += 1) {
+        if (!CGU.is_a((interrupt = iterator(object[i], i, true)), undefined))
           return interrupt;
+      }
     } else {
-      for (var key in object)
-        if (!CGU.is_a((interrupt = iter(key)), undefined))
-          return interrupt;
+      for (var k in object) {
+        instance = isEnumerable(object, k);
+        if (every || instance === true)
+          if (!CGU.is_a((interrupt = iterator(object[k], k, instance)), undefined))
+            return interrupt;
+      }
     }
+  };
+  
+  var isEnumerable = function (o, k) {
+    try{ return o.propertyIsEnumerable(k);                        }catch(e){}
+    try{ return Object.prototype.propertyIsEnumerable.call(o, k); }catch(e){}
+    return null;
   };
   
 })();

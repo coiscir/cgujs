@@ -22,11 +22,11 @@ cycles.Iterator = {
       title: 'every',
       cases: [
         [
-          'keys', 'foo, red, bar', function(){ var keys = []; CGU.every(iterObj, function (v, k) { keys.push(k); }); return keys.join(', '); }
+          'keys', 'bar, foo, red', function(){ var keys = []; CGU.every(iterObj, function (v, k) { keys.push(k); }); return keys.sort().join(', '); }
         ], [
-          'values', 'bar, foo, bar', function(){ var values = []; CGU.every(iterObj, function (v) { values.push(v); }); return values.join(', '); }
+          'values', 'bar, bar, foo', function(){ var values = []; CGU.every(iterObj, function (v) { values.push(v); }); return values.sort().join(', '); }
         ], [
-          'interrupt', true, function(){ return CGU.every(iterObj, function (v, k, i) { return i; }); }
+          'interrupt', true, function(){ return CGU.every(iterObj, function (v, k, i) { return true; }); }
         ]
       ]
     }, {
