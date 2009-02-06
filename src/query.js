@@ -45,14 +45,11 @@
   };
   
   CGU.param = function (object, complete) {
-    complete = complete === true ? true : false;
+    complete = CGU.limit(complete, Boolean) || false;
     
     var serial = [], i;
     var add = function (k, v) {
       serial.push(encodeURIComponent(k) + '=' + encodeURIComponent(v));
-    };
-    var append = function (s) {
-      serial.push(s);
     };
     
     // handle serialize arrays
@@ -69,7 +66,7 @@
           case 'error'    :
           case 'function' :
           case 'regexp'   : break;
-          case 'object': append(CGU.param(v)); break;
+          case 'object': serial.push(CGU.param(v)); break;
           case 'array' : CGU.each(v, function(v){ add(k, v); }); break;
           case 'date'  : add(k, CGU.fromTime(v)); break;
           default: add(k, v); break;

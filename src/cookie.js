@@ -22,11 +22,11 @@
     
     var r = read(key);
     if (CGU.isNil(value) && options.duration === false)
-      return r;
+      return CGU.isNil(r) ? null : r;
     
     var e = options.duration < 0;
     var w = write(key, value, options);
-    return e ? (r === null ? r : !w) : w;
+    return e ? (CGU.isNil(r) ? null : !w) : w;
   };
   
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,10 +36,10 @@
   var read = function (key) {
     key = String(key);
     var cookies = CGU.clone(document.cookie).split(/\;\s*/), i;
-    for (i = 0; i < cookies.length; i += 1)
-      if (key === decodeURIComponent(cookies[i].split('=')[0]))
-        return decodeURIComponent(cookies[i].split('=')[1] || '');
-    return null;
+    return CGU.each(cookies, function (v) {
+      if (key === decodeURIComponent(v.split('=')[0]))
+        return decodeURIComponent(v.split('=')[1] || '');
+    });
   };
   
   var write = function (key, value, options) {
@@ -54,7 +54,7 @@
       (!options.secure   ? '' : ('; secure'))
     );
     
-    return read(key) !== null;
+    return !CGU.isNil(read(key));
   };
   
 })();
