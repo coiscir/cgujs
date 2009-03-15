@@ -1,0 +1,104 @@
+<html>
+<head>
+  <title>CGU - Crypto - Tests</title>
+  <style type="text/css">
+    pre {
+      font-size: 8pt;
+    }
+  </style>
+</head>
+<body>
+
+<script type="text/javascript" src="../lib/cgu.crypto.js"></script>
+<script type="text/javascript">
+function print() {
+  for (var i = 0; i < arguments.length; i += 1)
+    document.write(arguments[i]);
+  document.write('&nbsp;<br />');
+}
+</script>
+<script type="text/javascript">
+document.write('<pre>');
+
+print(!!window.CGU);
+print();
+print(CGU.Crypto.to8bit('\u4142'));
+print(CGU.Crypto.Sequence('AB').str());
+print(CGU.Crypto.Sequence('AB').hex());
+print(CGU.Crypto.Sequence('AB').base32());
+print(CGU.Crypto.Sequence('AB').base64());
+print();
+print('= Algos =');
+print();
+print('All:   ', CGU.Crypto.algos().join(', '));
+print('HMAC:  ', CGU.Crypto.algos(false).join(', '));
+print('Keyed: ', CGU.Crypto.algos(true).join(', '));
+print();
+print('= 8 or 16-bit =');
+print();
+print(CGU.Crypto.hash('md5', '\x41\x42\x43\x44'));
+print(CGU.Crypto.hash('md5', '\u4142\u4344', null, true));
+print(CGU.Crypto.hash('md5', CGU.Crypto.to8bit('\u4142\u4344')));
+print();
+print('= MD =');
+print();
+print('a448017aaf21d8525fc10ae87aa6729d')
+print(CGU.Crypto.hash('md4', 'abc'));
+print();
+print('900150983cd24fb0d6963f7d28e17f72');
+print(CGU.Crypto.hash('md5', 'abc'));
+print();
+print('9294727a3638bb1c13f48ef8158bfc9d');
+print(CGU.Crypto.hmac('md5', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('= SHA =');
+print();
+print('A9993E364706816ABA3E25717850C26C9CD0D89D'.toLowerCase());
+print(CGU.Crypto.hash('sha1', 'abc'));
+print();
+print('23097D223405D8228642A477BDA255B32AADBCE4BDA0B3F7E36C9DA7'.toLowerCase());
+print(CGU.Crypto.hash('sha224', 'abc'));
+print();
+print('BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD'.toLowerCase());
+print(CGU.Crypto.hash('sha256', 'abc'));
+print();
+print('CB00753F45A35E8BB5A03D699AC65007272C32AB0EDED1631A8B605A43FF5BED8086072BA1E7CC2358BAECA134C825A7'.toLowerCase());
+print(CGU.Crypto.hash('sha384', 'abc'));
+print();
+print('DDAF35A193617ABACC417349AE20413112E6FA4E89A97EA20A9EEEE64B55D39A2192992A274FC1A836BA3C23A3FEEBBD454D4423643CE80E2A9AC94FA54CA49F'.toLowerCase());
+print(CGU.Crypto.hash('sha512', 'abc'));
+print();
+print('b617318655057264e28bc0b6fb378c8ef146be00');
+print(CGU.Crypto.hmac('sha1', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('896fb1128abbdf196832107cd49df33f47b4b1169912ba4f53684b22');
+print(CGU.Crypto.hmac('sha224', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7');
+print(CGU.Crypto.hmac('sha256', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('afd03944d84895626b0825f4ab46907f15f9dadbe4101ec682aa034c7cebc59cfaea9ea9076ede7f4af152e8b2fa9cb6');
+print(CGU.Crypto.hmac('sha384', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('87aa7cdea5ef619d4ff0b4241a1d6cb02379f4e2ce4ec2787ad0b30545e17cdedaa833b7d6b8a702038b274eaea3f4e4be9d914eeb61f1702e696c203a126854');
+print(CGU.Crypto.hmac('sha512', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('= RIPEMD =');
+print();
+print('c14a12199c66e4ba84636b0f69144c77');
+print(CGU.Crypto.hash('ripemd128', 'abc'));
+print();
+print('8eb208f7e05d987a9b044a8e98c6b087f15a0bfc');
+print(CGU.Crypto.hash('ripemd160', 'abc'));
+print();
+print('ad9db2c1e22af9ab5ca9dbe5a86f67dc');
+print(CGU.Crypto.hmac('ripemd128', '', '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff'));
+print();
+print('cf387677bfda8483e63b57e06c3b5ecd8b7fc055');
+print(CGU.Crypto.hmac('ripemd160', '', '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x01\x23\x45\x67'));
+
+document.write('</pre>');
+</script>
+
+</body>
+</html>
