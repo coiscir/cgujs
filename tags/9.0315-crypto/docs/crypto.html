@@ -1,0 +1,27 @@
+<h3>CGU Crypto 9.0315</h3>
+
+<p><code>CGU.Crypto.algos([keyed])</code> - List available algorithms.</p>
+
+<blockquote>
+  <p><code>keyed</code> - Boolean - List all (<code>null</code>/<code>undefined</code>), keyed (<code>true</code>), or HMAC (<code>false</code>) algorithms.</p>
+</blockquote>
+
+<p><code>CGU.Crypto.hash(algo, data [, key [, bytes]])</code> - Generate a hash of data.</p>
+
+<blockquote>
+  <p><code>algo</code> - String - Name of the algorithm to use.</p>
+  
+  <p><code>data</code> - String - Input to be hashed.</p>
+  
+  <p><code>key</code> - String - Specify a key for keyed algorithms. (For future support)</p>
+  
+  <p><code>bytes</code> - Boolean - Option to use to8bit on data before hashing (<code>true</code>).</p>
+</blockquote>
+
+<p><code>CGU.Crypto.hmac(algo, data, key, bytes)</code></p>
+
+<blockquote>
+  <p><em>Same arguments as hash. <code>key</code> specifies an HMAC key, instead.</em></p>
+</blockquote>
+
+<p><code>CGU.Crypto.to8bit(string)</code> - Prepare an 16-bit String for hashing.</p>
