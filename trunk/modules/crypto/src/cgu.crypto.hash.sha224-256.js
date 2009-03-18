@@ -59,7 +59,7 @@
       var MAJ = function (x, y, z) { return (x & y) ^ (x & z) ^ (y & z); };
       
       var a, b, c, d, e, f, g, h, tmp1, tmp2, i, t;
-      var w = [], x = decode(CGU.Crypto.Sequence(padded(input)).raw());
+      var w = [], x = decode(CGU.Sequence(padded(input)).raw());
       
       for (i = 0; i < x.length; i += 16) {
         a = 0xffffffff & HASH[0];

@@ -59,7 +59,7 @@
       };
       
       var aa, bb, cc, dd, aaa, bbb, ccc, ddd, i, t, tmp;
-      var x = decode((CGU.Crypto.Sequence(padded(input))).raw());
+      var x = decode((CGU.Sequence(padded(input))).raw());
       
       for (i = 0, t = 0; i < x.length; i += 16, t = 0) {
         aa = aaa = HASH[0];

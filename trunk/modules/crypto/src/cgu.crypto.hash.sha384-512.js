@@ -106,7 +106,7 @@
       };
       
       var a, b, c, d, e, f, g, h, t1, t2, i, t;
-      var w = [], x = decode((CGU.Crypto.Sequence(padded(input))).raw());
+      var w = [], x = decode((CGU.Sequence(padded(input))).raw());
       
       for (i = 0; i < x.length; i += 16) {
         a = NEW(HASH[0]);

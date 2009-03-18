@@ -77,8 +77,8 @@
         
         var count = (bitlen / Math.pow(2, 32));
         input += padding;
-        input += CGU.Crypto.Sequence(BIT32.MSD.encode([(count  & 0xffffff)])).str();
-        input += CGU.Crypto.Sequence(BIT32.MSD.encode([(bitlen & 0xffffff)])).str();
+        input += CGU.Sequence(BIT32.MSD.encode([(count  & 0xffffff)])).str();
+        input += CGU.Sequence(BIT32.MSD.encode([(bitlen & 0xffffff)])).str();
         
         return input;
       }
@@ -117,7 +117,7 @@
         
         var count = (bitlen / Math.pow(2, 32));
         input += padding;
-        input += (CGU.Crypto.Sequence(BIT32.LSD.encode([bitlen, count]))).str();
+        input += (CGU.Sequence(BIT32.LSD.encode([bitlen, count]))).str();
         
         return input;
       }

@@ -33,7 +33,7 @@
       
       ////////////
       // Update
-      x = decode((CGU.Crypto.Sequence(padded(input))).raw());
+      x = decode((CGU.Sequence(padded(input))).raw());
       
       for (i = 0; i < x.length; i += 16) {
         a = HASH[0];
