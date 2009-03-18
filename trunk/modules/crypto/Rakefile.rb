@@ -12,8 +12,9 @@ end
 DOCS = File.join(ROOT, 'docs')
 DSRC = File.join(DOCS, 'src')
 
-FINAL = File.join(ROOT, 'lib', 'cgu.crypto.js')
-START = File.join(ROOT, 'src', 'cgu.crypto.js')
+INPUT = File.join(ROOT, 'src', 'cgu.crypto.js')
+STAND = File.join(ROOT, 'lib', 'cgu.crypto.js')
+SHARE = File.join(ROOT, 'lib', 'cgu.crypto.share.js')
 
 ################################################################################
 # Versions
@@ -63,18 +64,24 @@ task :status => [:slib]
 # library script
 task :lib do
   print $/ + '== Build :: Library :: ' + version.to_s + ' (' + TIME.strftime('%Y-%m-%d %H:%M:%S') + ')' + $/
-  File.open(FINAL, 'w+') do |lib|
-    lib << Builder.build(START)
+  File.open(STAND, 'w+b') do |lib|
+    lib << Builder.build(INPUT, true)
   end
-  print ' + ' + File.basename(FINAL) + $/ if File.exists?(FINAL)
+  File.open(SHARE, 'w+b') do |lib|
+    lib << Builder.build(INPUT, false)
+  end
+  print ' + ' + File.basename(STAND) + $/ if File.exists?(STAND)
+  print ' + ' + File.basename(SHARE) + $/ if File.exists?(SHARE)
 end
 
 task :rlib do
   print $/ + '== Remove :: Library' + $/
-  print ' - ' + File.basename(FINAL) + $/ if File.exists?(FINAL) && File.delete(FINAL) > 0
+  print ' - ' + File.basename(STAND) + $/ if File.exists?(STAND) && File.delete(STAND) > 0
+  print ' - ' + File.basename(SHARE) + $/ if File.exists?(SHARE) && File.delete(SHARE) > 0
 end
 
 task :slib do
   print $/ + '== Status :: Library' + $/
-  print ' ' + (File.exists?(FINAL) ? '+' : '-') + ' ' + File.basename(FINAL) + $/
+  print ' ' + (File.exists?(STAND) ? '+' : '-') + ' ' + File.basename(STAND) + $/
+  print ' ' + (File.exists?(SHARE) ? '+' : '-') + ' ' + File.basename(SHARE) + $/
 end
