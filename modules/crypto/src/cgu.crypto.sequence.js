@@ -3,13 +3,13 @@
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
-  CGU.Crypto.Sequence = function (param) {
+  CGU.Sequence = function (param) {
     // enable new operator shortcut
-    if (!(this instanceof CGU.Crypto.Sequence))
-      return new CGU.Crypto.Sequence(param);
+    if (!(this instanceof CGU.Sequence))
+      return new CGU.Sequence(param);
     
     // enable cloning
-    if (param instanceof CGU.Crypto.Sequence)
+    if (param instanceof CGU.Sequence)
       param = param.raw();
     
     // prepare

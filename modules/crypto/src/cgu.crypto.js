@@ -16,7 +16,6 @@
 <% if @stand %>
   CGU = typeof(CGU) !== 'undefined' ? CGU : {Version: '<%=version%>'};
 <% end %>
-  CGU.Crypto = CGU.Crypto || {};
   
   // host & mask
   var Algos = {};

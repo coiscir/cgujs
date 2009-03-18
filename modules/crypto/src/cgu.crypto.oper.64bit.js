@@ -121,8 +121,8 @@
         var count2 = (count1 / Math.pow(2, 32));
         var count3 = (count2 / Math.pow(2, 32));
         input += padding;
-        input += CGU.Crypto.Sequence(BIT64.MSD.encode([[count3 & 0xffffffff, count2 & 0xffffffff]])).str();
-        input += CGU.Crypto.Sequence(BIT64.MSD.encode([[count1 & 0xffffffff, bitlen & 0xffffffff]])).str();
+        input += CGU.Sequence(BIT64.MSD.encode([[count3 & 0xffffffff, count2 & 0xffffffff]])).str();
+        input += CGU.Sequence(BIT64.MSD.encode([[count1 & 0xffffffff, bitlen & 0xffffffff]])).str();
         
         return input;
       }
