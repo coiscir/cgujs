@@ -65,7 +65,7 @@ module Builder
     
     def build(file, stand)
       @stand = stand === !!stand ? stand : false
-      inc(0, false, file).gsub(/[ \t]+$/m, '').gsub(/\r|\n|\r\n/, "\n")
+      inc(0, false, file).gsub(/[ \t]+$/m, '').gsub(/\r\n|\r|\n/, "\n")
     end
   end
 end
