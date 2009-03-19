@@ -52,7 +52,7 @@ module Builder
         min ? JSMin.minify(src).gsub(/ ?\n ?/, ' ').sub(/^ +/, '') : src
       }.map{|src|
         src.gsub(/^/, (' ' * pad))
-      }.join($/ + (min ? '' : $/))
+      }.join($/)
     end
     
     def opt(t, f)
@@ -65,7 +65,7 @@ module Builder
     
     def build(file, stand)
       @stand = stand === !!stand ? stand : false
-      inc(0, false, file).gsub(/[ \t]+$/m, '').gsub(/\r/, '')
+      inc(0, false, file).gsub(/[ \t]+$/m, '').gsub(/\r|\n|\r\n/, "\n")
     end
   end
 end
