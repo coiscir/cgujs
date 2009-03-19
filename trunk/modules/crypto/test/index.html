@@ -22,7 +22,6 @@ document.write('<pre>');
 
 print(!!window.CGU);
 print();
-print(CGU.hashable('\u4142'));
 print(CGU.Sequence('AB').str());
 print(CGU.Sequence('AB').hex());
 print(CGU.Sequence('AB').base32());
@@ -34,11 +33,14 @@ print('All:   ', CGU.hashes().join(', '));
 print('HMAC:  ', CGU.hashes(false).join(', '));
 print('Keyed: ', CGU.hashes(true).join(', '));
 print();
-print('= Hashable -- 8-bit, 16-bit =');
+print('= UTF-8 Encode =');
 print();
-print(CGU.hash('md5', '\x41\x42\x43\x44'));
-print(CGU.hash('md5', '\u4142\u4344', null, true));
-print(CGU.hash('md5', CGU.hashable('\u4142\u4344')));
+print('24  C2A2  E282AC');
+print(
+  CGU.Sequence(CGU.utf8Encode('\u0024')).base16(), '  ',
+  CGU.Sequence(CGU.utf8Encode('\u00A2')).base16(), '  ',
+  CGU.Sequence(CGU.utf8Encode('\u20AC')).base16()
+);
 print();
 print('= MD =');
 print();
