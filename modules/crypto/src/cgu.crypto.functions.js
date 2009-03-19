@@ -3,28 +3,30 @@
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
   
-  CGU.hash = function (call, data, hkey) {
+  CGU.hash = function (call, data, hkey, utf8) {
     if (typeof(call) != 'string') call = null;
     if (typeof(data) != 'string') data = null;
     if (typeof(hkey) != 'string') hkey = null;
+    if (utf8 !== true) utf8 = false;
     
     if (!(Algos[call] instanceof Algo) || data === null) return;
     if (Algos[call].keyed && hkey === null) return null;
     
-    data = CGU.utf8Encode(data); hkey = CGU.utf8Encode(hkey);
+    if (utf8) data = CGU.utf8Encode(data);
     
     return CGU.Sequence(Algos[call].algo(data, hkey));
   };
   
-  CGU.hmac = function (call, data, hkey) {
+  CGU.hmac = function (call, data, hkey, utf8) {
     if (typeof(call) != 'string') call = null;
     if (typeof(data) != 'string') data = null;
     if (typeof(hkey) != 'string') hkey = null;
+    if (utf8 !== true) utf8 = false;
     
     if (!(Algos[call] instanceof Algo) || data === null) return;
     if (Algos[call].keyed || hkey === null) return null;
     
-    data = CGU.utf8Encode(data); hkey = CGU.utf8Encode(hkey);
+    if (utf8) data = CGU.utf8Encode(data);
     
     var akey, ihash, ipad = [], opad = [];
     var block = Algos[call].block, klen = hkey.length;
@@ -54,7 +56,7 @@
   };
   
   CGU.utf8Encode = function (string) {
-    if (typeof(string) !== 'string') return string;
+    if (typeof(string) !== 'string') return;
     for (var res = '', c, i = 0; i < string.length; i += 1) {
       c = string.charCodeAt(i);
       if (c <= 127) {
