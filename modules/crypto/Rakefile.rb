@@ -1,20 +1,14 @@
-ROOT = File.expand_path(File.dirname(__FILE__))
+Dir.chdir(File.expand_path(File.dirname(__FILE__)))
 
 require 'rake'
-
-Dir.chdir(ROOT) do
-  require 'build/builder'
-end
+require 'build/builder'
 
 ################################################################################
 # Prepare
 ####
-DOCS = File.join(ROOT, 'docs')
-DSRC = File.join(DOCS, 'src')
-
-INPUT = File.join(ROOT, 'src', 'cgu.crypto.js')
-STAND = File.join(ROOT, 'lib', 'cgu.crypto.js')
-SHARE = File.join(ROOT, 'lib', 'cgu.crypto.share.js')
+INPUT = File.join('src', 'cgu.crypto.js')
+STAND = File.join('lib', 'cgu.crypto.js')
+SHARE = File.join('lib', 'cgu.crypto.share.js')
 
 ################################################################################
 # Versions
