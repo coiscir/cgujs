@@ -25,8 +25,8 @@
     this.keyed = keyed;
   };
 
-<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.functions.js' %><%=opt($/,'')%>
-<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.sequence.js' %><%=opt($/,'')%>
-<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.oper.{32,64}bit.js' %><%=opt($/,'')%>
+<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.functions.js' %><%=$/%>
+<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.sequence.js' %><%=$/%>
+<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.oper.{32,64}bit.js' %><%=$/%>
 <%= inc opt(2, 0), opt(true, false), 'cgu.crypto.hash.{md,sha,ripemd}*.js' %><%=$/%>
 })();
