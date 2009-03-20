@@ -20,7 +20,13 @@ function print() {
 <script type="text/javascript">
 document.write('<pre>');
 
-print(!!window.CGU);
+print('= Build Check =');
+print();
+print('CGU Build: ', !!window.CGU);
+print('Release: ', CGU.Release.toUTCString());
+print('Version: ', CGU.Version);
+print();
+print('= Encodings =');
 print();
 print(CGU.Sequence('AB').str());
 print(CGU.Sequence('AB').hex());
