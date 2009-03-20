@@ -6,9 +6,9 @@ require 'build/builder'
 ################################################################################
 # Prepare
 ####
-INPUT = File.join('src', 'cgu.crypto.js')
-STAND = File.join('lib', 'cgu.crypto.js')
-SHARE = File.join('lib', 'cgu.crypto.share.js')
+LIB = File.join('lib', 'cgu.crypto.js')
+MIN = File.join('lib', 'cgu.crypto.min.js')
+SRC = File.join('src', 'cgu.crypto.js')
 
 ################################################################################
 # Versions
@@ -58,24 +58,24 @@ task :status => [:slib]
 # library script
 task :lib do
   print $/ + '== Build :: Library :: ' + version.to_s + ' (' + TIME.strftime('%Y-%m-%d %H:%M:%S') + ')' + $/
-  File.open(STAND, 'w+b') do |lib|
-    lib << Builder.build(INPUT, true)
+  File.open(LIB, 'w+b') do |lib|
+    lib << Builder.build(SRC, false)
   end
-  File.open(SHARE, 'w+b') do |lib|
-    lib << Builder.build(INPUT, false)
+  print ' + ' + File.basename(LIB) + $/ if File.exists?(LIB)
+  File.open(MIN, 'w+b') do |min|
+    min << Builder.build(SRC, true)
   end
-  print ' + ' + File.basename(STAND) + $/ if File.exists?(STAND)
-  print ' + ' + File.basename(SHARE) + $/ if File.exists?(SHARE)
+  print ' + ' + File.basename(MIN) + $/ if File.exists?(MIN)
 end
 
 task :rlib do
   print $/ + '== Remove :: Library' + $/
-  print ' - ' + File.basename(STAND) + $/ if File.exists?(STAND) && File.delete(STAND) > 0
-  print ' - ' + File.basename(SHARE) + $/ if File.exists?(SHARE) && File.delete(SHARE) > 0
+  print ' - ' + File.basename(LIB) + $/ if File.exists?(LIB) && File.delete(LIB) > 0
+  print ' - ' + File.basename(MIN) + $/ if File.exists?(MIN) && File.delete(MIN) > 0
 end
 
 task :slib do
   print $/ + '== Status :: Library' + $/
-  print ' ' + (File.exists?(STAND) ? '+' : '-') + ' ' + File.basename(STAND) + $/
-  print ' ' + (File.exists?(SHARE) ? '+' : '-') + ' ' + File.basename(SHARE) + $/
+  print ' ' + (File.exists?(LIB) ? '+' : '-') + ' ' + File.basename(LIB) + $/
+  print ' ' + (File.exists?(MIN) ? '+' : '-') + ' ' + File.basename(MIN) + $/
 end
