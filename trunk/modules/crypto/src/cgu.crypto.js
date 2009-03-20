@@ -33,5 +33,5 @@
   'cgu.crypto.hash.md{4,5}.js',
   'cgu.crypto.hash.sha{1,224,384}*.js',
   'cgu.crypto.hash.ripemd{128,160}.js'
-%><%= $/ %>
+%>
 })();
