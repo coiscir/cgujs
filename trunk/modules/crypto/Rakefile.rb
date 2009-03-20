@@ -16,7 +16,7 @@ SRC = File.join('src', 'cgu.crypto.js')
 TIME = Time.now.utc
 
 def release
-  (TIME.to_f * 1000).truncate
+  TIME.to_i / 60 * 60 * 1000
 end
 
 def version
