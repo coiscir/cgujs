@@ -10,7 +10,6 @@
     if (utf8 !== true) utf8 = false;
     
     if (!(Algos[call] instanceof Algo) || data === null) return;
-    if (Algos[call].keyed && hkey === null) return null;
     
     if (utf8) data = CGU.utf8Encode(data);
     
