@@ -12,10 +12,11 @@
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
-(function Crypto() {
-<% if @stand %>
-  CGU = typeof(CGU) !== 'undefined' ? CGU : {Version: '<%=version%>'};
-<% end %>
+(function Crypto() { <%= opt('', $/) %>
+  CGU = typeof(CGU) !== 'undefined' ? CGU : {
+    Release: new Date(<%= release %>),
+    Version: '<%= version %>'
+  };
   
   // host & mask
   var Algos = {};
@@ -25,8 +26,8 @@
     this.keyed = keyed;
   };
 
-<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.functions.js' %><%=$/%>
-<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.sequence.js' %><%=$/%>
-<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.oper.{32,64}bit.js' %><%=$/%>
-<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.hash.{md,sha,ripemd}*.js' %><%=$/%>
+<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.functions.js' %><%= $/ %>
+<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.sequence.js' %><%= $/ %>
+<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.oper.{32,64}bit.js' %><%= $/ %>
+<%= inc opt(2, 0), opt(true, false), 'cgu.crypto.hash.{md,sha,ripemd}*.js' %><%= $/ %>
 })();
