@@ -41,12 +41,15 @@ print('Keyed: ', CGU.hashes(true).join(', '));
 print();
 print('= UTF-8 Encode =');
 print();
-print('24  C2A2  E282AC');
-print(
-  CGU.Sequence(CGU.utf8Encode('\u0024')).base16(), '  ',
+print('U+0024  U+00A2  U+20AC');
+print('    24    C2A2  E282AC');
+print('    ',
+  CGU.Sequence(CGU.utf8Encode('\u0024')).base16(), '    ',
   CGU.Sequence(CGU.utf8Encode('\u00A2')).base16(), '  ',
   CGU.Sequence(CGU.utf8Encode('\u20AC')).base16()
 );
+print();
+print(CGU.Sequence(CGU.utf8Encode('\u0024\u00A2\u20AC')).base16());
 print();
 print('= MD =');
 print();
