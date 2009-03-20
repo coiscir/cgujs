@@ -129,5 +129,6 @@
     };
     
     // override
-    this.toString = this.valueOf = this.hex;
+    this.toString = this.hex;
+    this.valueOf = this.raw;
   };
