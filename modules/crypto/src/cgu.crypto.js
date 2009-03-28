@@ -31,6 +31,7 @@
   'cgu.crypto.oper.{32,64}bit.js',
   'cgu.crypto.hash.md{4,5}.js',
   'cgu.crypto.hash.sha{1,2}*.js',
-  'cgu.crypto.hash.ripemd{128,160}.js'
+  'cgu.crypto.hash.ripemd{128,160}.js',
+  'cgu.crypto.hash.sha3.md6.js'
 %>
 })();
