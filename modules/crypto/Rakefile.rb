@@ -15,13 +15,8 @@ SRC = File.join('src', 'cgu.crypto.js')
 ####
 TIME = Time.now.utc
 
-def release
-  TIME.to_i / 60 * 60 * 1000
-end
-
 def version
-  # functions until 2100-01-01
-  sprintf("%.04f", TIME.strftime('%y.%m%d').to_f)
+  TIME.strftime('%Y.%m%d')
 end
 
 ################################################################################

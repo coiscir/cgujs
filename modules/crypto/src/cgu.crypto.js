@@ -14,7 +14,6 @@
 
 (function Crypto() { <%= opt('', $/) %>
   CGU = typeof(CGU) !== 'undefined' ? CGU : {
-    Release: new Date(<%= release %>),
     Version: '<%= version %>'
   };
   
