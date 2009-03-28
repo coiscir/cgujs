@@ -20,6 +20,8 @@ function print() {
 <script type="text/javascript">
 document.write('<pre>');
 
+var timeStart = new Date().getTime();
+
 print('= Build Check =');
 print();
 print('CGU Build: ', !!window.CGU);
@@ -106,6 +108,8 @@ print(CGU.hmac('ripemd128', '', '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xb
 print();
 print('cf387677bfda8483e63b57e06c3b5ecd8b7fc055');
 print(CGU.hmac('ripemd160', '', '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x01\x23\x45\x67'));
+
+print(new Date().getTime() - timeStart, 'ms');
 
 document.write('</pre>');
 </script>
