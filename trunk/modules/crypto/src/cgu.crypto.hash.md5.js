@@ -5,7 +5,7 @@
 
   (function MD5() {
     Algos.md5 = new Algo(64, false, function (input) {
-      var HASH = [0x067452301, 0x0efcdab89, 0x098badcfe, 0x010325476];
+      var HASH = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476];
       
       var AC = [
         0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee, // Round 1

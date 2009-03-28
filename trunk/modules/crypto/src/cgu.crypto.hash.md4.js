@@ -5,7 +5,7 @@
 
   (function MD4() {
     Algos.md4 = new Algo(64, false, function (input) {
-      var HASH = [0x067452301, 0x0efcdab89, 0x098badcfe, 0x010325476];
+      var HASH = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476];
       
       var X = [
         0, 1, 2,  3, 4,  5, 6,  7, 8, 9, 10, 11, 12, 13, 14, 15, // Round 1
