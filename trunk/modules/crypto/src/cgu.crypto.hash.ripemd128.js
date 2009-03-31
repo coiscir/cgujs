@@ -4,7 +4,7 @@
 **/
 
   (function RIPEMD128() {
-    Algos.ripemd128 = new Algo(64, false, function (input) {
+    Algos.ripemd128 = new Hash(64, false, function (input) {
       var HASH = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476];
       
       var S = [

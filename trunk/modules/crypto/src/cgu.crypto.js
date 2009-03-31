@@ -19,7 +19,7 @@
   
   // host & mask
   var Algos = {};
-  var Algo = function (block, keyed, algo) {
+  var Hash = function (block, keyed, algo) {
     this.algo = algo;
     this.block = block;
     this.keyed = keyed;
