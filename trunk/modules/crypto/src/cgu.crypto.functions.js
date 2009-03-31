@@ -3,6 +3,28 @@
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
   
+  CGU.cipher = function (call, data, ckey, utf8) {
+    if (typeof(call) != 'string') call = null;
+    if (typeof(data) != 'string') data = null;
+    if (typeof(ckey) != 'string') ckey = null;
+    if (utf8 !== true) utf8 = false;
+    
+    if (!(Algos[call] instanceof Cipher) || data === null) return;
+    
+    if (utf8) data = CGU.utf8Encode(data);
+    
+    //return CGU.Sequence(Algos[call].algo(data, ckey));
+    return Algos[call].algo(data, ckey);
+  };
+  
+  CGU.ciphers = function () {
+    var calls = [];
+    for (var call in Algos)
+      if (Algos[call] instanceof Cipher)
+        calls.push(call);
+    return calls;
+  };
+  
   CGU.hash = function (call, data, hkey, utf8) {
     if (typeof(call) != 'string') call = null;
     if (typeof(data) != 'string') data = null;
@@ -14,6 +36,17 @@
     if (utf8) data = CGU.utf8Encode(data);
     
     return CGU.Sequence(Algos[call].algo(data, hkey));
+  };
+  
+  CGU.hashes = function (keyed) {
+    keyed = keyed === !!keyed ? keyed : null; // true, false, or null
+    
+    var calls = [];
+    for (var call in Algos)
+      if (Algos[call] instanceof Hash)
+        if (keyed === null || Algos[call].keyed == keyed)
+          calls.push(call);
+    return calls;
   };
   
   CGU.hmac = function (call, data, hkey, utf8) {
@@ -41,17 +74,6 @@
     
     ihash = CGU.Sequence(Algos[call].algo(ipad + data)).str();
     return CGU.Sequence(Algos[call].algo(opad + ihash));
-  };
-  
-  CGU.hashes = function (keyed) {
-    keyed = keyed === !!keyed ? keyed : null; // true, false, or null
-    
-    var calls = [];
-    for (var call in Algos)
-      if (Algos[call] instanceof Hash)
-        if (keyed === null || Algos[call].keyed == keyed)
-          calls.push(call);
-    return calls;
   };
   
   CGU.utf8Encode = function (string) {
