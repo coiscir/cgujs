@@ -4,7 +4,7 @@
 **/
 
   (function SHA1() {
-    Algos.sha1 = new Algo(64, false, function (input) {
+    Algos.sha1 = new Hash(64, false, function (input) {
       var HASH = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0];
       
       var decode = BIT32.MSD.decode;

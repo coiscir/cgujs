@@ -9,7 +9,7 @@
     if (typeof(hkey) != 'string') hkey = null;
     if (utf8 !== true) utf8 = false;
     
-    if (!(Algos[call] instanceof Algo) || data === null) return;
+    if (!(Algos[call] instanceof Hash) || data === null) return;
     
     if (utf8) data = CGU.utf8Encode(data);
     
@@ -22,7 +22,7 @@
     if (typeof(hkey) != 'string') hkey = null;
     if (utf8 !== true) utf8 = false;
     
-    if (!(Algos[call] instanceof Algo) || data === null) return;
+    if (!(Algos[call] instanceof Hash) || data === null) return;
     if (Algos[call].keyed || hkey === null) return null;
     
     if (utf8) data = CGU.utf8Encode(data);
@@ -48,7 +48,7 @@
     
     var calls = [];
     for (var call in Algos)
-      if (Algos[call] instanceof Algo)
+      if (Algos[call] instanceof Hash)
         if (keyed === null || Algos[call].keyed == keyed)
           calls.push(call);
     return calls;

@@ -4,7 +4,7 @@
 **/
 
   (function SHA2_32() {
-    Algos.sha224 = new Algo(64, false, function (input) {
+    Algos.sha224 = new Hash(64, false, function (input) {
       var HASH = [
         0xc1059ed8, 0x367cd507, 0x3070dd17, 0xf70e5939,
         0xffc00b31, 0x68581511, 0x64f98fa7, 0xbefa4fa4
@@ -13,7 +13,7 @@
       return sha2_32(input, HASH, 7);
     });
     
-    Algos.sha256 = new Algo(64, false, function (input) {      
+    Algos.sha256 = new Hash(64, false, function (input) {      
       var HASH = [
         0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
         0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
