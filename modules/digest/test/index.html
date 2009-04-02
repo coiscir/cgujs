@@ -1,0 +1,179 @@
+<html>
+<head>
+  <title>CGU - Crypto - Tests</title>
+  <style type="text/css">
+    pre {
+      font-size: 8pt;
+    }
+  </style>
+</head>
+<body>
+
+<script type="text/javascript" src="../lib/cgu.crypto.js"></script>
+<script type="text/javascript">
+function print() {
+  for (var i = 0; i < arguments.length; i += 1)
+    document.write(arguments[i]);
+  document.write('&nbsp;<br />');
+}
+</script>
+<script type="text/javascript">
+document.write('<pre>');
+
+var md6_one_block = '';
+for (var i = 0; i < 57; i += 1)
+  md6_one_block += '\x11\x22\x33\x44\x55\x66\x77';
+md6_one_block += '\x11';
+var md6_two_block = md6_one_block;
+for (var i = 0; i < 57; i += 1)
+  md6_two_block += '\x22\x33\x44\x55\x66\x77\x11';
+md6_two_block += '\x22';
+
+var timeStart = new Date().getTime();
+
+print('= Build Check =');
+print();
+print('CGU Build: ', !!window.CGU);
+print('Version: ', CGU.Version);
+print();
+print('= Encodings =');
+print();
+print(CGU.Sequence('AB').str());
+print(CGU.Sequence('AB').hex());
+print(CGU.Sequence('AB').base32());
+print(CGU.Sequence('AB').base64());
+print();
+print('= Hashes =');
+print();
+print('All:   ', CGU.hashes().join(', '));
+print('HMAC:  ', CGU.hashes(false).join(', '));
+print('Keyed: ', CGU.hashes(true).join(', '));
+print();
+print('= UTF-8 Encode =');
+print();
+print('U+0024  U+00A2  U+20AC');
+print('    24    C2A2  E282AC');
+print('    ',
+  CGU.Sequence(CGU.utf8Encode('\u0024')).base16(), '    ',
+  CGU.Sequence(CGU.utf8Encode('\u00A2')).base16(), '  ',
+  CGU.Sequence(CGU.utf8Encode('\u20AC')).base16()
+);
+print();
+print(CGU.Sequence(CGU.utf8Encode('\u0024\u00A2\u20AC')).base16());
+print();
+print('= MD =');
+print();
+print('a448017aaf21d8525fc10ae87aa6729d');
+print(CGU.hash('md4', 'abc'));
+print();
+print('900150983cd24fb0d6963f7d28e17f72');
+print(CGU.hash('md5', 'abc'));
+print();
+print('9294727a3638bb1c13f48ef8158bfc9d');
+print(CGU.hmac('md5', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('= SHA =');
+print();
+print('A9993E364706816ABA3E25717850C26C9CD0D89D'.toLowerCase());
+print(CGU.hash('sha1', 'abc'));
+print();
+print('23097D223405D8228642A477BDA255B32AADBCE4BDA0B3F7E36C9DA7'.toLowerCase());
+print(CGU.hash('sha224', 'abc'));
+print();
+print('BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD'.toLowerCase());
+print(CGU.hash('sha256', 'abc'));
+print();
+print('CB00753F45A35E8BB5A03D699AC65007272C32AB0EDED1631A8B605A43FF5BED8086072BA1E7CC2358BAECA134C825A7'.toLowerCase());
+print(CGU.hash('sha384', 'abc'));
+print();
+print('DDAF35A193617ABACC417349AE20413112E6FA4E89A97EA20A9EEEE64B55D39A2192992A274FC1A836BA3C23A3FEEBBD454D4423643CE80E2A9AC94FA54CA49F'.toLowerCase());
+print(CGU.hash('sha512', 'abc'));
+print();
+print('b617318655057264e28bc0b6fb378c8ef146be00');
+print(CGU.hmac('sha1', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('896fb1128abbdf196832107cd49df33f47b4b1169912ba4f53684b22');
+print(CGU.hmac('sha224', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7');
+print(CGU.hmac('sha256', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('afd03944d84895626b0825f4ab46907f15f9dadbe4101ec682aa034c7cebc59cfaea9ea9076ede7f4af152e8b2fa9cb6');
+print(CGU.hmac('sha384', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('87aa7cdea5ef619d4ff0b4241a1d6cb02379f4e2ce4ec2787ad0b30545e17cdedaa833b7d6b8a702038b274eaea3f4e4be9d914eeb61f1702e696c203a126854');
+print(CGU.hmac('sha512', 'Hi There', '\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b'));
+print();
+print('= RIPEMD =');
+print();
+print('c14a12199c66e4ba84636b0f69144c77');
+print(CGU.hash('ripemd128', 'abc'));
+print();
+print('8eb208f7e05d987a9b044a8e98c6b087f15a0bfc');
+print(CGU.hash('ripemd160', 'abc'));
+print();
+print('ad9db2c1e22af9ab5ca9dbe5a86f67dc');
+print(CGU.hmac('ripemd128', '', '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff'));
+print();
+print('cf387677bfda8483e63b57e06c3b5ecd8b7fc055');
+print(CGU.hmac('ripemd160', '', '\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x01\x23\x45\x67'));
+print();
+print('= MD6 -- SHA-3 Candidate =');
+print();
+print('7538e7552a2e9cc94be251f73ce9cf67d4739b4b3f114e483ea38ab0');
+print(CGU.hash('md6-224', md6_one_block).hex());
+//print();
+//print('43113e9a22a6f7a264b500366a7dc18c28cec099a85a269db758754aedd315df');
+//print(CGU.hash('md6-256', md6_one_block).hex());
+//print();
+//print('abbdeaaa782c5897ee5a364def19b33037bfe34673b469c4cce6d92b4912d5763b24eda6c9cd74f979a3620c13dea9f7');
+//print(CGU.hash('md6-384', md6_one_block).hex());
+//print();
+//print('2a7c10dba7609e6f8afbba335d267290ba7d1cab9e220b98cd3e41a6b24950371d5bd44966b6ae8b0fd84e7aad0f685f254690605fae5674384baef96aa4e556');
+//print(CGU.hash('md6-512', md6_one_block).hex());
+//print();
+//print('9ca6f72f355e9f1cc818eb9fe40f801bd43be072c17aac290a58b96c');
+//print(CGU.hash('md6-224', md6_one_block, '111222333').hex());
+print();
+print('fb75daf08d970c19f49b34ec768fea1a74583a5b1d1df2149a61cb36e120d197');
+print(CGU.hash('md6-256', md6_one_block, '111222333').hex());
+//print();
+//print('a87af8bde95e51d5a0c90a155a5ac742aae0e41215597c5395b7afe49e6d7fcbffe0baadcaeb28baa01b3e4c48086bd5');
+//print(CGU.hash('md6-384', md6_one_block, '111222333').hex());
+//print();
+//print('ae845cb6bc28d5fbfacad17fa491ab1b7d4f0db38bb7b79deabf44c7cf6501e69d4dd04125b0e59514a46fbb45d2b8976c8ac09bd42424410cbc701ee3cee075');
+//print(CGU.hash('md6-512', md6_one_block, '111222333').hex());
+//print();
+//print('c5d2bcaa29dab0d486f96506a0bc5b9f22ff21a4b67a7f82f9a53095');
+//print(CGU.hash('md6-224', md6_two_block).hex());
+//print();
+//print('1a6d0518f6356ad35ac36c5a0b6639eb371c03998d29abe1e7f75097e8ebe1bd');
+//print(CGU.hash('md6-256', md6_two_block).hex());
+print();
+print('614cec06b9a0332f8c14d7d4f29934e4f39b91046c1c2cd1fa9f84fc3ed2e89efb583003b2fc9e996cb690a8be68dbf2');
+print(CGU.hash('md6-384', md6_two_block).hex());
+//print();
+//print('240b4ce4ed7252f62e58ec1a2f0c9a07851f6251f55f4e510e200d8a716753e2a75e34c409566cedc0907ab9680bdeed627e542184d5dc419adfa3b8f2358657');
+//print(CGU.hash('md6-512', md6_two_block).hex());
+//print();
+//print('dee962bf71ad8fdf3af0ae4163665ba928ffa9ccaf89a22bf84d22ca');
+//print(CGU.hash('md6-224', md6_two_block, '111222333').hex());
+//print();
+//print('d381491d02791a73672c7f60030cde7f872a72ba07e4da9bb75006bce5ca6beb');
+//print(CGU.hash('md6-256', md6_two_block, '111222333').hex());
+//print();
+//print('53a14a5463bc57e9782e4d8b67ca3bcb996f4bd066a9115aa3317226a36564d63ed0db4b9fcef1af85f14423ae7bf056');
+//print(CGU.hash('md6-384', md6_two_block, '111222333').hex());
+print();
+print('48e8dbfee51e36b0c549925ed9740df0d4e0aa9d46c5ec5bd7749a8c023b91582bb3fa07b311a4d3e774ebf5b5beffe806eea425c37af320ef06ff241bcb32e4');
+print(CGU.hash('md6-512', md6_two_block, '111222333').hex());
+print();
+print();
+
+print(new Date().getTime() - timeStart, 'ms');
+
+document.write('</pre>');
+</script>
+
+</body>
+</html>
