@@ -6,9 +6,9 @@ require 'build/builder'
 ################################################################################
 # Prepare
 ####
-LIB = File.join('lib', 'cgu.crypto.js')
-MIN = File.join('lib', 'cgu.crypto.min.js')
-SRC = File.join('src', 'cgu.crypto.js')
+LIB = File.join('lib', 'cgu.digest.js')
+MIN = File.join('lib', 'cgu.digest.min.js')
+SRC = File.join('src', 'cgu.digest.js')
 
 ################################################################################
 # Versions
