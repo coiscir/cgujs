@@ -1,5 +1,5 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  CGU - Crypto
+ *  CGU - Digest
  *  (c) 2008-2009 Jonathan Lonowski
  *    http://code.google.com/p/cgujs/
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -12,7 +12,7 @@
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
-(function Crypto() { <%= opt('', $/) %>
+(function Digest() { <%= opt('', $/) %>
   CGU = typeof(CGU) !== 'undefined' ? CGU : {
     Version: '<%= version %>'
   };
@@ -26,12 +26,12 @@
   };
 
 <%= inc opt(2, 0), opt(true, false),
-  'cgu.crypto.functions.js',
-  'cgu.crypto.sequence.js',
-  'cgu.crypto.oper.{32,64}bit.js',
-  'cgu.crypto.hash.md{4,5}.js',
-  'cgu.crypto.hash.sha{1,2}*.js',
-  'cgu.crypto.hash.ripemd{128,160}.js',
-  'cgu.crypto.hash.sha3.md6.js'
+  'cgu.digest.functions.js',
+  'cgu.digest.sequence.js',
+  'cgu.digest.oper.{32,64}bit.js',
+  'cgu.digest.hash.md{4,5}.js',
+  'cgu.digest.hash.sha{1,2}*.js',
+  'cgu.digest.hash.ripemd{128,160}.js',
+  'cgu.digest.hash.sha3.md6.js'
 %>
 })();
