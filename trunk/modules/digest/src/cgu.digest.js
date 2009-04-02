@@ -13,16 +13,11 @@
 **/
 
 (function Digest() { <%= opt('', $/) %>
-  CGU = typeof(CGU) !== 'undefined' ? CGU : {
-    Version: '<%= version %>'
-  };
+  CGU = typeof(CGU) !== 'undefined' ? CGU : { Version: '<%= version %>' };
   
   // host & mask
-  var Algos = {};
-  var Hash = function (block, keyed, algo) {
-    this.algo = algo;
-    this.block = block;
-    this.keyed = keyed;
+  var Algos = {}, Hash = function (block, keyed, algo) {
+    this.algo = algo; this.block = block; this.keyed = keyed;
   };
 
 <%= inc opt(2, 0), opt(true, false),
