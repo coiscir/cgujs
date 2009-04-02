@@ -18,17 +18,7 @@
   };
   
   // host & mask
-  var Algos = {};
-  
-  var Hash = function (block, keyed, algo) {
-    this.algo = algo;
-    this.block = block;
-    this.keyed = keyed;
-  };
-  
-  var Cipher = function (algo) {
-    this.algo = algo;
-  };
+  var Algos = {}, Cipher = function (algo) { this.algo = algo; };
 
 <%= inc opt(2, 0), opt(true, false),
   'cgu.crypto.functions.js',
