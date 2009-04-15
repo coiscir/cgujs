@@ -4,19 +4,19 @@
 **/
 
   (function MD6() {
-    Algos["md6-224"] = new Hash(64, true, function (input, key) {
+    Algos["md6-224"] = new Hash(0, true, function (input, key) {
       return md6(224, input, key);
     });
     
-    Algos["md6-256"] = new Hash(64, true, function (input, key) {
+    Algos["md6-256"] = new Hash(0, true, function (input, key) {
       return md6(256, input, key);
     });
     
-    Algos["md6-384"] = new Hash(64, true, function (input, key) {
+    Algos["md6-384"] = new Hash(0, true, function (input, key) {
       return md6(384, input, key);
     });
     
-    Algos["md6-512"] = new Hash(64, true, function (input, key) {
+    Algos["md6-512"] = new Hash(0, true, function (input, key) {
       return md6(512, input, key);
     });
     
