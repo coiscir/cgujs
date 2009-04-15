@@ -13,7 +13,7 @@ CGU = new (function () {
   var CGU = this; // internal reference
   
 <%= inc opt(2, 0), opt(true, false),
-  'type.js', 'crypto.js',
+  'type.js', 'digest.js',
   'iterator.js', 'json.js',
   'cookie.js', 'query.js',
   'time.js'
