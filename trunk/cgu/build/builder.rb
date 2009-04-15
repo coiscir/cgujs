@@ -46,21 +46,26 @@ module Builder
         !(File.file?(file) && File.readable?(file))
       }.map{|file|
         Dir.chdir(File.dirname(file)) do
-          ERB.new(IO.readlines(File.basename(file)).to_s).result(binding)
+          ERB.new(IO.readlines(File.basename(file)).to_s, nil, '<>').result(binding)
         end
       }.map{|src|
         min ? JSMin.minify(src).gsub(/ ?\n ?/, ' ').sub(/^ +/, '') : src
       }.map{|src|
-        src.gsub(/^/, (' ' * pad)).gsub(/[ \t]+$/m, '')
-      }.join($/ + (min ? '' : $/))
+        src.gsub(/^/, (' ' * pad))
+      }.join($/)
+    end
+    
+    def opt(t, f)
+      @stand ? t : f
     end
   end
   
   class << self
     include Reader
     
-    def build(file)
-      inc(0, false, file)
+    def build(file, stand)
+      @stand = stand === !!stand ? stand : false
+      inc(0, false, file).gsub(/[ \t]+$/m, '').gsub(/\r\n|\r|\n/, "\n")
     end
   end
 end
