@@ -29,6 +29,7 @@
     
     var akey, ihash, ipad = [], opad = [];
     var block = Algos[call].block, klen = hkey.length;
+    if (!(block > 0)) return false;
     
     akey = CGU.Sequence(klen > block ? Algos[call].algo(hkey) : hkey).raw();
     for (var i = 0; i < block; i += 1) {
