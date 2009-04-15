@@ -12,10 +12,12 @@ CGU = new (function () {
   
   var CGU = this; // internal reference
   
-<%= inc 2, true, 'type.js' %>
-<%= inc 2, true, 'crypto.js', 'iterator.js', 'json.js' %>
-<%= inc 2, true, 'cookie.js', 'query.js' %>
-<%= inc 2, true, 'time.js' %>
+<%= inc opt(2, 0), opt(true, false),
+  'type.js', 'crypto.js',
+  'iterator.js', 'json.js',
+  'cookie.js', 'query.js',
+  'time.js'
+%>
   
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * shared private
