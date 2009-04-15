@@ -5,10 +5,12 @@
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  CGU is released and distributable under the terms of the MIT License.
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  MD4 (c) 1990 R. Rivest                                          [RFC 1320]
- *  MD5 (c) 1992 R. Rivest                                          [RFC 1321]
+ *  MD4 (c) 1990 Ronald L. Rivest                                   [RFC 1320]
+ *  MD5 (c) 1992 Ronald L. Rivest                                   [RFC 1321]
  *  SHA (c) 2006 The Internet Society                               [RFC 4634]
  *  RIPEMD (c) 1996 Hans Dobbertin, Antoon Bosselaers, and Bart Preneel
+ **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  MD6 (c) 2008 Ronald L. Rivest
  **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **/
 
