@@ -1,20 +1,18 @@
-ROOT = File.expand_path(File.dirname(__FILE__))
+Dir.chdir(File.expand_path(File.dirname(__FILE__)))
 
 require 'rake'
-
-Dir.chdir(ROOT) do
-  require 'build/builder'
-  require 'build/pager'
-end
+require 'build/builder'
+require 'build/pager'
 
 ################################################################################
 # Prepare
 ####
-DOCS = File.join(ROOT, 'docs')
-DSRC = File.join(DOCS, 'src')
+DOCS = File.join('docs')
+DSRC = File.join('docs', 'src')
 
-FINAL = File.join(ROOT, 'lib', 'cgu.js')
-START = File.join(ROOT, 'src', 'cgu.js')
+LIB = File.join('lib', 'cgu.js')
+MIN = File.join('lib', 'cgu.min.js')
+SRC = File.join('src', 'cgu.js')
 
 ################################################################################
 # Versions
@@ -22,8 +20,7 @@ START = File.join(ROOT, 'src', 'cgu.js')
 TIME = Time.now.utc
 
 def version
-  # functions until 2100-01-01
-  sprintf("%.04f", TIME.strftime('%y.%m%d').to_f)
+  TIME.strftime('%Y.%m%d')
 end
 
 ################################################################################
@@ -64,20 +61,26 @@ task :status => [:slib, :sdocs]
 # library script
 task :lib do
   print $/ + '== Build :: Library :: ' + version.to_s + ' (' + TIME.strftime('%Y-%m-%d %H:%M:%S') + ')' + $/
-  File.open(FINAL, 'w+') do |lib|
-    lib << Builder.build(START)
+  File.open(LIB, 'w+b') do |lib|
+    lib << Builder.build(SRC, false)
   end
-  print ' + ' + File.basename(FINAL) + $/ if File.exists?(FINAL)
+  print ' + ' + File.basename(LIB) + $/ if File.exists?(LIB)
+  File.open(MIN, 'w+b') do |min|
+    min << Builder.build(SRC, true)
+  end
+  print ' + ' + File.basename(MIN) + $/ if File.exists?(MIN)
 end
 
 task :rlib do
   print $/ + '== Remove :: Library' + $/
-  print ' - ' + File.basename(FINAL) + $/ if File.exists?(FINAL) && File.delete(FINAL) > 0
+  print ' - ' + File.basename(LIB) + $/ if File.exists?(LIB) && File.delete(LIB) > 0
+  print ' - ' + File.basename(MIN) + $/ if File.exists?(MIN) && File.delete(MIN) > 0
 end
 
 task :slib do
   print $/ + '== Status :: Library' + $/
-  print ' ' + (File.exists?(FINAL) ? '+' : '-') + ' ' + File.basename(FINAL) + $/
+  print ' ' + (File.exists?(LIB) ? '+' : '-') + ' ' + File.basename(LIB) + $/
+  print ' ' + (File.exists?(MIN) ? '+' : '-') + ' ' + File.basename(MIN) + $/
 end
 
 # document pages
