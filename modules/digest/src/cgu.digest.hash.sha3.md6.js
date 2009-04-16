@@ -137,8 +137,13 @@
       };
       
       var PAR = function (M) {
+        var P = 0, z = M.length > b ? 0 : 1;
         var B = [], C = [];
-        var z = M.length > b ? 0 : 1;
+        
+        while ((M.length % b) > 0) {
+          M.push(0x00);
+          P += 8;
+        }
         
         while (M.length > 0) {
           B.push(M.slice(0, b));
@@ -146,12 +151,7 @@
         }
         
         for (var i = 0, p = 0, N, U, V; i < B.length; i += 1, p = 0) {
-          N = [].concat(Q).concat(K);
-          
-          while (B[i].length < b) {
-            B[i].push(0x00);
-            p += 8;
-          }
+          p = (i == (B.length - 1)) ? P : 0;
           
           C = C.concat(fPre(decode(B[i]), [], i, p, z));
         }
@@ -160,6 +160,7 @@
       };
       
       var SEQ = function (M) {
+        var P = 0;
         var B = [], C = [
           [0x0, 0x0], [0x0, 0x0], [0x0, 0x0], [0x0, 0x0],
           [0x0, 0x0], [0x0, 0x0], [0x0, 0x0], [0x0, 0x0],
@@ -167,19 +168,19 @@
           [0x0, 0x0], [0x0, 0x0], [0x0, 0x0], [0x0, 0x0]
         ];
         
+        while ((M.length % (b - c)) > 0) {
+          M.push(0x00);
+          P += 8;
+        }
+        
         while (M.length > 0) {
           B.push(M.slice(0, (b - c)));
           M = M.slice(b - c);
         }
         
         for (var i = 0, p = 0, N, U, V, z; i < B.length; i += 1, p = 0) {
+          p = (i == (B.length - 1)) ? P : 0;
           z = (i == (B.length - 1)) ? 1 : 0;
-          N = [].concat(Q).concat(K);
-          
-          while (B[i].length < (b - c)) {
-            B[i].push(0x00);
-            p += 8;
-          }
           
           C = fPre(decode(B[i]), C, i, p, z);
         }
