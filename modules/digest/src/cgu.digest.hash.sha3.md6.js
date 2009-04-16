@@ -5,22 +5,34 @@
 
   (function MD6() {
     Algos["md6-224"] = new Hash(0, true, function (input, key) {
-      return md6(224, input, key);
+      return md6(224, input, key, 64);
+    });
+    Algos["md6-224-L0"] = new Hash(0, true, function (input, key) {
+      return md6(224, input, key, 0);
     });
     
     Algos["md6-256"] = new Hash(0, true, function (input, key) {
-      return md6(256, input, key);
+      return md6(256, input, key, 64);
+    });
+    Algos["md6-256-L0"] = new Hash(0, true, function (input, key) {
+      return md6(256, input, key, 0);
     });
     
     Algos["md6-384"] = new Hash(0, true, function (input, key) {
-      return md6(384, input, key);
+      return md6(384, input, key, 64);
+    });
+    Algos["md6-384-L0"] = new Hash(0, true, function (input, key) {
+      return md6(384, input, key, 0);
     });
     
     Algos["md6-512"] = new Hash(0, true, function (input, key) {
-      return md6(512, input, key);
+      return md6(512, input, key, 64);
+    });
+    Algos["md6-512-L0"] = new Hash(0, true, function (input, key) {
+      return md6(512, input, key, 0);
     });
     
-    var md6 = function (digest, message, key) {
+    var md6 = function (digest, message, key, levels) {
       var decode = BIT64.MSD.decode;
       var encode = BIT64.MSD.encode;
       
@@ -57,7 +69,7 @@
       var r = Math.max((k ? 80 : 0), (40 + (d / 4)));
       
       // levels, PAR max and "current"
-      var L = 64, ell = 0;
+      var L = levels, ell = 0;
       
       // round constants
       var S0 = [0x01234567, 0x89abcdef];
@@ -99,6 +111,31 @@
         return A.slice(A.length - 16);
       };
       
+      var fPre = function (B, C, i, p, z) {
+        var U = NEW([
+          (
+            ((ell & 0xff) << 24) |
+            ((i / Math.pow(2, 32)) & 0xffffff)
+          ),
+          (i & 0xffffffff)
+        ]);
+        
+        var V = NEW([
+          (
+            ((r & 0xfff) << 16) |
+            ((L & 0xff) << 8) |
+            ((z & 0xf) << 4) |
+            ((p & 0xf000) >> 12)
+          ), (
+            ((p & 0xfff) << 20) |
+            ((k & 0xff) << 12) |
+            (d & 0xfff)
+          )
+        ]);
+        
+        return f([].concat(Q).concat(K).concat([U,V]).concat(C).concat(B));
+      };
+      
       var PAR = function (M) {
         var B = [], C = [];
         var z = M.length > b ? 0 : 1;
@@ -116,42 +153,44 @@
             p += 8;
           }
           
-          //= lllllllliiiiiiiiiiiiiiiiiiiiiiii iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
-          U = NEW([
-            (
-              ((ell & 0xff) << 24) |
-              ((i / Math.pow(2, 32)) & 0xffffff)
-            ),
-            (i & 0xffffffff)
-          ]);
-          
-          //= 0000rrrrrrrrrrrrLLLLLLLLzzzzpppp ppppppppppppkkkkkkkkdddddddddddd
-          V = NEW([
-            (
-              ((r & 0xfff) << 16) |
-              ((L & 0xff) << 8) |
-              ((z & 0xf) << 4) |
-              ((p & 0xf000) >> 12)
-            ), (
-              ((p & 0xfff) << 20) |
-              ((k & 0xff) << 12) |
-              (d & 0xfff)
-            )
-          ]);
-          
-          C = C.concat(f(N.concat([U,V]).concat(decode(B[i]))));
+          C = C.concat(fPre(decode(B[i]), [], i, p, z));
         }
         
         return encode(C);
       };
       
-      //var SEQ = function (M) {};
+      var SEQ = function (M) {
+        var B = [], C = [
+          [0x0, 0x0], [0x0, 0x0], [0x0, 0x0], [0x0, 0x0],
+          [0x0, 0x0], [0x0, 0x0], [0x0, 0x0], [0x0, 0x0],
+          [0x0, 0x0], [0x0, 0x0], [0x0, 0x0], [0x0, 0x0],
+          [0x0, 0x0], [0x0, 0x0], [0x0, 0x0], [0x0, 0x0]
+        ];
+        
+        while (M.length > 0) {
+          B.push(M.slice(0, (b - c)));
+          M = M.slice(b - c);
+        }
+        
+        for (var i = 0, p = 0, N, U, V, z; i < B.length; i += 1, p = 0) {
+          z = (i == (B.length - 1)) ? 1 : 0;
+          N = [].concat(Q).concat(K);
+          
+          while (B[i].length < (b - c)) {
+            B[i].push(0x00);
+            p += 8;
+          }
+          
+          C = fPre(decode(B[i]), C, i, p, z);
+        }
+        
+        return encode(C);
+      };
       
       // level-by-level loop
       do {
         ell += 1;
-        M = PAR(M);
-        //M = [].concat(ell > L ? SEQ(M) : PAR(M));
+        M = ell > L ? SEQ(M) : PAR(M);
       } while (M.length != c);
       
       return M.slice(M.length - (d / 8));
