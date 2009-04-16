@@ -144,16 +144,17 @@
           M.push(0x00);
           P += 8;
         }
+        M = decode(M);
         
         while (M.length > 0) {
-          B.push(M.slice(0, b));
-          M = M.slice(b);
+          B.push(M.slice(0, b / 8));
+          M = M.slice(b / 8);
         }
         
         for (var i = 0, p = 0, N, U, V; i < B.length; i += 1, p = 0) {
           p = (i == (B.length - 1)) ? P : 0;
           
-          C = C.concat(fPre(decode(B[i]), [], i, p, z));
+          C = C.concat(fPre(B[i], [], i, p, z));
         }
         
         return encode(C);
@@ -172,17 +173,18 @@
           M.push(0x00);
           P += 8;
         }
+        M = decode(M);
         
         while (M.length > 0) {
-          B.push(M.slice(0, (b - c)));
-          M = M.slice(b - c);
+          B.push(M.slice(0, (b - c) / 8));
+          M = M.slice((b - c) / 8);
         }
         
         for (var i = 0, p = 0, N, U, V, z; i < B.length; i += 1, p = 0) {
           p = (i == (B.length - 1)) ? P : 0;
           z = (i == (B.length - 1)) ? 1 : 0;
           
-          C = fPre(decode(B[i]), C, i, p, z);
+          C = fPre(B[i], C, i, p, z);
         }
         
         return encode(C);
