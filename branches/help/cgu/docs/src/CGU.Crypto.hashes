@@ -1,0 +1,26 @@
+Get a list of all available algorithms.
+
+----
+
+### Syntax ###
+
+>     CGU.hashes()
+> {: class=prettyprint}
+
+### Return ###
+
+> `<Array>`: List of hashing algorithm calls available for `hash`.
+
+----
+
+### Hash Functions ###
+
+> | Name       | Calls                                  |
+> |------------|----------------------------------------|
+> | MD         | `md4`, `md5`                           |
+> | RIPEMD-160 | `ripemd128`, `ripemd160`               |
+> | SHA-1      | `sha1`                                 |
+> | SHA-2      | `sha224`, `sha256`, `sha384`, `sha512` |
+> {: class=simple}
+
+----

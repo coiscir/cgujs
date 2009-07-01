@@ -1,0 +1,42 @@
+Enhanced `typeof`.
+
+----
+
+### Syntax ###
+
+>     CGU.type(object)
+> {: class=prettyprint}
+>
+> > **`object`** `<Mixed>`: The object being tested.
+
+### Return ###
+
+> `<String>`: The object's type.
+
+----
+
+### Example ###
+
+>     typeof(undefined);          //=> 'undefined'
+>     typeof(null);               //=> 'object'
+>     typeof([]);                 //=> 'object'
+>     typeof(new Date());         //=> 'object'
+>     typeof(new Error());        //=> 'object'
+>     typeof(function(){});       //=> 'function'
+>     typeof(/pattern/);          //=> 'object' or 'function'
+>     
+>     CGU.type(undefined);        //=> 'undefined'
+>     CGU.type(null);             //=> 'null'
+>     CGU.type([]);               //=> 'array'
+>     CGU.type(true);             //=> 'boolean'
+>     CGU.type(new Date());       //=> 'date'
+>     CGU.type(new Error());      //=> 'error'
+>     CGU.type(new TypeError());  //=> 'error'
+>     CGU.type(function(){});     //=> 'function'
+>     CGU.type(0);                //=> 'number'
+>     CGU.type({});               //=> 'object'
+>     CGU.type(/pattern/);        //=> 'regexp'
+>     CGU.type('');               //=> 'string'
+> {: class=prettyprint}
+{: class=codebox}
+----

@@ -1,0 +1,89 @@
+PHP `date()` formatting in local time.
+
+----
+
+### Syntax ###
+
+>     CGU.phpdate(format [, time])
+> {: class=prettyprint}
+>
+> > **`format`** `<String>`: A string representing the date format.
+> >
+> > > _(see below)_
+> >
+> > **`time`** `<Date>`: A date to format.
+> >
+> > > `<Number>`: Unix Epoch time in milliseconds.
+> > >
+> > > `<null>`: Use current time.
+
+### Return ###
+
+> `<String>`: A formatted date string.
+>
+> > `<null>`: Out of range. `(Jan 1, 0000 - Dec 31, 9999)`
+> >
+> > `<undefined>`: Invalid `time`.
+
+----
+
+### Format ### {: name=format}
+
+> ##### Day #####
+>
+> > `d` - Day of the month, 2 digits with leading zeros. `(01 - 31)`  
+> > `D` - A textual representation of a day, three letters. `(Mon - Sun)`  
+> > `j` - Day of the month without leading zeros. `(1 - 31)`  
+> > `l` - A full textual representation of the day of week. `(Sunday - Saturday)`  
+> > `N` - ISO-8601 numeric representation of the day of the week. `(1 - 7)`  
+> > `S` - English ordinal suffix for the day of the month. `(st, nd, rd, th)`  
+> > `w` - Numeric representation of the day of the week. `(0 - 6)`  
+> > `z` - The day of the year. `(0 - 365)`  
+>
+> ##### Week #####
+>
+> > `W` - ISO-8601 week number of year, weeks starting on Monday. `(00 - 53)`  
+>
+> ##### Month #####
+>
+> > `F` - A full textual representation of a month. `(January - December)`  
+> > `m` - Numeric representation of a month, with leading zeros. `(01 - 12)`  
+> > `M` - A short textual representation of a month. `(Jan - Dec)`  
+> > `n` - Numeric representation of a month, without leading zeros. `(1 - 12)`  
+> > `t` - Number of days in the given month. `(28 - 31)`  
+>
+> ##### Year #####
+>
+> > `L` - Whether it's a leap year. `(0 or 1)`  
+> > `O` - ISO-8601 year number.  
+> > `y` - A full numeric representation of a year, 4 digits.  
+> > `Y` - A two digit representation of a year.  
+>
+> ##### Time #####
+>
+> > `a` - Lowercase meridiem. `(am or pm)`  
+> > `A` - Uppercase meridiem. `(AM or PM)`  
+> > `B` - Swatch Internet Time. `(000 - 999)`  
+> > `g` - 12-hour without leading zeros. `(1 - 12)`  
+> > `G` - 24-hour without leading zeros. `(0 - 23)`  
+> > `h` - 12-hour with leading zeros. `(01 - 12)`  
+> > `H` - 24-hour with leading zeros. `(00 - 23)`  
+> > `i` - Minutes with leading zeros. `(00 - 59)`  
+> > `s` - Seconds with leading zeros. `(00 - 59)`  
+>
+> ##### Timezone #####
+>
+> > `e` - Timezone identifier. _(**unsupported**)_  
+> > `I` - Whether daylight savings time. `(0 or 1)`  
+> > `O` - Difference to Greenwich time. `(e.g. +0200)`  
+> > `P` - Difference to Greenwich time. `(e.g. +02:00)`  
+> > `T` - Timezone abbreviation. _(**unsupported**)_  
+> > `Z` - Timezone offset is seconds. `(-43200 - 50400)`  
+>
+> ##### Full Date/Time #####
+>
+> > `c` - ISO-8601 date. `(e.g. 2004-02-12T15:19:21+00:00)`  
+> > `r` - RFC 2822 date. `(e.g. Thu, 21 Dec 2000 16:01:07 +0200)`  
+> > `U` - Seconds since Unix Epoch.  
+
+----

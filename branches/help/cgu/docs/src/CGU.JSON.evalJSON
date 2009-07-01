@@ -1,0 +1,28 @@
+A **_non-secure_** JSON interpreter.
+
+----
+
+### Syntax ###
+
+>     CGU.evalJSON(json)
+> {: class=prettyprint}
+>
+> > **`json`** `<String>`: A JSON-formatted string.
+
+### Return ###
+
+> `<Mixed>`: The object represented by the string.
+
+----
+
+### Example ###
+
+>     CGU.evalJSON('24');      //=> 24
+>     CGU.evalJSON('[2, 4]');  //=> [2, 4]
+>
+>     CGU.evalJSON('(function(){/*...*/})()');     //=> function will execute
+>     CGU.evalJSON('{foo: function(){/*...*/}}');  //=> but, allows function values
+> {: class=prettyprint}
+{: class=codebox}
+
+----

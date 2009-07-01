@@ -1,0 +1,31 @@
+Search a query-string for all values of a key.
+
+----
+
+### Syntax ###
+
+>     CGU.query(key [, href])
+> {: class=prettyprint}
+>
+> > **`key`** `<String>`: Name of the query-string variable.
+> >
+> > **`href`** `<String>`: A valid URI. _(optional)_
+
+### Return ###
+
+> `<Array>`: A list of values.
+>
+> > `<undefined>`: Invalid `href`.
+
+----
+
+### Example ###
+
+>     CGU.query('foo');  //=> <Array>
+>     
+>     CGU.query('foo', 'foo=bar&amp;red=foo');   //=> undefined (invalid href)
+>     CGU.query('foo', '?foo=bar&amp;red=foo');  //=> ['bar'] (complete href)
+> {: class=prettyprint}
+{: class=codebox}
+
+----

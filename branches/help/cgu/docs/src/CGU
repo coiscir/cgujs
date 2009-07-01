@@ -1,0 +1,18 @@
+The global namespace.
+
+----
+
+### Properties ###
+
+>     CGU.Version
+> {: class=prettyprint}
+>
+> > `"<%=version%>"`
+
+----
+
+### Functions ###
+
+<%= funcs %>
+
+----

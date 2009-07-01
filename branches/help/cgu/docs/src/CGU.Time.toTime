@@ -1,0 +1,24 @@
+Convert a `"YYYY-MM-DDThh:mm:ss.sssZ"` formatted string to a Date Object.
+
+----
+
+### Syntax ###
+
+> CGU.toTime(string)
+>
+> > **`string`** `<String>`: A String representation of a Date.
+> >
+> > > `"YYYY-MM-DDThh:mm:ss.sssZ"`  
+> > > `"YYYY-MM-DD hh:mm:ss"`  
+> > >
+> > > > The `"T"` delimeter, milliseconds and `"Z"` timezone are optional.
+
+### Return ###
+
+> `<Date>`: A Date with the UTC time represented by the string.
+>
+> > `<null>`: `string` was malformed.
+> >
+> > `<undefined>`: `string` was not given.
+
+----
